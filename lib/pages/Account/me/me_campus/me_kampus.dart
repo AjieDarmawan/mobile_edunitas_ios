@@ -1,0 +1,34 @@
+import 'dart:async';
+
+import 'package:another_flushbar/flushbar.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app_edunitas/model/Auth/UsersDetailModel.dart';
+import 'package:flutter_app_edunitas/model/Campus/ListCampus.dart';
+import 'package:flutter_app_edunitas/model/Master/KampusMaster.dart';
+import 'package:flutter_app_edunitas/model/Master/KelasModel.dart';
+import 'package:flutter_app_edunitas/model/Master/StatusModel.dart';
+import 'package:flutter_app_edunitas/model/me/InfoPembayaran_me_Model.dart';
+import 'package:flutter_app_edunitas/model/me/basket_model.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_SPB.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_SPP.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_formulir.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_jaket.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_jumlah_semester_rencana.dart';
+import 'package:flutter_app_edunitas/model/me/dataRR_sppR.dart';
+import 'package:flutter_app_edunitas/pages/Home/widget_home/widget_home.dart';
+import 'package:flutter_app_edunitas/shared/shared.dart';
+import 'package:flutter_app_edunitas/viewmodels/UserViewModel.dart';
+import 'package:flutter_app_edunitas/viewmodels/apiview_model.dart';
+import 'package:flutter_app_edunitas/viewmodels/viewmodel.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:intl/intl.dart';
+
+part 'SingkronKampus.dart';
+part 'mainKampus.dart';
+part 'list_me_campus.dart';
+part 'info_pembayaran.dart';

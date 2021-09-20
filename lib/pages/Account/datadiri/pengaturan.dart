@@ -1,0 +1,42 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app_edunitas/model/Auth/UsersDetailModel.dart';
+import 'package:flutter_app_edunitas/model/Master/MasterDaerahModel.dart';
+import 'package:flutter_app_edunitas/model/Master/MasterJurusanModel.dart';
+import 'package:flutter_app_edunitas/model/Master/PendidikanModel.dart';
+import 'package:flutter_app_edunitas/model/Master/ProdiMultipleModel.dart';
+import 'package:flutter_app_edunitas/model/Master/StatusModel.dart';
+import 'package:flutter_app_edunitas/model/karir/ShowBahasa.dart';
+import 'package:flutter_app_edunitas/model/karir/ShowKemampuan.dart';
+import 'package:flutter_app_edunitas/model/karir/SpesialisasiModel.dart';
+import 'package:flutter_app_edunitas/pages/Account/account.dart';
+import 'package:flutter_app_edunitas/shared/shared.dart';
+import 'package:flutter_app_edunitas/viewmodels/UserViewModel.dart';
+
+import 'package:flutter_app_edunitas/viewmodels/viewmodel.dart';
+import 'package:flutter_app_edunitas/widget/widget.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_app_edunitas/model/Auth/PendidikanUserDetailModel.dart';
+import 'package:flutter_app_edunitas/model/karir/ShowPengalamanModel.dart';
+import 'package:flutter_app_edunitas/model/karir/ShowInfoTambahan.dart';
+import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+part 'listDatadiri.dart';
+part 'gantiPassword.dart';
+part 'pendidikan.dart';
+part 'insert_pengalaman.dart';
+part 'insert_keterampilan.dart';
+part 'insert_infotambahan.dart';
+part 'show_pengalaman.dart';
+part 'edit_pengalaman.dart';
+part 'show_ketarampilan.dart';
+part 'show_infotambahan.dart';
+part 'insert_kemampuan.dart';
+part 'insert_bahasa.dart';

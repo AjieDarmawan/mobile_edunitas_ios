@@ -1,0 +1,359 @@
+part of 'me_partnerkarir.dart';
+
+class MePartnerKarir extends StatefulWidget {
+  //const MePartnerKarir({ Key? key }) : super(key: key);
+
+  @override
+  _MePartnerKarirState createState() => _MePartnerKarirState();
+}
+
+class _MePartnerKarirState extends State<MePartnerKarir> {
+
+
+
+
+  List<String> title = [
+    "Jangan Hapus PT Danil IT TEST nyoba text sangat panjanngggggggggggg",
+    "CV Ajijaya",
+    "Testing danil",
+    "Testing danil",
+  ];
+
+  List<String> jobs = [
+    "Assistant IT Manager",
+    "-",
+    "Academic Co-ordinator",
+    "Academic Co-ordinator",
+  ];
+
+  List<String> periode = [
+    "13 Juli 2021 - 13 November 2021",
+    "18 Juli 2021 - 18 November 2021",
+    "25 Juli 2021 - 25 November 2021",
+    "25 Juli 2021 - 25 November 2021",
+  ];
+
+  List<String> lokasi = [
+    "Bogor",
+    "-",
+    "Jakarta Pusat",
+    "Jakarta Pusat",
+  ];
+
+  bool status = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backwardsCompatibility: false,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarColor: Colors.transparent,
+        ),
+        backgroundColor: mainColor1,
+        title: Text(
+          'Daftar Lowongan',
+          style: whiteFontStyle,
+        ),
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height - 145,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(bottom: 24),
+            child: ListView.builder(
+                physics: ClampingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: title.length,
+                itemBuilder: (context, index) {
+                  return status == true
+                      ? Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0.0, 1.0),
+                                      blurRadius: 3.0)
+                                ],
+                              ),
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    title[index],
+                                    style: blueFontStyleBold,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    jobs[index],
+                                    style: blackFontStyle1Bold.copyWith(
+                                        fontSize: 14),
+                                  ),
+                                  Divider(
+                                    height: 24,
+                                    thickness: 1,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_on_outlined,
+                                            size: 16,
+                                          ),
+                                          Container(
+                                            width: 120,
+                                            child: Text(
+                                              lokasi[index],
+                                              style: blackFontStyle1Bold
+                                                  .copyWith(fontSize: 11),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          periode[index],
+                                          style: blueFontStyleBold.copyWith(
+                                              fontSize: 11),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    height: 24,
+                                    thickness: 1,
+                                  ),
+                                  SizedBox(
+                                    height: 32,
+                                    child: EduButtonSecond(
+                                        buttonText: "Edit", onPressed: () {}),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(),
+                            Positioned(
+                              top: 16,
+                              right: 16,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                  ),
+                                  color: Colors.red,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 8),
+                                child: Text("Menunggu Approval",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.clip,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            )
+                          ],
+                        )
+                      : Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0.0, 1.0),
+                                      blurRadius: 3.0)
+                                ],
+                              ),
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    title[index],
+                                    style: blueFontStyleBold,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    jobs[index],
+                                    style: blackFontStyle1Bold.copyWith(
+                                        fontSize: 14),
+                                  ),
+                                  Divider(
+                                    height: 24,
+                                    thickness: 1,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_on_outlined,
+                                            size: 16,
+                                          ),
+                                          Container(
+                                            width: 120,
+                                            child: Text(
+                                              lokasi[index],
+                                              style: blackFontStyle1Bold
+                                                  .copyWith(fontSize: 11),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          periode[index],
+                                          style: blueFontStyleBold.copyWith(
+                                              fontSize: 11),
+                                          textAlign: TextAlign.end,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    height: 24,
+                                    thickness: 1,
+                                  ),
+                                  SizedBox(
+                                    height: 32,
+                                    child: EduButtonSecond(
+                                        buttonText: "Detail", onPressed: () {}),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 16,
+                              left: 16,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 32,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 8),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text("Dikunjungi ",
+                                              style: blackFontStyle1.copyWith(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold)),
+                                          Text("0",
+                                              style: blueFontStyle.copyWith(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold)),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 4),
+                                            height: 10,
+                                            width: 1,
+                                            color: Colors.grey[800],
+                                          ),
+                                          Text("Apply ",
+                                              style: blackFontStyle1.copyWith(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold)),
+                                          Text("0",
+                                              style: blueFontStyle.copyWith(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      thickness: 1,
+                                      height: 0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 16,
+                              right: 16,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                  ),
+                                  color: Colors.green,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 8),
+                                child: Text("Published",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.clip,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                          ],
+                        );
+                }),
+          ),
+        ),
+      ),
+      bottomSheet: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black38,
+                offset: Offset(0.0, 0.0),
+                blurRadius: 3.0)
+          ],
+        ),
+        height: 64,
+        child: Center(
+            child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.5,
+          height: 40,
+          child: EduButton(
+            buttonText: "Posting Lowongan Kerja",
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => (KarirPilihTemplate())));
+            },
+          ),
+        )),
+      ),
+    );
+  }
+}
