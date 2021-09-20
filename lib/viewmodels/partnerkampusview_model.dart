@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_app_edunitas/constant/constant.dart';
-import 'package:flutter_app_edunitas/model/Master/StatusModel.dart';
+import 'package:ios_edunitas/constant/constant.dart';
+import 'package:ios_edunitas/model/Master/StatusModel.dart';
 import 'package:http/http.dart' as http;
 
 class Partnerkampusview_model{

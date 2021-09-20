@@ -22,21 +22,21 @@ class _BuktiBayarDonasiState extends State<BuktiBayarDonasi> {
   String fdateText = "";
 
   var globalkey = "";
-  SessionManager sessionManager = SessionManager();
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {
-      //handled
-      setState(() {
-        globalkey = sessionManager.key;
-        print("globalkey${globalkey}");
-      });
-    });
-  }
+  // SessionManager sessionManager = SessionManager();
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {
+  //     //handled
+  //     setState(() {
+  //       globalkey = sessionManager.key;
+  //       print("globalkey${globalkey}");
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getPreferences();
+    //getPreferences();
   }
 
   @override
@@ -509,59 +509,59 @@ class _BuktiBayarDonasiState extends State<BuktiBayarDonasi> {
   File imagefoto, foto_save;
   TextEditingController ctitlefoto = new TextEditingController();
   accessCameraAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlefoto.text;
+    // final title = ctitlefoto.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto = img;
-        foto_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto = img;
+    //     foto_save = compressImg;
+    //     Navigator.pop(context);
+    //     //uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGalleryAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryAktivitas: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto = img;
-        foto_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto = img;
+    //     foto_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   final _formKey = GlobalKey<FormState>();

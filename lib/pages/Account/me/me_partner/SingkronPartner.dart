@@ -81,62 +81,62 @@ class _SingkronPartnerState extends State<SingkronPartner> {
   File image, logo_save; //ktp
   TextEditingController ctitle = new TextEditingController();
   accessCamera() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        logo_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image = img;
+    //     logo_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        logo_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image = img;
+    //     logo_save = compressImg;
+    //     Navigator.pop(context);
+    //     //uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   //gedung
@@ -144,251 +144,251 @@ class _SingkronPartnerState extends State<SingkronPartner> {
   File imagegedung, gedung_save; //ktp
   TextEditingController ctitlegedung = new TextEditingController();
   accessCameraGedung() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagegedung = img;
-        gedung_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagegedung = img;
+    //     gedung_save = compressImg;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGalleryGedung() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagegedung = img;
-        gedung_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagegedung = img;
+    //     gedung_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   // aktivitas
   File imageaktivitas, aktivitas_save; //ktp
   TextEditingController ctitleaktivitas = new TextEditingController();
   accessCameraAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitleaktivitas.text;
+    // final title = ctitleaktivitas.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imageaktivitas = img;
-        aktivitas_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imageaktivitas = img;
+    //     aktivitas_save = compressImg;
+    //     Navigator.pop(context);
+    //     //uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGalleryAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryAktivitas: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imageaktivitas = img;
-        aktivitas_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imageaktivitas = img;
+    //     aktivitas_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   // fasilitias
   File imagefasilitas, fasilitas_save; //ktp
   TextEditingController ctitlefasilitas = new TextEditingController();
   accessCamerafasilitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlefasilitas.text;
+    // final title = ctitlefasilitas.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefasilitas = img;
-        fasilitas_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefasilitas = img;
+    //     fasilitas_save = compressImg;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGalleryfasilitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefasilitas = img;
-        fasilitas_save = compressImg;
-        print("accessGalleryfasilitas: " + imagefasilitas.toString());
-        print("accessGalleryfasilitas: " + fasilitas_save.toString());
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefasilitas = img;
+    //     fasilitas_save = compressImg;
+    //     print("accessGalleryfasilitas: " + imagefasilitas.toString());
+    //     print("accessGalleryfasilitas: " + fasilitas_save.toString());
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   File imagebiaya, biaya_save; //ktp
   TextEditingController ctitlebiaya = new TextEditingController();
   accessCamerabiaya() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlebiaya.text;
+    // final title = ctitlebiaya.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagebiaya = img;
-        biaya_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagebiaya = img;
+    //     biaya_save = compressImg;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallerybiaya() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagebiaya = img;
-        biaya_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagebiaya = img;
+    //     biaya_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   void onErrHandling(erro, cat, id_parrent){

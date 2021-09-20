@@ -185,25 +185,25 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     });
   }
 
-  LatLng myLocation;
-  Timer _timer;
-  final Map<String, Marker> _marker = {};
+  // LatLng myLocation;
+  // Timer _timer;
+  // final Map<String, Marker> _marker = {};
 
   String linknya;
-  Future<void> _launched;
+  // Future<void> _launched;
 
-  Future<void> _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _launchInBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: false,
+  //       forceWebView: false,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   String videoId;
   @override
@@ -562,7 +562,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   borderRadius: BorderRadius.circular(5),
                                   child: GestureDetector(
                                     onTap: () => setState(() {
-                                      _launched = _launchInBrowser(toLaunch);
+                                     // _launched = _launchInBrowser(toLaunch);
                                     }),
                                     child: Container(
                                       color: CupertinoColors.systemGrey4,
@@ -1092,7 +1092,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         TextButton(
                           onPressed: () {
                             setState(() {
-                              _launched = _launchInBrowser(urlGooglemaps);
+                              //_launched = _launchInBrowser(urlGooglemaps);
                             });
                           },
                           child: Row(

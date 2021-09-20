@@ -265,19 +265,19 @@ class _DaftarState extends State<Daftar> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  SessionManager sessionManager = SessionManager();
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-      });
-    });
-  }
+  // SessionManager sessionManager = SessionManager();
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {//handled
+  //     setState(() {
+  //       mystatus = sessionManager.status;
+  //       globalkey = sessionManager.key;
+  //       globalEmail = sessionManager.email;
+  //       print("email${globalEmail}");
+  //       print("globalkey${globalkey}");
+  //       print("mystatus${mystatus}");
+  //     });
+  //   });
+  // }
 
   //1//
   DateTime _dueDate = DateTime.now();
@@ -464,7 +464,7 @@ class _DaftarState extends State<Daftar> {
   @override
   void initState() {
     super.initState();
-    getPreferences();
+    //getPreferences();
     conn();
   }
 

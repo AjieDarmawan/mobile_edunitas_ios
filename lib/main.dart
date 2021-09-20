@@ -4,15 +4,13 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_edunitas/constant/constant.dart';
-import 'package:flutter_app_edunitas/pages/Auth/Auth.dart';
-import 'package:flutter_app_edunitas/pages/Home/home.dart';
-import 'package:flutter_app_edunitas/pages/Home/widget_home/agensi/widget_agensi.dart';
-import 'package:flutter_app_edunitas/pages/Splash/intro.dart';
-import 'package:flutter_app_edunitas/widget/widget.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+
+import 'constant/constant.dart';
+import 'pages/Auth/Auth.dart';
+import 'pages/Splash/intro.dart';
 
 // void main() {
 //   runApp(new MaterialApp(
@@ -30,20 +28,20 @@ class MyHttpOverrides extends HttpOverrides{
 }
 
 const debug = true;
-void main()async  {
-  //GestureBinding.instance.resamplingEnabled = true;
-  //  WidgetsFlutterBinding.ensureInitialized();
+// void main()async  {
+//   //GestureBinding.instance.resamplingEnabled = true;
+//   //  WidgetsFlutterBinding.ensureInitialized();
 
-  HttpOverrides.global = new MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
-   await FlutterDownloader.initialize(debug: debug);
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
-    runApp(MyApp());
-  });
-}
+//   HttpOverrides.global = new MyHttpOverrides();
+//   WidgetsFlutterBinding.ensureInitialized();
+//    await FlutterDownloader.initialize(debug: debug);
+//   SystemChrome.setPreferredOrientations(
+//       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
+//     runApp(MyApp());
+//   });
+// }
 
-//void main() => runApp(MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -51,16 +49,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Edunitas',
-      home: SPSatu(),
+      home: Login(),
       routes: <String, WidgetBuilder>{
         INTRO: (BuildContext context) => SPSatu(),
-        ONBOARDING: (BuildContext context) => Onboarding(),
+        // ONBOARDING: (BuildContext context) => Onboarding(),
         SIGN_IN: (BuildContext context) => Login(),
-        SIGN_UP: (BuildContext context) => Register(),
-        HOMEPAGE: (BuildContext context) => MainHome(),
-        NAVI: (BuildContext context) => Navigation_bottom(),
-        ACTIVASI: (BuildContext context) => Activasi(),
-        AGENSILOGIN: (BuildContext context) => AgensiLogin(),
+        // SIGN_UP: (BuildContext context) => Register(),
+        // HOMEPAGE: (BuildContext context) => MainHome(),
+        // NAVI: (BuildContext context) => Navigation_bottom(),
+        // ACTIVASI: (BuildContext context) => Activasi(),
+        // AGENSILOGIN: (BuildContext context) => AgensiLogin(),
       },
     );
   }

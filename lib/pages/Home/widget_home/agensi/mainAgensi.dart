@@ -12,27 +12,27 @@ class MainAgensi extends StatefulWidget {
 
 class _MainAgensiState extends State<MainAgensi> {
   var globalkey = "", globalEmail = "";
-  SessionManager sessionManager = SessionManager();
+  //SessionManager sessionManager = SessionManager();
   var status = false;
   var mystatus = false;
   var _pilihkampus;
   bool _onSyarat = false;
 
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {
-      //handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-        datausers();
-        getInfoRekening();
-      });
-    });
-  }
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {
+  //     //handled
+  //     setState(() {
+  //       mystatus = sessionManager.status;
+  //       globalkey = sessionManager.key;
+  //       globalEmail = sessionManager.email;
+  //       print("email${globalEmail}");
+  //       print("globalkey${globalkey}");
+  //       print("mystatus${mystatus}");
+  //       datausers();
+  //       getInfoRekening();
+  //     });
+  //   });
+  // }
 
   UsersDetailModel userInfo;
   void datausers() {
@@ -113,7 +113,7 @@ class _MainAgensiState extends State<MainAgensi> {
   void initState() {
     super.initState();
     _loading = true;
-    getPreferences();
+    //getPreferences();
     _pilihkampus = "Pilih Kampus";
     _onSyarat = widget.onSyarat == null ? false : true;
   }
@@ -152,19 +152,19 @@ class _MainAgensiState extends State<MainAgensi> {
     "UTN",
   ];
 
-  Future<void> _launched;
-  Future<void> _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _launched;
+  // Future<void> _launchInBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: false,
+  //       forceWebView: false,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -291,8 +291,8 @@ class _MainAgensiState extends State<MainAgensi> {
             ),
           ),
           onTap: () => setState(() {
-            _launched =
-                _launchInBrowser('https://www.youtube.com/watch?v=R1bS18bR0IQ');
+            // _launched =
+            //     _launchInBrowser('https://www.youtube.com/watch?v=R1bS18bR0IQ');
           }),
         )),
         Stepper(

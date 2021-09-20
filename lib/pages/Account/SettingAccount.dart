@@ -10,19 +10,19 @@ class _SettingAccount extends State<MainAccount> {
       globalEmail = "";
   var status = false;
   var mystatus = false;
-  SessionManager sessionManager = SessionManager();
+ // SessionManager sessionManager = SessionManager();
 
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-      });
-    });
+    // await sessionManager.getPreference().then((value) {//handled
+    //   setState(() {
+    //     mystatus = sessionManager.status;
+    //     globalkey = sessionManager.key;
+    //     globalEmail = sessionManager.email;
+    //     print("email${globalEmail}");
+    //     print("globalkey${globalkey}");
+    //     print("mystatus${mystatus}");
+    //   });
+    // });
   }
 
   @override
@@ -32,13 +32,13 @@ class _SettingAccount extends State<MainAccount> {
   }
 
   signOut() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      preferences.setBool("status", false);
-      preferences.clear();
-      preferences.commit();
-      Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
-    });
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // setState(() {
+    //   preferences.setBool("status", false);
+    //   preferences.clear();
+    //   preferences.commit();
+    //   Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
+    // });
   }
 
   @override

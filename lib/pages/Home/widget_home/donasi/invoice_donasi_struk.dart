@@ -58,19 +58,19 @@ class InvoiceDonasiStruk extends StatefulWidget {
 }
 
 class _InvoiceDonasiStrukState extends State<InvoiceDonasiStruk> {
-  Future<void> _launched;
-  Future<void> _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _launched;
+  // Future<void> _launchInBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: false,
+  //       forceWebView: false,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   //  final updateAction = () {
   //     _launched = _launchInBrowser('https://play.google.com/store/apps/details?id='+androidApplicationId);
@@ -561,8 +561,8 @@ class _InvoiceDonasiStrukState extends State<InvoiceDonasiStruk> {
                     buttonText: "Cetak",
                     onPressed: () {
                       setState(() {
-                        _launched = _launchInBrowser(
-                            "https://edunitas.com/file/invoice/${widget.seolink}_${widget.no_reff}.pdf");
+                        // _launched = _launchInBrowser(
+                        //     "https://edunitas.com/file/invoice/${widget.seolink}_${widget.no_reff}.pdf");
                       });
                     },
                   )

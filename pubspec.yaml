@@ -1,5 +1,5 @@
-name: flutter_app_edunitas
-description: eduNitas application.
+name: ios_edunitas
+description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.3+22
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -24,9 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.2
   google_fonts: ^1.1.2
   supercharged: ^1.12.0
   flutter_spinkit: ^4.1.2+1
@@ -39,20 +40,18 @@ dependencies:
   carousel_slider: ^2.2.1
   shimmer: ^1.1.2
   format_indonesia: ^0.1.0
-  geolocator: ^5.3.2+2
-  google_maps_flutter: ^0.5.28+1
-  youtube_player_flutter: ^7.0.0+7
+  # youtube_player_flutter: ^7.0.0+7
   fluttertoast: ^7.1.6
   custom_radio_grouped_button: ^1.0.6+1
   expandable: ^4.1.4
   flutter_html: ^0.11.0
-  url_launcher: ^6.0.3
-  firebase_core: ^0.4.0
-  firebase_messaging: ^5.0.2
-  firebase_auth: ^0.11.1+6
-  cloud_firestore: ^0.12.5
+  # url_launcher: ^6.0.3
+  # firebase_core: ^0.4.0
+  # firebase_messaging: ^5.0.2
+  # firebase_auth: ^0.11.1+6
+  # cloud_firestore: ^0.12.5
   another_flushbar: ^1.10.10
-  platform_device_id: ^0.1.2
+  # platform_device_id: ^0.1.2
   connectivity: ^3.0.3
   flutter_app_badger: ^1.2.0
   flutter_ringtone_player: ^3.0.0
@@ -62,16 +61,19 @@ dependencies:
   flutter_linkify: ^5.0.2
   package_info_plus: ^0.6.4
   flutter_downloader: ^1.5.2
-  permission_handler: ^5.1.0+1
-  pdf_flutter: ^1.1.4
+  # permission_handler: ^5.1.0+1
+  # pdf_flutter: ^1.1.4
   percent_indicator: 3.0.1
-
 
 dev_dependencies:
   flutter_launcher_icons:
   flutter_test:
     sdk: flutter
 
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
 flutter_icons:
   ios: true
   android: true
@@ -79,12 +81,7 @@ flutter_icons:
   image_path_android: "assets/iclaunch.png"
   adaptive_icon_background: "assets/bg.png"
   adaptive_icon_foreground: "assets/fg.png"
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
-flutter:
+  
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -100,8 +97,6 @@ flutter:
       - assets/transaksi/
       - assets/navigasi/
       - assets/dialog/
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

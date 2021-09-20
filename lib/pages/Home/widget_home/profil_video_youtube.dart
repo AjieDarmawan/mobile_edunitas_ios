@@ -20,13 +20,13 @@ class _ProfilVideoYoutubeState extends State<ProfilVideoYoutube> {
     videoId = widget.videoyoutube == null ? '2kHtQPeMXm8' : widget.videoyoutube;
   }
 
-  YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: videoId,
-    flags: YoutubePlayerFlags(
-      autoPlay: false,
-      mute: false,
-    ),
-  );
+  // YoutubePlayerController _controller = YoutubePlayerController(
+  //   initialVideoId: videoId,
+  //   flags: YoutubePlayerFlags(
+  //     autoPlay: false,
+  //     mute: false,
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,11 @@ class _ProfilVideoYoutubeState extends State<ProfilVideoYoutube> {
       child: Column(
         children: [
           Text(videoId),
-          YoutubePlayer(
-            controller: _controller,
-            liveUIColor: Colors.amber,
-            showVideoProgressIndicator: true,
-          ),
+          // YoutubePlayer(
+          //   controller: _controller,
+          //   liveUIColor: Colors.amber,
+          //   showVideoProgressIndicator: true,
+          // ),
         ],
       ),
     );

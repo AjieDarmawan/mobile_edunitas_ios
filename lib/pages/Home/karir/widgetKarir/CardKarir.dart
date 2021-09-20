@@ -118,12 +118,12 @@ class _CardKarirState extends State<CardKarir> {
                                 )
                           : Container(),
                       widget.xkarir.jenisLowongan.toString() != "pdf"
-                          ? Container()
-                          : PDF.network(
-                              widget.xkarir.pdf.toString(),
-                              height: 200,
-                              width: MediaQuery.of(context).size.width,
-                            ),
+                          ? Container() : Container(),
+                          // : PDF.network(
+                          //     widget.xkarir.pdf.toString(),
+                          //     height: 200,
+                          //     width: MediaQuery.of(context).size.width,
+                          //   ),
                       // : PDF.asset(
                       //     "assets/invoice.pdf",
                       //     height: 200,

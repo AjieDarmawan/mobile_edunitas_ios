@@ -29,18 +29,18 @@ class _EditAccountState extends State<EditAccount> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  SessionManager sessionManager = SessionManager();
+  //SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-      });
-    });
+    // await sessionManager.getPreference().then((value) {//handled
+    //   setState(() {
+    //     // mystatus = sessionManager.status;
+    //     // globalkey = sessionManager.key;
+    //     // globalEmail = sessionManager.email;
+    //     print("email${globalEmail}");
+    //     print("globalkey${globalkey}");
+    //     print("mystatus${mystatus}");
+    //   });
+    // });
   }
 
   var loading_image = false;
@@ -84,58 +84,58 @@ class _EditAccountState extends State<EditAccount> {
   File image, image_save; //ktp
   TextEditingController ctitle = new TextEditingController();
   accessCamera() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        image_save = compressImg;
-        uploadPhoto();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image = img;
+    //     image_save = compressImg;
+    //     uploadPhoto();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle.text;
+    // final title = ctitle.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        image_save = compressImg;
-        uploadPhoto();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image = img;
+    //     image_save = compressImg;
+    //     uploadPhoto();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   void uploadPhoto() {

@@ -23,18 +23,18 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   AnimationController _ColorAnimationController;
   Animation _colorTweenContainer, _iconColorTween, _shadowColorTween;
   Future<void> _launched;
-  Future<void> _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _launchInBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: false,
+  //       forceWebView: false,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   DateTime currentBackPressTime;
 
@@ -87,7 +87,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
     final dismissAction = () => Navigator.pop(context);
     Text update = Text(updateText);
     final updateAction = () {
-      _launched = _launchInBrowser('https://play.google.com/store/apps/details?id='+androidApplicationId);
+      //_launched = _launchInBrowser('https://play.google.com/store/apps/details?id='+androidApplicationId);
       Navigator.pop(context);
     };
     final platform = Theme.of(context).platform;
@@ -141,18 +141,18 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus;
-  SessionManager sessionManager = SessionManager();
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-      });
-    });
-  }
+  // SessionManager sessionManager = SessionManager();
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {//handled
+  //     setState(() {
+  //       mystatus = sessionManager.status;
+  //       globalkey = sessionManager.key;
+  //       globalEmail = sessionManager.email;
+  //       print("email${globalEmail}");
+  //       print("globalkey${globalkey}");
+  //     });
+  //   });
+  // }
 
   var waktu = Waktu();
   // using specific time
@@ -271,46 +271,46 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
 
   String _homeScreenText = "Waiting for token...";
   String _messageText = "Waiting for message...";
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   void fcm() {
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        FlutterRingtonePlayer.playNotification();
-        print("onMessage: $message");
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        print("onLaunch: $message");
-      },
-      onResume: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        print("onResume: $message");
-      },
-    );
-    //ios only
-    _firebaseMessaging.requestNotificationPermissions(
-      const IosNotificationSettings(sound: true, badge: true, alert: true),
-    );
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
-    });
+    // _firebaseMessaging.configure(
+    //   onMessage: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     FlutterRingtonePlayer.playNotification();
+    //     print("onMessage: $message");
+    //   },
+    //   onLaunch: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     print("onLaunch: $message");
+    //   },
+    //   onResume: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     print("onResume: $message");
+    //   },
+    // );
+    // //ios only
+    // _firebaseMessaging.requestNotificationPermissions(
+    //   const IosNotificationSettings(sound: true, badge: true, alert: true),
+    // );
+    // _firebaseMessaging.onIosSettingsRegistered
+    //     .listen((IosNotificationSettings settings) {
+    //   print("Settings registered: $settings");
+    // });
 
-    _firebaseMessaging.getToken().then((String token) {
-      assert(token != null);
-      setState(() {
-        _homeScreenText = "Push Messaging token: $token";
-      });
-      print(_homeScreenText);
-    });
+    // _firebaseMessaging.getToken().then((String token) {
+    //   assert(token != null);
+    //   setState(() {
+    //     _homeScreenText = "Push Messaging token: $token";
+    //   });
+    //   print(_homeScreenText);
+    // });
   }
 
   Future changeColors() async {
@@ -334,7 +334,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    getPreferences();
+   // getPreferences();
     getData();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
@@ -877,8 +877,8 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           onTap: () => setState(() {
-                                            _launched = _launchInBrowser(
-                                                'https://edunitas.com/edupromotion/partner');
+                                            // _launched = _launchInBrowser(
+                                            //     'https://edunitas.com/edupromotion/partner');
                                           }),
                                         ),
                                       ),

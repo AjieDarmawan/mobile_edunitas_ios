@@ -30,22 +30,22 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  SessionManager sessionManager = SessionManager();
-  // var gabs = CryptoData.getData;
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {
-      //handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-      });
-    });
-    List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
-  }
+  // SessionManager sessionManager = SessionManager();
+  // // var gabs = CryptoData.getData;
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {
+  //     //handled
+  //     setState(() {
+  //       mystatus = sessionManager.status;
+  //       globalkey = sessionManager.key;
+  //       globalEmail = sessionManager.email;
+  //       print("email${globalEmail}");
+  //       print("globalkey${globalkey}");
+  //       print("mystatus${mystatus}");
+  //     });
+  //   });
+  //   List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
+  // }
 
   String stat = "1";
   String _wStatus(stat) {
@@ -147,46 +147,46 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
 
   String _homeScreenText = "Waiting for token...";
   String _messageText = "Waiting for message...";
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   void fcm() {
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        FlutterRingtonePlayer.playNotification();
-        print("onMessage: $message");
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        print("onLaunch: $message");
-      },
-      onResume: (Map<String, dynamic> message) async {
-        setState(() {
-          _messageText = "Push Messaging message: $message";
-        });
-        print("onResume: $message");
-      },
-    );
+    // _firebaseMessaging.configure(
+    //   onMessage: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     FlutterRingtonePlayer.playNotification();
+    //     print("onMessage: $message");
+    //   },
+    //   onLaunch: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     print("onLaunch: $message");
+    //   },
+    //   onResume: (Map<String, dynamic> message) async {
+    //     setState(() {
+    //       _messageText = "Push Messaging message: $message";
+    //     });
+    //     print("onResume: $message");
+    //   },
+    // );
     //ios only
-    _firebaseMessaging.requestNotificationPermissions(
-      const IosNotificationSettings(sound: true, badge: true, alert: true),
-    );
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
-    });
+    // _firebaseMessaging.requestNotificationPermissions(
+    //   const IosNotificationSettings(sound: true, badge: true, alert: true),
+    // );
+    // _firebaseMessaging.onIosSettingsRegistered
+    //     .listen((IosNotificationSettings settings) {
+    //   print("Settings registered: $settings");
+    // });
 
-    _firebaseMessaging.getToken().then((String token) {
-      assert(token != null);
-      setState(() {
-        _homeScreenText = "Push Messaging token: $token";
-      });
-      print(_homeScreenText);
-    });
+    // _firebaseMessaging.getToken().then((String token) {
+    //   assert(token != null);
+    //   setState(() {
+    //     _homeScreenText = "Push Messaging token: $token";
+    //   });
+    //   print(_homeScreenText);
+    // });
   }
 
   //conn has been updated 22 August 2021
@@ -221,7 +221,7 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   @override
   void initState() {
     super.initState();
-    getPreferences();
+    //getPreferences();
     conn();
     //checkInternet();
     // setState(() {

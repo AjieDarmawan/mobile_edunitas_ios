@@ -12,19 +12,19 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  SessionManager sessionManager = SessionManager();
-  void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
-      setState(() {
-        mystatus = sessionManager.status;
-        globalkey = sessionManager.key;
-        globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
-      });
-    });
-  }
+  // SessionManager sessionManager = SessionManager();
+  // void getPreferences() async {
+  //   await sessionManager.getPreference().then((value) {//handled
+  //     setState(() {
+  //       mystatus = sessionManager.status;
+  //       globalkey = sessionManager.key;
+  //       globalEmail = sessionManager.email;
+  //       print("email${globalEmail}");
+  //       print("globalkey${globalkey}");
+  //       print("mystatus${mystatus}");
+  //     });
+  //   });
+  // }
 
   var edit_cid = "",
       edit_nama_perusahaan,
@@ -404,63 +404,63 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   File image_logo_lengkap, logo_lengkap_save; //ktp
   TextEditingController ctitlelogo_lengkap = new TextEditingController();
   accessCameralogo_lengkap() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlelogo_lengkap.text;
+    // final title = ctitlelogo_lengkap.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_logo_lengkap = img;
-        logo_lengkap_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_logo_lengkap = img;
+    //     logo_lengkap_save = compressImg;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallerylogo_lengkap() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlelogo_lengkap.text;
+    // final title = ctitlelogo_lengkap.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_logo_lengkap = img;
-        logo_lengkap_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_logo_lengkap = img;
+    //     logo_lengkap_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   //jobgambar1
@@ -468,65 +468,65 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   File image_jobgambar1, jobgambar1_save; //ktp
   TextEditingController ctitle_jobgambar1 = new TextEditingController();
   accessCamera_jobgambar1() async {
-    File imgjob_gambar1 =
-        await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar1 =
+    //     await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar1.text;
+    // final title = ctitle_jobgambar1.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job1 =
-        new File("$path/image1_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job1 =
+    //     new File("$path/image1_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar1 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar1 = imgjob_gambar1;
-        jobgambar1_save = compressImg_job1;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (imgjob_gambar1 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar1 = imgjob_gambar1;
+    //     jobgambar1_save = compressImg_job1;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery_jobgambar1() async {
-    File imgjob_gambar1 =
-        await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar1 =
+    //     await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar1.text;
+    // final title = ctitle_jobgambar1.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job1 =
-        new File("$path/image1_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job1 =
+    //     new File("$path/image1_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar1 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar1 = imgjob_gambar1;
-        jobgambar1_save = compressImg_job1;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (imgjob_gambar1 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar1 = imgjob_gambar1;
+    //     jobgambar1_save = compressImg_job1;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   //jobgambar2
@@ -534,65 +534,65 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   File image_jobgambar2, jobgambar2_save; //ktp
   TextEditingController ctitle_jobgambar2 = new TextEditingController();
   accessCamera_jobgambar2() async {
-    File imgjob_gambar2 =
-        await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar2 =
+    //     await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar2.text;
+    // final title = ctitle_jobgambar2.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar2.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar2.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job2 =
-        new File("$path/image2_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job2 =
+    //     new File("$path/image2_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar2 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar2 = imgjob_gambar2;
-        jobgambar2_save = compressImg_job2;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (imgjob_gambar2 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar2 = imgjob_gambar2;
+    //     jobgambar2_save = compressImg_job2;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery_jobgambar2() async {
-    File imgjob_gambar2 =
-        await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar2 =
+    //     await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar2.text;
+    // final title = ctitle_jobgambar2.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar2.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar2.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job2 =
-        new File("$path/image2_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job2 =
+    //     new File("$path/image2_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar2 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar2 = imgjob_gambar2;
-        jobgambar2_save = compressImg_job2;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (imgjob_gambar2 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar2 = imgjob_gambar2;
+    //     jobgambar2_save = compressImg_job2;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   //jobgambar3
@@ -600,65 +600,65 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   File image_jobgambar3, jobgambar3_save; //ktp
   TextEditingController ctitle_jobgambar3 = new TextEditingController();
   accessCamera_jobgambar3() async {
-    File imgjob_gambar3 =
-        await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar3 =
+    //     await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar3.text;
+    // final title = ctitle_jobgambar3.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar3.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar3.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job3 =
-        new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job3 =
+    //     new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar3 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar3 = imgjob_gambar3;
-        jobgambar3_save = compressImg_job3;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (imgjob_gambar3 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar3 = imgjob_gambar3;
+    //     jobgambar3_save = compressImg_job3;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery_jobgambar3() async {
-    File imgjob_gambar3 =
-        await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File imgjob_gambar3 =
+    //     await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_jobgambar3.text;
+    // final title = ctitle_jobgambar3.text;
 
-    Img.Image _image = Img.decodeImage(imgjob_gambar3.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(imgjob_gambar3.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg_job3 =
-        new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg_job3 =
+    //     new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (imgjob_gambar3 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_jobgambar3 = imgjob_gambar3;
-        jobgambar3_save = compressImg_job3;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (imgjob_gambar3 == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_jobgambar3 = imgjob_gambar3;
+    //     jobgambar3_save = compressImg_job3;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   //pdf
@@ -668,66 +668,66 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   File image_pdf, pdf_save; //ktp
   TextEditingController ctitle_pdf = new TextEditingController();
   accessCamera_pdf() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_pdf.text;
+    // final title = ctitle_pdf.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image3_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    String adr_pdf = "$path/image3_${random_name_logo}${random_name_logo}.jpg";
+    // String adr_pdf = "$path/image3_${random_name_logo}${random_name_logo}.jpg";
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_pdf = img;
-        pdf_save = compressImg;
-        etuploadpdf_pdf.text = adr_pdf;
-        Navigator.pop(context);
-        //  uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_pdf = img;
+    //     pdf_save = compressImg;
+    //     etuploadpdf_pdf.text = adr_pdf;
+    //     Navigator.pop(context);
+    //     //  uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGallery_pdf() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitle_pdf.text;
+    // final title = ctitle_pdf.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryGedung: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg =
-        new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg =
+    //     new File("$path/image_${random_name_logo}${random_name_logo}.jpg")
+    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_pdf = img;
-        pdf_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     image_pdf = img;
+    //     pdf_save = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   // lengkap
@@ -899,7 +899,7 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   @override
   void initState() {
     super.initState();
-    getPreferences();
+    //getPreferences();
     checkXkarir();
     getposisi();
     getJurusan();

@@ -73,15 +73,15 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
   final _formKey = GlobalKey<FormState>();
 
   var globalkey = "";
-  SessionManager sessionManager = SessionManager();
+  //SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {
-      //handled
-      setState(() {
-        globalkey = sessionManager.key;
-        print("globalkey${globalkey}");
-      });
-    });
+    // await sessionManager.getPreference().then((value) {
+    //   //handled
+    //   setState(() {
+    //     globalkey = sessionManager.key;
+    //     print("globalkey${globalkey}");
+    //   });
+    // });
   }
 
   List<DataBankModel> listBank;
@@ -1620,111 +1620,111 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
   File imagefoto_ktp, foto_save_ktp;
   TextEditingController ctitlefoto = new TextEditingController();
   accessCameraKtp() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlefoto.text;
+    // final title = ctitlefoto.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_ktp = img;
-        foto_save_ktp = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto_ktp = img;
+    //     foto_save_ktp = compressImg;
+    //     Navigator.pop(context);
+    //     //uploadLogo();
 
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   accessGalleryKtp() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryAktivitas: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_ktp = img;
-        foto_save_ktp = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto_ktp = img;
+    //     foto_save_ktp = compressImg;
+    //     Navigator.pop(context);
+    //     // uploadLogo();
+    //     //  uploadimg();
+    //     // uploadktp();
+    //   });
+    // }
   }
 
   // ambil foto galangan
   File imagefoto_g, foto_save_g;
   TextEditingController ctitlefoto_g = new TextEditingController();
   accessCameraG() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    final title = ctitlefoto_g.text;
+    // final title = ctitlefoto_g.text;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_g = img;
-        foto_save_g = compressImg;
-        Navigator.pop(context);
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto_g = img;
+    //     foto_save_g = compressImg;
+    //     Navigator.pop(context);
+    //   });
+    // }
   }
 
   accessGalleryG() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
+    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // final tempDir = await getTemporaryDirectory();
+    // final path = tempDir.path;
 
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    // print("accessGalleryAktivitas: " + _image.toString());
+    // Img.Image _smallerimg = Img.copyResize(_image,
+    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    // var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+    //   ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_g = img;
-        foto_save_g = compressImg;
-        Navigator.pop(context);
-      });
-    }
+    // if (img == null) {
+    //   print('null');
+    // } else {
+    //   setState(() {
+    //     imagefoto_g = img;
+    //     foto_save_g = compressImg;
+    //     Navigator.pop(context);
+    //   });
+    // }
   }
 
   void submit() {

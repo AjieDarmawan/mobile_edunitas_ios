@@ -5,10 +5,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_edunitas/shared/shared.dart';
+import 'package:ios_edunitas/shared/shared.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 
 const debug = true;
 
@@ -329,20 +329,20 @@ class _HalamanDownloadState extends State<HalamanDownload> {
   }
 
   Future<bool> _checkPermission() async {
-    if (widget.platform == TargetPlatform.android) {
-      final status = await Permission.storage.status;
-      if (status != PermissionStatus.granted) {
-        final result = await Permission.storage.request();
-        if (result == PermissionStatus.granted) {
-          return true;
-        }
-      } else {
-        return true;
-      }
-    } else {
-      return true;
-    }
-    return false;
+    // if (widget.platform == TargetPlatform.android) {
+    //   final status = await Permission.storage.status;
+    //   if (status != PermissionStatus.granted) {
+    //     final result = await Permission.storage.request();
+    //     if (result == PermissionStatus.granted) {
+    //       return true;
+    //     }
+    //   } else {
+    //     return true;
+    //   }
+    // } else {
+    //   return true;
+    // }
+    // return false;
   }
 
   Future<Null> _prepare() async {
