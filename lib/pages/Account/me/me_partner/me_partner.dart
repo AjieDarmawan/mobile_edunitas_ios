@@ -15,7 +15,7 @@ import 'package:ios_edunitas/viewmodels/viewmodel.dart';
 import 'package:ios_edunitas/widget/widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:image/image.dart' as Img;
 
 import 'package:image_picker/image_picker.dart';
 // import 'package:image/image.dart' as Img;

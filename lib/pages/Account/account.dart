@@ -22,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:image/image.dart' as Img;
 
 import 'me/me_campus/me_kampus.dart';
 import 'me/me_partner/me_partner.dart';
