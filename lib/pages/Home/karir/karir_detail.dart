@@ -51,18 +51,18 @@ class _KarirDetailState extends State<KarirDetail> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus;
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+      });
+    });
+  }
 
   String varnama,
       varemail,
@@ -802,7 +802,7 @@ class _KarirDetailState extends State<KarirDetail> {
   void initState() {
     super.initState();
     getDetailKarir();
-   // getPreferences();
+    getPreferences();
   }
 
   @override

@@ -12,19 +12,19 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {//handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {//handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
+  }
 
   var edit_cid = "",
       edit_nama_perusahaan,
@@ -899,7 +899,7 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
   @override
   void initState() {
     super.initState();
-    //getPreferences();
+    getPreferences();
     checkXkarir();
     getposisi();
     getJurusan();

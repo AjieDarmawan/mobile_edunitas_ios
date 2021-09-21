@@ -42,11 +42,11 @@ class _LoginState extends State<Login> {
   Future<void> initPlatformState() async {
     String deviceId;
     // Platform messages may fail, so we use a try/catch PlatformException.
-    // try {
-    //   deviceId = await PlatformDeviceId.getDeviceId;
-    // } on PlatformException {
-    //   deviceId = 'Failed to get deviceId.';
-    // }
+    try {
+      deviceId = await PlatformDeviceId.getDeviceId;
+    } on PlatformException {
+      deviceId = 'Failed to get deviceId.';
+    }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -158,7 +158,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  //SessionManager sessionManager = SessionManager();
+  SessionManager sessionManager = SessionManager();
 
   String fcmToken;
   //final FirebaseMessaging _fcm = FirebaseMessaging();
@@ -179,8 +179,8 @@ class _LoginState extends State<Login> {
         setState(() {
           status = true;
           _trylogin = false;
-          // sessionManager.savePreference(
-          //     status, data.key, data.email, fcmToken.toString());
+          sessionManager.savePreference(
+              status, data.key, data.email, fcmToken.toString());
         });
 
         Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
@@ -188,8 +188,8 @@ class _LoginState extends State<Login> {
         setState(() {
           status = true;
 
-          // sessionManager.savePreference(
-          //     status, data.key, data.email, fcmToken.toString());
+          sessionManager.savePreference(
+              status, data.key, data.email, fcmToken.toString());
         });
 
         if (data.tmpdataKampus == null) {
@@ -438,8 +438,8 @@ class _LoginState extends State<Login> {
         setState(() {
           status = true;
           _trylogin = false;
-          // sessionManager.savePreference(
-          //     status, data.key, data.email, fcmToken.toString());
+          sessionManager.savePreference(
+              status, data.key, data.email, fcmToken.toString());
         });
 
         //masuk dari agent

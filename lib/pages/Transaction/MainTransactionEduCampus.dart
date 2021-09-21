@@ -30,22 +30,22 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  // SessionManager sessionManager = SessionManager();
-  // // var gabs = CryptoData.getData;
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {
-  //     //handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //     });
-  //   });
-  //   List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
-  // }
+  SessionManager sessionManager = SessionManager();
+  // var gabs = CryptoData.getData;
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
+    List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
+  }
 
   String stat = "1";
   String _wStatus(stat) {
@@ -221,7 +221,7 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   @override
   void initState() {
     super.initState();
-    //getPreferences();
+    getPreferences();
     conn();
     //checkInternet();
     // setState(() {

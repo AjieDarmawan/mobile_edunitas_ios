@@ -141,18 +141,18 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus;
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {//handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {//handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+      });
+    });
+  }
 
   var waktu = Waktu();
   // using specific time
@@ -334,7 +334,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-   // getPreferences();
+    getPreferences();
     getData();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));

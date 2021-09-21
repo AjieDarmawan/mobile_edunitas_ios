@@ -26,28 +26,28 @@ class _MainAccountState extends State<MainAccount> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
- // SessionManager sessionManager = SessionManager();
+  SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    // await sessionManager.getPreference().then((value) {
-    //   //handled
-    //   setState(() {
-    //     mystatus = sessionManager.status;
-    //     globalkey = sessionManager.key;
-    //     globalEmail = sessionManager.email;
-    //     print("email${globalEmail}");
-    //     print("globalkey${globalkey}");
-    //     print("mystatus${mystatus}");
-    //   });
-    // });
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
   }
 
-  // String fcmToken;
-  // final FirebaseMessaging _fcm = FirebaseMessaging();
+  String fcmToken;
+  //final FirebaseMessaging _fcm = FirebaseMessaging();
 
-  // _getFcmToken() async {
-  //   fcmToken = await _fcm.getToken();
-  //   print("fcmtoken: " + fcmToken);
-  // }
+  _getFcmToken() async {
+    // fcmToken = await _fcm.getToken();
+    // print("fcmtoken: " + fcmToken);
+  }
 
   String varnama,
       varemail,
@@ -231,7 +231,7 @@ class _MainAccountState extends State<MainAccount> {
   void getData() {
     fcm();
     datausers();
-    //_getFcmToken();
+    _getFcmToken();
   }
 
   @override
@@ -242,25 +242,25 @@ class _MainAccountState extends State<MainAccount> {
   }
 
   signOut() async {
-    UserViewModel().logout("").then((value) async {
+    UserViewModel().logout(fcmToken.toString()).then((value) async {
       //handled
       StatusModel data = value;
 
       if (data.status == 200) {
-       // SharedPreferences preferences = await SharedPreferences.getInstance();
+        SharedPreferences preferences = await SharedPreferences.getInstance();
         setState(() {
-          // preferences.setBool("status", false);
-          // preferences.clear();
-          // preferences.commit();
-          // Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
+          preferences.setBool("status", false);
+          preferences.clear();
+          preferences.commit();
+          Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
         });
       } else {
-      //  SharedPreferences preferences = await SharedPreferences.getInstance();
+        SharedPreferences preferences = await SharedPreferences.getInstance();
         setState(() {
-          // preferences.setBool("status", false);
-          // preferences.clear();
-          // preferences.commit();
-          // Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
+          preferences.setBool("status", false);
+          preferences.clear();
+          preferences.commit();
+          Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
         });
       }
     });

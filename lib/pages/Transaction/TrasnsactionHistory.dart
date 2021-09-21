@@ -15,23 +15,23 @@ class _TrasnsactionHistoryState extends State<TrasnsactionHistory> {
   var status = false;
   var mystatus = false;
   ScrollController _controller;
-  // SessionManager sessionManager = SessionManager();
-  // 
-  // //var gabs = CryptoData.getData;
+  SessionManager sessionManager = SessionManager();
+  
+  //var gabs = CryptoData.getData;
 
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {
-  //     //handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //     });
-  //   });
-  // }
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
+  }
 
   _scrollListener() {
     if (_controller.offset >= _controller.position.maxScrollExtent &&
@@ -144,7 +144,7 @@ class _TrasnsactionHistoryState extends State<TrasnsactionHistory> {
   @override
   void initState() {
     super.initState();
-   // getPreferences();
+   getPreferences();
 
     _controller = ScrollController();
     _controller.addListener(_scrollListener);

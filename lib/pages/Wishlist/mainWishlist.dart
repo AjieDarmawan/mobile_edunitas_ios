@@ -29,21 +29,21 @@ class _MainWishlistState extends State<MainWishlist> {
   var status = false;
   var mystatus = false;
     ScrollController _controller;
-  // SessionManager sessionManager = SessionManager();
+   SessionManager sessionManager = SessionManager();
 
-  // var gabs = CryptoData.getData;
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {//handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //     });
-  //   });
-  // }
+  var gabs = CryptoData.getData;
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {//handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
+  }
 
   _scrollListener() {
     if (_controller.offset >= _controller.position.maxScrollExtent &&
@@ -209,7 +209,7 @@ class _MainWishlistState extends State<MainWishlist> {
   void initState() {
     super.initState();
     conn();
-    //getPreferences();
+    getPreferences();
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
   }

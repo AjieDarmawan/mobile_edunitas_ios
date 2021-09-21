@@ -22,21 +22,21 @@ class _BuktiBayarDonasiState extends State<BuktiBayarDonasi> {
   String fdateText = "";
 
   var globalkey = "";
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {
-  //     //handled
-  //     setState(() {
-  //       globalkey = sessionManager.key;
-  //       print("globalkey${globalkey}");
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        globalkey = sessionManager.key;
+        print("globalkey${globalkey}");
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    //getPreferences();
+    getPreferences();
   }
 
   @override

@@ -9,6 +9,7 @@ import 'package:ios_edunitas/viewmodels/UserViewModel.dart';
 import 'package:ios_edunitas/widget/widget.dart';
 import 'package:ios_edunitas/pages/Splash/data/data.dart';
 import 'package:flutter/services.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 

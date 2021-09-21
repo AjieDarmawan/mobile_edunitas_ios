@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:ios_edunitas/pages/Home/home.dart';
+import 'package:ios_edunitas/pages/Home/widget_home/agensi/widget_agensi.dart';
+import 'package:ios_edunitas/widget/widget.dart';
 
 import 'constant/constant.dart';
 import 'pages/Auth/Auth.dart';
@@ -49,16 +52,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Edunitas',
-      home: Login(),
+      home: SPSatu(),
       routes: <String, WidgetBuilder>{
         INTRO: (BuildContext context) => SPSatu(),
-        // ONBOARDING: (BuildContext context) => Onboarding(),
+         ONBOARDING: (BuildContext context) => Onboarding(),
         SIGN_IN: (BuildContext context) => Login(),
-        // SIGN_UP: (BuildContext context) => Register(),
-        // HOMEPAGE: (BuildContext context) => MainHome(),
-        // NAVI: (BuildContext context) => Navigation_bottom(),
-        // ACTIVASI: (BuildContext context) => Activasi(),
-        // AGENSILOGIN: (BuildContext context) => AgensiLogin(),
+         SIGN_UP: (BuildContext context) => Register(),
+         HOMEPAGE: (BuildContext context) => MainHome(),
+         NAVI: (BuildContext context) => Navigation_bottom(),
+         ACTIVASI: (BuildContext context) => Activasi(),
+         AGENSILOGIN: (BuildContext context) => AgensiLogin(),
       },
     );
   }

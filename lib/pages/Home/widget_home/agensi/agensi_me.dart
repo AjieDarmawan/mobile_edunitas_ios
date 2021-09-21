@@ -37,20 +37,20 @@ class _AgensiMeState extends State<AgensiMe> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {//handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //       datausers();
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {//handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+        datausers();
+      });
+    });
+  }
 
   List<Photo> datakampus = [];
   void getKampus() async {
@@ -215,7 +215,7 @@ class _AgensiMeState extends State<AgensiMe> {
   void initState() {
     super.initState();
     _nrek = widget.nameRek!=null?true:false;
-    //getPreferences();
+    getPreferences();
     getInfoRekening();
     getKampus();
   }

@@ -45,13 +45,13 @@ dependencies:
   custom_radio_grouped_button: ^1.0.6+1
   expandable: ^4.1.4
   flutter_html: ^0.11.0
-  # url_launcher: ^6.0.3
+  url_launcher: ^6.0.3
   # firebase_core: ^0.4.0
   # firebase_messaging: ^5.0.2
   # firebase_auth: ^0.11.1+6
   # cloud_firestore: ^0.12.5
   another_flushbar: ^1.10.10
-  # platform_device_id: ^0.1.2
+  platform_device_id: ^0.1.2
   connectivity: ^3.0.3
   flutter_app_badger: ^1.2.0
   flutter_ringtone_player: ^3.0.0

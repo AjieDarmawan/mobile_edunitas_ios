@@ -17,22 +17,22 @@ class _MainTransactionEduDonasiHistoryState
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  // SessionManager sessionManager = SessionManager();
-  // // var gabs = CryptoData.getData;
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {
-  //     //handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       print("email${globalEmail}");
-  //       print("globalkey${globalkey}");
-  //       print("mystatus${mystatus}");
-  //     });
-  //   });
-  //   List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
-  // }
+  SessionManager sessionManager = SessionManager();
+  // var gabs = CryptoData.getData;
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        print("email${globalEmail}");
+        print("globalkey${globalkey}");
+        print("mystatus${mystatus}");
+      });
+    });
+    List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
+  }
 
   var datatrans = [];
   void getdatatrans(globalkey2) {

@@ -20,7 +20,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ios_edunitas/pages/Home/home.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-// import 'package:platform_device_id/platform_device_id.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:connectivity/connectivity.dart';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';

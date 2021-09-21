@@ -16,46 +16,46 @@ class _OnboardingState extends State<Onboarding> {
   void initState() {
     super.initState();
     slides = getSlide();
-   // initPlatformState();
+    initPlatformState();
   }
 
   String _deviceId = 'Unknown';
-  // Future<void> initPlatformState() async {
-  //   String deviceId;
-  //   // Platform messages may fail, so we use a try/catch PlatformException.
-  //   try {
-  //     deviceId = await PlatformDeviceId.getDeviceId;
-  //   } on PlatformException {
-  //     deviceId = 'Failed to get deviceId.';
-  //   }
+  Future<void> initPlatformState() async {
+    String deviceId;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      deviceId = await PlatformDeviceId.getDeviceId;
+    } on PlatformException {
+      deviceId = 'Failed to get deviceId.';
+    }
 
-  //   // If the widget was removed from the tree while the asynchronous platform
-  //   // message was in flight, we want to discard the reply rather than calling
-  //   // setState to update our non-existent appearance.
-  //   if (!mounted) return;
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
 
-  //   setState(() {
-  //     _deviceId = deviceId;
+    setState(() {
+      _deviceId = deviceId;
 
-  //     print("deviceId->$_deviceId");
-  //   });
-  // }
+      print("deviceId->$_deviceId");
+    });
+  }
 
-  // SessionManager sessionManager = SessionManager();
-  // void cekdevices() {
-  //   setState(() {
-  //     sessionManager.saveandroid_id(_deviceId);
-  //   });
-  //   Navigator.of(context).pushNamedAndRemoveUntil(SIGN_IN, (route) => false);
-  //   // UserViewModel().android_id_update(_deviceId.toString()).then((value) {
-  //   //   StatusModel data = value;
+  SessionManager sessionManager = SessionManager();
+  void cekdevices() {
+    setState(() {
+      sessionManager.saveandroid_id(_deviceId);
+    });
+    Navigator.of(context).pushNamedAndRemoveUntil(SIGN_IN, (route) => false);
+    // UserViewModel().android_id_update(_deviceId.toString()).then((value) {
+    //   StatusModel data = value;
 
-  //   //   if (data.status == 200) {
-  //   // Navigator.of(context)
-  //   //     .pushNamedAndRemoveUntil(SIGN_IN, (route) => false);
-  //   //   }
-  //   // });
-  // }
+    //   if (data.status == 200) {
+    // Navigator.of(context)
+    //     .pushNamedAndRemoveUntil(SIGN_IN, (route) => false);
+    //   }
+    // });
+  }
 
   Widget pageIndexIndicator(bool isCurrentPage) {
     return Container(
@@ -137,7 +137,7 @@ class _OnboardingState extends State<Onboarding> {
                     width: 120,
                     child: EduButton(
                       onPressed: () {
-                        //cekdevices();
+                        cekdevices();
                       },
                       buttonText: 'Mulai',
                     ),

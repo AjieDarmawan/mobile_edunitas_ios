@@ -35,19 +35,19 @@ class _FormPendaftaranOnlineState extends State<FormPendaftaranOnline> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-  // SessionManager sessionManager = SessionManager();
-  // void getPreferences() async {
-  //   await sessionManager.getPreference().then((value) {//handled
-  //     setState(() {
-  //       mystatus = sessionManager.status;
-  //       globalkey = sessionManager.key;
-  //       globalEmail = sessionManager.email;
-  //       // print("email_def${globalEmail}");
-  //       // print("globalkey_def${globalkey}");
-  //       // print("mystatus_def${mystatus}");
-  //     });
-  //   });
-  // }
+  SessionManager sessionManager = SessionManager();
+  void getPreferences() async {
+    await sessionManager.getPreference().then((value) {//handled
+      setState(() {
+        mystatus = sessionManager.status;
+        globalkey = sessionManager.key;
+        globalEmail = sessionManager.email;
+        // print("email_def${globalEmail}");
+        // print("globalkey_def${globalkey}");
+        // print("mystatus_def${mystatus}");
+      });
+    });
+  }
 
   List<KampusMasterModel> datakampus = new List();
   void getkampus() async {
@@ -158,7 +158,7 @@ class _FormPendaftaranOnlineState extends State<FormPendaftaranOnline> {
   @override
   void initState() {
     super.initState();
-   // getPreferences();
+   getPreferences();
     getData();
   }
 

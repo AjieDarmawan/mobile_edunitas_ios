@@ -73,15 +73,15 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
   final _formKey = GlobalKey<FormState>();
 
   var globalkey = "";
-  //SessionManager sessionManager = SessionManager();
+  SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    // await sessionManager.getPreference().then((value) {
-    //   //handled
-    //   setState(() {
-    //     globalkey = sessionManager.key;
-    //     print("globalkey${globalkey}");
-    //   });
-    // });
+    await sessionManager.getPreference().then((value) {
+      //handled
+      setState(() {
+        globalkey = sessionManager.key;
+        print("globalkey${globalkey}");
+      });
+    });
   }
 
   List<DataBankModel> listBank;
