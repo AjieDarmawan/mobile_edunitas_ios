@@ -23,18 +23,18 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   AnimationController _ColorAnimationController;
   Animation _colorTweenContainer, _iconColorTween, _shadowColorTween;
   Future<void> _launched;
-  // Future<void> _launchInBrowser(String url) async {
-  //   if (await canLaunch(url)) {
-  //     await launch(
-  //       url,
-  //       forceSafariVC: false,
-  //       forceWebView: false,
-  //       headers: <String, String>{'my_header_key': 'my_header_value'},
-  //     );
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   DateTime currentBackPressTime;
 
@@ -87,7 +87,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
     final dismissAction = () => Navigator.pop(context);
     Text update = Text(updateText);
     final updateAction = () {
-      //_launched = _launchInBrowser('https://play.google.com/store/apps/details?id='+androidApplicationId);
+      _launched = _launchInBrowser('https://play.google.com/store/apps/details?id='+androidApplicationId);
       Navigator.pop(context);
     };
     final platform = Theme.of(context).platform;
@@ -877,8 +877,8 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           onTap: () => setState(() {
-                                            // _launched = _launchInBrowser(
-                                            //     'https://edunitas.com/edupromotion/partner');
+                                            _launched = _launchInBrowser(
+                                                'https://edunitas.com/edupromotion/partner');
                                           }),
                                         ),
                                       ),

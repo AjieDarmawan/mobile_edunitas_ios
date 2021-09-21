@@ -11,18 +11,18 @@ class DetailMetodePemabyaran extends StatefulWidget {
 
 class _DetailMetodePemabyaranState extends State<DetailMetodePemabyaran> {
   Future<void> _launched;
-  // Future<void> _launchInBrowser(String url) async {
-  //   if (await canLaunch(url)) {
-  //     await launch(
-  //       url,
-  //       forceSafariVC: false,
-  //       forceWebView: false,
-  //       headers: <String, String>{'my_header_key': 'my_header_value'},
-  //     );
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class _DetailMetodePemabyaranState extends State<DetailMetodePemabyaran> {
                           width: 250,
                           child: EduButton(
                             onPressed: () => setState(() {
-                              //_launched = _launchInBrowser(
-                                //  'https://dev-api.edunitas.com/generate_doku?key=${widget.no_virtual}');
+                              _launched = _launchInBrowser(
+                                 'https://dev-api.edunitas.com/generate_doku?key=${widget.no_virtual}');
                             }),
                             buttonText: "Generate Kode",
                           ),

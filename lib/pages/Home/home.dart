@@ -51,6 +51,7 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:format_indonesia/format_indonesia.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 // import 'package:youtube_player_flutter/youtube_player_flutter.dart';

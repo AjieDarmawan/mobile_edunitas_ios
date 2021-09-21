@@ -11,19 +11,19 @@ class MenuHome extends StatefulWidget {
 }
 
 class _MenuHomeState extends State<MenuHome> {
-  // Future<void> //_launched;
-  // Future<void> _launchInBrowser(String url) async {
-  //   if (await canLaunch(url)) {
-  //     await launch(
-  //       url,
-  //       forceSafariVC: false,
-  //       forceWebView: false,
-  //       headers: <String, String>{'my_header_key': 'my_header_value'},
-  //     );
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  Future<void> _launched;
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-pendaftaran.jpg'),
                     iconSize: 48,
                     // onPressed: () => setState(() {
-                    //   //_launched = _launchInBrowser(
+                    //   _launched = _launchInBrowser(
                     //       'https://edunitas.com/daftar/educampus#form-daftar');
                     // }),
                     onPressed: () {
@@ -110,7 +110,7 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-minar.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched = _launchInBrowser(
+                        // _launched = _launchInBrowser(
                         //     'https://edunitas.com/educampus/partner');
 
                         widget.keycode == "null"
@@ -152,8 +152,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-learning.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched = _launchInBrowser(
-                        //     'https://kuliahonline.edunitas.com/');
+                        _launched = _launchInBrowser(
+                            'https://kuliahonline.edunitas.com/');
                       }),
                     ),
                   ),
@@ -182,8 +182,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-agentlm.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched = _launchInBrowser(
-                        //     'https://kuliahkaryawan.edunitas.com/');
+                        _launched = _launchInBrowser(
+                            'https://kuliahkaryawan.edunitas.com/');
                       }),
                     ),
                   ),
@@ -241,7 +241,7 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-career.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched = _launchInBrowser(
+                        // _launched = _launchInBrowser(
                         //     'https://edunitas.com/educareer/carilowongan/Full-Time/semua-wilayah/semua-pendidikan/semua-spesialisasi');
                         Navigator.pushReplacement(
                             context,
@@ -275,8 +275,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-beasiswa.jpg'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched = _launchInBrowser(
-                        //     'https://edunitas.com/educampus/beasiswa');
+                        _launched = _launchInBrowser(
+                            'https://edunitas.com/educampus/beasiswa');
                       }),
                     ),
                   ),
@@ -305,7 +305,7 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-donation.png'),
                       iconSize: 48,
                       onPressed: (){
-                        // //_launched = _launchInBrowser(
+                        // _launched = _launchInBrowser(
                         //     'https://edunitas.com/edudonation');
                         Navigator.push(
                             context,
@@ -339,8 +339,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-pas.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        //_launched =
-                          //  _launchInBrowser('https://edunitas.com/edupas');
+                        _launched =
+                            _launchInBrowser('https://edunitas.com/edupas');
                       }),
                     ),
                   ),
@@ -431,8 +431,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-forum.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // //_launched =
-                        //     _launchInBrowser('https://edunitas.com/eduforum');
+                        _launched =
+                            _launchInBrowser('https://edunitas.com/eduforum');
                       }),
                     ),
                   ),
@@ -461,8 +461,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-bimbel.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        //_launched = _launchInBrowser(
-                        //    'https://wiki.edunitas.com/ind/114-10/Ensiklopedi-Dunia-Berbahasa-Indonesia_2317__wiki-edunitas.html');
+                        _launched = _launchInBrowser(
+                            'https://wiki.edunitas.com/ind/114-10/Ensiklopedi-Dunia-Berbahasa-Indonesia_2317__wiki-edunitas.html');
                       }),
                     ),
                   ),
@@ -492,8 +492,8 @@ class _MenuHomeState extends State<MenuHome> {
                           Image.asset('assets/home/Icon eduNitas Baru-23.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        //_launched = _launchInBrowser(
-                          //  'https://wiki.edunitas.com/q1a/114-10/Al-Quran-Online-Digital_home_2222221231_eduNitas.html');
+                        _launched = _launchInBrowser(
+                            'https://wiki.edunitas.com/q1a/114-10/Al-Quran-Online-Digital_home_2222221231_eduNitas.html');
                       }),
                     ),
                   ),
@@ -522,8 +522,8 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-library.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        //_launched = _launchInBrowser(
-                           // 'https://wiki.edunitas.com/IT/114-10/Informatika-Komputer_1_eduNitas.html');
+                        _launched = _launchInBrowser(
+                            'https://wiki.edunitas.com/IT/114-10/Informatika-Komputer_1_eduNitas.html');
                       }),
                     ),
                   ),
@@ -553,8 +553,8 @@ class _MenuHomeState extends State<MenuHome> {
                           Image.asset('assets/home/Icon eduNitas Baru-22.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        //_launched = _launchInBrowser(
-                           // 'https://wiki.edunitas.com/d3/114-10/Tes-Psikologi-Latihan-Soal_home-psikotes_1__eduNitas.html');
+                        _launched = _launchInBrowser(
+                            'https://wiki.edunitas.com/d3/114-10/Tes-Psikologi-Latihan-Soal_home-psikotes_1__eduNitas.html');
                       }),
                     ),
                   ),
