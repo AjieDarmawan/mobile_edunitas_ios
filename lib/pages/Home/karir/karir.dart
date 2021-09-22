@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:ios_edunitas/model/karir/detail_karir_me_Model.dart';
+import 'package:ios_edunitas/model/karir/listKarirPatner.dart';
 import 'package:ios_edunitas/pages/Account/me/me_partnerkarir/me_partnerkarir.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ios_edunitas/model/karir/status_responseKarir.dart';

@@ -1,7 +1,7 @@
 part of 'me_partnerkarir.dart';
 
 class CardKarir_me extends StatefulWidget {
-  final ListKarirModel xkarir;
+  final ListKarirPatnerModel xkarir;
   CardKarir_me({this.xkarir});
 
   @override

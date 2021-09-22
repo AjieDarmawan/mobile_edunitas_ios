@@ -34,7 +34,7 @@ class _KarirMainState extends State<MePartnerKarir> {
   bool _error;
   bool _loading;
   final int _defaultkarirsPerPageCount = 10;
-  List<ListKarirModel> karirs;
+  List<ListKarirPatnerModel> karirs;
   final int _nextPageThreshold = 5;
   @override
   void initState() {
@@ -122,6 +122,7 @@ class _KarirMainState extends State<MePartnerKarir> {
   }
 
   Widget getBody() {
+    print("cek" + karirs.length.toString());
     if (karirs.isEmpty) {
       if (_loading) {
         return shimmerLoading();
@@ -174,7 +175,7 @@ class _KarirMainState extends State<MePartnerKarir> {
                 ));
               }
             }
-            final ListKarirModel karir = karirs[index];
+            final ListKarirPatnerModel karir = karirs[index];
 
             return CardKarir_me(xkarir: karir);
           });
@@ -336,21 +337,32 @@ class _KarirMainState extends State<MePartnerKarir> {
     try {
       final response = await http.get(
           "https://dev-api.edunitas.com/list_patner_karir?email=${widget.email}&page=$_pageNumber");
-      List<ListKarirModel> fetchedkarirs =
-          listKarirModelFromJson(response.body);
+
+           
+           
+      List<ListKarirPatnerModel> fetchedkarirs =
+          listKarirPatnerModelFromJson(response.body);
+
+           
+       
       //
+      print("cekck" + response.body);
       setState(() {
         _hasMore = fetchedkarirs.length == _defaultkarirsPerPageCount;
         _loading = false;
         _pageNumber = _pageNumber + 1;
         karirs.addAll(fetchedkarirs);
       });
+
+       
     } catch (e) {
       setState(() {
         _loading = false;
         _error = true;
       });
     }
+
+   
   }
 
   Widget shimmerLoading() {

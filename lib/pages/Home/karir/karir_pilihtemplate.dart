@@ -1,7 +1,7 @@
 part of 'karir.dart';
 
 class KarirPilihTemplate extends StatefulWidget {
-  final ListKarirModel xkarir;
+  final ListKarirPatnerModel xkarir;
   KarirPilihTemplate({this.xkarir});
 
   @override

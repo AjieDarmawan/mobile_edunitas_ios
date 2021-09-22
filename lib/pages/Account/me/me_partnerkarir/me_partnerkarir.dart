@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ios_edunitas/model/karir/listKarir.dart';
+import 'package:ios_edunitas/model/karir/listKarirPatner.dart';
 import 'package:ios_edunitas/pages/Home/karir/karir.dart';
 import 'package:ios_edunitas/shared/shared.dart';
 import 'package:ios_edunitas/widget/widget.dart';
