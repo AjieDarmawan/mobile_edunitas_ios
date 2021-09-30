@@ -6,7 +6,8 @@ class Agentview_model {
     print("key_sebenarnya: "+keycode);
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "get_rekening", body: {
+      //http.get(Uri.parse("https://yesno.wtf/api"))
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "get_rekening"), body: {
         'format': 'json',
         'keycode': keycode,
         'setdata_mod': 'get-data-agen',
@@ -235,7 +236,7 @@ class Agentview_model {
   Future<List> get_mhs_rekomend_agent(keycode) async {
     try {
       final response =
-      await http.post(ConstanUrl().baseUrl + "get_agent", body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "get_agent"), body: {
         'keycode': keycode,
       });
 
@@ -258,7 +259,7 @@ class Agentview_model {
 
       try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "check_agent", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_agent"), body: {
         'keycode': keycode.toString(),
         //'keycode': "df218b75dd2a4a00b88ca95acc32e91eaac77f58",
       });

@@ -4,7 +4,7 @@ class HomeViewModel {
 
   Future<List> getTerpopuler() async {
     http.Response hasil = await http.get(
-      Uri.encodeFull(ConstanUrl().baseUrl + "list_campus_logo"),
+      Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "list_campus_logo")),
       // headers: {"Accept": "application/json"}
     );
     if (hasil.statusCode == 200) {
@@ -25,7 +25,7 @@ class HomeViewModel {
   Future<void> getSipema() async {
     try {
       http.Response hasil = await http.get(
-        Uri.encodeFull(ConstanUrl().baseUrl + "biayasipema"),
+        Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "biayasipema")),
         // headers: {"Accept": "application/json"}
       );
       if (hasil.statusCode == 200) {
@@ -59,7 +59,7 @@ class HomeViewModel {
       String kampus) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "form_insert", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "form_insert"), body: {
       'nama': nama,
       'email': email,
       'notlp': notlp,
@@ -100,7 +100,7 @@ class HomeViewModel {
   ) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "form_insert_patner", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "form_insert_patner"), body: {
       'nama': etnamalengkap,
       'emailpenanggungjawab': etemailpenanggungjawab,
       'nohp': etnohp,

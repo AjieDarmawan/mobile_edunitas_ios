@@ -80,316 +80,316 @@ class _SingkronPartnerState extends State<SingkronPartner> {
 
   File image, logo_save; //ktp
   TextEditingController ctitle = new TextEditingController();
-  accessCamera() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        logo_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        logo_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCamera() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image = img;
+  //       logo_save = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGallery() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image = img;
+  //       logo_save = compressImg;
+  //       Navigator.pop(context);
+  //       //uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   //gedung
 
   File imagegedung, gedung_save; //ktp
   TextEditingController ctitlegedung = new TextEditingController();
-  accessCameraGedung() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagegedung = img;
-        gedung_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGalleryGedung() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagegedung = img;
-        gedung_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCameraGedung() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagegedung = img;
+  //       gedung_save = compressImg;
+  //       Navigator.pop(context);
+  //       //  uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryGedung() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryGedung: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagegedung = img;
+  //       gedung_save = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   // aktivitas
   File imageaktivitas, aktivitas_save; //ktp
   TextEditingController ctitleaktivitas = new TextEditingController();
-  accessCameraAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitleaktivitas.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imageaktivitas = img;
-        aktivitas_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGalleryAktivitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imageaktivitas = img;
-        aktivitas_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCameraAktivitas() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitleaktivitas.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imageaktivitas = img;
+  //       aktivitas_save = compressImg;
+  //       Navigator.pop(context);
+  //       //uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryAktivitas() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryAktivitas: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imageaktivitas = img;
+  //       aktivitas_save = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   // fasilitias
   File imagefasilitas, fasilitas_save; //ktp
   TextEditingController ctitlefasilitas = new TextEditingController();
-  accessCamerafasilitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitlefasilitas.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefasilitas = img;
-        fasilitas_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGalleryfasilitas() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefasilitas = img;
-        fasilitas_save = compressImg;
-        print("accessGalleryfasilitas: " + imagefasilitas.toString());
-        print("accessGalleryfasilitas: " + fasilitas_save.toString());
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCamerafasilitas() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitlefasilitas.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefasilitas = img;
+  //       fasilitas_save = compressImg;
+  //       Navigator.pop(context);
+  //       //  uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryfasilitas() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefasilitas = img;
+  //       fasilitas_save = compressImg;
+  //       print("accessGalleryfasilitas: " + imagefasilitas.toString());
+  //       print("accessGalleryfasilitas: " + fasilitas_save.toString());
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   File imagebiaya, biaya_save; //ktp
   TextEditingController ctitlebiaya = new TextEditingController();
-  accessCamerabiaya() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitlebiaya.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagebiaya = img;
-        biaya_save = compressImg;
-        Navigator.pop(context);
-        //  uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGallerybiaya() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagebiaya = img;
-        biaya_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCamerabiaya() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitlebiaya.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagebiaya = img;
+  //       biaya_save = compressImg;
+  //       Navigator.pop(context);
+  //       //  uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGallerybiaya() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagebiaya = img;
+  //       biaya_save = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   void onErrHandling(erro, cat, id_parrent){
     print("do_login_err: "+erro.toString());
@@ -1824,10 +1824,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGallery();
+                                                    //accessGallery();
                                                   },
                                                   onTap2: () {
-                                                    accessCamera();
+                                                    //accessCamera();
                                                   },
                                                 ));
                                       },
@@ -1848,10 +1848,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGallery();
+                                                    //accessGallery();
                                                   },
                                                   onTap2: () {
-                                                    accessCamera();
+                                                    //accessCamera();
                                                   },
                                                 ));
                                       },
@@ -1895,10 +1895,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryGedung();
+                                                    //accessGalleryGedung();
                                                   },
                                                   onTap2: () {
-                                                    accessCameraGedung();
+                                                    //accessCameraGedung();
                                                   },
                                                 ));
                                       },
@@ -1919,10 +1919,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryGedung();
+                                                    //accessGalleryGedung();
                                                   },
                                                   onTap2: () {
-                                                    accessCameraGedung();
+                                                    //accessCameraGedung();
                                                   },
                                                 ));
                                       },
@@ -1966,10 +1966,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryAktivitas();
+                                                    //accessGalleryAktivitas();
                                                   },
                                                   onTap2: () {
-                                                    accessCameraAktivitas();
+                                                    //accessCameraAktivitas();
                                                   },
                                                 ));
                                       },
@@ -1990,10 +1990,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryAktivitas();
+                                                    //accessGalleryAktivitas();
                                                   },
                                                   onTap2: () {
-                                                    accessCameraAktivitas();
+                                                    //accessCameraAktivitas();
                                                   },
                                                 ));
                                       },
@@ -2030,10 +2030,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryfasilitas();
+                                                    //accessGalleryfasilitas();
                                                   },
                                                   onTap2: () {
-                                                    accessCamerafasilitas();
+                                                    //accessCamerafasilitas();
                                                   },
                                                 ));
                                       },
@@ -2054,10 +2054,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGalleryfasilitas();
+                                                    //accessGalleryfasilitas();
                                                   },
                                                   onTap2: () {
-                                                    accessCamerafasilitas();
+                                                    //accessCamerafasilitas();
                                                   },
                                                 ));
                                       },
@@ -2112,10 +2112,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGallerybiaya();
+                                                    //accessGallerybiaya();
                                                   },
                                                   onTap2: () {
-                                                    accessCamerabiaya();
+                                                    //accessCamerabiaya();
                                                   },
                                                 ));
                                       },
@@ -2135,10 +2135,10 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                                             context: context,
                                             builder: (context) => ShowContent(
                                                   onTap1: () {
-                                                    accessGallerybiaya();
+                                                    //accessGallerybiaya();
                                                   },
                                                   onTap2: () {
-                                                    accessCamerabiaya();
+                                                    //accessCamerabiaya();
                                                   },
                                                 ));
                                       },

@@ -97,64 +97,64 @@ class _AgensiMeState extends State<AgensiMe> {
     });
   }
 
-  File image_brek, image_brek_save; //ktp
-  TextEditingController ctitleimage_brek = new TextEditingController();
-  accessGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitleimage_brek.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryGedung: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_brek = img;
-        image_brek_save = compressImg;
-        print("phoho: " + image_brek.toString());
-        Navigator.pop(context);
-      });
-    }
-  }
-
-  File image_brekgambar1, brekgambar1_save; //ktp
-  TextEditingController ctitle_brekgambar1 = new TextEditingController();
-  accessCamera() async {
-    File imgjob_gambar1 =
-        await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle_brekgambar1.text;
-
-    Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg_job1 =
-        new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (imgjob_gambar1 == null) {
-      print('null');
-    } else {
-      setState(() {
-        image_brekgambar1 = imgjob_gambar1;
-        brekgambar1_save = compressImg_job1;
-        Navigator.pop(context);
-      });
-    }
-  }
+  // File image_brek, image_brek_save; //ktp
+  // TextEditingController ctitleimage_brek = new TextEditingController();
+  // accessGallery() async {
+  //   final img = await ImagePicker.getImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitleimage_brek.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryGedung: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image_brek = img;
+  //       image_brek_save = compressImg;
+  //       print("phoho: " + image_brek.toString());
+  //       Navigator.pop(context);
+  //     });
+  //   }
+  // }
+  //
+  // File image_brekgambar1, brekgambar1_save; //ktp
+  // TextEditingController ctitle_brekgambar1 = new TextEditingController();
+  // accessCamera() async {
+  //   File imgjob_gambar1 =
+  //       await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle_brekgambar1.text;
+  //
+  //   Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg_job1 =
+  //       new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (imgjob_gambar1 == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image_brekgambar1 = imgjob_gambar1;
+  //       brekgambar1_save = compressImg_job1;
+  //       Navigator.pop(context);
+  //     });
+  //   }
+  // }
 
   void getInfoRekening() {
     Agentview_model().getRekening(widget.keycode).then((value) {//handled
@@ -580,10 +580,10 @@ class _AgensiMeState extends State<AgensiMe> {
                                           context: context,
                                           builder: (context) => ShowContent(
                                             onTap1: () {
-                                              accessGallery();
+                                              //accessGallery();
                                             },
                                             onTap2: () {
-                                              accessCamera();
+                                              //accessCamera();
                                             },
                                           ));
                                     },
@@ -616,7 +616,7 @@ class _AgensiMeState extends State<AgensiMe> {
                                         EdgeInsets.symmetric(vertical: 16),
                                         height: 56,
                                         width: 56,
-                                        child: image_brek == null &&
+                                        child: //image_brek == null &&
                                             edit_gambar == null
                                             ? Stack(
                                           children: [
@@ -640,7 +640,8 @@ class _AgensiMeState extends State<AgensiMe> {
                                         )
                                             : edit_gambar != null
                                             ? Image.network(edit_gambar)
-                                            : Image.file(image_brek)),
+                                            //: Image.file(image_brek)),
+                                            : Container),
                                   ),
                                 ),
                                 Divider(
@@ -693,8 +694,9 @@ class _AgensiMeState extends State<AgensiMe> {
 
   void check() {
     bool image_ada =
-        edit_gambar != null || image_brek_save != null ? true : false;
-    print("check_daftar_mhs_agent: \n" +
+        edit_gambar != null ? true : false;
+            //|| image_brek_save != null ? true : false;
+    print("check_daftar_mhs_agent: \n"+
         etnama.text.toString() +
         ",\n" +
         etemail.text.toString() +
@@ -709,7 +711,8 @@ class _AgensiMeState extends State<AgensiMe> {
         etnohp.text.toString(),
         etnowa.text.toString(),
         valkampus,
-        image_brek_save,
+        //image_brek_save,
+        null,
         widget.keycode.toString(),
         context,
       )

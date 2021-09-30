@@ -8,7 +8,7 @@ class Partnerkampusview_model{
   Future getProdi(String email) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-    await http.post(ConstanUrl().baseUrl + "check_singkron", body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "check_singkron"), body: {
       'email': email,
     });
 

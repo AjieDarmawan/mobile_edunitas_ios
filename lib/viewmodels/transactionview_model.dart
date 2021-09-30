@@ -10,7 +10,7 @@ class Transactionview_model {
   Future<List> getransaction(String keycode) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "transaction2", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "transaction2"), body: {
         'keycode': keycode.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });
@@ -33,7 +33,7 @@ class Transactionview_model {
    Future<List> getransactionHistory(String keycode) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "transactionhistory", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "transactionhistory"), body: {
         'keycode': keycode.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });
@@ -57,7 +57,7 @@ class Transactionview_model {
    Future<List> transaction_donasi(String keycode) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "transaction_donasi", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "transaction_donasi"), body: {
         'keycode': keycode.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });
@@ -80,7 +80,7 @@ class Transactionview_model {
   Future<List> transaction_donasi_history(String keycode) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "transaction_donasi_history", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "transaction_donasi_history"), body: {
         'keycode': keycode.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });

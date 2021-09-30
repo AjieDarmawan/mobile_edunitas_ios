@@ -87,7 +87,7 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
   List<DataBankModel> listBank;
   void getbank() async {
     try {
-      final response = await http.get("https://dev-api.edunitas.com/mbank");
+      final response = await http.get(Uri.parse("https://dev-api.edunitas.com/mbank"));
       setState(() {
         listBank = DataBankModel.parseList(json.decode(response.body));
       });
@@ -425,10 +425,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                           context: context,
                                           builder: (context) => ShowContent(
                                                 onTap1: () {
-                                                  accessGalleryKtp();
+                                                  //accessGalleryKtp();
                                                 },
                                                 onTap2: () {
-                                                  accessCameraKtp();
+                                                  //accessCameraKtp();
                                                 },
                                               ));
                                     },
@@ -458,10 +458,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                               context: context,
                                               builder: (context) => ShowContent(
                                                     onTap1: () {
-                                                      accessGalleryKtp();
+                                                      //accessGalleryKtp();
                                                     },
                                                     onTap2: () {
-                                                      accessCameraKtp();
+                                                      //accessCameraKtp();
                                                     },
                                                   ));
                                         },
@@ -497,10 +497,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                               context: context,
                                               builder: (context) => ShowContent(
                                                     onTap1: () {
-                                                      accessGalleryKtp();
+                                                      //accessGalleryKtp();
                                                     },
                                                     onTap2: () {
-                                                      accessCameraKtp();
+                                                      //accessCameraKtp();
                                                     },
                                                   ));
                                         },
@@ -1465,10 +1465,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                           context: context,
                                           builder: (context) => ShowContent(
                                                 onTap1: () {
-                                                  accessGalleryG();
+                                                  //accessGalleryG();
                                                 },
                                                 onTap2: () {
-                                                  accessCameraG();
+                                                  //accessCameraG();
                                                 },
                                               ));
                                     },
@@ -1498,10 +1498,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                               context: context,
                                               builder: (context) => ShowContent(
                                                     onTap1: () {
-                                                      accessGalleryG();
+                                                      //accessGalleryG();
                                                     },
                                                     onTap2: () {
-                                                      accessCameraG();
+                                                      //accessCameraG();
                                                     },
                                                   ));
                                         },
@@ -1543,10 +1543,10 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
                                               context: context,
                                               builder: (context) => ShowContent(
                                                     onTap1: () {
-                                                      accessGalleryG();
+                                                      //accessGalleryG();
                                                     },
                                                     onTap2: () {
-                                                      accessCameraG();
+                                                      //accessCameraG();
                                                     },
                                                   ));
                                         },
@@ -1619,113 +1619,113 @@ class _DonasiDataCampaignerState extends State<DonasiDataCampaigner> {
   // ambil foto ktp
   File imagefoto_ktp, foto_save_ktp;
   TextEditingController ctitlefoto = new TextEditingController();
-  accessCameraKtp() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitlefoto.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_ktp = img;
-        foto_save_ktp = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGalleryKtp() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_ktp = img;
-        foto_save_ktp = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCameraKtp() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitlefoto.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto_ktp = img;
+  //       foto_save_ktp = compressImg;
+  //       Navigator.pop(context);
+  //       //uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryKtp() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryAktivitas: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto_ktp = img;
+  //       foto_save_ktp = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   // ambil foto galangan
   File imagefoto_g, foto_save_g;
   TextEditingController ctitlefoto_g = new TextEditingController();
-  accessCameraG() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitlefoto_g.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_g = img;
-        foto_save_g = compressImg;
-        Navigator.pop(context);
-      });
-    }
-  }
-
-  accessGalleryG() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto_g = img;
-        foto_save_g = compressImg;
-        Navigator.pop(context);
-      });
-    }
-  }
+  // accessCameraG() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitlefoto_g.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto_g = img;
+  //       foto_save_g = compressImg;
+  //       Navigator.pop(context);
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryG() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryAktivitas: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto_g = img;
+  //       foto_save_g = compressImg;
+  //       Navigator.pop(context);
+  //     });
+  //   }
+  // }
 
   void submit() {
     if (_formKey.currentState.validate()) {

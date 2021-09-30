@@ -67,7 +67,7 @@ class SearchHome extends SearchDelegate {
   Future<List<Photo>> getSearch() async {
     List<Photo> data;
     final response =
-        await http.post(ConstanUrl().baseUrl + "search_campus_home", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus_home"), body: {
       'search': selectedResult != "" ? selectedResult : query,
     });
     data = Photo.parseList(json.decode(response.body));
@@ -77,7 +77,7 @@ class SearchHome extends SearchDelegate {
   Future<List<Photo>> getPopuler() async {
     List<Photo> data;
     final response =
-        await http.get("https://dev-api.edunitas.com/list_campus_logo");
+        await http.get(Uri.parse("https://dev-api.edunitas.com/list_campus_logo"));
     data = Photo.parseList(json.decode(response.body));
     return data;
   }

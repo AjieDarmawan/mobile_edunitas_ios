@@ -249,7 +249,7 @@ class _SearchLowonganHasilState extends State<SearchLowonganHasil> {
   Future<void> fetchKarir() async {
     try {
       final response = await http.get(
-          "https://dev-api.edunitas.com/SearchKarir?type=${widget.valtipe}&wilayah=${widget.valwilayah}&pendidikan=${widget.valpendidikan}&spesialisasi=${widget.valspesialisasi}&page=${_pageNumber}&sort=terlama");
+          Uri.parse("https://dev-api.edunitas.com/SearchKarir?type=${widget.valtipe}&wilayah=${widget.valwilayah}&pendidikan=${widget.valpendidikan}&spesialisasi=${widget.valspesialisasi}&page=${_pageNumber}&sort=terlama"));
       List<ListKarirModel> fetchedkarirs =
           listKarirModelFromJson(response.body);
       //

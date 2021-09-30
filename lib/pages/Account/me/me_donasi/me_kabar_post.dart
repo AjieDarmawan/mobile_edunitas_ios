@@ -204,10 +204,10 @@ class _MePostKabarState extends State<MePostKabar> {
                                         context: context,
                                         builder: (context) => ShowContent(
                                               onTap1: () {
-                                                accessGalleryBukti();
+                                                //accessGalleryBukti();
                                               },
                                               onTap2: () {
-                                                accessCameraBukti();
+                                                //accessCameraBukti();
                                               },
                                             ));
                                   },
@@ -226,10 +226,10 @@ class _MePostKabarState extends State<MePostKabar> {
                                         context: context,
                                         builder: (context) => ShowContent(
                                               onTap1: () {
-                                                accessGalleryBukti();
+                                                //accessGalleryBukti();
                                               },
                                               onTap2: () {
-                                                accessCameraBukti();
+                                                //accessCameraBukti();
                                               },
                                             ));
                                   },
@@ -299,61 +299,61 @@ class _MePostKabarState extends State<MePostKabar> {
 
   // ambil foto Bukti
   File imagefoto, foto_save;
-  accessCameraBukti() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto = img;
-        foto_save = compressImg;
-        Navigator.pop(context);
-        //uploadLogo();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGalleryBukti() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    print("accessGalleryAktivitas: " + _image.toString());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg =
-        new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        imagefoto = img;
-        foto_save = compressImg;
-        Navigator.pop(context);
-        // uploadLogo();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCameraBukti() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto = img;
+  //       foto_save = compressImg;
+  //       Navigator.pop(context);
+  //       //uploadLogo();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGalleryBukti() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   print("accessGalleryAktivitas: " + _image.toString());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg =
+  //       new File("$path/image_${widget.keycode}${widget.keycode}.jpg")
+  //         ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       imagefoto = img;
+  //       foto_save = compressImg;
+  //       Navigator.pop(context);
+  //       // uploadLogo();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   //final _formKey = GlobalKey<FormState>();
   void submit() {

@@ -332,7 +332,7 @@ class _KarirMainState extends State<KarirMain> {
   Future<void> fetchKarir() async {
     try {
       final response = await http
-          .get("https://dev-api.edunitas.com/list_karir?page=$_pageNumber");
+          .get(Uri.parse("https://dev-api.edunitas.com/list_karir?page=$_pageNumber"));
       List<ListKarirModel> fetchedkarirs =
           listKarirModelFromJson(response.body);
       //
@@ -353,7 +353,7 @@ class _KarirMainState extends State<KarirMain> {
   Future<void> fetchKarirChange(String value) async {
     try {
       final response = await http.get(
-          "https://dev-api.edunitas.com/SearchKarir_freetext?search=$value&page=$_pageNumber&sort=terbaru");
+          Uri.parse("https://dev-api.edunitas.com/SearchKarir_freetext?search=$value&page=$_pageNumber&sort=terbaru"));
       List<ListKarirModel> fetchedkarirs =
           listKarirModelFromJson(response.body);
 

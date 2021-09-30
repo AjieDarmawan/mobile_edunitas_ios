@@ -26,7 +26,7 @@ class KarirViewModel {
   Future detailKarir(String cid) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "detail_karir", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_karir"), body: {
         'cid': cid.toString(),
       });
 
@@ -47,7 +47,7 @@ class KarirViewModel {
   Future simpan_karir(String cid, String keycode) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "simpan_karir", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "simpan_karir"), body: {
       'cid': cid,
       'keycode': keycode,
     });
@@ -73,7 +73,7 @@ class KarirViewModel {
   Future<List<MasterJurusanModel>> karir_pendidikan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_pendidikan"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_pendidikan")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -92,7 +92,7 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_spesialisasi() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_spesialisasi"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_spesialisasi")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -112,7 +112,7 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_jabatan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_jabatan"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_jabatan")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -132,7 +132,7 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_industri() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_industri"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_industri")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -153,7 +153,7 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_bidang() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_bidang"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_bidang")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -172,7 +172,7 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_posisi() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_posisi"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_posisi")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("karir_posisi " + hasil.body);
@@ -191,7 +191,7 @@ class KarirViewModel {
   Future<List<SmbModel>> karir_tipe() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "karir_tipe"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_tipe")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data unitarea success");
@@ -210,7 +210,7 @@ class KarirViewModel {
   Future<List> wilayah_karir() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "wilayah_karir"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "wilayah_karir")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data provinsi success");
@@ -233,7 +233,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "show_pengalaman", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_pengalaman"), body: {
         'keycode': keycode.toString(),
       });
 
@@ -254,7 +254,7 @@ class KarirViewModel {
   Future hapus_pengalaman(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "hapus_pengalaman", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_pengalaman"), body: {
       'id': id,
     });
 
@@ -295,7 +295,7 @@ class KarirViewModel {
       String keycode) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "insert_pengalaman", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_pengalaman"), body: {
       'nama': nama,
       'dari': dari,
       'hingga': hingga,
@@ -356,7 +356,7 @@ class KarirViewModel {
       String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "edit_pengalaman", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "edit_pengalaman"), body: {
       'nama': nama,
       'dari': dari,
       'hingga': hingga,
@@ -402,7 +402,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "show_info_tambahan", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_info_tambahan"), body: {
         'keycode': keycode.toString(),
       });
 
@@ -428,7 +428,7 @@ class KarirViewModel {
   ) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "insert_infotambahan", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_infotambahan"), body: {
       'wilayah': wilayah,
       'penghasilan': penghasilan,
       'deskripsi': deskripsi,
@@ -454,7 +454,7 @@ class KarirViewModel {
   Future hapus_infotambahan(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "hapus_infotambahan", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_infotambahan"), body: {
       'id': id,
     });
 
@@ -480,7 +480,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "riwayat_lamaran", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "riwayat_lamaran"), body: {
         'keycode': keycode.toString(),
       });
 
@@ -1683,7 +1683,7 @@ class KarirViewModel {
   Future check_edit(String cid, String jenis_lowongan) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "check_edit", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_edit"), body: {
         'cid': cid.toString(),
         'jenis_lowongan': jenis_lowongan.toString(),
       });
@@ -1710,7 +1710,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil = await http
-          .post(ConstanUrl().baseUrl + "biayasipema_baru_kelompok", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru_kelompok"), body: {
         'kode_kampus': kode_kampus.toString(),
         'kode_jurusan': kode_jurusan.toString(),
         'kodeprg': kodeprg.toString(),
@@ -1739,7 +1739,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil = await http
-          .post(ConstanUrl().baseUrl + "biayasipema_baru_program", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru_program"), body: {
         'kode_kampus': kode_kampus.toString(),
         'kode_jurusan': kode_jurusan.toString(),
       });

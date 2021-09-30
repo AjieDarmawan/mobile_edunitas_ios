@@ -3,7 +3,7 @@ part of 'viewmodel.dart';
 class sipemaview_model {
   Future getBiayaSipema(String kodekampus) async {
     final response =
-    await http.post(ConstanUrl().baseUrl + "biayasipema", body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipema"), body: {
       'kode_kampus': kodekampus.toString(),
     });
 
@@ -16,7 +16,7 @@ class sipemaview_model {
 
   Future getBiayaSipema_web(String kodekampus) async {
     final response =
-    await http.post(ConstanUrl().baseUrl + "biayasipema_baru", body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru"), body: {
       'kode_kampus': kodekampus.toString(),
     });
 
@@ -30,7 +30,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "biayasipemaangsuran", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuran"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -52,7 +52,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response = await http
-          .post(ConstanUrl().baseUrl + "masterbiayasipemaangsuranSpp", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "masterbiayasipemaangsuranSpp"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -75,7 +75,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg, String waktu, String kelompok) async {
     try {
       final response = await http
-          .post(ConstanUrl().baseUrl + "biayasipemaangsuranSpb", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuranSpb"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -103,7 +103,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg, String waktu,String kelompok) async {
     try {
       final response = await http
-          .post(ConstanUrl().baseUrl + "biayasipemaangsuranSpp", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuranSpp"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -126,7 +126,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg) async {
     try {
       final response = await http
-          .post(ConstanUrl().baseUrl + "angsuranspp", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "angsuranspp"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -148,7 +148,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response = await http
-          .post(ConstanUrl().baseUrl + "angsuranspb", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "angsuranspb"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -171,7 +171,7 @@ class sipemaview_model {
       String kodekampus, String kodejrs) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "check_prodi_search", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_prodi_search"), body: {
         'kode_kampus': kodekampus.toString(),
         'kode_jurusan': kodejrs.toString(),
        

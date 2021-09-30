@@ -18,7 +18,7 @@ import 'package:async/async.dart';
 
 class UserViewModel {
   Future login(String email, String password, String android_id) async {
-    final response = await http.post(ConstanUrl().baseUrl + "login", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "login"), body: {
       'email': email,
       'password': password,
       'android_id': android_id,
@@ -57,7 +57,7 @@ class UserViewModel {
   Future register_email(String email) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "register_email", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "register_email"), body: {
       'email': email,
     });
 
@@ -79,7 +79,7 @@ class UserViewModel {
   Future forget_email(String email) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "forget_email", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "forget_email"), body: {
       'email': email,
     });
 
@@ -100,7 +100,7 @@ class UserViewModel {
 
   Future register(String email, String password, String username, String nowa,
       String notlp, String leveledu) async {
-    final response = await http.post(ConstanUrl().baseUrl + "register", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "register"), body: {
       'email': email,
       'password': password,
       'username': username,
@@ -125,7 +125,7 @@ class UserViewModel {
   }
 
   Future aktivasi(String email, String kode) async {
-    final response = await http.post(ConstanUrl().baseUrl + "activasi", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "activasi"), body: {
       'email': email,
       'code': kode,
     });
@@ -147,7 +147,7 @@ class UserViewModel {
 
   Future android_devices(String android_id) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "android_id", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "android_id"), body: {
       'android_id': android_id,
     });
 
@@ -169,7 +169,7 @@ class UserViewModel {
   }
 
   Future logout(String android_id) async {
-    final response = await http.post(ConstanUrl().baseUrl + "logout", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "logout"), body: {
       'android_id': android_id,
     });
 
@@ -191,7 +191,7 @@ class UserViewModel {
   }
 
   Future resend_pin(String email) async {
-    final response = await http.post(ConstanUrl().baseUrl + "mailform", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "mailform"), body: {
       'email': email,
     });
 
@@ -214,7 +214,7 @@ class UserViewModel {
 
   Future android_id_update(String android_id) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "android_id_update", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "android_id_update"), body: {
       'android_id': android_id,
     });
 
@@ -237,7 +237,7 @@ class UserViewModel {
 
   Future users_detail(String email) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "users_detail", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "users_detail"), body: {
       'email': email,
     });
 
@@ -260,7 +260,7 @@ class UserViewModel {
 
   Future form_forgetpassword(
       String email, String password, String codereff) async {
-    final response = await http.post(ConstanUrl().baseUrl + "form_password",
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "form_password"),
         body: {'email': email, 'password': password, 'codereff': codereff});
 
     final jsondata = jsonDecode(response.body);
@@ -292,7 +292,7 @@ class UserViewModel {
       String alamat) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "update_profil", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "update_profil"), body: {
       'keycode': keycode,
       'namalengkap': namalengkap,
       'tempatlahir': tempatlahir,
@@ -328,7 +328,7 @@ class UserViewModel {
   ) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "ganti_password", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "ganti_password"), body: {
       'email': email,
       'pass_lama': passlama,
       'pass_baru': passbaru,
@@ -418,7 +418,7 @@ class UserViewModel {
   Future<List> check_login_tmp(String singkatan) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "check_login_tmp", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_login_tmp"), body: {
         'singkatan': singkatan.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });
@@ -456,7 +456,7 @@ class UserViewModel {
     String keycode,
   ) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "insert_pendidikan", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_pendidikan"), body: {
       'tingkatpendidikan': tingkatpendidikan,
       'jurusan': jurusan,
       'namainstitusi': namainstitusi,
@@ -492,7 +492,7 @@ class UserViewModel {
   Future pendidikan_detail(String keycode) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "show_pendidikan", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_pendidikan"), body: {
         'keycode': keycode,
       });
 
@@ -518,7 +518,7 @@ class UserViewModel {
     String keycode,
     String id,
   ) async {
-    final response = await http.post(ConstanUrl().baseUrl + "insert_kemampuan",
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_kemampuan"),
         body: {
           'kemampuan': kemampuan,
           'tingkatan': tingkatan,
@@ -549,7 +549,7 @@ class UserViewModel {
     String id,
   ) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "insert_bahasa", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_bahasa"), body: {
       'bahasa': bahasa,
       'tulisan': tulisan,
       'lisan': lisan,
@@ -581,7 +581,7 @@ class UserViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "show_bahasa", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_bahasa"), body: {
         'keycode': keycode.toString(),
       });
 
@@ -606,7 +606,7 @@ class UserViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "show_kemampuan", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_kemampuan"), body: {
         'keycode': keycode.toString(),
       });
 
@@ -627,7 +627,7 @@ class UserViewModel {
   Future hapus_kemampuan(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "hapus_kemampuan", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_kemampuan"), body: {
       'id': id,
     });
 
@@ -649,7 +649,7 @@ class UserViewModel {
   Future hapus_bahasa(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "hapus_bahasa", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_bahasa"), body: {
       'id': id,
     });
 

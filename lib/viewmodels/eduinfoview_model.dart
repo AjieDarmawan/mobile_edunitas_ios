@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class Eduinfoview_model {
   Future<List> getCategori() async {
     try {
-      final hasil = await http.get(ConstanUrl().baseUrl + "categori");
+      final hasil = await http.get(Uri.parse(ConstanUrl().baseUrl + "categori"));
 
       // print("ceeah${keycode}");
       if (hasil.statusCode == 200) {
@@ -27,7 +27,7 @@ class Eduinfoview_model {
 
   Future<List> getedulist(String kategori) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "listedu", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "listedu"), body: {
         'kategori': kategori.toString(),
         //
         //380933623c56c82e75cca70187a4415730ca7ea8
@@ -50,7 +50,7 @@ class Eduinfoview_model {
 
   Future<List> getterbaru() async {
     try {
-      final hasil = await http.get(ConstanUrl().baseUrl + "terbaru");
+      final hasil = await http.get(Uri.parse(ConstanUrl().baseUrl + "terbaru"));
 
       print("hasil${hasil}");
       if (hasil.statusCode == 200) {
@@ -70,7 +70,7 @@ class Eduinfoview_model {
   //PROMOSI
    Future<List> getCategoripromosi() async {
     try {
-      final hasil = await http.get(ConstanUrl().baseUrl + "categori_promosi");
+      final hasil = await http.get(Uri.parse(ConstanUrl().baseUrl + "categori_promosi"));
 
       // print("ceeah${keycode}");
       if (hasil.statusCode == 200) {
@@ -89,7 +89,7 @@ class Eduinfoview_model {
 
   Future<List> getpromosilist(String kategori) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "listpromosi", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "listpromosi"), body: {
         'kategori': kategori.toString(),
         //
         //380933623c56c82e75cca70187a4415730ca7ea8
@@ -112,7 +112,7 @@ class Eduinfoview_model {
 
    Future<List> getPromositerbaru() async {
     try {
-      final hasil = await http.get(ConstanUrl().baseUrl + "terbarupromosi");
+      final hasil = await http.get(Uri.parse(ConstanUrl().baseUrl + "terbarupromosi"));
 
       print("hasil${hasil}");
       if (hasil.statusCode == 200) {
@@ -131,7 +131,7 @@ class Eduinfoview_model {
 
   Future<List> getPromositerbarudaftar() async {
     try {
-      final hasil = await http.get(ConstanUrl().baseUrl + "menampilan_promosi_daftar");
+      final hasil = await http.get(Uri.parse(ConstanUrl().baseUrl + "menampilan_promosi_daftar"));
 
       print("hasil${hasil}");
       if (hasil.statusCode == 200) {
@@ -152,7 +152,7 @@ class Eduinfoview_model {
    Future check_promo(String kodepromo,String kode_campus) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "check_promo", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "check_promo"), body: {
       'kodepromo': kodepromo,
       'kode_campus': kode_campus,
     });

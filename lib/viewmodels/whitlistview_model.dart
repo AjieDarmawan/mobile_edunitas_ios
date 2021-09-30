@@ -18,7 +18,7 @@ class Whitlistview_model {
       String kelas,
       String origin) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "simpanwhitlisht", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "simpanwhitlisht"), body: {
       'keycode': keycode,
       'pendidikan': pendidikan,
       'postlist': postlist,
@@ -49,7 +49,7 @@ class Whitlistview_model {
     String id,
   ) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "hapuswhitlisht", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapuswhitlisht"), body: {
       'id': id,
     });
 
@@ -70,7 +70,7 @@ class Whitlistview_model {
 
   Future<List> getwhitlist(String keycode) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "whitlist", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "whitlist"), body: {
         'keycode': keycode.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
       });

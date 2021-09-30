@@ -25,7 +25,7 @@ class Donasiview_model {
   Future listDonasi(String kategori, String kendala) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "listdonation", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "listdonation"), body: {
         'kategori': kategori,
         'kendala': kendala,
       });
@@ -46,7 +46,7 @@ class Donasiview_model {
   Future<DonasiDetailModel> getDetail(seolink) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "detailDonasi", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "detailDonasi"), body: {
         'seolink': seolink,
       });
 
@@ -66,7 +66,7 @@ class Donasiview_model {
   Future<FotoEditCampaignModel> getFotoCampaign(keycode) async {
     try {
       final hasil =
-      await http.post("https://dev-api.edunitas.com/edit_campaign", body: {
+      await http.post(Uri.parse("https://dev-api.edunitas.com/edit_campaign"), body: {
         'keycode': keycode,
       });
 
@@ -85,7 +85,7 @@ class Donasiview_model {
 
   Future<List<DonaturListModel>> getDonaturList(String cid) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "loaddonatur", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "loaddonatur"), body: {
         'cid': cid,
       });
 
@@ -106,7 +106,7 @@ class Donasiview_model {
 
   Future<List<DonasiMydesk>> getDonasiMydesk(String keycode) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "me_mydesk", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "me_mydesk"), body: {
         'keycode': keycode,
       });
 
@@ -125,7 +125,7 @@ class Donasiview_model {
 
   Future<List<DonasiKabarModel>> getKabarList(String cid) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "loadkabar", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "loadkabar"), body: {
         'cid': cid,
       });
 
@@ -144,7 +144,7 @@ class Donasiview_model {
 
   Future<List<DonasiMePatner>> me_patner(String keycode) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "me_patner", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "me_patner"), body: {
         'keycode': keycode,
 
 
@@ -166,7 +166,7 @@ class Donasiview_model {
   Future<DonasiMePatnerDetail> me_patner_detail(String cid) async {
     try {
       final hasil = await http
-          .post("https://api.edunitas.com/mod/edun-donation-g", body: {
+          .post(Uri.parse("https://api.edunitas.com/mod/edun-donation-g"), body: {
         'format': 'json',
         'formdata_cid': cid,
         'formdata_getlist': 'listdonatur',
@@ -191,7 +191,7 @@ class Donasiview_model {
   Future<DonasiMePatnerDetail> me_patner_campaign_edit(String cid, seolink) async {
     try {
       final hasil = await http
-          .post("https://api.edunitas.com/mod/edun-donation-g", body: {
+          .post(Uri.parse("https://api.edunitas.com/mod/edun-donation-g"), body: {
         'format': 'json',
         'formdata_apikey': cid,
         'formdata_getlist': 'listdonatur',
@@ -216,7 +216,7 @@ class Donasiview_model {
   Future<List<SmbModel>> search_semua_kategori() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "search_semua_kategori"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "search_semua_kategori")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data unitarea success");
@@ -235,7 +235,7 @@ class Donasiview_model {
   Future<List<SmbModel>> search_semua_kendala() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "search_semua_kendala"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "search_semua_kendala")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data unitarea success");
@@ -269,7 +269,7 @@ class Donasiview_model {
       formdata_postlist) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "people_donasi", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "people_donasi"), body: {
         'formdata_dntrdonaturname': formdata_dntrdonaturname,
         'formdata_dntrisanonim': formdata_dntrisanonim,
         'formdata_dntremail': formdata_dntremail,
@@ -765,7 +765,7 @@ class Donasiview_model {
       ) async {
     try{
       final hasil =
-      await http.post(ConstanUrl().baseUrl + "cairkan_dana", body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "cairkan_dana"), body: {
         'formdata_pencairanprice': formdata_pencairanprice,
         'formdata_pencairanbank': formdata_pencairanbank,
         'formdata_pencairannorek': formdata_pencairannorek,

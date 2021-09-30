@@ -4,7 +4,7 @@ class Masterview_model {
   Future<List> provinsi() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "provinsi"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "provinsi")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data provinsi success");
@@ -25,7 +25,7 @@ class Masterview_model {
       // http.Response hasil = await http.get(
       //     Uri.encodeFull(ConstanUrl().baseUrl + "kab__kota"),
       //     headers: {"Accept": "application/json"});
-      final hasil = await http.post(ConstanUrl().baseUrl + "kabkota", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "kabkota"), body: {
         'id_parent': idprovinsi.toString(),
       });
 
@@ -50,7 +50,7 @@ class Masterview_model {
       //     Uri.encodeFull(ConstanUrl().baseUrl + "kecamatan"),
       //     headers: {"Accept": "application/json"});
 
-      final hasil = await http.post(ConstanUrl().baseUrl + "kecamatan", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "kecamatan"), body: {
         'id_parent': idkabkota.toString(),
       });
 
@@ -75,7 +75,7 @@ class Masterview_model {
       //     Uri.encodeFull(ConstanUrl().baseUrl + "kab__kota"),
       //     headers: {"Accept": "application/json"});
 
-      final hasil = await http.post(ConstanUrl().baseUrl + "desa", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "desa"), body: {
         'id_parent': idkecamatan.toString(),
       });
 
@@ -97,7 +97,7 @@ class Masterview_model {
   Future<List> kota() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "kota"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "kota")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data provinsi success");
@@ -116,7 +116,7 @@ class Masterview_model {
   Future<List<MasterJurusanModel>> jurusan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "masterjurusan"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "masterjurusan")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         // print(hasil.body);
@@ -135,7 +135,7 @@ class Masterview_model {
   Future<List<MasterJurusanModel>> jurusan_detail(String kode_jurusan) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "jurusan_detail", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "jurusan_detail"), body: {
         'kode_jurusan': kode_jurusan.toString(),
       });
 
@@ -156,7 +156,7 @@ class Masterview_model {
   Future<List<KelasModel>> masterkelas() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "kelas"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "kelas")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data masterkelas success");
@@ -175,7 +175,7 @@ class Masterview_model {
   Future<List<UnitAreaModel>> unitarea() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "unitarea"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "unitarea")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data unitarea success");
@@ -194,7 +194,7 @@ class Masterview_model {
   Future<List<PendidikanModel>> masterpendidikan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "pendidikan"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "pendidikan")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data masterpendidikan success");
@@ -214,7 +214,7 @@ class Masterview_model {
       String kodelulusan) async {
     try {
       final hasil = await http
-          .post(ConstanUrl().baseUrl + "pendidikan_registrasi_daftar", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "pendidikan_registrasi_daftar"), body: {
         'kodelulusan': kodelulusan.toString(),
 
         //380933623c56c82e75cca70187a4415730ca7ea8
@@ -238,7 +238,7 @@ class Masterview_model {
       String kodelulusan, String kelompok) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response = await http.post(
-        ConstanUrl().baseUrl + "pendidikan_registrasi_daftar_mapping",
+        Uri.parse(ConstanUrl().baseUrl + "pendidikan_registrasi_daftar_mapping"),
         body: {
           'kodelulusan': kodelulusan.toString(),
           'kelompok': kelompok.toString(),
@@ -265,7 +265,7 @@ class Masterview_model {
       String kodekampus, String no_virtual) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "metodepembayaran", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "metodepembayaran"), body: {
         'kode': kodekampus.toString(),
         'no_virtual': no_virtual.toString(),
         //380933623c56c82e75cca70187a4415730ca7ea8
@@ -288,7 +288,7 @@ class Masterview_model {
   Future<List<SmbModel>> sumber_smb() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "sumber_smb"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "sumber_smb")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data unitarea success");
@@ -305,7 +305,7 @@ class Masterview_model {
   }
 
   Future va(String keycode, String id_invoice) async {
-    final response = await http.post(ConstanUrl().baseUrl + "va", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "va"), body: {
       'keycode': keycode,
       'id_invoice': id_invoice,
     });
@@ -337,7 +337,7 @@ class Masterview_model {
   Future<List> kampus_master() async {
     try {
       http.Response hasil = await http.get(
-        Uri.encodeFull(ConstanUrl().baseUrl + "kampus_master"),
+        Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "kampus_master")),
         // headers: {"Accept": "application/json"}
       );
       if (hasil.statusCode == 200) {
@@ -358,7 +358,7 @@ class Masterview_model {
   Future prodimultipe() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "jurusan_all_multiple"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "jurusan_all_multiple")),
           headers: {"Accept": "application/json"});
           
           print("testing${hasil.body}");
@@ -379,7 +379,7 @@ class Masterview_model {
    Future<List<PendidikanModel>> conf_leveledu_all() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "conf_leveledu_all"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "conf_leveledu_all")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data masterpendidikan success");
@@ -398,7 +398,7 @@ class Masterview_model {
   Future<List<PendidikanModel>> tahun_kelulusan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "tahun"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "tahun")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data masterpendidikan success");
@@ -417,7 +417,7 @@ class Masterview_model {
    Future<List> bahasa() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "bahasa"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "bahasa")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data bahasa success");
@@ -436,7 +436,7 @@ class Masterview_model {
    Future<List> keterampilan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.encodeFull(ConstanUrl().baseUrl + "keterampilan"),
+          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "keterampilan")),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data keterampilan success");

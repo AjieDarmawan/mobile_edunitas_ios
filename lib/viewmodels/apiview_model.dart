@@ -17,7 +17,7 @@ class Apiinfoview_model {
       String email, String kampus_singkatan) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "sinkron_mhs", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "sinkron_mhs"), body: {
       'keycode': keycode,
       'no_virtual': no_virtual,
       'kelas': kelas,
@@ -47,7 +47,7 @@ class Apiinfoview_model {
   Future check_singkron(String email) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(ConstanUrl().baseUrl + "check_singkron", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "check_singkron"), body: {
       'email': email,
     });
 
@@ -73,7 +73,7 @@ class Apiinfoview_model {
   Future info_pembayaran(String keycode, String no_va) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "info_pembayaran", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "info_pembayaran"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });
@@ -98,7 +98,7 @@ class Apiinfoview_model {
   //basket
   Future dataBasket(String keycode, String no_va) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "basket", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "basket"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });
@@ -120,7 +120,7 @@ class Apiinfoview_model {
 
   Future dataRRSpb(String keycode, String no_va) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "dataRRSpb", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "dataRRSpb"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });
@@ -140,7 +140,7 @@ class Apiinfoview_model {
   Future<List<InfoPsppJumlahSemesterRencana>> dataRRSpp(
       String keycode, String no_va) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "dataRRSpp", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "dataRRSpp"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });
@@ -164,7 +164,7 @@ class Apiinfoview_model {
       String keycode, String no_va, String semester) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "SPP_rencana", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "SPP_rencana"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
         'semester': semester.toString(),
@@ -187,7 +187,7 @@ class Apiinfoview_model {
       String keycode, String no_va, String semester) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "SPP_realita", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "SPP_realita"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
         'semester': semester.toString(),
@@ -209,7 +209,7 @@ class Apiinfoview_model {
   Future dataRR_formulir(String keycode, String no_va) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "DataRR_formulir", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "DataRR_formulir"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });
@@ -229,7 +229,7 @@ class Apiinfoview_model {
   Future dataRR_jaket(String keycode, String no_va) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "DataRR_jaket", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "DataRR_jaket"), body: {
         'keycode': keycode.toString(),
         'no_va': no_va.toString(),
       });

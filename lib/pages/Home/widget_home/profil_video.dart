@@ -27,7 +27,7 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
   Future<void> fetchPhotos() async {
     try {
       final response = await http.get(
-          "https://dev-api.edunitas.com/list_campus?page=$_pageNumber");
+          Uri.parse("https://dev-api.edunitas.com/list_campus?page=$_pageNumber"));
       List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
           //final fetchedPhotos = PhotoModel(response.body);
 

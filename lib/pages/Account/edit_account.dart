@@ -83,60 +83,60 @@ class _EditAccountState extends State<EditAccount> {
 
   File image, image_save; //ktp
   TextEditingController ctitle = new TextEditingController();
-  accessCamera() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        image_save = compressImg;
-        uploadPhoto();
-
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
-
-  accessGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-
-    final title = ctitle.text;
-
-    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    Img.Image _smallerimg = Img.copyResize(_image,
-        width: 300, height: 300, interpolation: Img.Interpolation.linear);
-
-    var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
-
-    if (img == null) {
-      print('null');
-    } else {
-      setState(() {
-        image = img;
-        image_save = compressImg;
-        uploadPhoto();
-        //  uploadimg();
-        // uploadktp();
-      });
-    }
-  }
+  // accessCamera() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image = img;
+  //       image_save = compressImg;
+  //       uploadPhoto();
+  //
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
+  //
+  // accessGallery() async {
+  //   File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   final tempDir = await getTemporaryDirectory();
+  //   final path = tempDir.path;
+  //
+  //   final title = ctitle.text;
+  //
+  //   Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+  //   Img.Image _smallerimg = Img.copyResize(_image,
+  //       width: 300, height: 300, interpolation: Img.Interpolation.linear);
+  //
+  //   var compressImg = new File("$path/image_${globalkey}${globalkey}.jpg")
+  //     ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+  //
+  //   if (img == null) {
+  //     print('null');
+  //   } else {
+  //     setState(() {
+  //       image = img;
+  //       image_save = compressImg;
+  //       uploadPhoto();
+  //       //  uploadimg();
+  //       // uploadktp();
+  //     });
+  //   }
+  // }
 
   void uploadPhoto() {
     setState(() {
@@ -413,10 +413,10 @@ class _EditAccountState extends State<EditAccount> {
                                                   builder: (context) =>
                                                       ShowContent(
                                                         onTap1: () {
-                                                          accessGallery();
+                                                          //accessGallery();
                                                         },
                                                         onTap2: () {
-                                                          accessCamera();
+                                                          //accessCamera();
                                                         },
                                                       ));
                                             },
@@ -447,10 +447,10 @@ class _EditAccountState extends State<EditAccount> {
                                                   builder: (context) =>
                                                       ShowContent(
                                                         onTap1: () {
-                                                          accessGallery();
+                                                          //accessGallery();
                                                         },
                                                         onTap2: () {
-                                                          accessCamera();
+                                                          //accessCamera();
                                                         },
                                                       ));
                                             },

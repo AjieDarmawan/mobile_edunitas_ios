@@ -522,7 +522,7 @@ class _FormulirMitraAgensiState extends State<FormulirMitraAgensi> {
   List<DataBankModel> listBank;
   void getbank() async{
     try{
-      final response = await http.get("https://dev-api.edunitas.com/mbank");
+      final response = await http.get(Uri.parse("https://dev-api.edunitas.com/mbank"));
       setState(() {
         listBank = DataBankModel.parseList(json.decode(response.body));
       });

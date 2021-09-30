@@ -26,7 +26,7 @@ class Kampusview_model {
     List<Photo> _photos = [];
     try {
       final response =
-          await http.get("https://dev-api.edunitas.com/list_campus?page=1");
+          await http.get(Uri.parse("https://dev-api.edunitas.com/list_campus?page=1"));
       List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
       _photos.addAll(fetchedPhotos);
       return _photos;
@@ -39,7 +39,7 @@ class Kampusview_model {
   Future<List> SearchgetKampusFront(String search) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "search_campus_home", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus_home"), body: {
         'search': search.toString(),
       });
 
@@ -64,7 +64,7 @@ class Kampusview_model {
       String nilaiunitarea, String jurusan, String kelas) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "search_campus", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus"), body: {
         'unitarea': nilaiunitarea.toString(),
         'jurusan': jurusan.toString(),
         'kelas': kelas.toString(),
@@ -90,7 +90,7 @@ class Kampusview_model {
   Future detailCampus(String kodekampus) async {
     try {
       final response =
-          await http.post(ConstanUrl().baseUrl + "detail_campus", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus"), body: {
         'kode_kampus': kodekampus.toString(),
       });
 
@@ -111,7 +111,7 @@ class Kampusview_model {
   Future<List> search_prodi(String nilaiarea) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "search_prodi", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_prodi"), body: {
         'unitarea': nilaiarea.toString(),
       });
       if (hasil.statusCode == 200) {
@@ -137,7 +137,7 @@ class Kampusview_model {
       String nilaiunitarea, String jurusan) async {
     try {
       final hasil = await http
-          .post(ConstanUrl().baseUrl + "search_prodi_listcampus", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "search_prodi_listcampus"), body: {
         'unitarea': nilaiunitarea.toString(),
         'jurusan': jurusan.toString(),
       });
@@ -162,7 +162,7 @@ class Kampusview_model {
   Future campuskelas(String kodekampus, String kodejrs, String kodeprg) async {
     try {
       final hasil =
-          await http.post(ConstanUrl().baseUrl + "campuskelas", body: {
+          await http.post(Uri.parse(ConstanUrl().baseUrl + "campuskelas"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -249,7 +249,7 @@ class Kampusview_model {
     String keycode_agent,
   ) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "integrasi_sipema", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema"), body: {
       'keycode': keycode.toString(),
       'kodecampus': kodecampus.toString(), // zzz
       'prodi': prodi.toString(), //s1k1
@@ -389,7 +389,7 @@ class Kampusview_model {
     String key_redeem,
   ) async {
     final response = await http.post(
-        ConstanUrl().baseUrl + "integrasi_sipema_pendaftaran_nonlogin",
+        Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema_pendaftaran_nonlogin"),
         body: {
           'keycode': keycode.toString(),
           'kodecampus': kodecampus.toString(), // zzz
@@ -477,7 +477,7 @@ class Kampusview_model {
 
   Future<List> getinbox(String keycode) async {
     try {
-      final hasil = await http.post(ConstanUrl().baseUrl + "message", body: {
+      final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "message"), body: {
         'keycode': keycode.toString()
         //380933623c56c82e75cca70187a4415730ca7ea8
       });
@@ -498,7 +498,7 @@ class Kampusview_model {
   }
 
   Future read_message(String id) async {
-    final response = await http.post(ConstanUrl().baseUrl + "read", body: {
+    final response = await http.post(Uri.parse(ConstanUrl().baseUrl + "read"), body: {
       'id': id,
     });
 
@@ -517,7 +517,7 @@ class Kampusview_model {
 
   Future count_read(String keycode) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "count_read", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "count_read"), body: {
       'keycode': keycode,
     });
 
@@ -536,7 +536,7 @@ class Kampusview_model {
 
   Future delete_message(String id) async {
     final response =
-        await http.post(ConstanUrl().baseUrl + "delete_message", body: {
+        await http.post(Uri.parse(ConstanUrl().baseUrl + "delete_message"), body: {
       'id': id,
     });
 
@@ -556,7 +556,7 @@ class Kampusview_model {
   Future<List> searchCampusjurusan(String nilaiunitarea, String jurusan) async {
     try {
       final hasil = await http
-          .post(ConstanUrl().baseUrl + "search_kampus_jurusan", body: {
+          .post(Uri.parse(ConstanUrl().baseUrl + "search_kampus_jurusan"), body: {
         'unitarea': nilaiunitarea.toString(),
         'kode_jurusan': jurusan.toString(),
       });
