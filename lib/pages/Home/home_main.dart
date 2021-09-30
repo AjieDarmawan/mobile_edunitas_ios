@@ -134,7 +134,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
     getTerpopuler();
     getberitaterbaru();
     getpromositerbaru();
-    //fcm();
+    fcm();
   }
 
   //conn has been updated 1 August 2021
@@ -286,6 +286,46 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
   String _messageText = "Waiting for message...";
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  void fcm() {
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        FlutterRingtonePlayer.playNotification();
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        print("onResume: $message");
+      },
+    );
+    //ios only
+    _firebaseMessaging.requestNotificationPermissions(
+      const IosNotificationSettings(sound: true, badge: true, alert: true),
+    );
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
+
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      setState(() {
+        _homeScreenText = "Push Messaging token: $token";
+      });
+      print(_homeScreenText);
+    });
+  }
 
   // Future<void> fcmSubcribe() async {
   //   {

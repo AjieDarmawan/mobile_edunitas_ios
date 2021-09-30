@@ -161,11 +161,11 @@ class _LoginState extends State<Login> {
   SessionManager sessionManager = SessionManager();
 
   String fcmToken;
-  //final FirebaseMessaging _fcm = FirebaseMessaging();
+  final FirebaseMessaging _fcm = FirebaseMessaging();
 
   _getFcmToken() async {
-    // fcmToken = await _fcm.getToken();
-    // print("fcmtoken: " + fcmToken);
+    fcmToken = await _fcm.getToken();
+    print("fcmtoken: " + fcmToken);
   }
 
   void masuklogin() {
