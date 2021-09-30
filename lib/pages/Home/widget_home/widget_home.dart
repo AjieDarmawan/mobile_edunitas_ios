@@ -31,6 +31,7 @@ import 'package:ios_edunitas/model/Master/PendidikanModel.dart';
 import 'package:ios_edunitas/model/Master/SearchProdiModel.dart';
 import 'package:ios_edunitas/model/Master/SmbModel.dart';
 import 'package:ios_edunitas/model/Master/StatusModel.dart';
+import 'package:ios_edunitas/model/Master/UnitAreaModel.dart';
 import 'package:ios_edunitas/model/educampus/listedu.dart';
 import 'package:ios_edunitas/model/transaction/transactionModel2.dart';
 import 'package:ios_edunitas/pages/Account/me/me_partner/me_partner.dart';

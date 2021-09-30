@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ios_edunitas/model/Master/MasterDaerahModel.dart';
 import 'package:ios_edunitas/model/Master/MasterJurusanModel.dart';
 import 'package:ios_edunitas/model/Master/SmbModel.dart';
 import 'package:ios_edunitas/model/karir/SpesialisasiModel.dart';

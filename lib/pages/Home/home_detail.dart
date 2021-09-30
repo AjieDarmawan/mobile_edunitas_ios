@@ -82,6 +82,8 @@ class _Home_detailState extends State<Home_detail>
 
   Color colorPrimary = Colors.blue[900];
   TabController _controller;
+  TextEditingController etkampussearch = new TextEditingController();
+  final _debouncer = Debouncer(milliseconds: 2000);
 
   //search
   var dataSearchKampus = new List();
@@ -93,7 +95,7 @@ class _Home_detailState extends State<Home_detail>
       setState(() {
         dataSearchKampus = value1;
       });
-    }).catchError((_error){
+    }).catchError((_error) {
       setState(() {
         //_stillhandling=_stillhandling+1;
         onErrHandling(_error);
@@ -115,7 +117,7 @@ class _Home_detailState extends State<Home_detail>
   Future<void> fetchPhotos() async {
     try {
       final response = await http
-          .get(Uri.parse("https://dev-api.edunitas.com/list_campus?page=$_pageNumber"));
+          .get("https://dev-api.edunitas.com/list_campus?page=$_pageNumber");
       List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
       //final fetchedPhotos = PhotoModel(response.body);
 
@@ -136,6 +138,27 @@ class _Home_detailState extends State<Home_detail>
     }
   }
 
+  List<Photo> getSearchkampus(String query) {
+    List<Photo> dataSearchKampus = new List();
+
+    Kampusview_model().SearchgetKampusFront(query).then((value1) {
+      print(value1);
+      print("SearchgetKampusq= $query");
+      print("SearchgetKampus=" + value1.length.toString());
+      dataSearchKampus = value1;
+      setState(() {
+        _hasMore = dataSearchKampus.length == _defaultPhotosPerPageCount;
+        isConn = true;
+        _loading = false;
+        _pageNumber = _pageNumber + 1;
+        _photos.addAll(dataSearchKampus);
+      });
+      return dataSearchKampus = value1;
+    });
+
+    return dataSearchKampus;
+  }
+
   void getData() {
     // searchgetListKampus();
     _hasMore = true;
@@ -148,12 +171,14 @@ class _Home_detailState extends State<Home_detail>
     _keyEnter = widget.key_enter;
   }
 
-  var _stillhandling=false;
-  void onErrHandling(erro){
-    print("do_home_det_err: "+erro.toString());
-    if (_stillhandling==false){
-      setState(() {_stillhandling=true;});
-      if(erro.toString().contains("SocketException")){
+  var _stillhandling = false;
+  void onErrHandling(erro) {
+    print("do_home_det_err: " + erro.toString());
+    if (_stillhandling == false) {
+      setState(() {
+        _stillhandling = true;
+      });
+      if (erro.toString().contains("SocketException")) {
         Flushbar(
             title: "Tidak ada koneksi",
             message: "Mohon cek koneksi internet",
@@ -175,7 +200,7 @@ class _Home_detailState extends State<Home_detail>
               child: EduButton(
                 onPressed: () {
                   setState(() {
-                    _stillhandling=false;
+                    _stillhandling = false;
                     isConn = true;
                     _loading = true;
                     _error = false;
@@ -272,45 +297,46 @@ class _Home_detailState extends State<Home_detail>
                         });
                       }),
             ],
-            title: Container(
-                height: 24,
-                //width: MediaQuery.of(context).size.width-(MediaQuery.of(context).size.width/2.5),
-
-                child: Builder(
-                  builder: (context) => GestureDetector(
-                    onTap: () async {
-                      await showSearch(
-                          context: context, delegate: SearchHome(widget.list));
-                    },
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.white,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.only(left: 6),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                              size: 15,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              "Pencarian Kampus",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 13),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )),
+            title: Text("Cari Kampus"),
+            // Container(
+            //     height: 24,
+            //     //width: MediaQuery.of(context).size.width-(MediaQuery.of(context).size.width/2.5),
+            //
+            //     child: Builder(
+            //       builder: (context) => GestureDetector(
+            //         onTap: () async {
+            //           await showSearch(
+            //               context: context, delegate: SearchHome(widget.list));
+            //         },
+            //         child: Container(
+            //           height: 40,
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(8.0),
+            //             color: Colors.white,
+            //           ),
+            //           child: Container(
+            //             padding: EdgeInsets.only(left: 6),
+            //             child: Row(
+            //               children: [
+            //                 Icon(
+            //                   Icons.search,
+            //                   color: Colors.grey,
+            //                   size: 15,
+            //                 ),
+            //                 SizedBox(
+            //                   width: 5,
+            //                 ),
+            //                 Text(
+            //                   "Pencarian Kampus",
+            //                   style:
+            //                       TextStyle(color: Colors.grey, fontSize: 13),
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     )),
             backgroundColor: mainColor1,
           ),
           body: isConn == false
@@ -386,6 +412,62 @@ class _Home_detailState extends State<Home_detail>
                                   )
                                 ],
                               ),
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 8.0,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 16.0),
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey, width: 1),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Row(children: [
+                                    Container(
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: Icon(
+                                        Icons.search_outlined,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        cursorColor: mainColor1,
+                                        controller: etkampussearch,
+                                        keyboardType: TextInputType.text,
+                                        //enabled: false,
+                                        decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                            contentPadding: EdgeInsets.only(
+                                                left: 8, bottom: 5, top: 5, right: 10),
+                                            hintText: "Cari kampus"),
+                                        onChanged: (string) {
+                                          setState(() {
+                                            _hasMore = true;
+                                            _pageNumber = 1;
+                                            _error = false;
+                                            _loading = true;
+                                            _photos = [];
+                                            _debouncer.run(() => string != ""
+                                                ? getSearchkampus(string)
+                                                : fetchPhotos());
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
@@ -566,5 +648,21 @@ class _Home_detailState extends State<Home_detail>
         ),
       ),
     ));
+  }
+}
+
+class Debouncer {
+  final int milliseconds;
+  VoidCallback action;
+  Timer _timer;
+
+  Debouncer({this.milliseconds});
+
+  run(VoidCallback action) {
+    if (_timer != null) {
+      _timer.cancel();
+    }
+
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
   }
 }
