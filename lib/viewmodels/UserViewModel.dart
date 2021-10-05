@@ -22,6 +22,7 @@ class UserViewModel {
       'email': email,
       'password': password,
       'android_id': android_id,
+      'status':'1',
     });
 
     final jsondata = jsonDecode(response.body);
