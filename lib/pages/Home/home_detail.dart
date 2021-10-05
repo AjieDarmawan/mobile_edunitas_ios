@@ -117,7 +117,7 @@ class _Home_detailState extends State<Home_detail>
   Future<void> fetchPhotos() async {
     try {
       final response = await http
-          .get("https://dev-api.edunitas.com/list_campus?page=$_pageNumber");
+          .get("https://dev-api.edunitas.com/list_campus2?page=$_pageNumber");
       List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
       //final fetchedPhotos = PhotoModel(response.body);
 
