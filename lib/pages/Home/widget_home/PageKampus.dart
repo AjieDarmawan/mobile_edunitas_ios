@@ -233,7 +233,7 @@ class _Pages1State extends State<Pages1> {
                       textAlign: TextAlign.left,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 4,
                     ),
                     globalkey == null
                         ? Container(
@@ -561,7 +561,7 @@ class Pages5 extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     SizedBox(
-                      height: 16,
+                      height: 5,
                     ),
                     Container(
                         width: MediaQuery.of(context).size.width / 2.5,
