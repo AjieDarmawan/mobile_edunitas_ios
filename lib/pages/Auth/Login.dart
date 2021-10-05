@@ -754,7 +754,7 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.only(bottom: 90, right: 24),
+                padding: EdgeInsets.only(bottom: 50, right: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
