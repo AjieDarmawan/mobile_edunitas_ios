@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
-import 'package:ios_edunitas/pages/Home/home.dart';
-import 'package:ios_edunitas/pages/Home/widget_home/agensi/widget_agensi.dart';
-import 'package:ios_edunitas/widget/widget.dart';
+import 'package:eduNitas/pages/Home/home.dart';
+import 'package:eduNitas/pages/Home/widget_home/agensi/widget_agensi.dart';
+import 'package:eduNitas/widget/widget.dart';
 
 import 'constant/constant.dart';
 import 'pages/Auth/Auth.dart';

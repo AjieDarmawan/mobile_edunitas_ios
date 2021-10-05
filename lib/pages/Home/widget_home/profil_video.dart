@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ios_edunitas/model/Campus/PhotoModel.dart';
+import 'package:eduNitas/model/Campus/PhotoModel.dart';
 import 'package:http/http.dart' as http;
 class PhotosListScreen extends StatefulWidget {
   PhotosListScreen({Key key}) : super(key: key);

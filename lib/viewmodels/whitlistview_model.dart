@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:ios_edunitas/constant/constant.dart';
-import 'package:ios_edunitas/model/Auth/LoginModel.dart';
-import 'package:ios_edunitas/model/Campus/PhotoModel.dart';
-import 'package:ios_edunitas/model/Master/StatusModel.dart';
+import 'package:eduNitas/constant/constant.dart';
+import 'package:eduNitas/model/Auth/LoginModel.dart';
+import 'package:eduNitas/model/Campus/PhotoModel.dart';
+import 'package:eduNitas/model/Master/StatusModel.dart';
 import 'package:http/http.dart' as http;
 
 class Whitlistview_model {

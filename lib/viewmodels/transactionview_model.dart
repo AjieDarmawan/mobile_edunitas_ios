@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:ios_edunitas/constant/constant.dart';
-import 'package:ios_edunitas/model/Campus/PhotoModel.dart';
-import 'package:ios_edunitas/model/transaction/transacationDonasiMode.dart';
-import 'package:ios_edunitas/model/transaction/transactionModel.dart';
-import 'package:ios_edunitas/model/transaction/transactionModel2.dart';
+import 'package:eduNitas/constant/constant.dart';
+import 'package:eduNitas/model/Campus/PhotoModel.dart';
+import 'package:eduNitas/model/transaction/transacationDonasiMode.dart';
+import 'package:eduNitas/model/transaction/transactionModel.dart';
+import 'package:eduNitas/model/transaction/transactionModel2.dart';
 import 'package:http/http.dart' as http;
 
 class Transactionview_model {

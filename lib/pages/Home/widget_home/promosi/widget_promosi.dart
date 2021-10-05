@@ -7,10 +7,10 @@ import 'package:custom_radio_grouped_button/CustomButtons/CustomRadioButton.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ios_edunitas/pages/Home/widget_home/widget_home.dart';
-import 'package:ios_edunitas/shared/shared.dart';
-import 'package:ios_edunitas/viewmodels/eduinfoview_model.dart';
-import 'package:ios_edunitas/widget/widget.dart';
+import 'package:eduNitas/pages/Home/widget_home/widget_home.dart';
+import 'package:eduNitas/shared/shared.dart';
+import 'package:eduNitas/viewmodels/eduinfoview_model.dart';
+import 'package:eduNitas/widget/widget.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';

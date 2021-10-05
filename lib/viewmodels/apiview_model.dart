@@ -1,14 +1,14 @@
 import 'dart:convert';
-import 'package:ios_edunitas/constant/constant.dart';
-import 'package:ios_edunitas/model/Master/StatusModel.dart';
-import 'package:ios_edunitas/model/me/InfoPembayaran_me_Model.dart';
-import 'package:ios_edunitas/model/me/basket_model.dart';
-import 'package:ios_edunitas/model/me/dataRR_SPB.dart';
-import 'package:ios_edunitas/model/me/dataRR_SPP.dart';
-import 'package:ios_edunitas/model/me/dataRR_formulir.dart';
-import 'package:ios_edunitas/model/me/dataRR_jaket.dart';
-import 'package:ios_edunitas/model/me/dataRR_jumlah_semester_rencana.dart';
-import 'package:ios_edunitas/model/me/dataRR_sppR.dart';
+import 'package:eduNitas/constant/constant.dart';
+import 'package:eduNitas/model/Master/StatusModel.dart';
+import 'package:eduNitas/model/me/InfoPembayaran_me_Model.dart';
+import 'package:eduNitas/model/me/basket_model.dart';
+import 'package:eduNitas/model/me/dataRR_SPB.dart';
+import 'package:eduNitas/model/me/dataRR_SPP.dart';
+import 'package:eduNitas/model/me/dataRR_formulir.dart';
+import 'package:eduNitas/model/me/dataRR_jaket.dart';
+import 'package:eduNitas/model/me/dataRR_jumlah_semester_rencana.dart';
+import 'package:eduNitas/model/me/dataRR_sppR.dart';
 
 import 'package:http/http.dart' as http;
 

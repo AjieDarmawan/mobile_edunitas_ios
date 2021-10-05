@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:ios_edunitas/constant/constant.dart';
-import 'package:ios_edunitas/model/Master/StatusModel.dart';
-import 'package:ios_edunitas/pages/Auth/Auth.dart';
-import 'package:ios_edunitas/pages/Home/home.dart';
-import 'package:ios_edunitas/viewmodels/UserViewModel.dart';
-import 'package:ios_edunitas/widget/widget.dart';
-import 'package:ios_edunitas/pages/Splash/data/data.dart';
+import 'package:eduNitas/constant/constant.dart';
+import 'package:eduNitas/model/Master/StatusModel.dart';
+import 'package:eduNitas/pages/Auth/Auth.dart';
+import 'package:eduNitas/pages/Home/home.dart';
+import 'package:eduNitas/viewmodels/UserViewModel.dart';
+import 'package:eduNitas/widget/widget.dart';
+import 'package:eduNitas/pages/Splash/data/data.dart';
 import 'package:flutter/services.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 

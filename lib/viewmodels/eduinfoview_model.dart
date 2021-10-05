@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:ios_edunitas/constant/constant.dart';
-import 'package:ios_edunitas/model/Master/StatusModel.dart';
-import 'package:ios_edunitas/model/educampus/CategoriModel.dart';
-import 'package:ios_edunitas/model/educampus/listedu.dart';
+import 'package:eduNitas/constant/constant.dart';
+import 'package:eduNitas/model/Master/StatusModel.dart';
+import 'package:eduNitas/model/educampus/CategoriModel.dart';
+import 'package:eduNitas/model/educampus/listedu.dart';
 import 'package:http/http.dart' as http;
 
 class Eduinfoview_model {
