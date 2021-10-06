@@ -109,9 +109,9 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_awal_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_awal_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -172,7 +172,8 @@ class _LoginState extends State<Login> {
     UserViewModel()
         .login(etEmail.text.toString(), etPassword.text.toString(),
             fcmToken.toString())
-        .then((value) {//handled
+        .then((value) {
+      //handled
       LoginModel data = value;
 
       if (data.status == 200) {
@@ -195,7 +196,8 @@ class _LoginState extends State<Login> {
         if (data.tmpdataKampus == null) {
           Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
         } else {
-          UserViewModel().check_login_tmp(data.tmpdataKampus).then((value) {//handled
+          UserViewModel().check_login_tmp(data.tmpdataKampus).then((value) {
+            //handled
             print("jackk: " + data.tmpdataProdi);
             Navigator.push(
                 context,
@@ -205,7 +207,7 @@ class _LoginState extends State<Login> {
                           kodejurusan: data.tmpdataProdi,
                           routef: 'Login',
                         ))));
-          }).catchError((erro){
+          }).catchError((erro) {
             onErrHandling(erro);
           });
         }
@@ -447,7 +449,8 @@ class _LoginState extends State<Login> {
         if (data.tmpdataKampus == null) {
           Navigator.of(context).pushNamedAndRemoveUntil(NAVI, (route) => false);
         } else {
-          UserViewModel().check_login_tmp(data.tmpdataKampus).then((value) {//handled
+          UserViewModel().check_login_tmp(data.tmpdataKampus).then((value) {
+            //handled
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -456,7 +459,7 @@ class _LoginState extends State<Login> {
                           routef: 'agent',
                           email: etEmail.text.toString(),
                         ))));
-          }).catchError((erro){
+          }).catchError((erro) {
             onErrHandling(erro);
           });
         }
@@ -480,7 +483,7 @@ class _LoginState extends State<Login> {
           backgroundColor: Colors.red,
         )..show(context);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -730,12 +733,42 @@ class _LoginState extends State<Login> {
                                     height: 48,
                                   ),
                                   Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Belum punya akun ?",
+                                          style: blackFontStyle3,
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          (Register())));
+                                            },
+                                            child: Text(
+                                              "Daftar",
+                                              style: blueFontStyle.copyWith(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
+                                  Center(
                                     child: Text(
                                       'App version : ' +
                                           _packageInfo.version +
                                           '.' +
                                           _packageInfo.buildNumber,
-                                      style: blueFontStyleBold.copyWith(
+                                      style: blueFontStyle.copyWith(
                                           color: Colors.grey),
                                     ),
                                   ),
@@ -745,39 +778,9 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 72,
-                      ),
                     ],
                   ),
                 ],
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.only(bottom: 50, right: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Belum punya akun ?",
-                      style: blackFontStyle3,
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => (Register())));
-                        },
-                        child: Text(
-                          "Daftar",
-                          style: blueFontStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                  ],
-                ),
               ),
             ],
           ),
