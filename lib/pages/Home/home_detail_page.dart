@@ -33,6 +33,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   var data = [];
   bool _loading;
   List<Tran> kend;
+  //List kend;
   String youtubemuncul;
   String rektor;
 
@@ -84,6 +85,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   }
 
   void getDetailCampus() {
+    print("widget.campus.kode: "+widget.campus.kode);
     Kampusview_model().detailCampus(widget.campus.kode).then((value) {
       setState(() {
         DetailCampusModel data = value;
@@ -102,6 +104,34 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       });
     });
   }
+
+  //todo dyms
+  // void getDetailCampus() {
+  //   print("widget.campus.kode: "+widget.campus.kode);
+  //   Kampusview_model().detailCampus(widget.campus.kode).then((value) {
+  //     setState(() {
+  //       DetailCampusModel2 data = value;
+  //
+  //       //youtubemuncul = data.youtube;
+  //       //rektor = data.rektor;
+  //       //transp = data.transportasi;
+  //       //fileimg = data.fileCampusDetail;
+  //       kend[0]=data.angkutan.kampus1.mikrolet1;
+  //       kend[1]=data.angkutan.kampus1.mikrolet2;
+  //       kend[2]=data.angkutan.kampus1.mikrolet3;
+  //       kend[3]=data.angkutan.kampus1.mikrolet4;
+  //       kend[4]=data.angkutan.kampus1.mikrolet5;
+  //       print("sieeeetttt: "+kend[0]+", "+kend[3]);
+  //
+  //       //munculvideo();
+  //     });
+  //   }).catchError((erro){
+  //     setState(() {
+  //       isConn==false;
+  //       onErrHandling(erro);
+  //     });
+  //   });
+  // }
 
   void getData() {
     getDetailCampus();
@@ -1232,6 +1262,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                               60,
                                                       child: Text(
                                                         document.kendaraan,
+                                                        //"mikrolet ",
                                                         style: blackFontStyle3,
                                                         maxLines: 2,
                                                         overflow: TextOverflow
@@ -1256,6 +1287,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                               vertical: 10),
                                           child: Text(
                                             document.jalan,
+                                            //document[0],
                                             style: blackFontStyle3.copyWith(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.bold),

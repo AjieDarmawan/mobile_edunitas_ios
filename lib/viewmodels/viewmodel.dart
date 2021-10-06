@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
+import 'package:eduNitas/model/Campus/DetailCampus2.dart';
 import 'package:flutter/material.dart';
 import 'package:eduNitas/constant/constant.dart';
 import 'package:eduNitas/model/Auth/LoginModel.dart';

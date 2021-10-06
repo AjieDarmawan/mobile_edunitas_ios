@@ -90,11 +90,13 @@ class Kampusview_model {
   Future detailCampus(String kodekampus) async {
     try {
       final response =
+         // await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus2"), body: {
           await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus"), body: {
         'kode_kampus': kodekampus.toString(),
       });
 
       final jsondata = jsonDecode(response.body);
+      //DetailCampusModel2 listData = DetailCampusModel2.fromJson(jsondata);
       DetailCampusModel listData = DetailCampusModel.fromJson(jsondata);
 
       if (response.statusCode == 200) {

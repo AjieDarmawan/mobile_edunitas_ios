@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:eduNitas/constant/constant.dart';
 import 'package:eduNitas/model/Campus/DetailCampus.dart';
+import 'package:eduNitas/model/Campus/DetailCampus2.dart';
 import 'package:eduNitas/model/Master/BannerModel.dart';
 import 'package:eduNitas/model/Campus/ListCampus.dart';
 import 'package:eduNitas/model/Master/LogoGambar.dart';
