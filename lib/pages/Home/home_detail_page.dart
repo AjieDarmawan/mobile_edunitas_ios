@@ -32,7 +32,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   var fileimg = new List();
   var data = [];
   bool _loading;
-  List<Tran> kend;
+  List<Kend> kend;
   //List kend;
   String youtubemuncul;
   String rektor;
@@ -76,62 +76,43 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         // namakonversi = datSipemaByIndex.itembayar.itembayar;
         dataSipema_lenght = dataSipema.length;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       setState(() {
-        isConn==false;
+        isConn == false;
         onErrHandling(erro);
       });
     });
   }
 
+  var rektorImg, rektor_jabatan, _youtube, _profile, _visi_misi, urlGooglemaps,gambar_youtube;
+
   void getDetailCampus() {
-    print("widget.campus.kode: "+widget.campus.kode);
+    print("widget.campus.kode: " + widget.campus.kode);
     Kampusview_model().detailCampus(widget.campus.kode).then((value) {
       setState(() {
-        DetailCampusModel data = value;
-        youtubemuncul = data.youtube;
+        DetailCampusModel2 data = value;
+        //youtubemuncul = data.youtube;
+        rektor_jabatan = data.rektorJabatan;
+        rektorImg = data.rektorImg;
         rektor = data.rektor;
-        transp = data.transportasi;
-        fileimg = data.fileCampusDetail;
-        kend = data.tran;
+        _youtube = data.linkYoutubePendek;
+        _profile = data.profile;
+        _visi_misi = data.visiMisi;
+        urlGooglemaps = data.linkPeta;
+        gambar_youtube = data.gambar_youtube;
+        // transp = data.transportasi;
+       fileimg = data.foto;
+        kend = data.kend;
 
         //munculvideo();
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       setState(() {
-        isConn==false;
+        isConn == false;
         onErrHandling(erro);
       });
     });
   }
-
-  //todo dyms
-  // void getDetailCampus() {
-  //   print("widget.campus.kode: "+widget.campus.kode);
-  //   Kampusview_model().detailCampus(widget.campus.kode).then((value) {
-  //     setState(() {
-  //       DetailCampusModel2 data = value;
-  //
-  //       //youtubemuncul = data.youtube;
-  //       //rektor = data.rektor;
-  //       //transp = data.transportasi;
-  //       //fileimg = data.fileCampusDetail;
-  //       kend[0]=data.angkutan.kampus1.mikrolet1;
-  //       kend[1]=data.angkutan.kampus1.mikrolet2;
-  //       kend[2]=data.angkutan.kampus1.mikrolet3;
-  //       kend[3]=data.angkutan.kampus1.mikrolet4;
-  //       kend[4]=data.angkutan.kampus1.mikrolet5;
-  //       print("sieeeetttt: "+kend[0]+", "+kend[3]);
-  //
-  //       //munculvideo();
-  //     });
-  //   }).catchError((erro){
-  //     setState(() {
-  //       isConn==false;
-  //       onErrHandling(erro);
-  //     });
-  //   });
-  // }
 
   void getData() {
     getDetailCampus();
@@ -142,9 +123,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -182,7 +163,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     await FlutterShare.share(
         title: 'Kampus Shared',
         text:
-        'Daftar sekarang juga sebelum Kuota penuh dan Biaya Kuliah Naik\n\n*Biaya Kuliah Mulai 350 ribu/bulan*',
+            'Daftar sekarang juga sebelum Kuota penuh dan Biaya Kuliah Naik\n\n*Biaya Kuliah Mulai 350 ribu/bulan*',
         linkUrl: 'https://edunitas.com/educampus/detail/' +
             widget.campus.singkatan.replaceAll(' ', '-'),
         chooserTitle: 'Chooser Kampus');
@@ -284,15 +265,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("aaaasa${widget.campus.keterangan.length}");
+
+    print("tes" + 'https://img.youtube.com/vi/${gambar_youtube}/0.jpg');
     buildCollapsed1() {
       return Html(
-        data: widget.campus.keterangan == null ||
-                widget.campus.keterangan.length == 0
+        data: _profile == null || _profile.length == 0
             ? ""
-            : widget.campus.keterangan.length < 250
-                ? widget.campus.keterangan.substring(0, 100) + "..."
-                : widget.campus.keterangan.substring(0, 250) + "...",
+            : _profile.length < 250
+                ? _profile.substring(0, 100) + "..."
+                : _profile.substring(0, 250) + "...",
         defaultTextStyle:
             blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
       );
@@ -300,20 +281,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
     buildExpanded1() {
       return Html(
-        data: widget.campus.keterangan == null ? "" : widget.campus.keterangan,
+        data: _profile == null ? "" : _profile,
         defaultTextStyle:
             blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
       );
     }
-
-    // print("fileimg12${fileimg[0]}");
-    print("fileimg = " + fileimg.length.toString());
-    String toLaunch =
-        'https://www.youtube.com/watch?v=${widget.campus.youtube}';
-    print("youtube ${toLaunch}");
-    String urlGooglemaps =
-        "http://maps.google.com/maps?q=${double.parse(widget.campus.strlat)},${double.parse(widget.campus.strlong)}";
-    var _youtube = widget.campus.youtube == null ? '' : widget.campus.youtube;
 
     return WillPopScope(
       onWillPop: _backPressed,
@@ -448,872 +420,896 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         },
                       )),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                            padding: EdgeInsets.only(left: 8, right: 8),
-                            height: 79,
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                rektor == null
-                                    ? Container(
-                                        child: Shimmer.fromColors(
-                                          baseColor: Colors.grey[350],
-                                          highlightColor: Colors.white,
-                                          child: Container(
-                                            margin: EdgeInsets.only(left: 16),
-                                            height: 56,
-                                            width: 56,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(28),
-                                                color: Colors.grey[350]),
-                                          ),
-                                        ),
-                                      )
-                                    : Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(28),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black38,
-                                              spreadRadius: 1,
-                                              blurRadius: 2,
-                                              offset: Offset(0,
-                                                  1), // changes position of shadow
-                                            ),
-                                          ],
-                                        ),
-                                        margin: EdgeInsets.only(left: 16),
-                                        height: 56,
-                                        width: 56,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(28),
-                                          child: Image.network(
-                                            rektor,
-                                            fit: BoxFit.cover,
-                                          ),
+                    child: Column(children: [
+                      // body isinya disini
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                          padding: EdgeInsets.only(left: 8, right: 8),
+                          height: 79,
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              rektor == null
+                                  ? Container(
+                                      child: Shimmer.fromColors(
+                                        baseColor: Colors.grey[350],
+                                        highlightColor: Colors.white,
+                                        child: Container(
+                                          margin: EdgeInsets.only(left: 16),
+                                          height: 56,
+                                          width: 56,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(28),
+                                              color: Colors.grey[350]),
                                         ),
                                       ),
-                                Container(
-                                  padding: EdgeInsets.only(left: 16),
-                                  height: 63,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.4,
+                                    )
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(28),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black38,
+                                            spreadRadius: 1,
+                                            blurRadius: 2,
+                                            offset: Offset(0,
+                                                1), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.only(left: 16),
+                                      height: 56,
+                                      width: 56,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(28),
+                                        child: Image.network(
+                                          rektorImg,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                              Container(
+                                padding: EdgeInsets.only(left: 16),
+                                height: 63,
+                                width: MediaQuery.of(context).size.width / 1.4,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      rektor_jabatan.toString() == null
+                                          ? ""
+                                          : rektor_jabatan.toString(),
+                                      style: blackFontStyle1.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      rektor == null ? "" : rektor,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.clip,
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                      Divider(
+                        indent: 24,
+                        endIndent: 24,
+                        color: Colors.grey,
+                      ),
+
+                      _youtube != ''
+                          ? Container(
+                              padding: EdgeInsets.all(16),
+                              width: double.infinity,
+                              height: 210,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: GestureDetector(
+                                  onTap: () => setState(() {
+                                    //_launched = _launchInBrowser(toLaunch);
+                                  }),
+                                  child: Container(
+                                    color: CupertinoColors.systemGrey4,
+                                    child: Stack(
+                                      children: [
+                                        Image.network(
+                                          'https://img.youtube.com/vi/${gambar_youtube}/0.jpg',
+                                          //gambar_youtube,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Center(
+                                            child: Stack(
+                                          children: [
+                                            Icon(
+                                              Icons.play_arrow,
+                                              color: Colors.white,
+                                              size: 80,
+                                            ),
+                                            Icon(
+                                              Icons.play_circle_fill,
+                                              color: Colors.red,
+                                              size: 80,
+                                            ),
+                                          ],
+                                        ))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                padding: EdgeInsets.all(16),
+                                child: Text(
+                                  "Profil",
+                                  style: blueFontStyleBold,
+                                ),
+                              ),
+                            ),
+
+                      Container(
+                        child: _profile == null
+                            ? Text("")
+                            : ExpandableNotifier(
+                                child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, right: 16, bottom: 10),
+                                child: ScrollOnExpand(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (widget.campus.picnik ==
-                                          "Akademi") ...[
-                                        Text(
-                                          "Direktur",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ] else if (widget.campus.picnik ==
-                                          "Universitas") ...[
-                                        Text(
-                                          "Rektor",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ] else if (widget.campus.picnik ==
-                                          "Institut") ...[
-                                        Text(
-                                          "Rektor",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ] else if (widget.campus.picnik ==
-                                          "Sekolah Tinggi") ...[
-                                        Text(
-                                          "Ketua",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ] else ...[
-                                        Text(
-                                          "Pimpinan Kampus",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ],
-                                      SizedBox(
-                                        height: 4,
+                                    children: <Widget>[
+                                      Expandable(
+                                        collapsed: buildCollapsed1(),
+                                        expanded: buildExpanded1(),
                                       ),
-                                      Text(
-                                        widget.campus.rektor == null
-                                            ? ""
-                                            : widget.campus.rektor,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.clip,
-                                        style: blueFontStyle.copyWith(
-                                            fontSize:
-                                                widget.campus.rektor.length < 35
-                                                    ? 14
-                                                    : 12,
-                                            fontWeight: FontWeight.bold),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )),
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
-                        _youtube != ''
-                            ? Container(
-                                padding: EdgeInsets.all(16),
-                                width: double.infinity,
-                                height: 210,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: GestureDetector(
-                                    onTap: () => setState(() {
-                                     _launched = _launchInBrowser(toLaunch);
-                                    }),
-                                    child: Container(
-                                      color: CupertinoColors.systemGrey4,
-                                      child: Stack(
-                                        children: [
-                                          Image.network(
-                                            'https://img.youtube.com/vi/${widget.campus.youtube}/0.jpg',
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            fit: BoxFit.cover,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Builder(
+                                            builder: (context) {
+                                              var controller =
+                                                  ExpandableController.of(
+                                                      context);
+                                              return TextButton(
+                                                child: Text(
+                                                  controller.expanded
+                                                      ? "Sembunyikan"
+                                                      : "Baca Selengkapnya",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .button
+                                                      .copyWith(
+                                                          color: mainColor1),
+                                                ),
+                                                onPressed: () {
+                                                  controller.toggle();
+                                                },
+                                              );
+                                            },
                                           ),
-                                          Center(
-                                              child: Stack(
-                                            children: [
-                                              Icon(
-                                                Icons.play_arrow,
-                                                color: Colors.white,
-                                                size: 80,
-                                              ),
-                                              Icon(
-                                                Icons.play_circle_fill,
-                                                color: Colors.red,
-                                                size: 80,
-                                              ),
-                                            ],
-                                          ))
                                         ],
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  padding: EdgeInsets.all(16),
-                                  child: Text(
-                                    "Profil",
-                                    style: blueFontStyleBold,
-                                  ),
-                                ),
-                              ),
-                        Container(
-                          child: widget.campus.keterangan.length == 0
-                              ? Text("")
-                              : ExpandableNotifier(
-                                  child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16, right: 16, bottom: 10),
-                                  child: ScrollOnExpand(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expandable(
-                                          collapsed: buildCollapsed1(),
-                                          expanded: buildExpanded1(),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Builder(
-                                              builder: (context) {
-                                                var controller =
-                                                    ExpandableController.of(
-                                                        context);
-                                                return TextButton(
-                                                  child: Text(
-                                                    controller.expanded
-                                                        ? "Sembunyikan"
-                                                        : "Baca Selengkapnya",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .button
-                                                        .copyWith(
-                                                            color: mainColor1),
-                                                  ),
-                                                  onPressed: () {
-                                                    controller.toggle();
-                                                  },
-                                                );
-                                              },
+
+                                      //tabs
+                                      DefaultTabController(
+                                        length: 1,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 48,
+                                              child: TabBar(
+                                                  indicatorColor: yellowColor,
+                                                  indicatorWeight: 4.0,
+                                                  indicatorSize:
+                                                      TabBarIndicatorSize.tab,
+                                                  indicatorPadding:
+                                                      EdgeInsets.only(
+                                                          left: 72, right: 72),
+                                                  tabs: [
+                                                    Tab(
+                                                        icon: Text(
+                                                      "Visi Misi",
+                                                      style: blueFontStyle
+                                                          .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    )),
+                                                    // Tab(
+                                                    //     icon: Text(
+                                                    //   "Misi",
+                                                    //   style: blueFontStyle.copyWith(
+                                                    //     fontSize: 16,
+                                                    //     fontWeight: FontWeight.bold,
+                                                    //   ),
+                                                    // )),
+                                                  ]),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                        ),
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
+                                            Container(
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      "assets/wavebg.png"),
+                                                  fit: BoxFit.fitWidth,
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                ),
+                                              ),
+                                              child: TabBarView(
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.all(24),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: Html(
+                                                        data: _visi_misi
+                                                                    .toString() ==
+                                                                null
+                                                            ? ""
+                                                            : _visi_misi
+                                                                .toString(),
+                                                        defaultTextStyle:
+                                                            blackFontStyle1.copyWith(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  // Container(
+                                                  //   padding: EdgeInsets.all(24),
+                                                  //   child: SingleChildScrollView(
+                                                  //     child: Html(
+                                                  //       data: widget.campus.misi,
+                                                  //       defaultTextStyle:
+                                                  //           blackFontStyle1.copyWith(
+                                                  //               fontSize: 14,
+                                                  //               fontWeight: FontWeight.w500),
+                                                  //     ),
+                                                  //   ),
+                                                  // )
+                                                ],
+                                              ),
+                                            ),
 
-                        //tabs
-                        DefaultTabController(
-                          length: 2,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 48,
-                                child: TabBar(
-                                    indicatorColor: yellowColor,
-                                    indicatorWeight: 4.0,
-                                    indicatorSize: TabBarIndicatorSize.tab,
-                                    indicatorPadding:
-                                        EdgeInsets.only(left: 72, right: 72),
-                                    tabs: [
-                                      Tab(
-                                          icon: Text(
-                                        "Visi",
-                                        style: blueFontStyle.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )),
-                                      Tab(
-                                          icon: Text(
-                                        "Misi",
-                                        style: blueFontStyle.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )),
-                                    ]),
-                              ),
-                              Container(
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/wavebg.png"),
-                                    fit: BoxFit.fitWidth,
-                                    alignment: Alignment.bottomCenter,
-                                  ),
-                                ),
-                                child: TabBarView(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(24),
-                                      child: SingleChildScrollView(
-                                        child: Html(
-                                          data: widget.campus.visi,
-                                          defaultTextStyle:
-                                              blackFontStyle1.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(24),
-                                      child: SingleChildScrollView(
-                                        child: Html(
-                                          data: widget.campus.misi,
-                                          defaultTextStyle:
-                                              blackFontStyle1.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(
+                                                  left: 24, top: 16),
+                                              child: Text("Galeri Kampus",
+                                                  style: blueFontStyle.copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
 
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: 24, top: 16),
-                          child: Text("Galeri Kampus",
-                              style: blueFontStyle.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          child: fileimg.length >= 0
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      height: 160,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.55,
-                                      child: GestureDetector(
-                                        child: Hero(
-                                            tag: 'image1',
-                                            child: !_loading
-                                                ? Container(
-                                                    child: fileimg.length == 0
-                                                        ? Container(
-                                                            child: Shimmer
-                                                                .fromColors(
-                                                              baseColor: Colors
-                                                                  .grey[350],
-                                                              highlightColor:
-                                                                  Colors.white,
+                                            Container(
+                                              padding: EdgeInsets.all(16),
+                                              child: fileimg.length >= 0
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          height: 160,
+                                                          width: MediaQuery.of(context).size.width /
+                                                              1.55,
+                                                          child: GestureDetector(
+                                                            child: Hero(
+                                                                tag: 'image1',
+                                                                child: !_loading
+                                                                    ? Container(
+                                                                        child: fileimg.length == 0
+                                                                            ? Container(
+                                                                                child: Shimmer
+                                                                                    .fromColors(
+                                                                                  baseColor: Colors
+                                                                                      .grey[350],
+                                                                                  highlightColor:
+                                                                                      Colors.white,
+                                                                                  child: Container(
+                                                                                    height: 160,
+                                                                                    width: MediaQuery.of(
+                                                                                                context)
+                                                                                            .size
+                                                                                            .width /
+                                                                                        1.55,
+                                                                                    decoration: BoxDecoration(
+                                                                                        borderRadius:
+                                                                                            BorderRadius
+                                                                                                .circular(
+                                                                                                    5),
+                                                                                        color: Colors
+                                                                                                .grey[
+                                                                                            350]),
+                                                                                  ),
+                                                                                ),
+                                                                              )
+                                                                            : Container(
+                                                                                decoration:
+                                                                                    BoxDecoration(
+                                                                                  color: CupertinoColors
+                                                                                      .systemGrey4,
+                                                                                  borderRadius:
+                                                                                      BorderRadius
+                                                                                          .circular(
+                                                                                              5),
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors
+                                                                                          .black38,
+                                                                                      spreadRadius:
+                                                                                          1,
+                                                                                      blurRadius: 2,
+                                                                                      offset: Offset(
+                                                                                          0,
+                                                                                          1), // changes position of shadow
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                                child: ClipRRect(
+                                                                                    borderRadius: BorderRadius
+                                                                                        .all(Radius
+                                                                                            .circular(
+                                                                                                5)),
+                                                                                    child: Image
+                                                                                        .network(
+                                                                                      fileimg[0],
+                                                                                      fit: BoxFit
+                                                                                          .cover,
+                                                                                    )),
+                                                                              ))
+                                                                    : Container(
+                                                                        child: Shimmer.fromColors(
+                                                                          baseColor:
+                                                                              Colors.grey[350],
+                                                                          highlightColor:
+                                                                              Colors.white,
+                                                                          child: Container(
+                                                                            height: 160,
+                                                                            width: MediaQuery.of(
+                                                                                        context)
+                                                                                    .size
+                                                                                    .width /
+                                                                                1.55,
+                                                                            decoration: BoxDecoration(
+                                                                                borderRadius:
+                                                                                    BorderRadius
+                                                                                        .circular(
+                                                                                            5),
+                                                                                color: Colors
+                                                                                    .grey[350]),
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                            onTap: () {
+                                                              Navigator.push(context,
+                                                                  MaterialPageRoute(builder: (_) {
+                                                                return DetailScreen(
+                                                                  imageCurr: fileimg[0],
+                                                                );
+                                                              }));
+                                                            },
+                                                          ),
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            Container(
                                                               child: Container(
-                                                                height: 160,
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    1.55,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                5),
-                                                                    color: Colors
-                                                                            .grey[
-                                                                        350]),
+                                                                height: 72,
+                                                                width: 80,
+                                                                child: fileimg.length >= 1
+                                                                    ? GestureDetector(
+                                                                        child: Hero(
+                                                                          tag: 'image2',
+                                                                          child: !_loading
+                                                                              ? Container(
+                                                                                  decoration:
+                                                                                      BoxDecoration(
+                                                                                    color: CupertinoColors
+                                                                                        .systemGrey4,
+                                                                                    borderRadius:
+                                                                                        BorderRadius
+                                                                                            .circular(
+                                                                                                5),
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors
+                                                                                            .black38,
+                                                                                        spreadRadius:
+                                                                                            1,
+                                                                                        blurRadius:
+                                                                                            2,
+                                                                                        offset: Offset(
+                                                                                            0,
+                                                                                            1), // changes position of shadow
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  child: ClipRRect(
+                                                                                    borderRadius: BorderRadius
+                                                                                        .all(Radius
+                                                                                            .circular(
+                                                                                                5)),
+                                                                                    child: Image
+                                                                                        .network(
+                                                                                      fileimg[1],
+                                                                                      fit: BoxFit
+                                                                                          .cover,
+                                                                                    ),
+                                                                                  ))
+                                                                              : Container(
+                                                                                  child: Shimmer
+                                                                                      .fromColors(
+                                                                                    baseColor:
+                                                                                        Colors.grey[
+                                                                                            350],
+                                                                                    highlightColor:
+                                                                                        Colors
+                                                                                            .white,
+                                                                                    child:
+                                                                                        Container(
+                                                                                      height: 72,
+                                                                                      width: 80,
+                                                                                      decoration: BoxDecoration(
+                                                                                          borderRadius:
+                                                                                              BorderRadius.circular(
+                                                                                                  5),
+                                                                                          color: Colors
+                                                                                                  .grey[
+                                                                                              350]),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                        ),
+                                                                        onTap: () {
+                                                                          Navigator.push(context,
+                                                                              MaterialPageRoute(
+                                                                                  builder: (_) {
+                                                                            return DetailScreen(
+                                                                              imageCurr: fileimg[1],
+                                                                            );
+                                                                          }));
+                                                                        },
+                                                                      )
+                                                                    : Container(
+                                                                        child: Shimmer.fromColors(
+                                                                          baseColor:
+                                                                              Colors.grey[350],
+                                                                          highlightColor:
+                                                                              Colors.white,
+                                                                          child: Container(
+                                                                            height: 72,
+                                                                            width: 80,
+                                                                            decoration: BoxDecoration(
+                                                                                borderRadius:
+                                                                                    BorderRadius
+                                                                                        .circular(
+                                                                                            5),
+                                                                                color: Colors
+                                                                                    .grey[350]),
+                                                                          ),
+                                                                        ),
+                                                                      ),
                                                               ),
                                                             ),
-                                                          )
-                                                        : Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: CupertinoColors
-                                                                  .systemGrey4,
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Container(
+                                                              child: Container(
+                                                                height: 72,
+                                                                width: 80,
+                                                                child: fileimg.length > 2
+                                                                    ? GestureDetector(
+                                                                        child: Hero(
+                                                                          tag: 'image3',
+                                                                          child: !_loading
+                                                                              ? Container(
+                                                                                  decoration:
+                                                                                      BoxDecoration(
+                                                                                    color: CupertinoColors
+                                                                                        .systemGrey4,
+                                                                                    borderRadius:
+                                                                                        BorderRadius
+                                                                                            .circular(
+                                                                                                5),
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors
+                                                                                            .black38,
+                                                                                        spreadRadius:
+                                                                                            1,
+                                                                                        blurRadius:
+                                                                                            2,
+                                                                                        offset: Offset(
+                                                                                            0,
+                                                                                            1), // changes position of shadow
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  child: ClipRRect(
+                                                                                    borderRadius: BorderRadius
+                                                                                        .all(Radius
+                                                                                            .circular(
+                                                                                                5)),
+                                                                                    child: Image
+                                                                                        .network(
+                                                                                      fileimg[2],
+                                                                                      fit: BoxFit
+                                                                                          .cover,
+                                                                                    ),
+                                                                                  ))
+                                                                              : Container(
+                                                                                  child: Shimmer
+                                                                                      .fromColors(
+                                                                                    baseColor:
+                                                                                        Colors.grey[
+                                                                                            350],
+                                                                                    highlightColor:
+                                                                                        Colors
+                                                                                            .white,
+                                                                                    child:
+                                                                                        Container(
+                                                                                      height: 72,
+                                                                                      width: 80,
+                                                                                      decoration: BoxDecoration(
+                                                                                          borderRadius:
+                                                                                              BorderRadius.circular(
+                                                                                                  5),
+                                                                                          color: Colors
+                                                                                                  .grey[
+                                                                                              350]),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                        ),
+                                                                        onTap: () {
+                                                                          Navigator.push(context,
+                                                                              MaterialPageRoute(
+                                                                                  builder: (_) {
+                                                                            return DetailScreen(
+                                                                              imageCurr: fileimg[2],
+                                                                            );
+                                                                          }));
+                                                                        },
+                                                                      )
+                                                                    : Container(
+                                                                        child: Shimmer.fromColors(
+                                                                          baseColor:
+                                                                              Colors.grey[350],
+                                                                          highlightColor:
+                                                                              Colors.white,
+                                                                          child: Container(
+                                                                            height: 72,
+                                                                            width: 80,
+                                                                            decoration: BoxDecoration(
+                                                                                borderRadius:
+                                                                                    BorderRadius
+                                                                                        .circular(
+                                                                                            5),
+                                                                                color: Colors
+                                                                                    .grey[350]),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    )
+                                                  : Container(
+                                                      child: Shimmer.fromColors(
+                                                        baseColor: Colors.grey[350],
+                                                        highlightColor: Colors.white,
+                                                        child: Container(
+                                                          height: 160,
+                                                          width: MediaQuery.of(context).size.width /
+                                                              1.55,
+                                                          decoration: BoxDecoration(
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black38,
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius: 2,
-                                                                  offset: Offset(
-                                                                      0,
-                                                                      1), // changes position of shadow
+                                                                  BorderRadius.circular(5),
+                                                              color: Colors.grey[350]),
+                                                        ),
+                                                      ),
+                                                    ),
+                                            ),
+
+                                            Divider(
+                                              indent: 24,
+                                              endIndent: 24,
+                                              color: Colors.grey,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(
+                                                  left: 24, top: 16),
+                                              child: Text("Alamat Kampus",
+                                                  style: blueFontStyle.copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  _launched = _launchInBrowser(
+                                                      urlGooglemaps);
+                                                });
+                                              },
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            1.3,
+                                                    child: Text(
+                                                      widget.campus.alamat
+                                                          .replaceAll(
+                                                              '<br>', ','),
+                                                      style: blackFontStyle3,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 4,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        right: 16),
+                                                    height: 28,
+                                                    child: Image.asset(
+                                                        'assets/locicon.png'),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(
+                                              indent: 24,
+                                              endIndent: 24,
+                                              color: Colors.grey,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(
+                                                  left: 24, top: 16),
+                                              child: Text("Transportasi",
+                                                  style: blueFontStyle.copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                            SizedBox(
+                                              height: 24,
+                                            ),
+                                            Container(
+                                              constraints: BoxConstraints(
+                                                maxHeight: double.infinity,
+                                              ),
+                                              child:
+                                                  kend == null ||
+                                                          kend.length == 0
+                                                      ? Container(
+                                                          child: Shimmer
+                                                              .fromColors(
+                                                            baseColor: Colors
+                                                                .grey[350],
+                                                            highlightColor:
+                                                                Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Container(
+                                                                  height: 48,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      48,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          350]),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 8,
+                                                                ),
+                                                                Container(
+                                                                  height: 48,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      48,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          350]),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 8,
+                                                                ),
+                                                                Container(
+                                                                  height: 48,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      48,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          350]),
                                                                 ),
                                                               ],
                                                             ),
-                                                            child: ClipRRect(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                                child: Image
-                                                                    .network(
-                                                                  fileimg[0],
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                )),
-                                                          ))
-                                                : Container(
-                                                    child: Shimmer.fromColors(
-                                                      baseColor:
-                                                          Colors.grey[350],
-                                                      highlightColor:
-                                                          Colors.white,
-                                                      child: Container(
-                                                        height: 160,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.55,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            color: Colors
-                                                                .grey[350]),
-                                                      ),
-                                                    ),
-                                                  )),
-                                        onTap: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(builder: (_) {
-                                            return DetailScreen(
-                                              imageCurr: fileimg[0],
-                                            );
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        Container(
-                                          child: Container(
-                                            height: 72,
-                                            width: 80,
-                                            child: fileimg.length >= 1
-                                                ? GestureDetector(
-                                                    child: Hero(
-                                                      tag: 'image2',
-                                                      child: !_loading
-                                                          ? Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: CupertinoColors
-                                                                    .systemGrey4,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black38,
-                                                                    spreadRadius:
-                                                                        1,
-                                                                    blurRadius:
-                                                                        2,
-                                                                    offset: Offset(
-                                                                        0,
-                                                                        1), // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                                child: Image
-                                                                    .network(
-                                                                  fileimg[1],
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ))
-                                                          : Container(
-                                                              child: Shimmer
-                                                                  .fromColors(
-                                                                baseColor:
-                                                                    Colors.grey[
-                                                                        350],
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .white,
-                                                                child:
-                                                                    Container(
-                                                                  height: 72,
-                                                                  width: 80,
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                      color: Colors
-                                                                              .grey[
-                                                                          350]),
+                                                          ),
+                                                        )
+                                                      : Column(
+                                                          children: kend
+                                                              .map<Widget>(
+                                                                  (document) {
+                                                          return ExpandablePanel(
+                                                            theme:
+                                                                const ExpandableThemeData(
+                                                              headerAlignment:
+                                                                  ExpandablePanelHeaderAlignment
+                                                                      .center,
+                                                              tapBodyToExpand:
+                                                                  true,
+                                                              tapBodyToCollapse:
+                                                                  true,
+                                                              hasIcon: false,
+                                                            ),
+                                                            header: Container(
+                                                              //  color: Color(0xFFFFCE00),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        4.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    ExpandableIcon(
+                                                                      theme:
+                                                                          const ExpandableThemeData(
+                                                                        expandIcon:
+                                                                            Icons.arrow_right,
+                                                                        collapseIcon:
+                                                                            Icons.arrow_drop_down,
+                                                                        iconColor:
+                                                                            Colors.blue,
+                                                                        iconSize:
+                                                                            24.0,
+                                                                        alignment:
+                                                                            Alignment.centerRight,
+                                                                        //iconRotationAngle: math.pi / 2,
+                                                                        iconPadding:
+                                                                            EdgeInsets.only(right: 5),
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Container(
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.of(context).size.width - 60,
+                                                                              child: Text(
+                                                                                document.angkutan,
+                                                                                //"mikrolet ",
+                                                                                style: blackFontStyle3,
+                                                                                maxLines: 2,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),
-                                                    ),
-                                                    onTap: () {
-                                                      Navigator.push(context,
-                                                          MaterialPageRoute(
-                                                              builder: (_) {
-                                                        return DetailScreen(
-                                                          imageCurr: fileimg[1],
-                                                        );
-                                                      }));
-                                                    },
-                                                  )
-                                                : Container(
-                                                    child: Shimmer.fromColors(
-                                                      baseColor:
-                                                          Colors.grey[350],
-                                                      highlightColor:
-                                                          Colors.white,
-                                                      child: Container(
-                                                        height: 72,
-                                                        width: 80,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            color: Colors
-                                                                .grey[350]),
-                                                      ),
-                                                    ),
-                                                  ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 16,
-                                        ),
-                                        Container(
-                                          child: Container(
-                                            height: 72,
-                                            width: 80,
-                                            child: fileimg.length > 2
-                                                ? GestureDetector(
-                                                    child: Hero(
-                                                      tag: 'image3',
-                                                      child: !_loading
-                                                          ? Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: CupertinoColors
-                                                                    .systemGrey4,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black38,
-                                                                    spreadRadius:
-                                                                        1,
-                                                                    blurRadius:
-                                                                        2,
-                                                                    offset: Offset(
-                                                                        0,
-                                                                        1), // changes position of shadow
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                                child: Image
-                                                                    .network(
-                                                                  fileimg[2],
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ))
-                                                          : Container(
-                                                              child: Shimmer
-                                                                  .fromColors(
-                                                                baseColor:
-                                                                    Colors.grey[
-                                                                        350],
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .white,
-                                                                child:
-                                                                    Container(
-                                                                  height: 72,
-                                                                  width: 80,
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                      color: Colors
-                                                                              .grey[
-                                                                          350]),
-                                                                ),
-                                                              ),
+                                                            expanded: Container(
+                                                              color: CupertinoColors
+                                                                  .systemGrey5,
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 24),
+                                                              child: Container(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              15),
+                                                                  margin: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              10),
+                                                                  child: Text(
+                                                                    document
+                                                                        .rute,
+                                                                    //document[0],
+                                                                    style: blackFontStyle3.copyWith(
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  )),
                                                             ),
-                                                    ),
-                                                    onTap: () {
-                                                      Navigator.push(context,
-                                                          MaterialPageRoute(
-                                                              builder: (_) {
-                                                        return DetailScreen(
-                                                          imageCurr: fileimg[2],
-                                                        );
-                                                      }));
-                                                    },
-                                                  )
-                                                : Container(
-                                                    child: Shimmer.fromColors(
-                                                      baseColor:
-                                                          Colors.grey[350],
-                                                      highlightColor:
-                                                          Colors.white,
-                                                      child: Container(
-                                                        height: 72,
-                                                        width: 80,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            color: Colors
-                                                                .grey[350]),
-                                                      ),
-                                                    ),
-                                                  ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                )
-                              : Container(
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.grey[350],
-                                    highlightColor: Colors.white,
-                                    child: Container(
-                                      height: 160,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.55,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.grey[350]),
-                                    ),
-                                  ),
-                                ),
-                        ),
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: 24, top: 16),
-                          child: Text("Alamat Kampus",
-                              style: blueFontStyle.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _launched = _launchInBrowser(urlGooglemaps);
-                            });
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(left: 16),
-                                width: MediaQuery.of(context).size.width / 1.3,
-                                child: Text(
-                                  widget.campus.alamat.replaceAll('<br>', ','),
-                                  style: blackFontStyle3,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(right: 16),
-                                height: 28,
-                                child: Image.asset('assets/locicon.png'),
-                              )
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: 24, top: 16),
-                          child: Text("Transportasi",
-                              style: blueFontStyle.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        Container(
-                          constraints: BoxConstraints(
-                            maxHeight: double.infinity,
-                          ),
-                          child: kend == null || kend.length == 0
-                              ? Container(
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.grey[350],
-                                    highlightColor: Colors.white,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 48,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              48,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Colors.grey[350]),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Container(
-                                          height: 48,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              48,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Colors.grey[350]),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Container(
-                                          height: 48,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              48,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Colors.grey[350]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : Column(
-                                  children: kend.map<Widget>((document) {
-                                  return ExpandablePanel(
-                                    theme: const ExpandableThemeData(
-                                      headerAlignment:
-                                          ExpandablePanelHeaderAlignment.center,
-                                      tapBodyToExpand: true,
-                                      tapBodyToCollapse: true,
-                                      hasIcon: false,
-                                    ),
-                                    header: Container(
-                                      //  color: Color(0xFFFFCE00),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Row(
-                                          children: [
-                                            ExpandableIcon(
-                                              theme: const ExpandableThemeData(
-                                                expandIcon: Icons.arrow_right,
-                                                collapseIcon:
-                                                    Icons.arrow_drop_down,
-                                                iconColor: Colors.blue,
-                                                iconSize: 24.0,
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                //iconRotationAngle: math.pi / 2,
-                                                iconPadding:
-                                                    EdgeInsets.only(right: 5),
-                                              ),
+                                                          );
+                                                        }).toList()),
                                             ),
-                                            Expanded(
-                                              child: Container(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width -
-                                                              60,
-                                                      child: Text(
-                                                        document.kendaraan,
-                                                        //"mikrolet ",
-                                                        style: blackFontStyle3,
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
+                                            Divider(
+                                              indent: 24,
+                                              endIndent: 24,
+                                              color: Colors.grey,
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    expanded: Container(
-                                      color: CupertinoColors.systemGrey5,
-                                      padding: EdgeInsets.only(left: 24),
-                                      child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Text(
-                                            document.jalan,
-                                            //document[0],
-                                            style: blackFontStyle3.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ),
-                                  );
-                                }).toList()),
-                        ),
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
 
-                        //list jurusan
-                        // List Jurusan
+                                            //list jurusan
+                                            // List Jurusan
 
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: 24, top: 16),
-                          child: Text("Program Studi / Jurusan yang Tersedia",
-                              style: blueFontStyle.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                        ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(
+                                                  left: 24, top: 16),
+                                              child: Text(
+                                                  "Program Studi / Jurusan yang Tersedia",
+                                                  style: blueFontStyle.copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
 
-                        Container(
+                                               Container(
                           child: dataWebJurusan_lenght == 0
                               ? Container(
                                   child: Shimmer.fromColors(
@@ -1594,16 +1590,28 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 ),
                         ),
 
-                        Divider(
-                          indent: 24,
-                          endIndent: 24,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 200,
-                        ),
-                      ],
-                    ),
+                                            Divider(
+                                              indent: 24,
+                                              endIndent: 24,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              height: 200,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
+                      ),
+                      Divider(
+                        indent: 24,
+                        endIndent: 24,
+                        color: Colors.grey,
+                      ),
+                    ]),
                   )
                 ]),
           bottomSheet: isConn == false
