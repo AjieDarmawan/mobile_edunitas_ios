@@ -25,7 +25,7 @@ class ListKampusCard extends StatefulWidget {
 class _ListKampusCardState extends State<ListKampusCard> {
   @override
   Widget build(BuildContext context) {
-    print("widget.routef= " + widget.routef);
+    //print("widget.routef= " + widget.routef);
     return GestureDetector(
       onTap: () {
         Navigator.pushReplacement(

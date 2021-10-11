@@ -90,7 +90,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       _profile,
       _visi_misi,
       urlGooglemaps,
-      gambar_youtube;
+      gambar_youtube,
+      _visi,
+      _misi;
 
   void getDetailCampus() {
     print("widget.campus.kode: " + widget.campus.kode);
@@ -103,7 +105,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         rektor = data.rektor;
         _youtube = data.linkYoutubePendek;
         _profile = data.profile;
-        _visi_misi = data.visiMisi;
+        _visi_misi = data.visiMisi.replaceAll('-*-Visi =', '').replaceAll(' -*-Misi = ', '');
+        var _vmArr = data.visiMisi.split("-*-");
+        _visi = _vmArr[1].replaceAll('-*-Visi =', '').replaceAll("Visi =", "");
+        _misi = _vmArr[2].replaceAll(' -*-Misi = ', '').replaceAll("Misi =", "");
         urlGooglemaps = data.linkPeta;
         gambar_youtube = data.gambar_youtube;
         // transp = data.transportasi;
@@ -294,24 +299,55 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     }
 
     buildCollapsed2() {
-      return Html(
-        data: _visi_misi == null || _visi_misi.length == 0
-            ? ""
-            : _visi_misi.substring(0, 250) + "...",
-        // : _profile.length < 250
-        // ? _profile.substring(0, 100) + "..."
-        // : _profile.substring(0, 250) + "...",
-        defaultTextStyle:
-            blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Text("Visi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
+          Html(
+            data: _visi_misi == null || _visi_misi.length == 0
+                ? ""
+                : _visi_misi.substring(0, 200) + "...",
+            defaultTextStyle:
+                blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+          )
+        ],
       );
+      // return Html(
+      //   data: _visi_misi == null || _visi_misi.length == 0
+      //       ? ""
+      //       : _visi_misi.substring(0, 250) + "...",
+      //   // : _profile.length < 250
+      //   // ? _profile.substring(0, 100) + "..."
+      //   // : _profile.substring(0, 250) + "...",
+      //   defaultTextStyle:
+      //       blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+      // );
     }
 
     buildExpanded2() {
-      return Html(
-        data: _visi_misi == null ? "" : _visi_misi,
-        defaultTextStyle:
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Visi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
+          Html(
+            data: _visi,
+            defaultTextStyle:
+                blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 5,),
+          Text("Misi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
+          Html(
+            data: _misi,
+            defaultTextStyle:
             blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+          ),
+        ],
       );
+      // return Html(
+      //   data: _visi_misi == null ? "" : _visi_misi,
+      //   defaultTextStyle:
+      //       blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
+      // );
     }
 
     return WillPopScope(
@@ -651,7 +687,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(left: 24, top: 16),
                         margin: EdgeInsets.only(bottom: 16),
-                        child: Text("Visi Misi",
+                        child: Text("Visi dan Misi",
                             style: blueFontStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
                       ),

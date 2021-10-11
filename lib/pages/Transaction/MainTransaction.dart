@@ -170,7 +170,9 @@ class _MainInboxState extends State<MainTransaction> {
   }
 
   Widget _tab() {
-    return DefaultTabController(
+    return globalkey == null
+        ? NonLogin()
+        : DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
@@ -195,10 +197,10 @@ class _MainInboxState extends State<MainTransaction> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => (TrasnsactionHistory(
-                                  kodecampus: datatrans[0].kode == null
-                                      ? ""
-                                      : datatrans[0].kode,
-                                ))));
+                              kodecampus: datatrans[0].kode == null
+                                  ? ""
+                                  : datatrans[0].kode,
+                            ))));
                   },
                 )
               ],
@@ -238,11 +240,11 @@ class _MainInboxState extends State<MainTransaction> {
             child: globalkey == null
                 ? NonLogin()
                 : TabBarView(
-                    children: [
-                      MainTransactionEduCampus(),
-                      MainTransactionEduDonation()
-                    ],
-                  ),
+              children: [
+                MainTransactionEduCampus(),
+                MainTransactionEduDonation()
+              ],
+            ),
           ),
         ));
   }

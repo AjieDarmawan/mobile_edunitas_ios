@@ -8,10 +8,10 @@ class Home_detail extends StatefulWidget {
 
   Home_detail(
       {this.nilaijurusan,
-      this.nilaikelas,
-      this.nilaiunitarea,
-      this.nilai,
-      this.key_enter});
+        this.nilaikelas,
+        this.nilaiunitarea,
+        this.nilai,
+        this.key_enter});
 
   @override
   _Home_detailState createState() => _Home_detailState();
@@ -36,7 +36,7 @@ class _Home_detailState extends State<Home_detail>
                 appBar: AppBar(
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10))),
+                      BorderRadius.vertical(top: Radius.circular(10))),
                   automaticallyImplyLeading: false,
                   flexibleSpace: Container(
                     padding: EdgeInsets.only(top: 16),
@@ -90,7 +90,7 @@ class _Home_detailState extends State<Home_detail>
   void searchgetListKampus() {
     Kampusview_model()
         .SearchgetKampus(
-            widget.nilaiunitarea, widget.nilaijurusan, widget.nilaikelas)
+        widget.nilaiunitarea, widget.nilaijurusan, widget.nilaikelas)
         .then((value1) {
       setState(() {
         dataSearchKampus = value1;
@@ -114,7 +114,17 @@ class _Home_detailState extends State<Home_detail>
   int _keyEnter;
   bool isConn;
 
+  void fetchfromsearch(){
+    //_hasMore = true;
+    _pageNumber = 1;
+    _error = false;
+    _loading = true;
+    _photos = [];
+    fetchPhotos();
+  }
+
   Future<void> fetchPhotos() async {
+    print("masih kebaca nich");
     try {
       final response = await http
           .get("https://dev-api.edunitas.com/list_campus2?page=$_pageNumber");
@@ -122,7 +132,9 @@ class _Home_detailState extends State<Home_detail>
       //final fetchedPhotos = PhotoModel(response.body);
 
       setState(() {
-        _hasMore = fetchedPhotos.length == _defaultPhotosPerPageCount;
+        _hasMore = fetchedPhotos.length == _defaultPhotosPerPageCount?true:false;
+        //print("llkkaiisnndajn:"+fetchedPhotos[0].total.toString());
+        //if(fetchedPhotos[0].total < _defaultPhotosPerPageCount)_hasMore=false;
         isConn = true;
         _loading = false;
         _pageNumber = _pageNumber + 1;
@@ -138,22 +150,29 @@ class _Home_detailState extends State<Home_detail>
     }
   }
 
+  var _search = false;
+  var _querrys = "";
   List<Photo> getSearchkampus(String query) {
     List<Photo> dataSearchKampus = new List();
-
+    //setState(() => _photos=[]);
     Kampusview_model().SearchgetKampusFront(query).then((value1) {
       print(value1);
       print("SearchgetKampusq= $query");
-      print("SearchgetKampus=" + value1.length.toString());
+      //print("SearchgetKampus=" + value1.length.toString());
       dataSearchKampus = value1;
       setState(() {
-        _hasMore = dataSearchKampus.length == _defaultPhotosPerPageCount;
+        _querrys = query;
+        _search = true;
+        _photos=[];
+        print("oaksoksoakdalist: "+dataSearchKampus.length.toString());
+        _hasMore = dataSearchKampus.length == _defaultPhotosPerPageCount?true:false;
+        //if(dataSearchKampus[0].total < _defaultPhotosPerPageCount)_hasMore=false;
         isConn = true;
         _loading = false;
         _pageNumber = _pageNumber + 1;
         _photos.addAll(dataSearchKampus);
       });
-      return dataSearchKampus = value1;
+      //return dataSearchKampus = value1;
     });
 
     return dataSearchKampus;
@@ -161,7 +180,7 @@ class _Home_detailState extends State<Home_detail>
 
   void getData() {
     // searchgetListKampus();
-    _hasMore = true;
+    //_hasMore = true;
     _pageNumber = 1;
     _error = false;
     _loading = true;
@@ -250,11 +269,11 @@ class _Home_detailState extends State<Home_detail>
 
   @override
   Widget build(BuildContext context) {
-    print("dataSearchKampus${dataSearchKampus.length}");
-    print("printunitarea${widget.nilaiunitarea}");
-    print("printnilai${widget.nilai}");
-
-    print("_keyenter ${widget.key_enter}, latapi ${_keyEnter}");
+    // print("dataSearchKampus${dataSearchKampus.length}");
+    // print("printunitarea${widget.nilaiunitarea}");
+    // print("printnilai${widget.nilai}");
+    //
+    // print("_keyenter ${widget.key_enter}, latapi ${_keyEnter}");
 
     return WillPopScope(
       onWillPop: _backPressed,
@@ -272,30 +291,30 @@ class _Home_detailState extends State<Home_detail>
             actions: [
               isConn == false
                   ? Container(
-                      child: Shimmer.fromColors(
-                          baseColor: Colors.grey[350],
-                          highlightColor: Colors.white,
-                          child: Icon(Icons.filter_alt)),
-                    )
+                child: Shimmer.fromColors(
+                    baseColor: Colors.grey[350],
+                    highlightColor: Colors.white,
+                    child: Icon(Icons.filter_alt)),
+              )
                   : IconButton(
-                      icon: isConn == true
-                          ? Icon(Icons.filter_alt)
-                          : Container(
-                              child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Icon(Icons.filter_alt)),
-                            ),
-                      onPressed: () {
-                        //isConn=false;
-                        //conn();
-                        Future.delayed(const Duration(milliseconds: 500), () {
-                          if (isConn == true) {
-                            //_changeZero();
-                            bottomModal(context);
-                          }
-                        });
-                      }),
+                  icon: isConn == true
+                      ? Icon(Icons.filter_alt)
+                      : Container(
+                    child: Shimmer.fromColors(
+                        baseColor: Colors.grey[350],
+                        highlightColor: Colors.white,
+                        child: Icon(Icons.filter_alt)),
+                  ),
+                  onPressed: () {
+                    //isConn=false;
+                    //conn();
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      if (isConn == true) {
+                        //_changeZero();
+                        bottomModal(context);
+                      }
+                    });
+                  }),
             ],
             title: Text("Cari Kampus"),
             // Container(
@@ -341,185 +360,184 @@ class _Home_detailState extends State<Home_detail>
           ),
           body: isConn == false
               ? Center(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: shimmerLoading()))
+              child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: shimmerLoading()))
               : _keyEnter == 1
-                  ? SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Container(
-                              height: 90,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF060E5C),
-                                    const Color(0xFF0E3C83),
-                                  ],
-                                  begin: const FractionalOffset(0.0, 1.0),
-                                  end: const FractionalOffset(1.0, 0.0),
-                                  stops: [0.0, 1.0],
-                                  tileMode: TileMode.clamp,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.8,
-                                        padding:
-                                            EdgeInsets.only(left: 16, top: 10),
-                                        child: Text(
-                                          'Program Perkuliahan Karyawan',
-                                          textAlign: TextAlign.left,
-                                          style: whiteFontStyle.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10),
-                                        ),
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.8,
-                                        padding:
-                                            EdgeInsets.only(left: 16, top: 8),
-                                        child: Text(
-                                          'Program kuliah dengan waktu yang fleksibel dengan biaya terjangkau diperuntukan bagi karyawan atau wirausaha (Kalangan Profesional)',
-                                          textAlign: TextAlign.left,
-                                          maxLines: 4,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: whiteFontStyle.copyWith(
-                                              fontSize: 10),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Flexible(
-                                    child: Container(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Image.asset(
-                                          'assets/bannerkampus.png'),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 16.0),
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey, width: 1),
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                  child: Row(children: [
-                                    Container(
-                                      padding: EdgeInsets.only(left: 8),
-                                      child: Icon(
-                                        Icons.search_outlined,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: TextFormField(
-                                        cursorColor: mainColor1,
-                                        controller: etkampussearch,
-                                        keyboardType: TextInputType.text,
-                                        //enabled: false,
-                                        decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            contentPadding: EdgeInsets.only(
-                                                left: 8, bottom: 5, top: 5, right: 10),
-                                            hintText: "Cari kampus"),
-                                        onChanged: (string) {
-                                          setState(() {
-                                            _hasMore = true;
-                                            _pageNumber = 1;
-                                            _error = false;
-                                            _loading = true;
-                                            _photos = [];
-                                            _debouncer.run(() => string != ""
-                                                ? getSearchkampus(string)
-                                                : fetchPhotos());
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(right: 10),
-                            alignment: Alignment.centerRight,
-                            child: _photos.isNotEmpty
-                                ? Row(
-                                    //crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(_photos[0].perpage.toString() +
-                                          " / "),
-                                      Text(_photos[0].total.toString())
-                                      // Text("1/"),
-                                      // Text("10")
-                                    ],
-                                  )
-                                : Text(""),
-                          ),
-                          Container(
-                            child: Container(
-                              //api kampus search
-                              child: dataSearchKampus.length == 0 ||
-                                      dataSearchKampus == null
-                                  ? Center(
-                                      child: getCampus(),
-                                    )
-                                  : ListView.builder(
-                                      itemCount: dataSearchKampus.length == 0
-                                          ? 0
-                                          : dataSearchKampus.length,
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final Photo xkampus =
-                                            dataSearchKampus[i];
-                                        return ListKampusCard(
-                                          campus: xkampus,
-                                          routef: 'HomeDetail',
-                                        );
-                                      },
-                                    ),
-                            ),
-                          ),
+              ? SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Container(
+                    height: 90,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFF060E5C),
+                          const Color(0xFF0E3C83),
                         ],
+                        begin: const FractionalOffset(0.0, 1.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp,
                       ),
-                    )
-                  : Center(
-                      child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: shimmerLoading(),
-                    ))),
+                    ),
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width:
+                              MediaQuery.of(context).size.width /
+                                  1.8,
+                              padding:
+                              EdgeInsets.only(left: 16, top: 10),
+                              child: Text(
+                                'Program Perkuliahan Karyawan',
+                                textAlign: TextAlign.left,
+                                style: whiteFontStyle.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10),
+                              ),
+                            ),
+                            Container(
+                              width:
+                              MediaQuery.of(context).size.width /
+                                  1.8,
+                              padding:
+                              EdgeInsets.only(left: 16, top: 8),
+                              child: Text(
+                                'Program kuliah dengan waktu yang fleksibel dengan biaya terjangkau diperuntukan bagi karyawan atau wirausaha (Kalangan Profesional)',
+                                textAlign: TextAlign.left,
+                                maxLines: 4,
+                                overflow: TextOverflow.ellipsis,
+                                style: whiteFontStyle.copyWith(
+                                    fontSize: 10),
+                              ),
+                            )
+                          ],
+                        ),
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.only(right: 8),
+                            child: Image.asset(
+                                'assets/bannerkampus.png'),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16.0),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 1),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Row(children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 8),
+                            child: Icon(
+                              Icons.search_outlined,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              cursorColor: mainColor1,
+                              controller: etkampussearch,
+                              keyboardType: TextInputType.text,
+                              //enabled: false,
+                              decoration: new InputDecoration(
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(
+                                      left: 8, bottom: 5, top: 5, right: 10),
+                                  hintText: "Cari kampus"),
+                              onChanged: (string) {
+                                setState(() {
+                                  _search = true;
+                                  _debouncer.run(() => getSearchkampus(string));
+                                  // _debouncer.run(() => string == ""
+                                  //     ? fetchfromsearch()
+                                  //     : getSearchkampus(string));
+                                });
+                              },
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  ),
+                ),
+                //PAGE COUNTER
+                // Container(
+                //   padding: EdgeInsets.only(right: 10),
+                //   alignment: Alignment.centerRight,
+                //   child: _photos.isNotEmpty
+                //       ? Row(
+                //           //crossAxisAlignment: CrossAxisAlignment.end,
+                //           mainAxisAlignment: MainAxisAlignment.end,
+                //           children: [
+                //             Text(_photos[0].perpage.toString() +
+                //                 " / "),
+                //             Text(_photos[0].total.toString())
+                //             // Text("1/"),
+                //             // Text("10")
+                //           ],
+                //         )
+                //       : Text(""),
+                // ),
+                Container(
+                  child: Container(
+                    child: getCampus(),
+                    //api kampus search
+                    // child: dataSearchKampus.length == 0 ||
+                    //         dataSearchKampus == null
+                    //     ? Center(
+                    //         child: getCampus(),
+                    //       )
+                    //     : ListView.builder(
+                    //         itemCount: dataSearchKampus.length == 0
+                    //             ? 0
+                    //             : dataSearchKampus.length,
+                    //         shrinkWrap: true,
+                    //         physics: NeverScrollableScrollPhysics(),
+                    //         itemBuilder: (context, i) {
+                    //           final Photo xkampus =
+                    //               dataSearchKampus[i];
+                    //           return ListKampusCard(
+                    //             campus: xkampus,
+                    //             routef: 'HomeDetail',
+                    //           );
+                    //         },
+                    //       ),
+                  ),
+                ),
+              ],
+            ),
+          )
+              : Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: shimmerLoading(),
+              ))),
     );
   }
 
@@ -528,24 +546,24 @@ class _Home_detailState extends State<Home_detail>
       if (_loading) {
         return Center(
             child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: shimmerLoading(),
-        ));
+              padding: const EdgeInsets.all(8),
+              child: shimmerLoading(),
+            ));
       } else if (_error) {
         return Center(
             child: InkWell(
-          onTap: () {
-            setState(() {
-              _loading = true;
-              _error = false;
-              fetchPhotos();
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text("Error while loading photos, tap to try agin"),
-          ),
-        ));
+              onTap: () {
+                setState(() {
+                  _loading = true;
+                  _error = false;
+                  fetchPhotos();
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text("Error while loading photos, tap to try agin"),
+              ),
+            ));
       }
     } else {
       return ListView.builder(
@@ -555,31 +573,33 @@ class _Home_detailState extends State<Home_detail>
           physics: ScrollPhysics(),
           itemCount: _photos.length + (_hasMore ? 1 : 0),
           itemBuilder: (context, index) {
-            if (index == _photos.length - _nextPageThreshold) {
-              fetchPhotos();
+            if(_search==false){
+              if (index == _photos.length - _nextPageThreshold) {
+                fetchPhotos();
+              }
             }
             if (index == _photos.length) {
               if (_error) {
                 return Center(
                     child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      _loading = true;
-                      _error = false;
-                      fetchPhotos();
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text("Error while loading photos, tap to try agin"),
-                  ),
-                ));
+                      onTap: () {
+                        setState(() {
+                          _loading = true;
+                          _error = false;
+                          fetchPhotos();
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text("Error while loading photos, tap to try agin"),
+                      ),
+                    ));
               } else {
                 return Center(
                     child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: shimmerLoading(),
-                ));
+                      padding: const EdgeInsets.all(8),
+                      child: shimmerLoading(),
+                    ));
               }
             }
             final Photo photo = _photos[index];
@@ -612,42 +632,42 @@ class _Home_detailState extends State<Home_detail>
   Widget shimmerLoading() {
     return Center(
         child: Padding(
-      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-      child: Container(
-        child: Shimmer.fromColors(
-          baseColor: Colors.grey[350],
-          highlightColor: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[350])),
-              SizedBox(
-                height: 20,
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+          child: Container(
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey[350],
+              highlightColor: Colors.white,
+              child: Column(
+                children: [
+                  Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[350])),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[350])),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[350])),
+                ],
               ),
-              Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[350])),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[350])),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }
 
