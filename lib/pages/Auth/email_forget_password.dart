@@ -174,14 +174,27 @@ class _Email_forgetPasswordState extends State<Email_forgetPassword> {
             children: <Widget>[
               SizedBox(height: 96),
               Container(
-                  padding: EdgeInsets.only(left: 24, bottom: 8),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Lupa Kata Sandi",
-                    textAlign: TextAlign.left,
-                    style: blueFontStyle.copyWith(
-                        fontSize: 18, fontWeight: FontWeight.w800),
-                  )),
+                padding: EdgeInsets.only(left: 19, bottom: 8),
+                child: Row(
+                  children: [
+                    InkWell(
+                      child: Icon(Icons.arrow_back_ios, color: mainColor1,),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(left: 5),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Lupa Kata Sandi",
+                          textAlign: TextAlign.left,
+                          style: blueFontStyle.copyWith(
+                              fontSize: 18, fontWeight: FontWeight.w800),
+                        )),
+                  ],
+                ),
+              ),
               SizedBox(height: 150),
               Container(
                 child: Center(

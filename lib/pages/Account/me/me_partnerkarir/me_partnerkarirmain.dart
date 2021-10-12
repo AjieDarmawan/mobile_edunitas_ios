@@ -63,7 +63,7 @@ class _KarirMainState extends State<MePartnerKarir> {
     //print("email${widget.email}");
     //print("_pageNumber${_pageNumber}");
     return WillPopScope(
-      onWillPop: _onWillpop,
+      //onWillPop: _onWillpop,
       child: Scaffold(
         appBar: AppBar(
             backwardsCompatibility: false,

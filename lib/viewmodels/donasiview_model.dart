@@ -143,6 +143,7 @@ class Donasiview_model {
   }
 
   Future<List<DonasiMePatner>> me_patner(String keycode) async {
+    print("kk: "+keycode);
     try {
       final hasil = await http.post(Uri.parse(ConstanUrl().baseUrl + "me_patner"), body: {
         'keycode': keycode,

@@ -74,7 +74,7 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

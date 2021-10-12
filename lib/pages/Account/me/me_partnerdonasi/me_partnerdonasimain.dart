@@ -55,6 +55,13 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
     ));
   }
 
+  var _alamat = "";
+  var _nama = "";
+  var _email = "";
+  var _noHp = "";
+  var _medsos = "";
+  var lenght = 0;
+
   var datadonasi = new List();
   String image_profile;
   void getListDonasi() {
@@ -62,9 +69,13 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
       //handled
       setState(() {
         datadonasi = value1 == null ? null : value1;
-        image_profile =
-            widget.data_me.foto == null ? null : widget.data_me.foto;
-        //lenght = datadonasi == null ? 0 : 1; //is this even list
+        image_profile = widget.data_me.foto == null ? null : widget.data_me.foto;
+        _alamat = widget.data_me.alamat!=null?widget.data_me.alamat:"";
+        _nama = widget.data_me.nama!=null?widget.data_me.nama:"";
+        _email = widget.data_me.email!=null?widget.data_me.email:"";
+        _noHp = widget.data_me.noHp!=null?widget.data_me.noHp:"";
+        _medsos = widget.data_me.medsos!=null?widget.data_me.medsos:"";
+        lenght = datadonasi == null ? 0 : 1;
       });
     }).catchError((erro) {
       setState(() {
@@ -151,19 +162,19 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.data_me.nama,
+                            _nama,
                             style: blueFontStyle,
                             overflow: TextOverflow.clip,
                             maxLines: 1,
                           ),
                           Text(
-                            widget.data_me.email,
+                            _email,
                             style: blackFontStyle3,
                             overflow: TextOverflow.clip,
                             maxLines: 1,
                           ),
                           Text(
-                            widget.data_me.noHp,
+                            _noHp,
                             style: blackFontStyle3,
                             overflow: TextOverflow.clip,
                             maxLines: 1,
@@ -213,7 +224,7 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
                       Text('Alamat :'),
                       Expanded(
                         child: Text(
-                          widget.data_me.alamat,
+                          _alamat,
                           style: blueFontStyle,
                           textAlign: TextAlign.right,
                           overflow: TextOverflow.ellipsis,
@@ -229,7 +240,7 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(''),
-                      Text(widget.data_me.medsos),
+                      Text(_medsos),
                     ],
                   )
                 ],
@@ -274,13 +285,13 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
               ),
             ),
              Container(
-              child: datadonasi.length == 0
+              child: lenght == 0
                   ? shimmerLoading()
                   : ListView.builder(
                       padding: EdgeInsets.only(bottom: 16),
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: datadonasi.length,
+                      itemCount: lenght,
                       itemBuilder: (context, index) {
                         var _konten = datadonasi[index];
                         double _persen = double.parse("0." +
