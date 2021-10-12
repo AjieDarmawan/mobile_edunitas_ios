@@ -1186,7 +1186,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
                                 // return Container(child: Center(child: Terpopuler(logo : xpopuler.logo)));
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>

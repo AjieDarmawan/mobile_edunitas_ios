@@ -169,16 +169,16 @@ class _MainAgensiState extends State<MainAgensi> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        if (!_onSyarat) {
-          return Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Navigation_bottom()),
-          );
-        } else {
-          return Navigator.of(context).maybePop();
-        }
-      },
+      // onWillPop: () {
+      //   if (!_onSyarat) {
+      //     return Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => Navigation_bottom()),
+      //     );
+      //   } else {
+      //     return Navigator.of(context).maybePop();
+      //   }
+      // },
       child: Scaffold(
           //backgroundColor: globalkey == null?Colors.white:Color(0xFF8DBEE6),
           backgroundColor: Colors.white,

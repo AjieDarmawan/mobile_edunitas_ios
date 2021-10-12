@@ -168,7 +168,7 @@ class _BeritatTabState extends State<BeritatTab> {
     print("valketegori${valketegori}");
     getedu2(valketegori);
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(

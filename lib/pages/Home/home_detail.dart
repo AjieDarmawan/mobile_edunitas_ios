@@ -276,7 +276,7 @@ class _Home_detailState extends State<Home_detail>
     // print("_keyenter ${widget.key_enter}, latapi ${_keyEnter}");
 
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
           appBar: AppBar(
             backwardsCompatibility: false,
@@ -284,10 +284,10 @@ class _Home_detailState extends State<Home_detail>
               statusBarIconBrightness: Brightness.light,
               statusBarColor: Colors.transparent,
             ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: _backPressed,
-            ),
+            // leading: IconButton(
+            //   icon: Icon(Icons.arrow_back, color: Colors.white),
+            //   onPressed: _backPressed,
+            // ),
             actions: [
               isConn == false
                   ? Container(

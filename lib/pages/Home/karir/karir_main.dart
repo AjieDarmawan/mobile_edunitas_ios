@@ -103,7 +103,7 @@ class _KarirMainState extends State<KarirMain> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onWillpop,
+      //onWillPop: _onWillpop,
       child: Scaffold(
         appBar: AppBar(
             backwardsCompatibility: false,

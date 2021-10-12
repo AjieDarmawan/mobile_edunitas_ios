@@ -119,7 +119,7 @@ class _MenuHomeState extends State<MenuHome> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         (PartnerKampus_Main())))
-                            : Navigator.pushReplacement(
+                            : Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => (SingkronPartner(
@@ -210,7 +210,7 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-agent.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (MainAgensi())));
@@ -243,7 +243,7 @@ class _MenuHomeState extends State<MenuHome> {
                       onPressed: () => setState(() {
                         // _launched = _launchInBrowser(
                         //     'https://edunitas.com/educareer/carilowongan/Full-Time/semua-wilayah/semua-pendidikan/semua-spesialisasi');
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => (KarirMain())));
@@ -367,7 +367,7 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-promotion.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (PromosiTab(
@@ -398,7 +398,7 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-news.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (BeritatTab(

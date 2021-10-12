@@ -131,7 +131,7 @@ class _PromosiTabState extends State<PromosiTab> {
     print("datacategori${dataedu.length}");
     getedu2(valketegori);
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
           backgroundColor: CupertinoColors.white,
           appBar: AppBar(
