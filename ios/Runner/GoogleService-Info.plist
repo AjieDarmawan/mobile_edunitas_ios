@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>367666571945-lb8a8hksl5trsvrip93eb7qsekubf8ev.apps.googleusercontent.com</string>
+	<string>237634568216-agevgaf6babhej1ckalq97rkb7ffcgdo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.367666571945-lb8a8hksl5trsvrip93eb7qsekubf8ev</string>
+	<string>com.googleusercontent.apps.237634568216-agevgaf6babhej1ckalq97rkb7ffcgdo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCxnV_i_7UQ_LFaEwyIdfRyO7VHRsvNkas</string>
+	<string>AIzaSyAu0KkfwX_FOPKoTHJnBmmE4xPMVW7kxnA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>367666571945</string>
+	<string>237634568216</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.iosEdunitas</string>
 	<key>PROJECT_ID</key>
-	<string>edunitas-mobile-b3d01</string>
+	<string>edunitas-mobile-ios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>edunitas-mobile-b3d01.appspot.com</string>
+	<string>edunitas-mobile-ios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:367666571945:ios:e7a07d127bd940785b97b8</string>
+	<string>1:237634568216:ios:c4eaf545354e9361ec436d</string>
 </dict>
 </plist>
