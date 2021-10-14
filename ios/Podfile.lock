@@ -107,8 +107,8 @@ PODS:
     - Flutter
   - platform_device_id (0.0.1):
     - Flutter
-  - PromisesObjC (1.2.12)
-  - Protobuf (3.18.0)
+  - PromisesObjC (1.2.10)
+  - Protobuf (3.13.0)
   - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
@@ -212,8 +212,8 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   platform_device_id: 81b3e2993881f87d0c82ef151dc274df4869aef5
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Protobuf: 1a37ebea1338949e9ac35a3f06e80b3f536eec8d
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
