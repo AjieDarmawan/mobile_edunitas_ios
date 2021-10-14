@@ -90,9 +90,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       _profile,
       _visi_misi,
       urlGooglemaps,
-      gambar_youtube,
-      _visi,
-      _misi;
+      gambar_youtube;
 
   void getDetailCampus() {
     print("widget.campus.kode: " + widget.campus.kode);
@@ -105,10 +103,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         rektor = data.rektor;
         _youtube = data.linkYoutubePendek;
         _profile = data.profile;
-        _visi_misi = data.visiMisi.replaceAll('-*-Visi =', '').replaceAll(' -*-Misi = ', '');
-        var _vmArr = data.visiMisi.split("-*-");
-        _visi = _vmArr[1].replaceAll('-*-Visi =', '').replaceAll("Visi =", "");
-        _misi = _vmArr[2].replaceAll(' -*-Misi = ', '').replaceAll("Misi =", "");
+        _visi_misi = data.visiMisi
+            .replaceAll('-*-Visi =', '')
+            .replaceAll(' -*-Misi = ', '');
         urlGooglemaps = data.linkPeta;
         gambar_youtube = data.gambar_youtube;
         // transp = data.transportasi;
@@ -299,55 +296,24 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     }
 
     buildCollapsed2() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        Text("Visi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
-          Html(
-            data: _visi_misi == null || _visi_misi.length == 0
-                ? ""
-                : _visi_misi.substring(0, 200) + "...",
-            defaultTextStyle:
-                blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
-          )
-        ],
+      return Html(
+        data: _visi_misi == null || _visi_misi.length == 0
+            ? ""
+            : _visi_misi.substring(0, 250) + "...",
+        // : _profile.length < 250
+        // ? _profile.substring(0, 100) + "..."
+        // : _profile.substring(0, 250) + "...",
+        defaultTextStyle:
+            blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
       );
-      // return Html(
-      //   data: _visi_misi == null || _visi_misi.length == 0
-      //       ? ""
-      //       : _visi_misi.substring(0, 250) + "...",
-      //   // : _profile.length < 250
-      //   // ? _profile.substring(0, 100) + "..."
-      //   // : _profile.substring(0, 250) + "...",
-      //   defaultTextStyle:
-      //       blackFontStyle1.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
-      // );
     }
 
     buildExpanded2() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Visi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
-          Html(
-            data: _visi,
-            defaultTextStyle:
-                blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
-          ),
-          SizedBox(height: 5,),
-          Text("Misi:", style: blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),),
-          Html(
-            data: _misi,
-            defaultTextStyle:
+      return Html(
+        data: _visi_misi == null ? "" : _visi_misi,
+        defaultTextStyle:
             blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
-          ),
-        ],
       );
-      // return Html(
-      //   data: _visi_misi == null ? "" : _visi_misi,
-      //   defaultTextStyle:
-      //       blackFontStyle1.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
-      // );
     }
 
     return WillPopScope(
@@ -483,13 +449,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         },
                       )),
                   SliverToBoxAdapter(
-                    child: Column(children: [
-                      // body isinya disini
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 8, right: 8, top: 10),
                           height: 79,
                           width: double.infinity,
                           child: Row(
@@ -542,802 +505,717 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      rektor_jabatan.toString() == null
-                                          ? ""
-                                          : rektor_jabatan.toString(),
-                                      style: blackFontStyle1.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.start,
-                                    ),
+                                    rektor_jabatan == null
+                                        ? Container(
+                                            child: Shimmer.fromColors(
+                                              baseColor: Colors.grey[350],
+                                              highlightColor: Colors.white,
+                                              child: Container(
+                                                height: 10,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: Colors.grey[350]),
+                                              ),
+                                            ),
+                                          )
+                                        : Text(
+                                            rektor_jabatan == null
+                                                ? ""
+                                                : rektor_jabatan.toString(),
+                                            style: blackFontStyle1.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal),
+                                            textAlign: TextAlign.start,
+                                          ),
                                     SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      rektor == null ? "" : rektor,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.clip,
-                                      style: blueFontStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.start,
-                                    ),
+                                    rektor == null
+                                        ? Container(
+                                            child: Shimmer.fromColors(
+                                              baseColor: Colors.grey[350],
+                                              highlightColor: Colors.white,
+                                              child: Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 4),
+                                                height: 16,
+                                                width: 150,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: Colors.grey[350]),
+                                              ),
+                                            ),
+                                          )
+                                        : Text(
+                                            rektor == null ? "" : rektor,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.clip,
+                                            style: blueFontStyle.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.start,
+                                          ),
                                   ],
                                 ),
                               ),
                             ],
-                          )),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-
-                      _youtube != ''
-                          ? Container(
-                              padding: EdgeInsets.all(16),
-                              width: double.infinity,
-                              height: 210,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: GestureDetector(
-                                  onTap: () => setState(() {
-                                    //_launched = _launchInBrowser(toLaunch);
-                                  }),
-                                  child: Container(
-                                    color: CupertinoColors.systemGrey4,
-                                    child: Stack(
-                                      children: [
-                                        Image.network(
-                                          'https://img.youtube.com/vi/${gambar_youtube}/0.jpg',
-                                          //gambar_youtube,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        Center(
-                                            child: Stack(
-                                          children: [
-                                            Icon(
-                                              Icons.play_arrow,
-                                              color: Colors.white,
-                                              size: 80,
-                                            ),
-                                            Icon(
-                                              Icons.play_circle_fill,
-                                              color: Colors.red,
-                                              size: 80,
-                                            ),
-                                          ],
-                                        ))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                padding: EdgeInsets.all(16),
-                                child: Text(
-                                  "Profil",
-                                  style: blueFontStyleBold,
-                                ),
-                              ),
-                            ),
-
-                      Container(
-                        child: _profile == null
-                            ? Text("")
-                            : ExpandableNotifier(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16, right: 16, bottom: 10),
-                                  child: ScrollOnExpand(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expandable(
-                                          collapsed: buildCollapsed1(),
-                                          expanded: buildExpanded1(),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Builder(
-                                              builder: (context) {
-                                                var controller =
-                                                    ExpandableController.of(
-                                                        context);
-                                                return TextButton(
-                                                  child: Text(
-                                                    controller.expanded
-                                                        ? "Sembunyikan"
-                                                        : "Baca Selengkapnya",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .button
-                                                        .copyWith(
-                                                            color: mainColor1),
-                                                  ),
-                                                  onPressed: () {
-                                                    controller.toggle();
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      ),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 24, top: 16),
-                        margin: EdgeInsets.only(bottom: 16),
-                        child: Text("Visi dan Misi",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                        child: _profile == null
-                            ? Text("")
-                            : ExpandableNotifier(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16, right: 16, bottom: 10),
-                                  child: ScrollOnExpand(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expandable(
-                                          collapsed: buildCollapsed2(),
-                                          expanded: buildExpanded2(),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Builder(
-                                              builder: (context) {
-                                                var controller =
-                                                    ExpandableController.of(
-                                                        context);
-                                                return TextButton(
-                                                  child: Text(
-                                                    controller.expanded
-                                                        ? "Sembunyikan"
-                                                        : "Baca Selengkapnya",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .button
-                                                        .copyWith(
-                                                            color: mainColor1),
-                                                  ),
-                                                  onPressed: () {
-                                                    controller.toggle();
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      ),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 24, top: 16),
-                        child: Text("Galeri Kampus",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.bold)),
-                      ),
-
-                      Container(
-                        padding: EdgeInsets.all(16),
-                        child: fileimg.length >= 0
-                            ? Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 160,
-                                    width: MediaQuery.of(context).size.width /
-                                        1.55,
-                                    child: GestureDetector(
-                                      child: Hero(
-                                          tag: 'image1',
-                                          child: !_loading
-                                              ? Container(
-                                                  child: fileimg.length == 0
-                                                      ? Container(
-                                                          child: Shimmer
-                                                              .fromColors(
-                                                            baseColor: Colors
-                                                                .grey[350],
-                                                            highlightColor:
-                                                                Colors.white,
-                                                            child: Container(
-                                                              height: 160,
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  1.55,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                  color: Colors
-                                                                          .grey[
-                                                                      350]),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      : Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color:
-                                                                CupertinoColors
-                                                                    .systemGrey4,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black38,
-                                                                spreadRadius: 1,
-                                                                blurRadius: 2,
-                                                                offset: Offset(
-                                                                    0,
-                                                                    1), // changes position of shadow
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
-                                                              child:
-                                                                  Image.network(
-                                                                fileimg[0],
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              )),
-                                                        ))
-                                              : Container(
-                                                  child: Shimmer.fromColors(
-                                                    baseColor: Colors.grey[350],
-                                                    highlightColor:
-                                                        Colors.white,
-                                                    child: Container(
-                                                      height: 160,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              1.55,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          color:
-                                                              Colors.grey[350]),
-                                                    ),
-                                                  ),
-                                                )),
-                                      onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder: (_) {
-                                          return DetailScreen(
-                                            imageCurr: fileimg[0],
-                                          );
-                                        }));
-                                      },
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        child: Container(
-                                          height: 72,
-                                          width: 80,
-                                          child: fileimg.length >= 1
-                                              ? GestureDetector(
-                                                  child: Hero(
-                                                    tag: 'image2',
-                                                    child: !_loading
-                                                        ? Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: CupertinoColors
-                                                                  .systemGrey4,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black38,
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius: 2,
-                                                                  offset: Offset(
-                                                                      0,
-                                                                      1), // changes position of shadow
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
-                                                              child:
-                                                                  Image.network(
-                                                                fileimg[1],
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ))
-                                                        : Container(
-                                                            child: Shimmer
-                                                                .fromColors(
-                                                              baseColor: Colors
-                                                                  .grey[350],
-                                                              highlightColor:
-                                                                  Colors.white,
-                                                              child: Container(
-                                                                height: 72,
-                                                                width: 80,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                5),
-                                                                    color: Colors
-                                                                            .grey[
-                                                                        350]),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                  ),
-                                                  onTap: () {
-                                                    Navigator.push(context,
-                                                        MaterialPageRoute(
-                                                            builder: (_) {
-                                                      return DetailScreen(
-                                                        imageCurr: fileimg[1],
-                                                      );
-                                                    }));
-                                                  },
-                                                )
-                                              : Container(
-                                                  child: Shimmer.fromColors(
-                                                    baseColor: Colors.grey[350],
-                                                    highlightColor:
-                                                        Colors.white,
-                                                    child: Container(
-                                                      height: 72,
-                                                      width: 80,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          color:
-                                                              Colors.grey[350]),
-                                                    ),
-                                                  ),
-                                                ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Container(
-                                        child: Container(
-                                          height: 72,
-                                          width: 80,
-                                          child: fileimg.length > 2
-                                              ? GestureDetector(
-                                                  child: Hero(
-                                                    tag: 'image3',
-                                                    child: !_loading
-                                                        ? Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: CupertinoColors
-                                                                  .systemGrey4,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black38,
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius: 2,
-                                                                  offset: Offset(
-                                                                      0,
-                                                                      1), // changes position of shadow
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
-                                                              child:
-                                                                  Image.network(
-                                                                fileimg[2],
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ))
-                                                        : Container(
-                                                            child: Shimmer
-                                                                .fromColors(
-                                                              baseColor: Colors
-                                                                  .grey[350],
-                                                              highlightColor:
-                                                                  Colors.white,
-                                                              child: Container(
-                                                                height: 72,
-                                                                width: 80,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                5),
-                                                                    color: Colors
-                                                                            .grey[
-                                                                        350]),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                  ),
-                                                  onTap: () {
-                                                    Navigator.push(context,
-                                                        MaterialPageRoute(
-                                                            builder: (_) {
-                                                      return DetailScreen(
-                                                        imageCurr: fileimg[2],
-                                                      );
-                                                    }));
-                                                  },
-                                                )
-                                              : Container(
-                                                  child: Shimmer.fromColors(
-                                                    baseColor: Colors.grey[350],
-                                                    highlightColor:
-                                                        Colors.white,
-                                                    child: Container(
-                                                      height: 72,
-                                                      width: 80,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          color:
-                                                              Colors.grey[350]),
-                                                    ),
-                                                  ),
-                                                ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            : Container(
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                    height: 160,
-                                    width: MediaQuery.of(context).size.width /
-                                        1.55,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: Colors.grey[350]),
-                                  ),
-                                ),
-                              ),
-                      ),
-
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 24, top: 16),
-                        child: Text("Alamat Kampus",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.bold)),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _launched = _launchInBrowser(urlGooglemaps);
-                          });
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(left: 16),
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              child: Text(
-                                widget.campus.alamat.replaceAll('<br>', ','),
-                                style: blackFontStyle3,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 4,
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right: 16),
-                              height: 28,
-                              child: Image.asset('assets/locicon.png'),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 24, top: 16),
-                        child: Text("Transportasi",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.bold)),
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Container(
-                        constraints: BoxConstraints(
-                          maxHeight: double.infinity,
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
                         ),
-                        child: kend == null || kend.length == 0
+                        _youtube != ''
                             ? Container(
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
+                                padding: EdgeInsets.all(16),
+                                width: double.infinity,
+                                height: 230,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: GestureDetector(
+                                    onTap: () => setState(() {
+                                      //_launched = _launchInBrowser(toLaunch);
+                                    }),
+                                    child: Container(
+                                      color: CupertinoColors.systemGrey4,
+                                      child: Stack(
+                                        children: [
+                                          Image.network(
+                                            'https://img.youtube.com/vi/${gambar_youtube}/0.jpg',
+                                            //gambar_youtube,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Center(
+                                              child: Stack(
+                                            children: [
+                                              Icon(
+                                                Icons.play_arrow,
+                                                color: Colors.white,
+                                                size: 80,
+                                              ),
+                                              Icon(
+                                                Icons.play_circle_fill,
+                                                color: Colors.red,
+                                                size: 80,
+                                              ),
+                                            ],
+                                          ))
+                                        ],
                                       ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               )
-                            : Column(
-                                children: kend.map<Widget>((document) {
-                                return ExpandablePanel(
-                                  theme: const ExpandableThemeData(
-                                    headerAlignment:
-                                        ExpandablePanelHeaderAlignment.center,
-                                    tapBodyToExpand: true,
-                                    tapBodyToCollapse: true,
-                                    hasIcon: false,
+                            : Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.all(16),
+                                  child: Text(
+                                    "Profil",
+                                    style: blueFontStyleBold,
                                   ),
-                                  header: Container(
-                                    //  color: Color(0xFFFFCE00),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Row(
-                                        children: [
-                                          ExpandableIcon(
-                                            theme: const ExpandableThemeData(
-                                              expandIcon: Icons.arrow_right,
-                                              collapseIcon:
-                                                  Icons.arrow_drop_down,
-                                              iconColor: Colors.blue,
-                                              iconSize: 24.0,
-                                              alignment: Alignment.centerRight,
-                                              //iconRotationAngle: math.pi / 2,
-                                              iconPadding:
-                                                  EdgeInsets.only(right: 5),
-                                            ),
+                                ),
+                              ),
+                        Container(
+                          child: _profile == null
+                              ? Text("")
+                              : ExpandableNotifier(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, bottom: 10),
+                                    child: ScrollOnExpand(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Expandable(
+                                            collapsed: buildCollapsed1(),
+                                            expanded: buildExpanded1(),
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width -
-                                                            60,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Builder(
+                                                builder: (context) {
+                                                  var controller =
+                                                      ExpandableController.of(
+                                                          context);
+                                                  return TextButton(
                                                     child: Text(
-                                                      document.angkutan,
-                                                      //"mikrolet ",
-                                                      style: blackFontStyle3,
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                                      controller.expanded
+                                                          ? "Sembunyikan"
+                                                          : "Baca Selengkapnya",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .button
+                                                          .copyWith(
+                                                              color:
+                                                                  mainColor1),
                                                     ),
-                                                  )
-                                                ],
+                                                    onPressed: () {
+                                                      controller.toggle();
+                                                    },
+                                                  );
+                                                },
                                               ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                  expanded: Container(
-                                    color: CupertinoColors.systemGrey5,
-                                    padding: EdgeInsets.only(left: 24),
-                                    child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        child: Text(
-                                          document.rute,
-                                          //document[0],
-                                          style: blackFontStyle3.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
-                                );
-                              }).toList()),
-                      ),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-
-                      //list jurusan
-                      // List Jurusan
-
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 24, top: 16),
-                        child: Text("Program Studi / Jurusan yang Tersedia",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.bold)),
-                      ),
-
-                      Container(
-                        child: dataWebJurusan_lenght == 0
+                                ),
+                        ),
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 24, top: 16),
+                          margin: EdgeInsets.only(bottom: 16),
+                          child: Text("Visi Misi",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                        ),
+                        _profile == null
                             ? Container(
-                                margin: EdgeInsets.only(top: 24),
+                                alignment: Alignment.topLeft,
                                 child: Shimmer.fromColors(
                                   baseColor: Colors.grey[350],
                                   highlightColor: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        height: 48,
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.grey[350]),
-                                      ),
-                                    ],
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(20, 4, 0, 16),
+                                    height: 24,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: Colors.grey[350]),
                                   ),
                                 ),
                               )
-                            : ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: dataWebJurusan_lenght,
-                                itemBuilder:
-                                    (BuildContext context, int indexsatu) {
-                                  final xweb = dataWebJurusan[indexsatu];
+                            : Container(
+                                child: _profile == null
+                                    ? Text("")
+                                    : ExpandableNotifier(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 16, right: 16, bottom: 10),
+                                          child: ScrollOnExpand(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Expandable(
+                                                  collapsed: buildCollapsed2(),
+                                                  expanded: buildExpanded2(),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Builder(
+                                                      builder: (context) {
+                                                        var controller =
+                                                            ExpandableController
+                                                                .of(context);
+                                                        return TextButton(
+                                                          child: Text(
+                                                            controller.expanded
+                                                                ? "Sembunyikan"
+                                                                : "Baca Selengkapnya",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .button
+                                                                .copyWith(
+                                                                    color:
+                                                                        mainColor1),
+                                                          ),
+                                                          onPressed: () {
+                                                            controller.toggle();
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ),
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 24, top: 16),
+                          child: Text("Galeri Kampus",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          child: fileimg.length >= 0
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 160,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.55,
+                                      child: GestureDetector(
+                                        child: Hero(
+                                            tag: 'image1',
+                                            child: !_loading
+                                                ? Container(
+                                                    child: fileimg.length == 0
+                                                        ? Container(
+                                                            child: Shimmer
+                                                                .fromColors(
+                                                              baseColor: Colors
+                                                                  .grey[350],
+                                                              highlightColor:
+                                                                  Colors.white,
+                                                              child: Container(
+                                                                height: 160,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    1.55,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                5),
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        350]),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        : Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: CupertinoColors
+                                                                  .systemGrey4,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black38,
+                                                                  spreadRadius:
+                                                                      1,
+                                                                  blurRadius: 2,
+                                                                  offset: Offset(
+                                                                      0,
+                                                                      1), // changes position of shadow
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: ClipRRect(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            5)),
+                                                                child: Image
+                                                                    .network(
+                                                                  fileimg[0],
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                )),
+                                                          ))
+                                                : Container(
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[350],
+                                                      highlightColor:
+                                                          Colors.white,
+                                                      child: Container(
+                                                        height: 160,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.55,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            color: Colors
+                                                                .grey[350]),
+                                                      ),
+                                                    ),
+                                                  )),
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder: (_) {
+                                            return DetailScreen(
+                                              imageCurr: fileimg[0],
+                                            );
+                                          }));
+                                        },
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          child: Container(
+                                            height: 72,
+                                            width: 80,
+                                            child: fileimg.length >= 1
+                                                ? GestureDetector(
+                                                    child: Hero(
+                                                      tag: 'image2',
+                                                      child: !_loading
+                                                          ? Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: CupertinoColors
+                                                                    .systemGrey4,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Colors
+                                                                        .black38,
+                                                                    spreadRadius:
+                                                                        1,
+                                                                    blurRadius:
+                                                                        2,
+                                                                    offset: Offset(
+                                                                        0,
+                                                                        1), // changes position of shadow
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            5)),
+                                                                child: Image
+                                                                    .network(
+                                                                  fileimg[1],
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ))
+                                                          : Container(
+                                                              child: Shimmer
+                                                                  .fromColors(
+                                                                baseColor:
+                                                                    Colors.grey[
+                                                                        350],
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .white,
+                                                                child:
+                                                                    Container(
+                                                                  height: 72,
+                                                                  width: 80,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          350]),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                    ),
+                                                    onTap: () {
+                                                      Navigator.push(context,
+                                                          MaterialPageRoute(
+                                                              builder: (_) {
+                                                        return DetailScreen(
+                                                          imageCurr: fileimg[1],
+                                                        );
+                                                      }));
+                                                    },
+                                                  )
+                                                : Container(
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[350],
+                                                      highlightColor:
+                                                          Colors.white,
+                                                      child: Container(
+                                                        height: 72,
+                                                        width: 80,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            color: Colors
+                                                                .grey[350]),
+                                                      ),
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Container(
+                                          child: Container(
+                                            height: 72,
+                                            width: 80,
+                                            child: fileimg.length > 2
+                                                ? GestureDetector(
+                                                    child: Hero(
+                                                      tag: 'image3',
+                                                      child: !_loading
+                                                          ? Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: CupertinoColors
+                                                                    .systemGrey4,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Colors
+                                                                        .black38,
+                                                                    spreadRadius:
+                                                                        1,
+                                                                    blurRadius:
+                                                                        2,
+                                                                    offset: Offset(
+                                                                        0,
+                                                                        1), // changes position of shadow
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            5)),
+                                                                child: Image
+                                                                    .network(
+                                                                  fileimg[2],
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ))
+                                                          : Container(
+                                                              child: Shimmer
+                                                                  .fromColors(
+                                                                baseColor:
+                                                                    Colors.grey[
+                                                                        350],
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .white,
+                                                                child:
+                                                                    Container(
+                                                                  height: 72,
+                                                                  width: 80,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          350]),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                    ),
+                                                    onTap: () {
+                                                      Navigator.push(context,
+                                                          MaterialPageRoute(
+                                                              builder: (_) {
+                                                        return DetailScreen(
+                                                          imageCurr: fileimg[2],
+                                                        );
+                                                      }));
+                                                    },
+                                                  )
+                                                : Container(
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[350],
+                                                      highlightColor:
+                                                          Colors.white,
+                                                      child: Container(
+                                                        height: 72,
+                                                        width: 80,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            color: Colors
+                                                                .grey[350]),
+                                                      ),
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              : Container(
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[350],
+                                    highlightColor: Colors.white,
+                                    child: Container(
+                                      height: 160,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.55,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.grey[350]),
+                                    ),
+                                  ),
+                                ),
+                        ),
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 24, top: 16),
+                          child: Text("Alamat Kampus",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _launched = _launchInBrowser(urlGooglemaps);
+                            });
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(left: 16),
+                                width: MediaQuery.of(context).size.width / 1.3,
+                                child: Text(
+                                  widget.campus.alamat.replaceAll('<br>', ','),
+                                  style: blackFontStyle3,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 4,
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(right: 16),
+                                height: 28,
+                                child: Image.asset('assets/locicon.png'),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 24, top: 16),
+                          child: Text("Transportasi",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: double.infinity,
+                          ),
+                          child: kend == null || kend.length == 0
+                              ? Container(
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[350],
+                                    highlightColor: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : Column(
+                                  children: kend.map<Widget>((document) {
                                   return ExpandablePanel(
                                     theme: const ExpandableThemeData(
                                       headerAlignment:
@@ -1374,52 +1252,20 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                           .spaceBetween,
                                                   children: [
                                                     Container(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width -
-                                                            60,
-                                                        child: Flexible(
-                                                          child: Container(
-                                                            child: Text(
-                                                              "${xweb.label}",
-                                                              style: blackFontStyle3
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          14),
-                                                            ),
-                                                          ),
-                                                        )
-
-                                                        // child: Row(
-                                                        //   mainAxisAlignment:
-                                                        //       MainAxisAlignment
-                                                        //           .spaceBetween,
-                                                        //   children: [
-                                                        //     Flexible(
-                                                        //         child: Container(
-                                                        //       child: Text(
-                                                        //         "${xweb.label}",
-                                                        //         style: blackFontStyle3
-                                                        //             .copyWith(
-                                                        //                 fontSize:
-                                                        //                     14),
-                                                        //       ),
-                                                        //     )),
-                                                        //     Flexible(
-                                                        //         child: Container(
-                                                        //       child: Text(
-                                                        //         "",
-                                                        //         // "${datSipemaByIndex.detail.lulusan}",
-                                                        //         style: blackFontStyle3
-                                                        //             .copyWith(
-                                                        //                 fontSize:
-                                                        //                     12),
-                                                        //       ),
-                                                        //     )),
-                                                        //   ],
-                                                        // ),
-                                                        )
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width -
+                                                              60,
+                                                      child: Text(
+                                                        document.angkutan,
+                                                        //"mikrolet ",
+                                                        style: blackFontStyle3,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    )
                                                   ],
                                                 ),
                                               ),
@@ -1432,159 +1278,277 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       color: CupertinoColors.systemGrey5,
                                       padding: EdgeInsets.only(left: 24),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 10),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Text(
+                                            document.rute,
+                                            //document[0],
+                                            style: blackFontStyle3.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ),
+                                  );
+                                }).toList()),
+                        ),
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+
+                        // List Jurusan
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 24, top: 16),
+                          child: Text("Program Studi / Jurusan yang Tersedia",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.bold)),
+                        ),
+                        Container(
+                          child: dataWebJurusan_lenght == 0
+                              ? Container(
+                                  margin: EdgeInsets.only(top: 24),
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[350],
+                                    highlightColor: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Container(
+                                          height: 48,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.grey[350]),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: dataWebJurusan_lenght,
+                                  itemBuilder:
+                                      (BuildContext context, int indexsatu) {
+                                    final xweb = dataWebJurusan[indexsatu];
+                                    return ExpandablePanel(
+                                      theme: ExpandableThemeData(
+                                        headerAlignment:
+                                            ExpandablePanelHeaderAlignment
+                                                .center,
+                                        tapBodyToExpand: true,
+                                        tapBodyToCollapse: true,
+                                        hasIcon: false,
+                                      ),
+                                      header: Container(
+                                        height: 32,
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Flexible(
-                                                child: Container(
-                                              child: SizedBox(
-                                                width: 100,
-                                                child: EduButtonSecond(
-                                                  onPressed: () {
-                                                    // checkEmailAndPassowrd();
-
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                (CekbiayaWebJurusan(
-                                                                  campus: widget
-                                                                              .campus ==
-                                                                          null
-                                                                      ? ""
-                                                                      : widget
-                                                                          .campus,
-                                                                  kodejurusan: xweb
-                                                                              .kode ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .kode
-                                                                          .toString(),
-                                                                  jenjang: xweb
-                                                                              .jenjang ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .jenjang
-                                                                          .toString(),
-                                                                  namaJurusan: xweb
-                                                                              .label ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .label
-                                                                          .toString(),
-                                                                  // kodeprogram: labelprogram
-                                                                  //             .toString() ==
-                                                                  //         null
-                                                                  //     ? ""
-                                                                  //     : labelprogram
-                                                                  //         .toString(),
-                                                                  // namaKelompok: labelkelompok
-                                                                  //             .toString() ==
-                                                                  //         null
-                                                                  //     ? ""
-                                                                  //     : labelkelompok
-                                                                  //         .toString(),
-                                                                ))));
-                                                  },
-                                                  buttonText: "Cek Biaya",
-                                                ),
-                                              ),
-                                            )),
-                                            Container(
-                                              child: SizedBox(
-                                                width: 100,
-                                                child: EduButtonSecond(
-                                                  onPressed: () {
-                                                    // checkEmailAndPassowrd();
-
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    (Prospek(
-                                                                      kodejurusan: xweb
-                                                                          .kode
-                                                                          .toString(),
-                                                                    ))));
-                                                  },
-                                                  buttonText: "Prospek",
-                                                ),
+                                            ExpandableIcon(
+                                              theme: const ExpandableThemeData(
+                                                expandIcon: Icons.arrow_right,
+                                                collapseIcon:
+                                                    Icons.arrow_drop_down,
+                                                iconColor: Colors.blue,
+                                                iconSize: 24.0,
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                //iconRotationAngle: math.pi / 2,
+                                                iconPadding:
+                                                    EdgeInsets.only(right: 5),
                                               ),
                                             ),
-                                            Flexible(
-                                                child: Container(
-                                              child: SizedBox(
-                                                width: 100,
-                                                child: EduButtonSecond(
-                                                  onPressed: () {
-                                                    // checkEmailAndPassowrd();
-
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                (Daftar_kuliahWebJurusan(
-                                                                  campus: widget
-                                                                              .campus ==
-                                                                          null
-                                                                      ? ""
-                                                                      : widget
-                                                                          .campus,
-                                                                  kodejurusan: xweb
-                                                                              .kode ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .kode
-                                                                          .toString(),
-                                                                  jenjang: xweb
-                                                                              .jenjang ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .jenjang
-                                                                          .toString(),
-                                                                  namaJurusan: xweb
-                                                                              .label ==
-                                                                          null
-                                                                      ? ""
-                                                                      : xweb
-                                                                          .label
-                                                                          .toString(),
-                                                                ))));
-                                                  },
-                                                  buttonText: "Daftar",
-                                                ),
-                                              ),
-                                            )),
+                                            Text(
+                                              "${xweb.label}",
+                                              style: blackFontStyle3.copyWith(
+                                                  fontSize: 14),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ),
+                                      expanded: Container(
+                                        color: CupertinoColors.systemGrey5,
+                                        padding: EdgeInsets.only(left: 24),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(
+                                                  child: Container(
+                                                child: SizedBox(
+                                                  width: 100,
+                                                  child: EduButtonSecond(
+                                                    onPressed: () {
+                                                      // checkEmailAndPassowrd();
 
-                                    // return
-                                  );
-                                },
-                              ),
-                      ),
-                      Divider(
-                        indent: 24,
-                        endIndent: 24,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 200,
-                      ),
-                    ]),
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  (CekbiayaWebJurusan(
+                                                                    campus: widget.campus ==
+                                                                            null
+                                                                        ? ""
+                                                                        : widget
+                                                                            .campus,
+                                                                    kodejurusan: xweb.kode ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .kode
+                                                                            .toString(),
+                                                                    jenjang: xweb.jenjang ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .jenjang
+                                                                            .toString(),
+                                                                    namaJurusan: xweb.label ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .label
+                                                                            .toString(),
+                                                                    // kodeprogram: labelprogram
+                                                                    //             .toString() ==
+                                                                    //         null
+                                                                    //     ? ""
+                                                                    //     : labelprogram
+                                                                    //         .toString(),
+                                                                    // namaKelompok: labelkelompok
+                                                                    //             .toString() ==
+                                                                    //         null
+                                                                    //     ? ""
+                                                                    //     : labelkelompok
+                                                                    //         .toString(),
+                                                                  ))));
+                                                    },
+                                                    buttonText: "Cek Biaya",
+                                                  ),
+                                                ),
+                                              )),
+                                              Container(
+                                                child: SizedBox(
+                                                  width: 100,
+                                                  child: EduButtonSecond(
+                                                    onPressed: () {
+                                                      // checkEmailAndPassowrd();
+
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      (Prospek(
+                                                                        kodejurusan: xweb
+                                                                            .kode
+                                                                            .toString(),
+                                                                      ))));
+                                                    },
+                                                    buttonText: "Prospek",
+                                                  ),
+                                                ),
+                                              ),
+                                              Flexible(
+                                                  child: Container(
+                                                child: SizedBox(
+                                                  width: 100,
+                                                  child: EduButtonSecond(
+                                                    onPressed: () {
+                                                      // checkEmailAndPassowrd();
+
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  (Daftar_kuliahWebJurusan(
+                                                                    campus: widget.campus ==
+                                                                            null
+                                                                        ? ""
+                                                                        : widget
+                                                                            .campus,
+                                                                    kodejurusan: xweb.kode ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .kode
+                                                                            .toString(),
+                                                                    jenjang: xweb.jenjang ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .jenjang
+                                                                            .toString(),
+                                                                    namaJurusan: xweb.label ==
+                                                                            null
+                                                                        ? ""
+                                                                        : xweb
+                                                                            .label
+                                                                            .toString(),
+                                                                  ))));
+                                                    },
+                                                    buttonText: "Daftar",
+                                                  ),
+                                                ),
+                                              )),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                        ),
+
+                        Divider(
+                          indent: 24,
+                          endIndent: 24,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 200,
+                        ),
+                      ],
+                    ),
                   )
                 ]),
           bottomSheet: isConn == false
