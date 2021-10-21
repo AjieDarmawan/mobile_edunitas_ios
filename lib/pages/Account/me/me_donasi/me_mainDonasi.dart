@@ -50,104 +50,123 @@ class _MeDonasiState extends State<MeDonasi> {
               itemCount: datadonasi.length,
               itemBuilder: (context, index) {
                 final xdatadonasi = datadonasi[index];
-                return Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0.0, 1.0),
-                              blurRadius: 3.0)
-                        ],
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                return xdatadonasi.donaturname.toString() == "hendler_null"
+                    ? Center(
+                      child: Container(
+                        //  color: Colors.green,
+                          width: double.infinity,
+                          height: 500,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                             // width: MediaQuery.of(context).size.width * 0.9,
+                              height: 100,
+                              child: Text("Tidak Ada Donasi"),
+                              //color: Colors.amber,
+                            ),
+                          ),
+                        ),
+                    )
+                    : Stack(
                         children: [
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Text(
-                            xdatadonasi.judul.toString(),
-                            style: blueFontStyleBold,
-                          ),
-                          Divider(
-                            height: 24,
-                            thickness: 1,
-                          ),
-                          Text(
-                            xdatadonasi.textmessage.toString(),
-                            style: blackFontStyle1.copyWith(fontSize: 14),
-                          ),
-                          Divider(
-                            height: 24,
-                            thickness: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(0.0, 1.0),
+                                    blurRadius: 3.0)
+                              ],
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Text(
+                                  xdatadonasi.judul.toString(),
+                                  style: blueFontStyleBold,
+                                ),
+                                Divider(
+                                  height: 24,
+                                  thickness: 1,
+                                ),
+                                Text(
+                                  xdatadonasi.textmessage.toString(),
+                                  style: blackFontStyle1.copyWith(fontSize: 14),
+                                ),
+                                Divider(
+                                  height: 24,
+                                  thickness: 1,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Donatur :',
-                                      style: blackFontStyle1.copyWith(
-                                          fontSize: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Donatur :',
+                                            style: blackFontStyle1.copyWith(
+                                                fontSize: 12),
+                                          ),
+                                          Text(
+                                            xdatadonasi.donaturname.toString(),
+                                            style: blueFontStyle.copyWith(
+                                                fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    Text(
-                                      xdatadonasi.donaturname.toString(),
-                                      style:
-                                          blueFontStyle.copyWith(fontSize: 14),
+                                    Expanded(
+                                      child: Text(
+                                        'Rp.${xdatadonasi.price.toString()}',
+                                        style: whiteFontStyle.copyWith(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red[600]),
+                                        textAlign: TextAlign.right,
+                                      ),
                                     ),
                                   ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 16,
+                            right: 16,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                ),
+                                color: yellowColor,
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 8),
+                              child: Text(
+                                xdatadonasi.crdt.toString(),
+                                maxLines: 2,
+                                overflow: TextOverflow.clip,
+                                style: blueFontStyleBold.copyWith(
+                                  fontSize: 10,
                                 ),
                               ),
-                              Expanded(
-                                child: Text(
-                                  'Rp.${xdatadonasi.price.toString()}',
-                                  style: whiteFontStyle.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red[600]),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),
-                            ],
-                          )
+                            ),
+                          ),
                         ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 16,
-                      right: 16,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                          color: yellowColor,
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                        child: Text(
-                          xdatadonasi.crdt.toString(),
-                          maxLines: 2,
-                          overflow: TextOverflow.clip,
-                          style: blueFontStyleBold.copyWith(
-                            fontSize: 10,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
+                      );
               },
             ),
     );
