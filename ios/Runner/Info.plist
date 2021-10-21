@@ -25,7 +25,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Aplikasi Perlu menggunakan kamera untuk mengambil gambar </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Aplikasi Perlu menggunakan kamera untuk mengambil gambar</string>
+	<string>Aplikasi Perlu menggunakan Galeri untuk mengambil gambar</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
