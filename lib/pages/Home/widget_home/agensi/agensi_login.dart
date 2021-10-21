@@ -18,7 +18,7 @@ class _AgensiLoginState extends State<AgensiLogin> {
   var labelnamaweb = '', kodeweb = '', jenjangweb;
   var dataWebJurusan = new List();
   void getWebJurusan() {
-    sipemaview_model().getBiayaSipema_web(widget.campus.kode).then((value) {//handled
+    sipemaview_model().getBiayaSipema_web(widget.campus.kode,widget.campus.webacid).then((value) {//handled
       setState(() {
         dataWebJurusan = value;
 

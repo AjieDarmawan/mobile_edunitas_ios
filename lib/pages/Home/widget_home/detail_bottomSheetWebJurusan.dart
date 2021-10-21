@@ -16,7 +16,7 @@ class _DetailBottomSheetWebJurusanState
   var labelnamaweb = '', kodeweb = '', jenjangweb;
   var dataWebJurusan = new List();
   void getWebJurusan() {
-    sipemaview_model().getBiayaSipema_web(widget.campus.kode).then((value) {
+    sipemaview_model().getBiayaSipema_web(widget.campus.kode,widget.campus.webacid).then((value) {
       setState(() {
         dataWebJurusan = value;
         if (widget.jurusan == null) {

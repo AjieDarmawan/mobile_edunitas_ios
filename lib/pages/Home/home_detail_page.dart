@@ -43,7 +43,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   var dataWebJurusan = new List();
   int dataWebJurusan_lenght = 0;
   void getWebJurusan() {
-    sipemaview_model().getBiayaSipema_web(widget.campus.kode).then((value) {
+    sipemaview_model().getBiayaSipema_web(widget.campus.kode,widget.campus.webacid).then((value) {
       setState(() {
         dataWebJurusan = value;
         dataWebJurusan_lenght = dataWebJurusan.length;
