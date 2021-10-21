@@ -14,10 +14,11 @@ class sipemaview_model {
   }
 
 
-  Future getBiayaSipema_web(String kodekampus) async {
+  Future getBiayaSipema_web(String kodekampus,String kodeacid) async {
     final response =
     await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru"), body: {
       'kode_kampus': kodekampus.toString(),
+      'kode_acid':kodeacid.toString(),
     });
 
     if (response.statusCode == 200) {
