@@ -263,70 +263,73 @@ class _MenuHomeState extends State<MenuHome> {
               ),
             ),
           ),
-          Opacity(
-            opacity: 1,
-            child: Container(
-              width: MediaQuery.of(context).size.width / 4.3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: IconButton(
-                      icon: Image.asset('assets/home/edu-intro-beasiswa.jpg'),
-                      iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://edunitas.com/educampus/beasiswa');
-                      }),
-                    ),
-                  ),
-                  Container(
-                    //padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(
-                      "Permohonan Beasiswa",
-                      textAlign: TextAlign.center,
-                      style: blueFontStyle.copyWith(
-                          fontSize: 10, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Opacity(
-            opacity: 1,
-            child: Container(
-              width: MediaQuery.of(context).size.width / 4.5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: IconButton(
-                      icon: Image.asset('assets/home/edu-intro-donation.png'),
-                      iconSize: 48,
-                      onPressed: (){
-                        // _launched = _launchInBrowser(
-                        //     'https://edunitas.com/edudonation');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainDonasi()));
-                                //builder: (context) => BuktiBayarDonasi()));
-                      }),
-                    ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(
-                      "Pemberi Beasiswa",
-                      textAlign: TextAlign.center,
-                      style: blueFontStyle.copyWith(
-                          fontSize: 10, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+
+          //todo donation takedown due apple strict rules
+          // Opacity(
+          //   opacity: 1,
+          //   child: Container(
+          //     width: MediaQuery.of(context).size.width / 4.3,
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //           child: IconButton(
+          //             icon: Image.asset('assets/home/edu-intro-beasiswa.jpg'),
+          //             iconSize: 48,
+          //             onPressed: () => setState(() {
+          //               _launched = _launchInBrowser(
+          //                   'https://edunitas.com/educampus/beasiswa');
+          //             }),
+          //           ),
+          //         ),
+          //         Container(
+          //           //padding: EdgeInsets.symmetric(horizontal: 10.0),
+          //           child: Text(
+          //             "Permohonan Beasiswa",
+          //             textAlign: TextAlign.center,
+          //             style: blueFontStyle.copyWith(
+          //                 fontSize: 10, fontWeight: FontWeight.bold),
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // Opacity(
+          //   opacity: 1,
+          //   child: Container(
+          //     width: MediaQuery.of(context).size.width / 4.5,
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //           child: IconButton(
+          //             icon: Image.asset('assets/home/edu-intro-donation.png'),
+          //             iconSize: 48,
+          //             onPressed: (){
+          //               // _launched = _launchInBrowser(
+          //               //     'https://edunitas.com/edudonation');
+          //               Navigator.push(
+          //                   context,
+          //                   MaterialPageRoute(
+          //                       builder: (context) => MainDonasi()));
+          //                       //builder: (context) => BuktiBayarDonasi()));
+          //             }),
+          //           ),
+          //         Container(
+          //           padding: EdgeInsets.symmetric(horizontal: 10.0),
+          //           child: Text(
+          //             "Pemberi Beasiswa",
+          //             textAlign: TextAlign.center,
+          //             style: blueFontStyle.copyWith(
+          //                 fontSize: 10, fontWeight: FontWeight.bold),
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
           Opacity(
             opacity: 1,
             child: Container(
