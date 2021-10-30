@@ -48,59 +48,60 @@ class _FormulirMitraAgensiState extends State<FormulirMitraAgensi> {
   File image_brek, image_brek_save; //ktp
   TextEditingController ctitleimage_brek = new TextEditingController();
   accessGallery() async {
-    // File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    // final tempDir = await getTemporaryDirectory();
-    // final path = tempDir.path;
+    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
 
-    // final title = ctitleimage_brek.text;
+    final title = ctitleimage_brek.text;
 
-    // Img.Image _image = Img.decodeImage(img.readAsBytesSync());
-    // print("accessGalleryGedung: " + _image.toString());
-    // Img.Image _smallerimg = Img.copyResize(_image,
-    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    Img.Image _image = Img.decodeImage(img.readAsBytesSync());
+    print("accessGalleryGedung: " + _image.toString());
+    Img.Image _smallerimg = Img.copyResize(_image,
+        width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    // var compressImg =
-    //     new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
-    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    var compressImg =
+    new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
+      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    // if (img == null) {
-    //   print('null');
-    // } else {
-    //   setState(() {
-    //     image_brek = img;
-    //     image_brek_save = compressImg;
-    //     Navigator.pop(context);
-    //   });
-    // }
+    if (img == null) {
+      print('null');
+    } else {
+      setState(() {
+        image_brek = img;
+        image_brek_save = compressImg;
+        print("phoho: " + image_brek.toString());
+        Navigator.pop(context);
+      });
+    }
   }
 
   File image_brekgambar1, brekgambar1_save; //ktp
   TextEditingController ctitle_brekgambar1 = new TextEditingController();
   accessCamera() async {
-    // File imgjob_gambar1 =
-    //     await ImagePicker.pickImage(source: ImageSource.camera);
-    // final tempDir = await getTemporaryDirectory();
-    // final path = tempDir.path;
+    File imgjob_gambar1 =
+    await ImagePicker.pickImage(source: ImageSource.camera);
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
 
-    // final title = ctitle_brekgambar1.text;
+    final title = ctitle_brekgambar1.text;
 
-    // Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
-    // Img.Image _smallerimg = Img.copyResize(_image,
-    //     width: 300, height: 300, interpolation: Img.Interpolation.linear);
+    Img.Image _image = Img.decodeImage(imgjob_gambar1.readAsBytesSync());
+    Img.Image _smallerimg = Img.copyResize(_image,
+        width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
-    // var compressImg_job1 =
-    //     new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
-    //       ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    var compressImg_job1 =
+    new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
+      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
-    // if (imgjob_gambar1 == null) {
-    //   print('null');
-    // } else {
-    //   setState(() {
-    //     image_brekgambar1 = imgjob_gambar1;
-    //     brekgambar1_save = compressImg_job1;
-    //     Navigator.pop(context);
-    //   });
-    // }
+    if (imgjob_gambar1 == null) {
+      print('null');
+    } else {
+      setState(() {
+        image_brekgambar1 = imgjob_gambar1;
+        brekgambar1_save = compressImg_job1;
+        Navigator.pop(context);
+      });
+    }
   }
 
   @override
