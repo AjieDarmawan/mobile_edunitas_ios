@@ -213,6 +213,12 @@ class _MainTransactionEduCampusHistoryState
                                                                       ? ""
                                                                       : datatrans[
                                                                           index],
+                                                                             waktu: datatrans[
+                                                                              index].waktu ==
+                                                                          null
+                                                                      ? ""
+                                                                      : datatrans[
+                                                                          index].waktu,  
                                                                 ))));
                                               },
                                               child: Container(
