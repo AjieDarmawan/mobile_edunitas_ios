@@ -59,6 +59,14 @@ String nameValidator(String value) {
   }
 }
 
+String baruValidator(String value) {
+  if (value.length < 1) {
+    return "Tidak boleh kosong";
+  } else {
+    return null;
+  }
+}
+
 String noZeroNumberValidator(String value) {
   if (value == "0") {
     return "Tidak boleh kosong";

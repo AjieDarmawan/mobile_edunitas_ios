@@ -117,31 +117,33 @@ class _RegistarDatadiriState extends State<RegistarDatadiri> {
             MaterialPageRoute(
                 builder: (context) =>
                     (Activasi(email3: widget.email2.toString()))));
-      } else if (data.status == 404) {
-        setState(() {
-          InSignIn = false;
-        });
+      }
+      // else if (data.status == 404) {
+      //   setState(() {
+      //     InSignIn = false;
+      //   });
 
-        Flushbar(
-          title: "Maaf !!",
-          message:
-              "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
-          duration: Duration(seconds: 3),
-          flushbarPosition: FlushbarPosition.TOP,
-          flushbarStyle: FlushbarStyle.FLOATING,
-          reverseAnimationCurve: Curves.decelerate,
-          forwardAnimationCurve: Curves.fastOutSlowIn,
-          boxShadows: [
-            BoxShadow(
-                color: Colors.black38,
-                offset: Offset(0.0, 3.0),
-                blurRadius: 3.0)
-          ],
-          backgroundColor: Colors.red[600],
-        )..show(context);
+      //   Flushbar(
+      //     title: "Maaf !!",
+      //     message:
+      //         "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
+      //     duration: Duration(seconds: 3),
+      //     flushbarPosition: FlushbarPosition.TOP,
+      //     flushbarStyle: FlushbarStyle.FLOATING,
+      //     reverseAnimationCurve: Curves.decelerate,
+      //     forwardAnimationCurve: Curves.fastOutSlowIn,
+      //     boxShadows: [
+      //       BoxShadow(
+      //           color: Colors.black38,
+      //           offset: Offset(0.0, 3.0),
+      //           blurRadius: 3.0)
+      //     ],
+      //     backgroundColor: Colors.red[600],
+      //   )..show(context);
 
-        // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
-      } else if (data.status == 400) {
+      //   // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
+      // }
+      else if (data.status == 400) {
         setState(() {
           InSignIn = false;
         });
@@ -296,7 +298,7 @@ class _RegistarDatadiriState extends State<RegistarDatadiri> {
                               // labelText: "Email",
                               hintText: "Nama Lengkap",
                             ),
-                            validator: nameValidator,
+                            validator: baruValidator,
                             // validator: (value) => value.length < 6 ? 'Password too short.' : null,
                             onSaved: (value) {
                               email = value;

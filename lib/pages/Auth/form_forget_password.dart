@@ -31,7 +31,8 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
         .resend_pin(
       widget.email2.toString(),
     )
-        .then((value) {//handled
+        .then((value) {
+      //handled
       StatusModel data = value;
 
       if (data.status == 200) {
@@ -78,15 +79,15 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
           InSignIn = false;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       InSignIn = false;
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -121,7 +122,7 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
     super.initState();
     getpendidikan();
     etemail = TextEditingController(text: widget.email2);
-   // resend_pin2();
+    // resend_pin2();
   }
 
   void _togglePasswordVisibility() {
@@ -131,11 +132,12 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
   }
 
   void getpendidikan() async {
-    Masterview_model().masterpendidikan().then((value2) {//handled
+    Masterview_model().masterpendidikan().then((value2) {
+      //handled
       setState(() {
         datapendidikan = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -195,19 +197,18 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
     UserViewModel()
         .form_forgetpassword(widget.email2.toString(),
             etPassword.text.toString(), etkode_aktivasi.text.toString())
-        .then((value) {//handled
+        .then((value) {
+      //handled
       StatusModel data = value;
       print("status${data.status}");
 
       if (data.status == 200) {
         //Navigator.of(context).pushNamedAndRemoveUntil(ACTIVASI, (route) => false);
 
-        
-
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => (Login())));
 
-            Flushbar(
+        Flushbar(
           title: "Sukses",
           message: "Email berhasil dikirim, silahkan cek email anda",
           duration: Duration(seconds: 3),
@@ -223,31 +224,33 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
           ],
           backgroundColor: Colors.green[800],
         )..show(context);
-      } else if (data.status == 404) {
-        setState(() {
-          InSignIn = false;
-        });
+      }
+      // else if (data.status == 404) {
+      //   setState(() {
+      //     InSignIn = false;
+      //   });
 
-        Flushbar(
-          title: "Maaf",
-          message:
-              "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
-          duration: Duration(seconds: 5),
-          flushbarPosition: FlushbarPosition.TOP,
-          flushbarStyle: FlushbarStyle.FLOATING,
-          reverseAnimationCurve: Curves.decelerate,
-          forwardAnimationCurve: Curves.fastOutSlowIn,
-          boxShadows: [
-            BoxShadow(
-                color: Colors.black38,
-                offset: Offset(0.0, 3.0),
-                blurRadius: 3.0)
-          ],
-          backgroundColor: Colors.red[600],
-        )..show(context);
+      //   Flushbar(
+      //     title: "Maaf",
+      //     message:
+      //         "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
+      //     duration: Duration(seconds: 5),
+      //     flushbarPosition: FlushbarPosition.TOP,
+      //     flushbarStyle: FlushbarStyle.FLOATING,
+      //     reverseAnimationCurve: Curves.decelerate,
+      //     forwardAnimationCurve: Curves.fastOutSlowIn,
+      //     boxShadows: [
+      //       BoxShadow(
+      //           color: Colors.black38,
+      //           offset: Offset(0.0, 3.0),
+      //           blurRadius: 3.0)
+      //     ],
+      //     backgroundColor: Colors.red[600],
+      //   )..show(context);
 
-        // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
-      } else if (data.status == 400) {
+      //   // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
+      // }
+      else if (data.status == 400) {
         setState(() {
           InSignIn = false;
         });
@@ -296,7 +299,7 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
           InSignIn = false;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       InSignIn = false;
       onErrHandling(erro);
     });
@@ -440,7 +443,7 @@ class _FormForgetPasswordState extends State<FormForgetPassword> {
                                   //labelText: "Password",
                                   hintText: "Kata Sandi",
                                 ),
-                                validator: nameValidator,
+                                validator: baruValidator,
                                 onSaved: (value) {
                                   password1 = value;
                                 },
