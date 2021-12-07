@@ -9,7 +9,8 @@ class InvoiceStruk extends StatefulWidget {
       keycode,
       namaJurusan,
       kodekampus,
-      id_invoice;
+      id_invoice,
+      waktu;
   InvoiceStruk(
       {this.params,
       this.logo,
@@ -19,7 +20,7 @@ class InvoiceStruk extends StatefulWidget {
       this.keycode,
       this.namaJurusan,
       this.kodekampus,
-      this.id_invoice});
+      this.id_invoice,this.waktu});
 
   @override
   _InvoiceStrukState createState() => _InvoiceStrukState();
@@ -114,7 +115,9 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
     datausers(globalEmail);
 
     // print("nama${datametodepembayran.length}");
-    //  print("nama${widget.kodekampus}");
+    //  print("nama_kodekampus${widget.kodekampus}");
+    //   print("nama_id_invoice${widget.id_invoice}");
+
     print("logo${widget.logo}");
     return Scaffold(
       appBar: AppBar(
@@ -419,7 +422,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
             // ),
             Container(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-                child: namametode == null
+                child: no_virtual == null
                     ? Center(child: CircularProgressIndicator())
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -464,6 +467,20 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                   ],
                 )),
             SizedBox(height: 24),
+             Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Tanggal Bayar",
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text(widget.waktu.toString == null ? "" : widget.waktu.toString(),
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold))
+                  ],
+                )),
+                SizedBox(height: 24),
             Container(
               decoration: BoxDecoration(
                 border: Border(
@@ -486,20 +503,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                                   ? ""
                                   : widget.keycode))));
                 },
-                child: ListTile(
-                  leading: Icon(
-                    Icons.payment_rounded,
-                    color: mainColor1,
-                  ),
-                  title: Text(
-                    "Cara Pembayaran",
-                    style: blackFontStyle2,
-                  ),
-                  trailing: Icon(
-                    Icons.navigate_next,
-                    color: mainColor1,
-                  ),
-                ),
+                child: Container(),
               ),
             ),
             SizedBox(
