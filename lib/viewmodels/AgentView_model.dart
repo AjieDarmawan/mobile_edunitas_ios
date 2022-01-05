@@ -195,12 +195,12 @@ class Agentview_model {
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
 
-    request.send().then((onValue) {
-      print("result_daftar_mhs_agent" + onValue.statusCode.toString());
-
-      print(onValue.headers);
-      print(onValue.contentLength);
-    });
+    // request.send().then((onValue) {
+    //   print("result_daftar_mhs_agent" + onValue.statusCode.toString());
+    //
+    //   print(onValue.headers);
+    //   print(onValue.contentLength);
+    // });
 
     if (response.statusCode == 200) {
       final jsondata = jsonDecode(responseString);

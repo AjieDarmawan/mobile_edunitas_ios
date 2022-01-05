@@ -2,9 +2,11 @@ part of 'widget_agensi.dart';
 
 class InformasiPerolehan extends StatefulWidget {
   final String keycode;
+  final bool fromsendmhs;
 
   InformasiPerolehan({
     this.keycode,
+    this.fromsendmhs,
   });
 
   @override
@@ -88,7 +90,7 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
                         },
                         child: Container(
                           padding:
-                              EdgeInsets.only(left: 20, right: 24, top: 15),
+                          EdgeInsets.only(left: 20, right: 24, top: 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -170,7 +172,7 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
                         },
                         child: Container(
                           padding:
-                              EdgeInsets.only(left: 20, right: 24, top: 15),
+                          EdgeInsets.only(left: 20, right: 24, top: 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -202,6 +204,24 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
   @override
   void initState() {
     super.initState();
+    // if(widget.fromsendmhs){
+    //   Flushbar(
+    //     title: "Berhasil",
+    //     message: "Data Berhasil Disimpan",
+    //     duration: Duration(seconds: 3),
+    //     flushbarPosition: FlushbarPosition.TOP,
+    //     flushbarStyle: FlushbarStyle.FLOATING,
+    //     reverseAnimationCurve: Curves.decelerate,
+    //     forwardAnimationCurve: Curves.fastOutSlowIn,
+    //     boxShadows: [
+    //       BoxShadow(
+    //           color: Colors.black38,
+    //           offset: Offset(0.0, 3.0),
+    //           blurRadius: 3.0)
+    //     ],
+    //     backgroundColor: Colors.green[600],
+    //   )..show(context);
+    // }
     getMhsRekomen();
   }
 
@@ -332,7 +352,7 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
                                   width: MediaQuery.of(context).size.width,
                                   child: Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Expanded(
                                         flex: 2,
@@ -345,7 +365,7 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
                                         flex: 8,
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Divider(
                                               height: 0,
@@ -380,7 +400,7 @@ class _InformasiPerolehanState extends State<InformasiPerolehan> {
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.0)),
+                  BorderRadius.vertical(top: Radius.circular(20.0)),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black12,
@@ -468,7 +488,7 @@ class TabelMhsRekomen extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       dataRowColor: MaterialStateColor.resolveWith(
-        (states) {
+            (states) {
           return Colors.grey[100];
         },
       ),
@@ -478,65 +498,65 @@ class TabelMhsRekomen extends StatelessWidget {
       rows: xmhsrekomenlist
           .map(
             (data) => DataRow(
-                cells: [
-                  DataCell(
-                    Container(
-                      width: 32,
-                      child: data.status.toString() == "0"
-                          ? Icon(
-                              Icons.schedule_outlined,
-                              size: 24,
-                              color: Colors.grey,
-                            )
-                          : data.status == "1"
-                              ? Icon(
-                                  Icons.visibility_outlined,
-                                  size: 24,
-                                  color: mainColor1,
-                                )
-                              : data.status == "2"
-                                  ? Icon(
-                                      Icons.question_answer_outlined,
-                                      size: 24,
-                                      color: orenColor,
-                                    )
-                                  : data.status == "3"
-                                      ? Icon(
-                                          Icons.check_circle_outlined,
-                                          size: 24,
-                                          color: Colors.green,
-                                        )
-                                      : Icon(
-                                          Icons.cancel_outlined,
-                                          size: 24,
-                                          color: Colors.redAccent,
-                                        ),
-                    ),
+            cells: [
+              DataCell(
+                Container(
+                  width: 32,
+                  child: data.status.toString() == "0"
+                      ? Icon(
+                    Icons.schedule_outlined,
+                    size: 24,
+                    color: Colors.grey,
+                  )
+                      : data.status == "1"
+                      ? Icon(
+                    Icons.visibility_outlined,
+                    size: 24,
+                    color: mainColor1,
+                  )
+                      : data.status == "2"
+                      ? Icon(
+                    Icons.question_answer_outlined,
+                    size: 24,
+                    color: orenColor,
+                  )
+                      : data.status == "3"
+                      ? Icon(
+                    Icons.check_circle_outlined,
+                    size: 24,
+                    color: Colors.green,
+                  )
+                      : Icon(
+                    Icons.cancel_outlined,
+                    size: 24,
+                    color: Colors.redAccent,
                   ),
-                  DataCell(Container(
-                    width: (MediaQuery.of(context).size.width / 2) * 0.5,
-                    child: Text(
-                      data.nama.toString(),
-                      style: blackFontStyle1Bold.copyWith(fontSize: 11),
-                      textAlign: TextAlign.start,
-                    ),
-                  )),
-                  DataCell(Container(
-                    width: (MediaQuery.of(context).size.width / 2) * 0.5,
-                    child: Text(
-                      data.cid.toString(),
-                      style: blackFontStyle1Bold.copyWith(fontSize: 11),
-                      textAlign: TextAlign.start,
-                    ),
-                  )),
-                ],
-                onSelectChanged: (bool selected) {
-                  if (selected) {
-                    detailMhs(data.nama, data.notlp, data.nowa, data.unitarea,
-                        data.code, data.cid, data.crdt, data.status, context);
-                  }
-                }),
-          )
+                ),
+              ),
+              DataCell(Container(
+                width: (MediaQuery.of(context).size.width / 2) * 0.5,
+                child: Text(
+                  data.nama.toString(),
+                  style: blackFontStyle1Bold.copyWith(fontSize: 11),
+                  textAlign: TextAlign.start,
+                ),
+              )),
+              DataCell(Container(
+                width: (MediaQuery.of(context).size.width / 2) * 0.5,
+                child: Text(
+                  data.cid.toString(),
+                  style: blackFontStyle1Bold.copyWith(fontSize: 11),
+                  textAlign: TextAlign.start,
+                ),
+              )),
+            ],
+            onSelectChanged: (bool selected) {
+              if (selected) {
+                detailMhs(data.nama, data.notlp, data.nowa, data.unitarea,
+                    data.code, data.cid, data.crdt, data.status, context);
+              }
+            }),
+      )
           .toList(),
       showCheckboxColumn: false,
     );

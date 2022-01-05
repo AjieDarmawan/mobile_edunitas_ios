@@ -112,8 +112,8 @@ class _AgensiMeState extends State<AgensiMe> {
         width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
     var compressImg =
-        new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
+      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
     if (img == null) {
       print('null');
@@ -131,7 +131,7 @@ class _AgensiMeState extends State<AgensiMe> {
   TextEditingController ctitle_brekgambar1 = new TextEditingController();
   accessCamera() async {
     File imgjob_gambar1 =
-        await ImagePicker.pickImage(source: ImageSource.camera);
+    await ImagePicker.pickImage(source: ImageSource.camera);
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
 
@@ -142,8 +142,8 @@ class _AgensiMeState extends State<AgensiMe> {
         width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
     var compressImg_job1 =
-        new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
-          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+    new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
+      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
     if (imgjob_gambar1 == null) {
       print('null');
@@ -321,6 +321,7 @@ class _AgensiMeState extends State<AgensiMe> {
                                       MaterialPageRoute(
                                           builder: (context) => (InformasiPerolehan(
                                             keycode: widget.keycode,
+                                            fromsendmhs: false,
                                           ))));
                                 },
                               ),
@@ -693,7 +694,7 @@ class _AgensiMeState extends State<AgensiMe> {
 
   void check() {
     bool image_ada =
-        edit_gambar != null || image_brek_save != null ? true : false;
+    edit_gambar != null || image_brek_save != null ? true : false;
     print("check_daftar_mhs_agent: \n" +
         etnama.text.toString() +
         ",\n" +
@@ -715,10 +716,10 @@ class _AgensiMeState extends State<AgensiMe> {
       )
           .then((value) {//handled
         if (value != null) {
-          print("tell_me_what_happen: " + value.toString());
+          //print("tell_me_what_happen: " + value.toString());
           AddMhsAgensiModel data = value == null ? [] : value;
 
-          if (data.statuscode.toString() == "200") {
+          if (data.responsecode.toString() == "200") {
             setState(() {
               _loading = false;
               InSignIn = false;
@@ -729,9 +730,29 @@ class _AgensiMeState extends State<AgensiMe> {
               // data.message;
             });
 
+            String _title = "";
+            String _message = "";
+            Color _color = yellowColor;
+
+            setState(() {
+              if(data.response=="OK"){
+                _title = "Berhasil";
+                _message = "Data Berhasil Disimpan";
+                _color = Colors.green[600];
+              }else if(data.response=="DUPLICATE"){
+                _title = "Peringatan";
+                _message = "Maaf, email yang anda masukan sudah direkomendasikan";
+                _color = yellowColor;
+              }else{
+                _title = "Peringatan";
+                _message = "Maaf, data anda tidak sesuai";
+                _color = Colors.red;
+              }
+            });
+
             Flushbar(
-              title: "Berhasil",
-              message: "Data Berhasil Disimpan",
+              title: _title,
+              message: _message,
               duration: Duration(seconds: 3),
               flushbarPosition: FlushbarPosition.TOP,
               flushbarStyle: FlushbarStyle.FLOATING,
@@ -743,8 +764,26 @@ class _AgensiMeState extends State<AgensiMe> {
                     offset: Offset(0.0, 3.0),
                     blurRadius: 3.0)
               ],
-              backgroundColor: Colors.green[600],
+              backgroundColor: _color,
             )..show(context);
+
+            if(data.response=="OK"){
+              etnama.text = "";
+              etemail.text = "";
+              etnohp.text = "";
+              etnowa.text = "";
+              hintkampus = "Pilih Kampus yang Diminati";
+              valkampus = "";
+              image_brek_save = null;
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => (InformasiPerolehan(
+                        keycode: widget.keycode,
+                        fromsendmhs: true,
+                      ))));
+            }
           }
         } else {
           setState(() {
@@ -908,11 +947,15 @@ class ContentKampusModalState extends State<ContentKampusModal> {
   final _debouncer = Debouncer(milliseconds: 1200);
 
   void searchKampus(dataSearch) async {
+    List<Photo> dataSearchKampus = new List();
     Kampusview_model().SearchgetKampusFront(dataSearch).then((value) {//handled
+      dataSearchKampus = value;
       setState(() {
-        kampusList = value;
+        kampusList =[];
+        kampusList.addAll(dataSearchKampus);
+        tempKampus = kampusList;
+        ftempKampus = kampusList;
         lenght = kampusList.length;
-        print("hdata_fy: " + kampusList.toString());
       });
     }).catchError((erro) {
       onErrHandlingS(erro);
@@ -1000,7 +1043,7 @@ class ContentKampusModalState extends State<ContentKampusModal> {
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     contentPadding:
-                        EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
+                    EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
                     hintText: "Cari Kampus"),
                 onChanged: (string) {
                   setState(() {
@@ -1011,7 +1054,7 @@ class ContentKampusModalState extends State<ContentKampusModal> {
                     //     .toList();
                     // lenght = ftempKampus.length;
                     print("hdata_th: " + kampusList.toString());
-                    lenght = 0;
+                    //lenght = 0;
                     print("hdata_nao: " + kampusList.toString());
                     _debouncer.run(() {
                       searchKampus(string);
@@ -1024,60 +1067,60 @@ class ContentKampusModalState extends State<ContentKampusModal> {
               child: Expanded(
                 child: lenght == 0
                     ? Column(
-                        children: [
-                          Text("Tidak ditemukan",
-                              maxLines: 1,
-                              overflow: TextOverflow.clip,
-                              style: whiteFontStyle.copyWith(
-                                  fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Divider(
-                            color: Colors.white38,
-                            thickness: 1,
-                          ),
-                        ],
-                      )
+                  children: [
+                    Text("Tidak ditemukan",
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        style: whiteFontStyle.copyWith(
+                            fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                      color: Colors.white38,
+                      thickness: 1,
+                    ),
+                  ],
+                )
                     : ListView.builder(
-                        itemCount: lenght,
-                        itemBuilder: (BuildContext context, int index) {
-                          final fdata = ftempKampus[index];
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
-                                //valposisi = lastDataSipema.id;
-                                //hintposisi = lastDataSipema.nama;
-                                result[0] = fdata.kode.toString();
-                                result[1] = fdata.nama.toString();
-                                Navigator.pop(context, result);
-                              });
-                            },
-                            child: Container(
-                              padding:
-                                  EdgeInsets.only(left: 20, right: 24, top: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(fdata.nama,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style: whiteFontStyle.copyWith(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Divider(
-                                    color: Colors.white38,
-                                    thickness: 1,
-                                  ),
-                                ],
-                              ),
+                  itemCount: lenght,
+                  itemBuilder: (BuildContext context, int index) {
+                    final fdata = ftempKampus[index];
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
+                          //valposisi = lastDataSipema.id;
+                          //hintposisi = lastDataSipema.nama;
+                          result[0] = fdata.kode.toString();
+                          result[1] = fdata.nama.toString();
+                          Navigator.pop(context, result);
+                        });
+                      },
+                      child: Container(
+                        padding:
+                        EdgeInsets.only(left: 20, right: 24, top: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(fdata.nama,
+                                maxLines: 1,
+                                overflow: TextOverflow.clip,
+                                style: whiteFontStyle.copyWith(
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              height: 5,
                             ),
-                          );
-                        },
+                            Divider(
+                              color: Colors.white38,
+                              thickness: 1,
+                            ),
+                          ],
+                        ),
                       ),
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(height: 24),

@@ -28,7 +28,7 @@ class _ListKampusCardState extends State<ListKampusCard> {
     //print("widget.routef= " + widget.routef);
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => (HomeDetailPage(

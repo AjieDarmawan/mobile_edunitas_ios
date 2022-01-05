@@ -61,7 +61,7 @@ class _MeDonasiState extends State<MeDonasi> {
                             child: Container(
                              // width: MediaQuery.of(context).size.width * 0.9,
                               height: 100,
-                              child: Text("Tidak Ada Donasi"),
+                              child: Text("Tidak Ada Donasi", style: blackFontStyle1,),
                               //color: Colors.amber,
                             ),
                           ),

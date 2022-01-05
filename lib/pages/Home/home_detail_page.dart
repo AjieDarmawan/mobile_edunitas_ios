@@ -236,6 +236,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     //periodicMethod();
   }
 
+  //watchout, maybe you need it later
   Future<bool> _backPressed() {
     widget.routef == "DaftarOnline"
         ? Navigator.pop(context)
@@ -317,7 +318,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     }
 
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
           body: isConn == false
               ? Center(

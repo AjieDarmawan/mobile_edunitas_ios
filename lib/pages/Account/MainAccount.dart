@@ -763,173 +763,176 @@ class _MainAccountState extends State<MainAccount> {
                       ),
                     ),
                     Divider(),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Text(
-                              "Dashboard Pemberi Beasiswa",
-                              style: blackFontStyle3,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: varnama != null
-                                ? Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      (MeDonasi(
-                                                        keycode: globalkey
-                                                                    .toString() ==
-                                                                null
-                                                            ? ""
-                                                            : globalkey
-                                                                .toString(),
-                                                      ))));
-                                        },
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.5,
-                                          height: 48,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: mainColor1, width: 2)),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Icon(
-                                                Icons.favorite_outlined,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "Donasi Saya",
-                                                style: blueFontStyle.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Opacity(
-                                        opacity: 1,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        (MePartnerDonasi(
-                                                           keycode: globalkey
-                                                                    .toString() ==
-                                                                null
-                                                            ? ""
-                                                            : globalkey
-                                                                .toString(),
-                                                          data_me: data_me,
-                                                        ))));
-                                          },
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: mainColor1,
-                                                    width: 2)),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Icon(
-                                                  Icons.volunteer_activism,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Galang Dana",
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                          ),
-                        ],
-                      ),
-                    ),
+
+                    //todo donation takedown due apple strict rules
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   margin: EdgeInsets.symmetric(horizontal: 16),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Container(
+                    //         child: Text(
+                    //           "Dashboard Pemberi Beasiswa",
+                    //           style: blackFontStyle3,
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         padding: EdgeInsets.symmetric(
+                    //             horizontal: 8, vertical: 16),
+                    //         child: varnama != null
+                    //             ? Row(
+                    //                 crossAxisAlignment:
+                    //                     CrossAxisAlignment.start,
+                    //                 mainAxisAlignment:
+                    //                     MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   GestureDetector(
+                    //                     onTap: () {
+                    //                       Navigator.push(
+                    //                           context,
+                    //                           MaterialPageRoute(
+                    //                               builder: (context) =>
+                    //                                   (MeDonasi(
+                    //                                     keycode: globalkey
+                    //                                                 .toString() ==
+                    //                                             null
+                    //                                         ? ""
+                    //                                         : globalkey
+                    //                                             .toString(),
+                    //                                   ))));
+                    //                     },
+                    //                     child: Container(
+                    //                       width: MediaQuery.of(context)
+                    //                               .size
+                    //                               .width /
+                    //                           2.5,
+                    //                       height: 48,
+                    //                       decoration: BoxDecoration(
+                    //                           color: Colors.white,
+                    //                           borderRadius:
+                    //                               BorderRadius.circular(10),
+                    //                           border: Border.all(
+                    //                               color: mainColor1, width: 2)),
+                    //                       child: Row(
+                    //                         children: [
+                    //                           SizedBox(
+                    //                             width: 10,
+                    //                           ),
+                    //                           Icon(
+                    //                             Icons.favorite_outlined,
+                    //                           ),
+                    //                           SizedBox(
+                    //                             width: 5,
+                    //                           ),
+                    //                           Text(
+                    //                             "Donasi Saya",
+                    //                             style: blueFontStyle.copyWith(
+                    //                                 fontSize: 12,
+                    //                                 fontWeight:
+                    //                                     FontWeight.bold),
+                    //                           )
+                    //                         ],
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                   Opacity(
+                    //                     opacity: 1,
+                    //                     child: GestureDetector(
+                    //                       onTap: () {
+                    //                         Navigator.push(
+                    //                             context,
+                    //                             MaterialPageRoute(
+                    //                                 builder: (context) =>
+                    //                                     (MePartnerDonasi(
+                    //                                        keycode: globalkey
+                    //                                                 .toString() ==
+                    //                                             null
+                    //                                         ? ""
+                    //                                         : globalkey
+                    //                                             .toString(),
+                    //                                       data_me: data_me,
+                    //                                     ))));
+                    //                       },
+                    //                       child: Container(
+                    //                         width: MediaQuery.of(context)
+                    //                                 .size
+                    //                                 .width /
+                    //                             2.5,
+                    //                         height: 48,
+                    //                         decoration: BoxDecoration(
+                    //                             color: Colors.white,
+                    //                             borderRadius:
+                    //                                 BorderRadius.circular(10),
+                    //                             border: Border.all(
+                    //                                 color: mainColor1,
+                    //                                 width: 2)),
+                    //                         child: Row(
+                    //                           children: [
+                    //                             SizedBox(
+                    //                               width: 10,
+                    //                             ),
+                    //                             Icon(
+                    //                               Icons.volunteer_activism,
+                    //                             ),
+                    //                             SizedBox(
+                    //                               width: 5,
+                    //                             ),
+                    //                             Text(
+                    //                               "Galang Dana",
+                    //                               style: blueFontStyle.copyWith(
+                    //                                   fontSize: 12,
+                    //                                   fontWeight:
+                    //                                       FontWeight.bold),
+                    //                             )
+                    //                           ],
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               )
+                    //             : Container(
+                    //                 child: Shimmer.fromColors(
+                    //                   baseColor: Colors.grey[350],
+                    //                   highlightColor: Colors.white,
+                    //                   child: Row(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceBetween,
+                    //                     children: [
+                    //                       Container(
+                    //                         width: MediaQuery.of(context)
+                    //                                 .size
+                    //                                 .width /
+                    //                             2.5,
+                    //                         height: 48,
+                    //                         decoration: BoxDecoration(
+                    //                           color: Colors.grey[350],
+                    //                           borderRadius:
+                    //                               BorderRadius.circular(10),
+                    //                         ),
+                    //                       ),
+                    //                       Container(
+                    //                         width: MediaQuery.of(context)
+                    //                                 .size
+                    //                                 .width /
+                    //                             2.5,
+                    //                         height: 48,
+                    //                         decoration: BoxDecoration(
+                    //                           color: Colors.grey[350],
+                    //                           borderRadius:
+                    //                               BorderRadius.circular(10),
+                    //                         ),
+                    //                       ),
+                    //                     ],
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
                     SizedBox(
                       height: 24,
                     ),
