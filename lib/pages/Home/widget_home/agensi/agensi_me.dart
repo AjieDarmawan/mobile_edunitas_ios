@@ -39,7 +39,8 @@ class _AgensiMeState extends State<AgensiMe> {
   var mystatus = false;
   SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
+    await sessionManager.getPreference().then((value) {
+      //handled
       setState(() {
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
@@ -54,7 +55,8 @@ class _AgensiMeState extends State<AgensiMe> {
 
   List<Photo> datakampus = [];
   void getKampus() async {
-    Kampusview_model().getKampus().then((value) {//handled
+    Kampusview_model().getKampus().then((value) {
+      //handled
       setState(() {
         datakampus = value;
       });
@@ -65,7 +67,8 @@ class _AgensiMeState extends State<AgensiMe> {
 
   UsersDetailModel userInfo;
   void datausers() {
-    UserViewModel().users_detail(globalEmail.toString()).then((value) {//handled
+    UserViewModel().users_detail(globalEmail.toString()).then((value) {
+      //handled
       UsersDetailModel data = value;
       if (data.status == 200) {
         setState(() {
@@ -112,8 +115,8 @@ class _AgensiMeState extends State<AgensiMe> {
         width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
     var compressImg =
-    new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+        new File("$path/image_${random_name_brek}${random_name_brek}.jpg")
+          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
     if (img == null) {
       print('null');
@@ -131,7 +134,7 @@ class _AgensiMeState extends State<AgensiMe> {
   TextEditingController ctitle_brekgambar1 = new TextEditingController();
   accessCamera() async {
     File imgjob_gambar1 =
-    await ImagePicker.pickImage(source: ImageSource.camera);
+        await ImagePicker.pickImage(source: ImageSource.camera);
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
 
@@ -142,8 +145,8 @@ class _AgensiMeState extends State<AgensiMe> {
         width: 300, height: 300, interpolation: Img.Interpolation.linear);
 
     var compressImg_job1 =
-    new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
-      ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
+        new File("$path/image1_${random_name_brek}${random_name_brek}.jpg")
+          ..writeAsBytesSync(Img.encodeJpg(_smallerimg, quality: 70));
 
     if (imgjob_gambar1 == null) {
       print('null');
@@ -157,7 +160,8 @@ class _AgensiMeState extends State<AgensiMe> {
   }
 
   void getInfoRekening() {
-    Agentview_model().getRekening(widget.keycode).then((value) {//handled
+    Agentview_model().getRekening(widget.keycode).then((value) {
+      //handled
       setState(() {
         CheckRekeningAgentModel data = value;
         rekList = data;
@@ -168,17 +172,17 @@ class _AgensiMeState extends State<AgensiMe> {
         _label_bank = data.label_bank == null ? "" : data.label_bank;
         _ccid = data.ccid == null ? "" : data.ccid;
         _imgbuku = data.imgbuku == null ? "" : data.imgbuku;
-        print("cidcid: "+_cid_r);
-        print("ccidccid: "+_ccid);
+        print("cidcid: " + _cid_r);
+        print("ccidccid: " + _ccid);
       });
     }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -214,7 +218,7 @@ class _AgensiMeState extends State<AgensiMe> {
   @override
   void initState() {
     super.initState();
-    _nrek = widget.nameRek!=null?true:false;
+    _nrek = widget.nameRek != null ? true : false;
     getPreferences();
     getInfoRekening();
     getKampus();
@@ -230,6 +234,20 @@ class _AgensiMeState extends State<AgensiMe> {
   void _backNonAgent() {
     Navigator.of(context).pop();
   }
+
+  // Future<void> _launched;
+  // Future<void> _launchInBrowser(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: false,
+  //       forceWebView: false,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -253,333 +271,437 @@ class _AgensiMeState extends State<AgensiMe> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 300,
-                color: Colors.grey[300],
+                color: Colors.blueGrey[50],
               ),
               SingleChildScrollView(
                   child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Ingin Mempunyai Penghasilan Tambahan ?",
+                                style:
+                                    blueFontStyle2Bold.copyWith(fontSize: 14),
+                              ),
+                              SizedBox(height: 8),
+                              RichText(
+                                text: TextSpan(
+                                    text: 'Ayo gabung bersama kami di ',
+                                    style: blackFontStyle2.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: ' \"Mitra eduAgent\"',
+                                        style: blackFontStyle2.copyWith(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ]),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                  "Dengan menjadi Mitra eduAgent, kamu bisa menambah penghasilan kamu. Ikuti langkah – langkah berikut untuk dapat menjadi Mitra eduAgent kami.",
+                                  style:
+                                      blackFontStyle1.copyWith(fontSize: 14)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                      child: GestureDetector(
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 160,
+                              color: Colors.grey,
+                              child: Image.network(
+                                "https://img.youtube.com/vi/R1bS18bR0IQ/0.jpg",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.red,
+                            size: 72,
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () => setState(() {
+                      // _launched = _launchInBrowser(
+                      //     'https://www.youtube.com/watch?v=R1bS18bR0IQ');
+                    }),
+                  )),
+                  Card(
+                    margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0)),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        ListTile(
+                          //leading: Icon(Icons.credit_card),
+                          title: _namarekening == null
+                              ? Text("Loading..")
+                              : Padding(
+                                  padding: const EdgeInsets.only(bottom: 4.0),
+                                  child: Text(
+                                    _namarekening,
+                                    style: blueFontStyleBold,
+                                  ),
+                                ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _label_bank == null
+                                  ? Text("")
+                                  : Text(
+                                      _label_bank,
+                                      style: blackFontStyle3.copyWith(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                              SizedBox(
+                                height: 4.0,
+                              ),
+                              _norekening == null
+                                  ? Text("")
+                                  : Text(
+                                      _norekening,
+                                      style: blackFontStyle3.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          (FormulirMitraAgensi(
+                                            keycode: widget.keycode,
+                                            userInfo: userInfo,
+                                            rekinfo: rekList,
+                                            edit: true,
+                                          )))).then((value) {
+                                //handled
+                                if (value == 'edited') {
+                                  getInfoRekening();
+                                }
+                              }).catchError((erro) {
+                                onErrHandling(erro);
+                              });
+                            },
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          leading: Icon(Icons.account_balance_wallet,
+                              color: mainColor1),
+                          title: Text(
+                            "Informasi Perolehan",
+                            style: blackFontStyle2,
+                          ),
+                          trailing: Icon(Icons.navigate_next),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => (InformasiPerolehan(
+                                          keycode: widget.keycode,
+                                          fromsendmhs: false,
+                                        ))));
+                          },
+                        ),
+                        ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          leading: Icon(Icons.info, color: mainColor1),
+                          title: Text(
+                            "Syarat & Ketentuan",
+                            style: blackFontStyle2,
+                          ),
+                          trailing: Icon(Icons.navigate_next),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => (MainAgensi(
+                                          onSyarat: true,
+                                        ))));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Stack(
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: BorderRadius.circular(20.0),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.black12,
-                                  offset: Offset(0.0, 3.0),
+                                  offset: Offset(0.0, 0.0),
                                   blurRadius: 3.0)
                             ],
                             color: Colors.white),
-                        child: ListTile(
-                            leading: Icon(Icons.credit_card),
-                            title: _namarekening == null
-                                ? Text("Loading..")
-                                : Text(_namarekening),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _label_bank == null ? Text("") : Text(_label_bank),
-                                _norekening == null ? Text("") : Text(_norekening),
-                              ],
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(Icons.edit),
-                              onPressed: (){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => (FormulirMitraAgensi(
-                                          keycode: widget.keycode, userInfo: userInfo, rekinfo: rekList, edit: true,
-                                        )))).then((value){//handled
-                                  if(value=='edited'){
-                                    getInfoRekening();
-                                  }
-                                }).catchError((erro) {
-                                  onErrHandling(erro);
-                                });
-                              },
-                            )
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(16.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Card(
-                              child: ListTile(
-                                leading: Icon(Icons.account_balance_wallet,
-                                    color: mainColor1),
-                                title: Text(
-                                  "Informasi Perolehan",
-                                  style: blackFontStyle2,
+                            SizedBox(
+                              height: 48,
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Nama ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
+                                    ),
+                                  ],
                                 ),
-                                trailing: Icon(Icons.navigate_next),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => (InformasiPerolehan(
-                                            keycode: widget.keycode,
-                                            fromsendmhs: false,
-                                          ))));
-                                },
                               ),
                             ),
-                            Card(
-                              child: ListTile(
-                                leading: Icon(Icons.account_balance_wallet,
-                                    color: mainColor1),
-                                title: Text(
-                                  "Syarat & Ketentuan",
-                                  style: blackFontStyle2,
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                cursorColor: mainColor1,
+                                controller: etnama,
+                                validator: nameValidator,
+                                //enabled: false,
+                                decoration: new InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: const EdgeInsets.only(
+                                      left: 14.0, bottom: 8.0, top: 8.0),
+                                  hintText: "Nama",
                                 ),
-                                trailing: Icon(Icons.navigate_next),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => (MainAgensi(onSyarat: true,))));
-                                },
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0.0, 0.0),
-                                      blurRadius: 3.0)
-                                ],
-                                color: Colors.white),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 48,
-                                ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "Nama ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Email ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: TextFormField(
-                                    cursorColor: mainColor1,
-                                    controller: etnama,
-                                    validator: nameValidator,
-                                    //enabled: false,
-                                    decoration: new InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      // focusedBorder: InputBorder.none,
-                                      // enabledBorder: InputBorder.none,
-                                      // errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 14.0, bottom: 8.0, top: 8.0),
-                                      hintText: "Nama",
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                cursorColor: mainColor1,
+                                controller: etemail,
+                                validator: emailValidator,
+                                //enabled: false,
+                                decoration: new InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: const EdgeInsets.only(
+                                      left: 14.0, bottom: 8.0, top: 8.0),
+                                  hintText: "Email",
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "No. Handphone ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "Email ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                cursorColor: mainColor1,
+                                controller: etnowa,
+                                validator: teleponValidator,
+                                //enabled: false,
+                                decoration: new InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: const EdgeInsets.only(
+                                      left: 14.0, bottom: 8.0, top: 8.0),
+                                  hintText: "+628xxxxx",
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "No. Whatsapp ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: TextFormField(
-                                    cursorColor: mainColor1,
-                                    controller: etemail,
-                                    validator: emailValidator,
-                                    //enabled: false,
-                                    decoration: new InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      // focusedBorder: InputBorder.none,
-                                      // enabledBorder: InputBorder.none,
-                                      // errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 14.0, bottom: 8.0, top: 8.0),
-                                      hintText: "Email",
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                cursorColor: mainColor1,
+                                controller: etnohp,
+                                validator: teleponValidator,
+                                //enabled: false,
+                                decoration: new InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: const EdgeInsets.only(
+                                      left: 14.0, bottom: 8.0, top: 8.0),
+                                  hintText: "+628xxxxx",
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Pilih kampus yang diminati ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "No. Handphone ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: TextFormField(
-                                    cursorColor: mainColor1,
-                                    controller: etnowa,
-                                    validator: teleponValidator,
-                                    //enabled: false,
-                                    decoration: new InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      // focusedBorder: InputBorder.none,
-                                      // enabledBorder: InputBorder.none,
-                                      // errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 14.0, bottom: 8.0, top: 8.0),
-                                      hintText: "+628xxxxx",
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "No. Whatsapp ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: TextFormField(
-                                    cursorColor: mainColor1,
-                                    controller: etnohp,
-                                    validator: teleponValidator,
-                                    //enabled: false,
-                                    decoration: new InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      // focusedBorder: InputBorder.none,
-                                      // enabledBorder: InputBorder.none,
-                                      // errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 14.0, bottom: 8.0, top: 8.0),
-                                      hintText: "+628xxxxx",
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "Pilih kampus yang diminati ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border:
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border:
                                       Border.all(color: Colors.grey, width: 1),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: ListTile(
-                                      onTap: () {
-                                        modalBottomAgensi(context);
-                                      },
-                                      // leading: Text("Provinsi",
-                                      //     style: blackFontStyle1.copyWith(fontSize: 16)),
-                                      leading: Text(
-                                        hintkampus == null
-                                            ? 'Pilih Kampus yang Diminati'
-                                            : hintkampus,
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.navigate_next,
-                                        color: blackColor,
-                                      ),
-                                    ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: ListTile(
+                                  onTap: () {
+                                    modalBottomAgensi(context);
+                                  },
+                                  // leading: Text("Provinsi",
+                                  //     style: blackFontStyle1.copyWith(fontSize: 16)),
+                                  leading: Text(
+                                    hintkampus == null
+                                        ? 'Pilih Kampus yang Diminati'
+                                        : hintkampus,
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                  trailing: Icon(
+                                    Icons.navigate_next,
+                                    color: blackColor,
                                   ),
                                 ),
-                                Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "Foto Bersama Mahasiswa ",
-                                      style: blueFontStyleBold,
-                                      children: const <TextSpan>[
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
-                                      ],
+                              ),
+                            ),
+                            Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Foto Bersama Mahasiswa ",
+                                  style: blueFontStyleBold,
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => ShowContent(
+                              ),
+                            ),
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => ShowContent(
                                             onTap1: () {
                                               accessGallery();
                                             },
@@ -587,106 +709,82 @@ class _AgensiMeState extends State<AgensiMe> {
                                               accessCamera();
                                             },
                                           ));
-                                    },
-                                    child:
-                                    // Container(
-                                    //   margin: EdgeInsets.symmetric(vertical: 16),
-                                    //   height: 56,
-                                    //   width: 56,
-                                    //   child: Stack(
-                                    //     children: [
-                                    //       Image(
-                                    //         image: AssetImage("assets/uploadlogo.png"),
-                                    //       ),
-                                    //       Center(
-                                    //         child: Container(
-                                    //             height: 32,
-                                    //             width: 32,
-                                    //             color: Colors.white),
-                                    //       ),
-                                    //       Center(
-                                    //         child: Icon(
-                                    //           Icons.supervised_user_circle_outlined,
-                                    //         ),
-                                    //       )
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                    Container(
-                                        margin:
-                                        EdgeInsets.symmetric(vertical: 16),
-                                        height: 56,
-                                        width: 56,
-                                        child: image_brek == null &&
+                                },
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(vertical: 16),
+                                    height: 72,
+                                    width: 72,
+                                    child: image_brek == null &&
                                             edit_gambar == null
-                                            ? Stack(
-                                          children: [
-                                            Image(
-                                              image: AssetImage(
-                                                  "assets/uploadlogo.png"),
-                                            ),
-                                            Center(
-                                              child: Container(
-                                                  height: 32,
-                                                  width: 32,
-                                                  color: Colors.white),
-                                            ),
-                                            Center(
-                                              child: Icon(
-                                                Icons
-                                                    .supervised_user_circle_outlined,
+                                        ? Stack(
+                                            children: [
+                                              Image(
+                                                image: AssetImage(
+                                                    "assets/uploadlogo.png"),
                                               ),
-                                            )
-                                          ],
-                                        )
-                                            : edit_gambar != null
+                                              Center(
+                                                child: Container(
+                                                    height: 64,
+                                                    width: 64,
+                                                    color: Colors.white),
+                                              ),
+                                              Center(
+                                                child: Icon(
+                                                  Icons
+                                                      .supervised_user_circle_outlined,
+                                                  size: 48,
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        : edit_gambar != null
                                             ? Image.network(edit_gambar)
                                             : Image.file(image_brek)),
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                ),
-                                Center(
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 16),
-                                    height: 48,
-                                    width: 250,
-                                    child: InSignIn
-                                        ? SpinKitFadingCircle(color: orenColor)
-                                        : EduButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          InSignIn = true;
-                                          check();
-                                        });
-                                      },
-                                      buttonText: "Join as Partner",
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[600],
-                              borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(20.0)),
-                            ),
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(
-                              child: Text(
-                                'Profile Mahasiswa yang direkomendasikan',
-                                style: whiteFontStyle.copyWith(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                             ),
+                            Divider(
+                              thickness: 1,
+                            ),
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 16),
+                                height: 48,
+                                width: 250,
+                                child: InSignIn
+                                    ? SpinKitFadingCircle(color: orenColor)
+                                    : EduButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            InSignIn = true;
+                                            check();
+                                          });
+                                        },
+                                        buttonText: "Get Student Fee",
+                                      ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[600],
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20.0)),
+                        ),
+                        padding: EdgeInsets.all(16.0),
+                        child: Center(
+                          child: Text(
+                            'Profile Mahasiswa yang direkomendasikan',
+                            style: whiteFontStyle.copyWith(
+                                fontSize: 14, fontWeight: FontWeight.bold),
                           ),
-                        ],
+                        ),
                       ),
                     ],
-                  ))
+                  ),
+                ],
+              ))
             ],
           )),
     );
@@ -694,7 +792,7 @@ class _AgensiMeState extends State<AgensiMe> {
 
   void check() {
     bool image_ada =
-    edit_gambar != null || image_brek_save != null ? true : false;
+        edit_gambar != null || image_brek_save != null ? true : false;
     print("check_daftar_mhs_agent: \n" +
         etnama.text.toString() +
         ",\n" +
@@ -714,7 +812,8 @@ class _AgensiMeState extends State<AgensiMe> {
         widget.keycode.toString(),
         context,
       )
-          .then((value) {//handled
+          .then((value) {
+        //handled
         if (value != null) {
           //print("tell_me_what_happen: " + value.toString());
           AddMhsAgensiModel data = value == null ? [] : value;
@@ -735,15 +834,16 @@ class _AgensiMeState extends State<AgensiMe> {
             Color _color = yellowColor;
 
             setState(() {
-              if(data.response=="OK"){
+              if (data.response == "OK") {
                 _title = "Berhasil";
                 _message = "Data Berhasil Disimpan";
                 _color = Colors.green[600];
-              }else if(data.response=="DUPLICATE"){
+              } else if (data.response == "DUPLICATE") {
                 _title = "Peringatan";
-                _message = "Maaf, email yang anda masukan sudah direkomendasikan";
+                _message =
+                    "Maaf, email yang anda masukan sudah direkomendasikan";
                 _color = yellowColor;
-              }else{
+              } else {
                 _title = "Peringatan";
                 _message = "Maaf, data anda tidak sesuai";
                 _color = Colors.red;
@@ -767,7 +867,7 @@ class _AgensiMeState extends State<AgensiMe> {
               backgroundColor: _color,
             )..show(context);
 
-            if(data.response=="OK"){
+            if (data.response == "OK") {
               etnama.text = "";
               etemail.text = "";
               etnohp.text = "";
@@ -780,9 +880,9 @@ class _AgensiMeState extends State<AgensiMe> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => (InformasiPerolehan(
-                        keycode: widget.keycode,
-                        fromsendmhs: true,
-                      ))));
+                            keycode: widget.keycode,
+                            fromsendmhs: true,
+                          ))));
             }
           }
         } else {
@@ -948,10 +1048,11 @@ class ContentKampusModalState extends State<ContentKampusModal> {
 
   void searchKampus(dataSearch) async {
     List<Photo> dataSearchKampus = new List();
-    Kampusview_model().SearchgetKampusFront(dataSearch).then((value) {//handled
+    Kampusview_model().SearchgetKampusFront(dataSearch).then((value) {
+      //handled
       dataSearchKampus = value;
       setState(() {
-        kampusList =[];
+        kampusList = [];
         kampusList.addAll(dataSearchKampus);
         tempKampus = kampusList;
         ftempKampus = kampusList;
@@ -962,9 +1063,9 @@ class ContentKampusModalState extends State<ContentKampusModal> {
     });
   }
 
-  void onErrHandlingS(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandlingS(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -1043,7 +1144,7 @@ class ContentKampusModalState extends State<ContentKampusModal> {
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     contentPadding:
-                    EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
+                        EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
                     hintText: "Cari Kampus"),
                 onChanged: (string) {
                   setState(() {
@@ -1067,60 +1168,60 @@ class ContentKampusModalState extends State<ContentKampusModal> {
               child: Expanded(
                 child: lenght == 0
                     ? Column(
-                  children: [
-                    Text("Tidak ditemukan",
-                        maxLines: 1,
-                        overflow: TextOverflow.clip,
-                        style: whiteFontStyle.copyWith(
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      color: Colors.white38,
-                      thickness: 1,
-                    ),
-                  ],
-                )
+                        children: [
+                          Text("Tidak ditemukan",
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                              style: whiteFontStyle.copyWith(
+                                  fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Divider(
+                            color: Colors.white38,
+                            thickness: 1,
+                          ),
+                        ],
+                      )
                     : ListView.builder(
-                  itemCount: lenght,
-                  itemBuilder: (BuildContext context, int index) {
-                    final fdata = ftempKampus[index];
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
-                          //valposisi = lastDataSipema.id;
-                          //hintposisi = lastDataSipema.nama;
-                          result[0] = fdata.kode.toString();
-                          result[1] = fdata.nama.toString();
-                          Navigator.pop(context, result);
-                        });
-                      },
-                      child: Container(
-                        padding:
-                        EdgeInsets.only(left: 20, right: 24, top: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(fdata.nama,
-                                maxLines: 1,
-                                overflow: TextOverflow.clip,
-                                style: whiteFontStyle.copyWith(
-                                    fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 5,
+                        itemCount: lenght,
+                        itemBuilder: (BuildContext context, int index) {
+                          final fdata = ftempKampus[index];
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
+                                //valposisi = lastDataSipema.id;
+                                //hintposisi = lastDataSipema.nama;
+                                result[0] = fdata.kode.toString();
+                                result[1] = fdata.nama.toString();
+                                Navigator.pop(context, result);
+                              });
+                            },
+                            child: Container(
+                              padding:
+                                  EdgeInsets.only(left: 20, right: 24, top: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(fdata.nama,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                      style: whiteFontStyle.copyWith(
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Divider(
+                                    color: Colors.white38,
+                                    thickness: 1,
+                                  ),
+                                ],
+                              ),
                             ),
-                            Divider(
-                              color: Colors.white38,
-                              thickness: 1,
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ),
             SizedBox(height: 24),
