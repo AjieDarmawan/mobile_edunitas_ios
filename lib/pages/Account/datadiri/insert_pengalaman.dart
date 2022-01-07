@@ -1422,6 +1422,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
                           cursorColor: mainColor1,
                           controller: etkodepos,
                           keyboardType: TextInputType.phone,
+                          maxLength: 5,
                           //enabled: false,
                           decoration: new InputDecoration(
                               border: InputBorder.none,
