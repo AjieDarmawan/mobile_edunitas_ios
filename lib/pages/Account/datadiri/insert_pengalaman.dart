@@ -319,13 +319,13 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
               InSignIn = false;
             });
 
-            //Navigator.pop(context);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => (ShowPengalaman(
-                          keycode: widget.keycode,
-                        ))));
+            Navigator.pop(context, "berhasil");
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => (ShowPengalaman(
+            //               keycode: widget.keycode,
+            //             ))));
             Flushbar(
               title: "Berhasil",
               message: "Data Berhasil Disimpan",
@@ -789,7 +789,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   Widget build(BuildContext context) {
     print("_selectedIndex${_selectedIndex}");
     return WillPopScope(
-      onWillPop: _backPressed,
+      //onWillPop: _backPressed,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

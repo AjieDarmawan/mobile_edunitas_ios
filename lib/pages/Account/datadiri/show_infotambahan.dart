@@ -71,6 +71,31 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
     );
   }
 
+  void prepareBackButton() async {
+    var result = await Navigator.of(context)
+        .push(new MaterialPageRoute(
+      builder: (BuildContext context) =>
+          InsertInfoTambahan(
+            keycode: widget.keycode == null
+                ? ""
+                : widget.keycode.toString(),
+          ),
+    ));
+    if (result!=null) getInfo();
+  }
+
+  void prepareBackButtonEdit(String keycode, ShowInfotambahanModel xdatainfo) async {
+    var result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+            (InsertInfoTambahan(
+              keycode: keycode,
+              xdatainfo: xdatainfo,
+            ))));
+    if (result!=null) getInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -235,15 +260,7 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
                                   child: EduButtonSecond(
                                     buttonText: "Tambah",
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .push(new MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            InsertInfoTambahan(
-                                          keycode: widget.keycode == null
-                                              ? ""
-                                              : widget.keycode.toString(),
-                                        ),
-                                      ));
+                                      prepareBackButton();
                                     },
                                   ),
                                 )
@@ -440,15 +457,7 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
                                 height: 32,
                                 child: EduButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                (InsertInfoTambahan(
-                                                  keycode: keycode,
-                                                  xdatainfo: xdatainfo,
-                                                ))));
-                                    //edit(context,xpengalaman);
+                                    prepareBackButtonEdit(keycode, xdatainfo);
                                   },
                                   buttonText: "Edit",
                                 ),
