@@ -270,6 +270,9 @@ class _SingkronKampusState extends State<SingkronKampus> {
           valkelas.toString() == null ||
           valkelas.toString() == "null" ||
           valkelas.toString() == "") {
+        setState(() {
+          InSignIn = false;
+        });
         Flushbar(
           title: "Error",
           message: "Mohon Di lengkapi Terlebih dahulu",
@@ -441,7 +444,7 @@ class _SingkronKampusState extends State<SingkronKampus> {
     print("valkampus${valkampus}");
 
     return Scaffold(
-      backgroundColor: CupertinoColors.systemGrey,
+      backgroundColor: CupertinoColors.white,
       appBar: AppBar(
         backwardsCompatibility: false,
         systemOverlayStyle: SystemUiOverlayStyle(
