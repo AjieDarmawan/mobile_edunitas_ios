@@ -140,13 +140,13 @@ class _BahasaDatadiriState extends State<BahasaDatadiri> {
               InSignIn = false;
             });
 
-            //Navigator.pop(context);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => (ShowKeterampilan(
-                          keycode: widget.keycode,
-                        ))));
+            Navigator.pop(context, 'berhasil');
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => (ShowKeterampilan(
+            //               keycode: widget.keycode,
+            //             ))));
             Flushbar(
               title: "Berhasil",
               message: "Data Berhasil Disimpan",

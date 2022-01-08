@@ -82,6 +82,34 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
     );
   }
 
+  void prepareBackButtonKeterampilan() async {
+    var result = await Navigator.of(context)
+        .push(new MaterialPageRoute(
+      builder: (BuildContext context) =>
+          KemampuanDatadiri(
+            keycode: widget.keycode == null
+                ? ""
+                : widget.keycode.toString(),
+            status: "insert",
+          ),
+    ));
+    if (result!=null) getkemampuan();
+  }
+
+  void prepareBackButtonBahasa() async {
+    var result = await Navigator.of(context)
+        .push(new MaterialPageRoute(
+      builder: (BuildContext context) =>
+          BahasaDatadiri(
+            keycode: widget.keycode == null
+                ? ""
+                : widget.keycode.toString(),
+            status: "insert",
+          ),
+    ));
+    if (result!=null) getbahasa();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -184,16 +212,7 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                             child: EduButtonSecond(
                               buttonText: "Tambah",
                               onPressed: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      KemampuanDatadiri(
-                                    keycode: widget.keycode == null
-                                        ? ""
-                                        : widget.keycode.toString(),
-                                    status: "insert",
-                                  ),
-                                ));
+                                prepareBackButtonKeterampilan();
                               },
                             ),
                           ),
@@ -322,16 +341,7 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                             child: EduButtonSecond(
                               buttonText: "Tambah",
                               onPressed: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      BahasaDatadiri(
-                                    keycode: widget.keycode == null
-                                        ? ""
-                                        : widget.keycode.toString(),
-                                    status: "insert",
-                                  ),
-                                ));
+                                prepareBackButtonBahasa();
                               },
                             ),
                           ),
