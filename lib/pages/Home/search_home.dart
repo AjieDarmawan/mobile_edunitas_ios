@@ -10,20 +10,22 @@ class SearchHome extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
       primaryColor: mainColor1,
+      brightness: Brightness.dark,
       primaryIconTheme: IconThemeData(
         color: Colors.white,
       ),
       textTheme: TextTheme(
-        title: TextStyle(
+        subtitle1: TextStyle(
           color: Colors.white,
           fontSize: 18,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: InputBorder.none,
         hintStyle: Theme.of(context)
             .textTheme
-            .title
-            .copyWith(color: Colors.white.withOpacity(0.5)),
+            .bodyText2
+            .copyWith(fontSize: 18, color: Colors.white.withOpacity(0.8)),
       ),
     );
   }
@@ -67,7 +69,7 @@ class SearchHome extends SearchDelegate {
   Future<List<Photo>> getSearch() async {
     List<Photo> data;
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus_home"), body: {
+        await http.post(ConstanUrl().baseUrl + "search_campus_home", body: {
       'search': selectedResult != "" ? selectedResult : query,
     });
     data = Photo.parseList(json.decode(response.body));
@@ -77,62 +79,68 @@ class SearchHome extends SearchDelegate {
   Future<List<Photo>> getPopuler() async {
     List<Photo> data;
     final response =
-        await http.get(Uri.parse("https://dev-api.edunitas.com/list_campus_logo"));
+        await http.get("https://dev-api.edunitas.com/list_campus_logo");
     data = Photo.parseList(json.decode(response.body));
     return data;
   }
 
-  Widget _hasilKosong(var context){
+  Widget _hasilKosong(var context) {
     return Center(
         child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text('Kampus yang kamu cari tidak ditemukan', style: blackFontStyle2, textAlign: TextAlign.center,),
-        )
-    );
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        'Kampus yang kamu cari tidak ditemukan',
+        style: blackFontStyle2,
+        textAlign: TextAlign.center,
+      ),
+    ));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder(
-        future: getSearch(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.hasError);
-          List<Photo> results = snapshot.data;
-          var resleng = results == null ? 0 : results.length;
-          if (resleng == 0) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/1.2,
-              child: _hasilKosong(context),
-            );
-          } else {
-            Photo dongs = results[0];
-            print("Dangs=" + dongs.singkatan);
-            return SingleChildScrollView(
-              child: Container(
-                //api kampus search
-                child: ListView.builder(
-                  itemCount: results.length == 0 ? 0 : results.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, i) {
-                    print("wwwkk " + results[0].toString());
-                    final Photo xkampus = results[i];
-                    return ListKampusCard(
-                      campus: xkampus,
-                      routef: 'Home',
-                      nilaiunitarea: "",
-                      nilaikelas: "",
-                      nilaijurusan: "",
-                      nilai: "1",
-                      key_enter: 1,
-                    );
-                  },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: FutureBuilder(
+          future: getSearch(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.hasError);
+            List<Photo> results = snapshot.data;
+            var resleng = results == null ? 0 : results.length;
+            if (resleng == 0) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 1.2,
+                child: _hasilKosong(context),
+              );
+            } else {
+              Photo dongs = results[0];
+              print("Dangs=" + dongs.singkatan);
+              return SingleChildScrollView(
+                child: Container(
+                  //api kampus search
+                  child: ListView.builder(
+                    itemCount: results.length == 0 ? 0 : results.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, i) {
+                      print("wwwkk " + results[0].toString());
+                      final Photo xkampus = results[i];
+                      return ListKampusCard(
+                        campus: xkampus,
+                        routef: 'Home',
+                        nilaiunitarea: "",
+                        nilaikelas: "",
+                        nilaijurusan: "",
+                        nilai: "1",
+                        key_enter: 1,
+                      );
+                    },
+                  ),
                 ),
-              ),
-            );
-          }
-        });
+              );
+            }
+          }),
+    );
   }
 
   final List<String> listExample;
@@ -142,34 +150,39 @@ class SearchHome extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     //List<String> suggestionList = [];
     if (query == '') {
-      return FutureBuilder(
-        future: getPopuler(),
-        builder: (context, pop) {
-          if (pop.hasError) print(pop.hasError);
-          List<Photo> results = pop.data;
-          var popleng = results == null ? 0 : results.length;
-          if (popleng == 0) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Container(
-              padding: EdgeInsets.fromLTRB(20,20,20,0),
-              child: Column(
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: FutureBuilder(
+          future: getPopuler(),
+          builder: (context, pop) {
+            if (pop.hasError) print(pop.hasError);
+            List<Photo> results = pop.data;
+            var popleng = results == null ? 0 : results.length;
+            if (popleng == 0) {
+              return Center(
+                child: SpinKitThreeBounce(
+                  color: mainColor1,
+                ),
+              );
+            } else {
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Kampus populer',
-                    style: blackFontStyle2,
+                  Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Text(
+                      'Kampus populer',
+                      style: blackFontStyle2,
+                    ),
                   ),
-                  SizedBox(height: 20),
                   Expanded(
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      color: Colors.white,
+                      width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
-                          itemCount: popleng<6?popleng:6,
+                          physics: BouncingScrollPhysics(),
+                          padding: EdgeInsets.symmetric(horizontal: 24.0),
+                          itemCount: popleng < 6 ? popleng : 6,
                           itemBuilder: (context, index) {
                             final xdatakampus = results[index];
                             return GestureDetector(
@@ -180,8 +193,8 @@ class SearchHome extends SearchDelegate {
                                     Row(
                                       children: [
                                         ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
                                           child: Image.network(
                                             xdatakampus.logo,
                                             height: 50,
@@ -208,63 +221,67 @@ class SearchHome extends SearchDelegate {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                        (HomeDetailPage(
-                                          campus: xdatakampus,
-                                          routef: 'HomeMain',
-                                        ))));
+                                        builder: (context) => (HomeDetailPage(
+                                              campus: xdatakampus,
+                                              routef: 'HomeMain',
+                                            ))));
                               },
                             );
                           }),
                     ),
                   ),
                 ],
-              ),
-            );
-          }
-        },
-      );
-    } else {
-      return FutureBuilder(
-          future: getSearch(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) print(snapshot.hasError);
-            List<Photo> results = snapshot.data;
-            var resleng = results == null ? 0 : results.length;
-            if (resleng == 0) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/1.2,
-                child: _hasilKosong(context),
-              );
-            } else {
-              return Container(
-                height: MediaQuery.of(context).size.height / 2,
-                color: Colors.white,
-                child: ListView.builder(
-                  itemCount: resleng,
-                  itemBuilder: (context, index) {
-                    if (index < 6) {
-                      print('results[index].nama' + results[index].singkatan);
-                      return ListTile(
-                        title: Text(
-                          results[index].singkatan,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        leading: Icon(Icons.search),
-                        onTap: () {
-                          query = results[index].singkatan;
-                          showResults(context);
-                        },
-                      );
-                    } else {
-                      return Container();
-                    }
-                  },
-                ),
               );
             }
-          });
+          },
+        ),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: FutureBuilder(
+            future: getSearch(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) print(snapshot.hasError);
+              List<Photo> results = snapshot.data;
+              var resleng = results == null ? 0 : results.length;
+              if (resleng == 0) {
+                return Center(
+                  child: _hasilKosong(context),
+                );
+              } else {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.white,
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: resleng,
+                    itemBuilder: (context, index) {
+                      if (index < 6) {
+                        print('results[index].nama' + results[index].singkatan);
+                        return ListTile(
+                          title: Text(
+                            results[index].singkatan,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          leading: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                          onTap: () {
+                            query = results[index].singkatan;
+                            showResults(context);
+                          },
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
+                );
+              }
+            }),
+      );
     }
   }
 }
