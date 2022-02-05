@@ -1305,9 +1305,8 @@ class _DaftarNonLoginState extends State<DaftarNonLogin> {
                     onStepContinue: next,
                     onStepTapped: (step) => goTo(step),
                     onStepCancel: cancel,
-                    controlsBuilder: (BuildContext context,
-                        {VoidCallback onStepContinue,
-                        VoidCallback onStepCancel}) {
+                    controlsBuilder: (BuildContext context, {VoidCallback onStepContinue,
+                      VoidCallback onStepCancel}) {
                       return Container(
                         padding: EdgeInsets.symmetric(vertical: 24),
                         child: Row(
