@@ -206,8 +206,8 @@ class _SingkronKampusState extends State<SingkronKampus> {
 
   var valkampus;
   var hintkampus;
-  void modalBottomKamp(context) {
-    showModalBottomSheet(
+  void modalBottomKamp(context) async{
+    final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
@@ -215,111 +215,11 @@ class _SingkronKampusState extends State<SingkronKampus> {
         context: context,
         builder: (context) {
           return ContentModalSearchLKampus(datalist: datakampus);
-          //   Container(
-          //   height: 480,
-          //   child: Column(
-          //     children: [
-          //       Container(
-          //         height: 48,
-          //         child: Center(
-          //           child: Container(
-          //             decoration: BoxDecoration(
-          //               borderRadius: BorderRadius.circular(2),
-          //               color: Colors.white,
-          //             ),
-          //             height: 4,
-          //             width: 32,
-          //           ),
-          //         ),
-          //       ),
-          //       Container(
-          //         width: MediaQuery.of(context).size.width,
-          //         decoration: BoxDecoration(
-          //           border: Border.all(color: mainColor1, width: 2),
-          //           color: Colors.white,
-          //           borderRadius: BorderRadius.circular(10),
-          //         ),
-          //         child: TextFormField(
-          //           cursorColor: mainColor1,
-          //           controller: etkampus,
-          //           keyboardType: TextInputType.text,
-          //           //enabled: false,
-          //           decoration: new InputDecoration(
-          //               border: InputBorder.none,
-          //               focusedBorder: InputBorder.none,
-          //               enabledBorder: InputBorder.none,
-          //               errorBorder: InputBorder.none,
-          //               disabledBorder: InputBorder.none,
-          //               contentPadding:
-          //               EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
-          //               hintText: "Cari Kampus"),
-          //           onChanged: (string) {
-          //             setState(() {
-          //               // ftempKampus = tempKampus
-          //               //     .where((u) => (u.nama
-          //               //         .toLowerCase()
-          //               //         .contains(string.toLowerCase())))
-          //               //     .toList();
-          //               // datakampus = [];
-          //               // datakampus = ftempKampus;
-          //               // lenght = ftempKampus.length;
-          //               //print("hdata_th: " + datakampus.toString());
-          //               //lenght = 0;
-          //               //print("hdata_nao: " + datakampus.toString());
-          //               _debouncer.run(() {
-          //                 searchKampus(string);
-          //               });
-          //             });
-          //           },
-          //         ),
-          //       ),
-          //       Container(
-          //         child: Expanded(
-          //           child: datakampus.length == 0
-          //               ? Center(child: CircularProgressIndicator())
-          //               : ListView.builder(
-          //                   itemCount: datakampus.length,
-          //                   itemBuilder: (BuildContext context, int index) {
-          //                     final lastDataSipema = datakampus[index];
-          //                     return InkWell(
-          //                       onTap: () {
-          //                         setState(() {
-          //                           valkampus = lastDataSipema.singkatan;
-          //                           hintkampus = lastDataSipema.nama;
-          //                           Navigator.pop(context);
-          //                         });
-          //                       },
-          //                       child: Container(
-          //                         padding: EdgeInsets.only(
-          //                             left: 20, right: 24, top: 15),
-          //                         child: Column(
-          //                           crossAxisAlignment:
-          //                               CrossAxisAlignment.start,
-          //                           children: [
-          //                             Text(lastDataSipema.nama,
-          //                                 maxLines: 1,
-          //                                 overflow: TextOverflow.clip,
-          //                                 style: whiteFontStyle.copyWith(
-          //                                     fontWeight: FontWeight.bold)),
-          //                             SizedBox(
-          //                               height: 5,
-          //                             ),
-          //                             Divider(
-          //                               color: Colors.white38,
-          //                               thickness: 1,
-          //                             ),
-          //                           ],
-          //                         ),
-          //                       ),
-          //                     );
-          //                   },
-          //                 ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // );
         });
+    setState(() {
+      valkampus = result[0].toString();
+      hintkampus = result[1].toString();
+    });
   }
 
   var InSignIn = false;
