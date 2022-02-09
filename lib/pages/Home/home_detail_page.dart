@@ -43,7 +43,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   var dataWebJurusan = new List();
   int dataWebJurusan_lenght = 0;
   void getWebJurusan() {
-    sipemaview_model().getBiayaSipema_web(widget.campus.kode,widget.campus.webacid).then((value) {
+    sipemaview_model()
+        .getBiayaSipema_web(widget.campus.kode, widget.campus.webacid)
+        .then((value) {
       setState(() {
         dataWebJurusan = value;
         dataWebJurusan_lenght = dataWebJurusan.length;
@@ -1394,10 +1396,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                     EdgeInsets.only(right: 5),
                                               ),
                                             ),
-                                            Text(
-                                              "${xweb.label}",
-                                              style: blackFontStyle3.copyWith(
-                                                  fontSize: 14),
+                                            Expanded(
+                                              child: Text(
+                                                "${xweb.label}",
+                                                style: blackFontStyle3.copyWith(
+                                                    fontSize: 14),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                              ),
                                             ),
                                           ],
                                         ),
