@@ -327,7 +327,7 @@ class _MePartnerDonasiState extends State<MePartnerDonasi> {
                                 padding: EdgeInsets.only(bottom: 16),
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemCount: lenght,
+                                itemCount: datadonasi.length,
                                 itemBuilder: (context, index) {
                                   var _konten = datadonasi[index];
                                   double _persen = double.parse("0." +
