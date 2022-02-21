@@ -51,22 +51,34 @@ class _MeDonasiState extends State<MeDonasi> {
               itemBuilder: (context, index) {
                 final xdatadonasi = datadonasi[index];
                 return xdatadonasi.donaturname.toString() == "hendler_null"
-                    ? Center(
-                      child: Container(
-                        //  color: Colors.green,
-                          width: double.infinity,
-                          height: 500,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                             // width: MediaQuery.of(context).size.width * 0.9,
-                              height: 100,
-                              child: Text("Tidak Ada Donasi", style: blackFontStyle1,),
-                              //color: Colors.amber,
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height - 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 250,
+                              child:
+                                  Image.asset("assets/noTransactionxhdpi.png"),
                             ),
-                          ),
+                            SizedBox(
+                              height: 24.0,
+                            ),
+                            Text(
+                              "Tidak Ada Donasi",
+                              style: blueFontStyle2Bold,
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            Text(
+                              "Anda belum memiliki daftar donasi",
+                              style: blackFontStyle3,
+                            ),
+                          ],
                         ),
-                    )
+                      )
                     : Stack(
                         children: [
                           Container(
