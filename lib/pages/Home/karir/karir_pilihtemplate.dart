@@ -2393,6 +2393,7 @@ class KarirPilihTemplateState extends State<KarirPilihTemplate> {
               child: TextFormField(
                 controller: etkodepos_data_lengkap,
                 style: TextStyle(fontSize: 16.0, color: Colors.black),
+                maxLength: 5,
                 //keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   contentPadding:

@@ -142,13 +142,13 @@ class _InsertInfoTambahanState extends State<InsertInfoTambahan> {
             InSignIn = false;
           });
 
-          //Navigator.pop(context);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => (ShowInfoTambahan(
-                        keycode: widget.keycode,
-                      ))));
+          Navigator.pop(context, 'berhasil');
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => (ShowInfoTambahan(
+          //               keycode: widget.keycode,
+          //             ))));
           Flushbar(
             title: "Berhasil",
             message: "Data Berhasil Disimpan",

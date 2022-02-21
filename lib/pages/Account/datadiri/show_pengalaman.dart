@@ -69,6 +69,33 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
     );
   }
 
+  void prepareBackButton() async {
+    var result = await Navigator.of(context)
+        .push(new MaterialPageRoute(
+      builder: (BuildContext context) =>
+          PenglamanDatadiri(
+            keycode: widget.keycode == null
+                ? ""
+                : widget.keycode.toString(),
+          ),
+    ));
+    if (result!=null) getPengalaman();
+  }
+
+  void prepareBackButtonEdit(String keycode, ShowPengalamanModel xdatainfo) async {
+    var result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+            (editPengalaman(
+              keycode: keycode,
+              xpengalaman: xdatainfo,
+            ))));
+    if (result!=null) {
+      getPengalaman();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -171,15 +198,7 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
                             child: EduButtonSecond(
                               buttonText: "Tambah",
                               onPressed: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      PenglamanDatadiri(
-                                    keycode: widget.keycode == null
-                                        ? ""
-                                        : widget.keycode.toString(),
-                                  ),
-                                ));
+                                prepareBackButton();
                               },
                             ),
                           ),
@@ -490,14 +509,7 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
                                 height: 32,
                                 child: EduButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                (editPengalaman(
-                                                  keycode: keycode,
-                                                  xpengalaman: xpengalaman,
-                                                ))));
+                                    prepareBackButtonEdit(keycode, xpengalaman);
                                     //edit(context,xpengalaman);
                                   },
                                   buttonText: "Edit",

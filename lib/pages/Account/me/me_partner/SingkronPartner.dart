@@ -1621,6 +1621,7 @@ class _SingkronPartnerState extends State<SingkronPartner> {
                         cursorColor: mainColor1,
                         controller: etkodepos,
                         keyboardType: TextInputType.phone,
+                        maxLength: 5,
                         //enabled: false,
                         decoration: new InputDecoration(
                             border: OutlineInputBorder(

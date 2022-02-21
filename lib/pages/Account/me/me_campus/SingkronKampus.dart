@@ -47,10 +47,14 @@ class _SingkronKampusState extends State<SingkronKampus> {
   }
 
   List<KampusMasterModel> datakampus = new List();
+  List tempKampus = [];
+  List ftempKampus = [];
   void getkampus() async {
     Masterview_model().kampus_master().then((value2) {//handled
       setState(() {
         datakampus = value2;
+        tempKampus = datakampus;
+        ftempKampus = datakampus;
       });
     }).catchError((erro){
       onErrHandling(erro);
@@ -174,80 +178,48 @@ class _SingkronKampusState extends State<SingkronKampus> {
         });
   }
 
+  TextEditingController etkampus = new TextEditingController();
+
+  int lenght = 0;
+  void searchKampus(dataSearch) async {
+    List<KampusMasterModel> dataSearchKampus = new List();
+    Masterview_model().kampus_master().then((value) {
+      //handled
+      dataSearchKampus = value;
+      setState(() {
+        datakampus = [];
+        ftempKampus = dataSearchKampus
+            .where((u) => (u.nama
+                .toLowerCase()
+                .contains(dataSearch.toLowerCase())))
+            .toList();
+        datakampus = ftempKampus;
+        //datakampus.addAll(dataSearchKampus);
+        //tempKampus = datakampus;
+        //ftempKampus = datakampus;
+        lenght = datakampus.length;
+      });
+    }).catchError((erro) {
+      onErrHandling(erro);
+    });
+  }
+
   var valkampus;
   var hintkampus;
-  void modalBottomKamp(context) {
-    showModalBottomSheet(
+  void modalBottomKamp(context) async{
+    final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return Container(
-            height: 480,
-            child: Column(
-              children: [
-                Container(
-                  height: 48,
-                  child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.white,
-                      ),
-                      height: 4,
-                      width: 32,
-                    ),
-                  ),
-                ),
-                Container(
-                  child: Expanded(
-                    child: datakampus.length == 0
-                        ? Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            itemCount: datakampus.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final lastDataSipema = datakampus[index];
-                              return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    valkampus = lastDataSipema.singkatan;
-                                    hintkampus = lastDataSipema.nama;
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 24, top: 15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(lastDataSipema.nama,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.clip,
-                                          style: whiteFontStyle.copyWith(
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Divider(
-                                        color: Colors.white38,
-                                        thickness: 1,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                ),
-              ],
-            ),
-          );
+          return ContentModalSearchLKampus(datalist: datakampus);
         });
+    setState(() {
+      valkampus = result[0].toString();
+      hintkampus = result[1].toString();
+    });
   }
 
   var InSignIn = false;
@@ -270,6 +242,9 @@ class _SingkronKampusState extends State<SingkronKampus> {
           valkelas.toString() == null ||
           valkelas.toString() == "null" ||
           valkelas.toString() == "") {
+        setState(() {
+          InSignIn = false;
+        });
         Flushbar(
           title: "Error",
           message: "Mohon Di lengkapi Terlebih dahulu",
@@ -441,7 +416,7 @@ class _SingkronKampusState extends State<SingkronKampus> {
     print("valkampus${valkampus}");
 
     return Scaffold(
-      backgroundColor: CupertinoColors.systemGrey,
+      backgroundColor: CupertinoColors.white,
       appBar: AppBar(
         backwardsCompatibility: false,
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -718,4 +693,152 @@ class _SingkronKampusState extends State<SingkronKampus> {
       ),
     );
   }
+}
+
+class ContentModalSearchLKampus extends StatefulWidget{
+  var datalist;
+  ContentModalSearchLKampus({Key key, @required this.datalist}): super(key : key);
+
+  @override
+  ContentModalSearchLKampusState createState() => new ContentModalSearchLKampusState();
+
+}
+
+class ContentModalSearchLKampusState extends State<ContentModalSearchLKampus>{
+
+  TextEditingController etsearchkampus = new TextEditingController();
+  List<KampusMasterModel> tempKampus;
+  List<KampusMasterModel> ftempKampus;
+  List<String> result = ["", ""];
+  int listLenght = 0;
+
+  @override
+  initState(){
+    super.initState();
+    ftempKampus = widget.datalist;
+    tempKampus = widget.datalist;
+    listLenght = ftempKampus.length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        height: MediaQuery.of(context).size.height - 200,
+        child: Column(
+          children: [
+            Container(
+              height: 48,
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: Colors.white,
+                  ),
+                  height: 4,
+                  width: 32,
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                border: Border.all(color: mainColor1, width: 2),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextFormField(
+                cursorColor: mainColor1,
+                controller: etsearchkampus,
+                keyboardType: TextInputType.text,
+                //enabled: false,
+                decoration: new InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.only(
+                        left: 10, bottom: 5, top: 5, right: 10),
+                    hintText: "Cari Wilayah"),
+                onChanged: (string) {
+                  setState(() {
+                    ftempKampus = tempKampus
+                        .where((u) => (u.nama
+                        .toLowerCase()
+                        .contains(string.toLowerCase())))
+                        .toList();
+                    listLenght = ftempKampus.length;
+                  });
+                },
+              ),
+            ),
+            Container(
+              child: Expanded(
+                child: listLenght == 0
+                    ?
+                Column(
+                  children: [
+                    Text("Tidak ditemukan",
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        style: whiteFontStyle.copyWith(
+                            fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                      color: Colors.white38,
+                      thickness: 1,
+                    ),
+                  ],
+                )
+                    : ListView.builder(
+                  itemCount: listLenght,
+                  itemBuilder: (BuildContext context, int index) {
+                    var lastDataLokasi;
+                    lastDataLokasi = ftempKampus[index];
+
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          result[0]= lastDataLokasi.id.toString();
+                          result[1]= lastDataLokasi.nama.toString();
+                          Navigator.pop(context, result);
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 20, right: 24, top: 15),
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(lastDataLokasi.nama,
+                                maxLines: 1,
+                                overflow: TextOverflow.clip,
+                                style: whiteFontStyle.copyWith(
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Divider(
+                              color: Colors.white38,
+                              thickness: 1,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
+          ],
+        ),
+      ),
+    );
+  }
+
 }

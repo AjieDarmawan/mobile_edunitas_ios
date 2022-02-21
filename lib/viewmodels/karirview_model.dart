@@ -453,6 +453,7 @@ class KarirViewModel {
 
   Future hapus_infotambahan(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
+    print("hapus_info_tambahan_id: "+id);
     final response =
         await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_infotambahan"), body: {
       'id': id,

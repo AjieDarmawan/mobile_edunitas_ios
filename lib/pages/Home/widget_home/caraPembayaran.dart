@@ -100,7 +100,7 @@ class _CaraPembayaranState extends State<CaraPembayaran> {
                                       "Total Angsuran Petama",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .body2
+                                          .bodyText2
                                           .copyWith(color: mainColor1),
                                     ),
                                   ),
@@ -253,7 +253,7 @@ class _CaraPembayaranState extends State<CaraPembayaran> {
                                       "Mobile Banking",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .body2
+                                          .bodyText2
                                           .copyWith(color: mainColor1),
                                     ),
                                   ),

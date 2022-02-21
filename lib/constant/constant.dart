@@ -10,6 +10,7 @@ final String AGENSILOGIN = "agensiLogin";
 
 
 class ConstanUrl {
-  final baseUrl = "https://dev-api.edunitas.com/";
+  //final baseUrl = "https://dev-api.edunitas.com/";
+  final baseUrl = "https://mobile-api.edunitas.com/";
   final baseImageUrl = "https://gawe.id/api_apps/apps/datadiri4";
 }

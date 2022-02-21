@@ -311,13 +311,14 @@ class _editPengalamanState extends State<editPengalaman> {
               InSignIn = false;
             });
 
-            //Navigator.pop(context);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => (ShowPengalaman(
-                          keycode: widget.keycode,
-                        ))));
+            Navigator.pop(context, "berhasil");
+            Navigator.pop(context);
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => (ShowPengalaman(
+            //               keycode: widget.keycode,
+            //             ))));
             Flushbar(
               title: "Berhasil",
               message: "Data Berhasil Disimpan",
@@ -1382,6 +1383,7 @@ class _editPengalamanState extends State<editPengalaman> {
                         cursorColor: mainColor1,
                         controller: etkodepos,
                         keyboardType: TextInputType.phone,
+                        maxLength: 5,
                         //enabled: false,
                         decoration: new InputDecoration(
                             border: InputBorder.none,
