@@ -46,8 +46,8 @@ class _MenuHomeState extends State<MenuHome> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => (Home_detail(
-                                    key_enter: 1,
-                                  ))));
+                                key_enter: 1,
+                              ))));
                     },
                   ),
                 ),
@@ -81,8 +81,8 @@ class _MenuHomeState extends State<MenuHome> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => (PendaftaranOnline(
-                                  // key_enter: 1,
-                                  ))));
+                                // key_enter: 1,
+                              ))));
                     },
                   ),
                 ),
@@ -115,15 +115,15 @@ class _MenuHomeState extends State<MenuHome> {
 
                         widget.keycode == "null"
                             ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        (PartnerKampus_Main())))
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                (PartnerKampus_Main())))
                             : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => (SingkronPartner(
-                                        keycode: widget.keycode))));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => (SingkronPartner(
+                                    keycode: widget.keycode))));
                       }),
                     ),
                   ),
@@ -151,10 +151,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-learning.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://kuliahonline.edunitas.com/');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://kuliahonline.edunitas.com/'),
                     ),
                   ),
                   Container(
@@ -181,10 +178,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-agentlm.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://kuliahkaryawan.edunitas.com/');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://kuliahkaryawan.edunitas.com/'),
                     ),
                   ),
                   Container(
@@ -210,7 +204,7 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-agent.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (MainAgensi())));
@@ -241,9 +235,7 @@ class _MenuHomeState extends State<MenuHome> {
                       icon: Image.asset('assets/home/edu-intro-career.png'),
                       iconSize: 48,
                       onPressed: () => setState(() {
-                        // _launched = _launchInBrowser(
-                        //     'https://edunitas.com/educareer/carilowongan/Full-Time/semua-wilayah/semua-pendidikan/semua-spesialisasi');
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => (KarirMain())));
@@ -263,73 +255,65 @@ class _MenuHomeState extends State<MenuHome> {
               ),
             ),
           ),
-
-          //todo donation takedown due apple strict rules
-          // Opacity(
-          //   opacity: 1,
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width / 4.3,
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         Container(
-          //           child: IconButton(
-          //             icon: Image.asset('assets/home/edu-intro-beasiswa.jpg'),
-          //             iconSize: 48,
-          //             onPressed: () => setState(() {
-          //               _launched = _launchInBrowser(
-          //                   'https://edunitas.com/educampus/beasiswa');
-          //             }),
-          //           ),
-          //         ),
-          //         Container(
-          //           //padding: EdgeInsets.symmetric(horizontal: 10.0),
-          //           child: Text(
-          //             "Permohonan Beasiswa",
-          //             textAlign: TextAlign.center,
-          //             style: blueFontStyle.copyWith(
-          //                 fontSize: 10, fontWeight: FontWeight.bold),
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Opacity(
-          //   opacity: 1,
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width / 4.5,
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         Container(
-          //           child: IconButton(
-          //             icon: Image.asset('assets/home/edu-intro-donation.png'),
-          //             iconSize: 48,
-          //             onPressed: (){
-          //               // _launched = _launchInBrowser(
-          //               //     'https://edunitas.com/edudonation');
-          //               Navigator.push(
-          //                   context,
-          //                   MaterialPageRoute(
-          //                       builder: (context) => MainDonasi()));
-          //                       //builder: (context) => BuktiBayarDonasi()));
-          //             }),
-          //           ),
-          //         Container(
-          //           padding: EdgeInsets.symmetric(horizontal: 10.0),
-          //           child: Text(
-          //             "Pemberi Beasiswa",
-          //             textAlign: TextAlign.center,
-          //             style: blueFontStyle.copyWith(
-          //                 fontSize: 10, fontWeight: FontWeight.bold),
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
+          Opacity(
+            opacity: 1,
+            child: Container(
+              width: MediaQuery.of(context).size.width / 4.3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: IconButton(
+                      icon: Image.asset('assets/home/edu-intro-beasiswa.jpg'),
+                      iconSize: 48,
+                      onPressed: () => showAlertToBrowser(context, 'https://edunitas.com/educampus/beasiswa'),
+                    ),
+                  ),
+                  Container(
+                    //padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "Permohonan Beasiswa",
+                      textAlign: TextAlign.center,
+                      style: blueFontStyle.copyWith(
+                          fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Opacity(
+            opacity: 1,
+            child: Container(
+              width: MediaQuery.of(context).size.width / 4.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: IconButton(
+                        icon: Image.asset('assets/home/edu-intro-donation.png'),
+                        iconSize: 48,
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainDonasi()));
+                          //builder: (context) => BuktiBayarDonasi()));
+                        }),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "Pemberi Beasiswa",
+                      textAlign: TextAlign.center,
+                      style: blueFontStyle.copyWith(
+                          fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           Opacity(
             opacity: 1,
             child: Container(
@@ -341,10 +325,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-pas.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched =
-                            _launchInBrowser('https://edunitas.com/edupas');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://edunitas.com/edupas'),
                     ),
                   ),
                   Container(
@@ -370,12 +351,12 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-promotion.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (PromosiTab(
-                                    key_enter: 1,
-                                  ))));
+                                key_enter: 1,
+                              ))));
                     },
                   ),
                 ),
@@ -401,12 +382,12 @@ class _MenuHomeState extends State<MenuHome> {
                     icon: Image.asset('assets/home/edu-intro-news.png'),
                     iconSize: 48,
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (BeritatTab(
-                                    key_enter: 1,
-                                  ))));
+                                key_enter: 1,
+                              ))));
                     },
                   ),
                 ),
@@ -433,10 +414,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-forum.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched =
-                            _launchInBrowser('https://edunitas.com/eduforum');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://edunitas.com/eduforum'),
                     ),
                   ),
                   Container(
@@ -463,10 +441,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-bimbel.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://wiki.edunitas.com/ind/114-10/Ensiklopedi-Dunia-Berbahasa-Indonesia_2317__wiki-edunitas.html');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://wiki.edunitas.com/ind/114-10/Ensiklopedi-Dunia-Berbahasa-Indonesia_2317__wiki-edunitas.html'),
                     ),
                   ),
                   Container(
@@ -492,12 +467,9 @@ class _MenuHomeState extends State<MenuHome> {
                   Container(
                     child: IconButton(
                       icon:
-                          Image.asset('assets/home/Icon eduNitas Baru-23.png'),
+                      Image.asset('assets/home/Icon eduNitas Baru-23.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://wiki.edunitas.com/q1a/114-10/Al-Quran-Online-Digital_home_2222221231_eduNitas.html');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://wiki.edunitas.com/q1a/114-10/Al-Quran-Online-Digital_home_2222221231_eduNitas.html'),
                     ),
                   ),
                   Container(
@@ -524,10 +496,7 @@ class _MenuHomeState extends State<MenuHome> {
                     child: IconButton(
                       icon: Image.asset('assets/home/edu-intro-library.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://wiki.edunitas.com/IT/114-10/Informatika-Komputer_1_eduNitas.html');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://wiki.edunitas.com/IT/114-10/Informatika-Komputer_1_eduNitas.html'),
                     ),
                   ),
                   Container(
@@ -553,12 +522,9 @@ class _MenuHomeState extends State<MenuHome> {
                   Container(
                     child: IconButton(
                       icon:
-                          Image.asset('assets/home/Icon eduNitas Baru-22.png'),
+                      Image.asset('assets/home/Icon eduNitas Baru-22.png'),
                       iconSize: 48,
-                      onPressed: () => setState(() {
-                        _launched = _launchInBrowser(
-                            'https://wiki.edunitas.com/d3/114-10/Tes-Psikologi-Latihan-Soal_home-psikotes_1__eduNitas.html');
-                      }),
+                      onPressed: () => showAlertToBrowser(context, 'https://wiki.edunitas.com/d3/114-10/Tes-Psikologi-Latihan-Soal_home-psikotes_1__eduNitas.html'),
                     ),
                   ),
                   Container(
@@ -577,5 +543,21 @@ class _MenuHomeState extends State<MenuHome> {
         ],
       ),
     );
+  }
+
+  void showAlertToBrowser(BuildContext context, link) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text("Anda akan dialihkan ke aplikasi browser"),
+          actions: [
+            TextButton(child: Text('Cancel'), onPressed: (){Navigator.pop(context);},),
+            TextButton(child: Text('Lanjutkan'), onPressed: () => setState(() {
+              _launched = _launchInBrowser(
+                  '$link');
+            }),
+            ),
+          ],
+        ));
   }
 }

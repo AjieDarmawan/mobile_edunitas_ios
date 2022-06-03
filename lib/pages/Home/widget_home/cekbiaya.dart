@@ -62,10 +62,10 @@ class _CekbiayaState extends State<Cekbiaya> {
         Map<String, Map<String, Sipema>> data = value;
         Sipema tempData1 = Sipema.fromJson(data.values.first);
         List<Map<String, Sipema>> list =
-            data.entries.map((e) => e.value).toList();
+        data.entries.map((e) => e.value).toList();
         List<Iterable<Sipema>> finalList = list.map((e) => e.values).toList();
         final lastList =
-            finalList.map((e) => e.map((e) => e).toList()).toList();
+        finalList.map((e) => e.map((e) => e).toList()).toList();
         List<List<Sipema>> dataSipema2 = lastList.map((e) => e).toList();
         dataSipema = dataSipema2;
         //List<Sipema> lastDataSipema = dataSipema[0];
@@ -79,10 +79,10 @@ class _CekbiayaState extends State<Cekbiaya> {
   }
 
   //master spb
-  List<AngsuranSpbModel> dataAngsurSpb = new List();
+  List<AngsuranMasterModel> dataAngsurSpb = new List();
   void getBiayaSipemaAngsur() {
     sipemaview_model()
-        .getBiayaSipemaAngsuran(
+        .getBiayaSipemaAngsuranSPBMaster(
       widget.campus.kode.toString(),
       kodejurusan.length == 0
           ? widget.kodejurusan.toString()
@@ -105,25 +105,24 @@ class _CekbiayaState extends State<Cekbiaya> {
   }
 
   //angsuran spb
-  List<AngsuranSpbAngsuranModel> dataAngsurSpbAngsur = new List();
-   var valwaktuspb = '';
+  List<AngsuranModel> dataAngsurSpbAngsur = new List();
+  var valwaktuspb = '';
   void getBiayaSipemaAngsurSpb() {
-    print("get_spb");
     sipemaview_model()
         .getBiayaSipemaAngsuranSpb(
-            widget.campus.kode.toString(),
-            kodejurusan.length == 0
-                ? widget.kodejurusan.toString()
-                : kodejurusan.toString(),
-            kodeprogram.length == 0
-                ? widget.kodeprogram.toString()
-                : kodeprogram.toString(),
-             valwaktuspb.toString(),
-              namaKelompok.length == 0
+      widget.campus.kode.toString(),
+      kodejurusan.length == 0
+          ? widget.kodejurusan.toString()
+          : kodejurusan.toString(),
+      kodeprogram.length == 0
+          ? widget.kodeprogram.toString()
+          : kodeprogram.toString(),
+      valwaktuspb.toString(),
+      namaKelompok.length == 0
           ? widget.namaKelompok.toString()
           : namaKelompok.toString(),
 
-          )
+    )
         .then((value1) {//handled
       setState(() {
         dataAngsurSpbAngsur = value1;
@@ -135,19 +134,19 @@ class _CekbiayaState extends State<Cekbiaya> {
             //int.parse(biayapendaftaran) +
             int.parse(biayajaket);
 
-          //print("wkwkwkwkk${valwaktuspb}");
+        //print("wkwkwkwkk${valwaktuspb}");
         // print("wkwkwkwkk${valwaktuspb.toString() == "1"  ? 0 : dataAngsurSpbAngsur[1].biayaAngsuran }");
 
         var angsuranselanjutnyaspb = biayaSpb != 0
             ? valwaktuspb.toString() == "1"
-                ? 0
-                : dataAngsurSpbAngsur[1].biayaAngsuran
+            ? 0
+            : dataAngsurSpbAngsur[1].biayaAngsuran
             : 0;
 
         var angsuranselanjutnyaspp = biayaSpp != 0
             ? valwaktuspp.toString() == "1"
-                ? 0
-                : dataAngsurSppAngsur[1].biayaAngsuran
+            ? 0
+            : dataAngsurSppAngsur[1].biayaAngsuran
             : 0;
 
         angsuranselanjutnya = angsuranselanjutnyaspb + angsuranselanjutnyaspp;
@@ -158,10 +157,10 @@ class _CekbiayaState extends State<Cekbiaya> {
   }
 
   //master spp
-  List<AngsuranSpbModel> dataAngsurSpp = new List();
+  List<AngsuranMasterModel> dataAngsurSpp = new List();
   void getBiayaSipemaAngsurSPP() {
     sipemaview_model()
-        .getBiayaSipemaAngsuranSpp(
+        .getBiayaSipemaAngsuranSPPMaster(
       widget.campus.kode.toString(),
       kodejurusan.length == 0
           ? widget.kodejurusan.toString()
@@ -183,23 +182,23 @@ class _CekbiayaState extends State<Cekbiaya> {
   }
 
   //ansuran spp
-  List<AngsuranSpbAngsuranModel> dataAngsurSppAngsur = new List();
+  List<AngsuranModel> dataAngsurSppAngsur = new List();
   var valwaktuspp = '';
   void angsurgetBiayaSipemaAngsurSpp() {
     sipemaview_model()
         .angsurangetBiayaSipemaSpp(
-            widget.campus.kode.toString(),
-            kodejurusan.length == 0
-                ? widget.kodejurusan.toString()
-                : kodejurusan.toString(),
-            kodeprogram.length == 0
-                ? widget.kodeprogram.toString()
-                : kodeprogram.toString(),
-            valwaktuspp.toString(),
-             namaKelompok.length == 0
+      widget.campus.kode.toString(),
+      kodejurusan.length == 0
+          ? widget.kodejurusan.toString()
+          : kodejurusan.toString(),
+      kodeprogram.length == 0
+          ? widget.kodeprogram.toString()
+          : kodeprogram.toString(),
+      valwaktuspp.toString(),
+      namaKelompok.length == 0
           ? widget.namaKelompok.toString()
           : namaKelompok.toString(),
-            )
+    )
         .then((value1) {//handled
       setState(() {
         dataAngsurSppAngsur = value1;
@@ -208,18 +207,17 @@ class _CekbiayaState extends State<Cekbiaya> {
             : dataAngsurSppAngsur[0].biayaAngsuran;
         angsuranpertama = biayaSpp +
             biayaSpb +
-            //int.parse(biayapendaftaran) +
             int.parse(biayajaket);
         var angsuranselanjutnyaspb = biayaSpb != 0
             ? valwaktuspb.toString() == "1"
-                ? 0
-                : dataAngsurSpbAngsur[1].biayaAngsuran
+            ? 0
+            : dataAngsurSpbAngsur[1].biayaAngsuran
             : 0;
 
         var angsuranselanjutnyaspp = biayaSpp != 0
             ? valwaktuspp.toString() == "1"
-                ? 0
-                : dataAngsurSppAngsur[1].biayaAngsuran
+            ? 0
+            : dataAngsurSppAngsur[1].biayaAngsuran
             : 0;
 
         angsuranselanjutnya = angsuranselanjutnyaspb + angsuranselanjutnyaspp;
@@ -336,8 +334,8 @@ class _CekbiayaState extends State<Cekbiaya> {
 
   @override
   Widget build(BuildContext context) {
-      //  print("wwkwkwkwkwt${defaultvaktuspb}");
-      //  print("wwkwkwkwkwt${valwaktuspb}");
+    //  print("wwkwkwkwkwt${defaultvaktuspb}");
+    //  print("wwkwkwkwkwt${valwaktuspb}");
     return Scaffold(
       appBar: AppBar(
         backwardsCompatibility: false,
@@ -355,706 +353,706 @@ class _CekbiayaState extends State<Cekbiaya> {
       ),
       body: isConn == false
           ? Center(
-              child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: SpinKitThreeBounce(
-                color: mainColor1,
-              ),
-            ))
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: SpinKitThreeBounce(
+              color: mainColor1,
+            ),
+          ))
           : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.all(10.0),
-                      color: CupertinoColors.systemGrey5,
-                      child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                padding: EdgeInsets.all(10.0),
+                color: CupertinoColors.systemGrey5,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            color: mainColor1,
+                          )),
+                    ),
+                    Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 60,
-                            child: ClipRRect(
+                              height: 60,
+                              width: 60,
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: Container(
-                                  color: mainColor1,
-                                )),
-                          ),
+                                child: Image.network(
+                                  widget.campus.logo,
+                                  // height: MediaQuery.of(context).size.height / 9,
+                                  // width: MediaQuery.of(context).size.width / 3,
+                                ),
+                              )),
                           Container(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            padding: EdgeInsets.only(left: 10),
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                    height: 60,
-                                    width: 60,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      child: Image.network(
-                                        widget.campus.logo,
-                                        // height: MediaQuery.of(context).size.height / 9,
-                                        // width: MediaQuery.of(context).size.width / 3,
-                                      ),
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.5,
-                                        child: Text(
-                                          widget.campus.nama,
-                                          style: whiteFontStyle.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(top: 5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        child: Text(
-                                          programstudi,
-                                          style: whiteFontStyle.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      // Text(programstudi),
-                                    ],
+                                  width:
+                                  MediaQuery.of(context).size.width /
+                                      1.5,
+                                  child: Text(
+                                    widget.campus.nama,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                )
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top: 5),
+                                  width:
+                                  MediaQuery.of(context).size.width /
+                                      2,
+                                  child: Text(
+                                    programstudi,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.normal),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                // Text(programstudi),
                               ],
                             ),
                           )
                         ],
-                      )),
+                      ),
+                    )
+                  ],
+                )),
+            Container(
+              margin: EdgeInsets.only(left: 20, top: 20),
+              child: Text(
+                "Rincian Biaya Kuliah",
+                style: blueFontStyle.copyWith(
+                    fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: Divider(
+                color: mainColor1,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(24, 16, 24, 8),
+              child: Text(
+                "Pilih Program Studi / Jurusan",
+                style: blackFontStyle3.copyWith(
+                    fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  bottomModal(context);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                  width: MediaQuery.of(context).size.width,
+                  height: 48,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.blueGrey)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          programstudi,
+                          style: blackFontStyle3.copyWith(fontSize: 14),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      //Flexible(child: Text(programstudilulusan, style: _styleText(2),)),
+                      Icon(
+                        Icons.navigate_next,
+                        color: mainColor1,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            //biru
+            SizedBox(
+              height: 16,
+            ),
+
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              color: Colors.blue[50],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Container(
-                    margin: EdgeInsets.only(left: 20, top: 20),
                     child: Text(
-                      "Rincian Biaya Kuliah",
+                      "Rincian Pembayaran Pertama",
                       style: blueFontStyle.copyWith(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: Divider(
-                      color: mainColor1,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(24, 16, 24, 8),
-                    child: Text(
-                      "Pilih Program Studi / Jurusan",
-                      style: blackFontStyle3.copyWith(
-                          fontSize: 12, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        bottomModal(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        margin: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-                        width: MediaQuery.of(context).size.width,
-                        height: 48,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            border: Border.all(color: Colors.blueGrey)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                programstudi,
-                                style: blackFontStyle3.copyWith(fontSize: 14),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            //Flexible(child: Text(programstudilulusan, style: _styleText(2),)),
-                            Icon(
-                              Icons.navigate_next,
-                              color: mainColor1,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
 
-                  //biru
                   SizedBox(
                     height: 16,
                   ),
-
                   Container(
-                    padding: const EdgeInsets.all(20.0),
-                    color: Colors.blue[50],
+                    padding: EdgeInsets.all(16),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: mainColor1, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           child: Text(
-                            "Rincian Pembayaran Pertama",
-                            style: blueFontStyle.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: mainColor1, width: 2),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                child: Text(
-                                  "Biaya Kuliah Untuk Lulusan",
-                                  style: blackFontStyle3.copyWith(fontSize: 14),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                child: Text(
-                                  programstudilulusan,
-                                  style: blackFontStyle3.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                child: Text(
-                                  "Program Studi :",
-                                  style: blackFontStyle3.copyWith(fontSize: 14),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                child: Text(
-                                  programstudi,
-                                  style: blackFontStyle3.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
+                            "Biaya Kuliah Untuk Lulusan",
+                            style: blackFontStyle3.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: mainColor1, width: 2),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                          child: Text(
+                            programstudilulusan,
+                            style: blackFontStyle3.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Pendaftaran",
-                                style: blackFontStyle3.copyWith(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                NumberFormat.currency(
-                                        symbol: 'IDR ',
-                                        decimalDigits: 0,
-                                        locale: 'id-ID')
-                                    .format(int.parse(biayapendaftaran)),
-                                style: blackFontStyle3.copyWith(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: mainColor1, width: 2),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Nama Biaya",
-                                  style: blueFontStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "Jumlah",
-                                  style: blueFontStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                            Divider(
-                              height: 20,
-                              thickness: 2,
-                              color: mainColor1,
-                            ),
-                            Container(
-                              child: Column(
-                                children: [
-                                  biayajaket != '0'
-                                      ? Column(
-                                          children: [
-                                            Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("Jaket",
-                                                      style: blackFontStyle3),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(double.parse(
-                                                              biayajaket)),
-                                                      style: blackFontStyle3),
-                                                ]),
-                                            Divider(
-                                              color:
-                                                  CupertinoColors.systemGrey3,
-                                              thickness: 1,
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
-                                  biayaSpb != 0
-                                      ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text("SPb ke-1",
-                                                    style: blackFontStyle3),
-                                                Text(
-                                                    NumberFormat.currency(
-                                                            symbol: 'IDR ',
-                                                            decimalDigits: 0,
-                                                            locale: 'id-ID')
-                                                        .format(biayaSpb),
-                                                    style: blackFontStyle3),
-                                              ],
-                                            ),
-                                            Text(
-                                              "Sumbangan Pengembangan",
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Divider(
-                                              color:
-                                                  CupertinoColors.systemGrey3,
-                                              thickness: 1,
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
-                                  biayaSpp != 0
-                                      ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "SPP ke-1",
-                                                  style: blackFontStyle3,
-                                                ),
-                                                Text(
-                                                    NumberFormat.currency(
-                                                            symbol: 'IDR ',
-                                                            decimalDigits: 0,
-                                                            locale: 'id-ID')
-                                                        .format(biayaSpp),
-                                                    style: blackFontStyle3)
-                                              ],
-                                            ),
-                                            Text(
-                                              "Sumbangan Pendidikan Persemester",
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Divider(
-                                              color:
-                                                  CupertinoColors.systemGrey3,
-                                              thickness: 1,
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(vertical: 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Angsuran Pertama",
-                                          style: blackFontStyle3.copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          NumberFormat.currency(
-                                                  symbol: 'IDR ',
-                                                  decimalDigits: 0,
-                                                  locale: 'id-ID')
-                                              .format(angsuranpertama),
-                                          style: blackFontStyle3.copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ]),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: mainColor1, width: 2),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Angsuran Selanjutnya",
-                                style: blackFontStyle3.copyWith(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                NumberFormat.currency(
-                                        symbol: 'IDR ',
-                                        decimalDigits: 0,
-                                        locale: 'id-ID')
-                                    .format(double.parse(
-                                        angsuranselanjutnya.toString())),
-                                style: blackFontStyle3.copyWith(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                          child: Text(
+                            "Program Studi :",
+                            style: blackFontStyle3.copyWith(fontSize: 14),
                           ),
                         ),
                         SizedBox(
-                          height: 16,
+                          height: 10,
                         ),
-
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     borderRadius: BorderRadius.circular(7.0),
-                        //   ),
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     children: [
-                        //       Text("Angsuran Selanjutnya"),
-                        //       Text("Rp.100.000")
-                        //     ],
-                        //   ),
-                        // ),
+                        Container(
+                          child: Text(
+                            programstudi,
+                            style: blackFontStyle3.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: mainColor1, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Pendaftaran",
+                          style: blackFontStyle3.copyWith(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          NumberFormat.currency(
+                              symbol: 'IDR ',
+                              decimalDigits: 0,
+                              locale: 'id-ID')
+                              .format(int.parse(biayapendaftaran)),
+                          style: blackFontStyle3.copyWith(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                   ),
 
-                  // Container(
-                  //   alignment: Alignment.centerLeft,
-                  //   color: Color(0xFFFFCE00),
-                  //   height: 50,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  //   child: Text(
-                  //     programstudi,
-                  //     style: _styleText(2),
-                  //   ),
-                  // ),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                  //Tabel Spb
-                  biayaSpb != 0
-                      ? Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              top: BorderSide(color: mainColor1, width: 0.5),
-                              bottom: BorderSide(color: mainColor1, width: 0.5),
-                            ),
-                            color: Colors.white,
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: mainColor1, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Nama Biaya",
+                            style: blueFontStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
                           ),
-                          child: ExpansionTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          Text(
+                            "Jumlah",
+                            style: blueFontStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 2,
+                        color: mainColor1,
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            biayajaket != '0'
+                                ? Column(
                               children: [
-                                Text(
-                                  spb_spp != 0
-                                      ? "Tabel Angsuran SPb"
-                                      : "Tabel Angsuran Biaya Kuliah",
-                                  textAlign: TextAlign.start,
-                                  style: blueFontStyle.copyWith(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Biaya SPb bisa diangsur ${valwaktuspb=='' ?  defaultvaktuspb : valwaktuspb }x atau bulanan",
-                                  style: blackFontStyle3.copyWith(fontSize: 12),
+                                Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Text("Jaket",
+                                          style: blackFontStyle3),
+                                      Text(
+                                          NumberFormat.currency(
+                                              symbol: 'IDR ',
+                                              decimalDigits: 0,
+                                              locale: 'id-ID')
+                                              .format(double.parse(
+                                              biayajaket)),
+                                          style: blackFontStyle3),
+                                    ]),
+                                Divider(
+                                  color:
+                                  CupertinoColors.systemGrey3,
+                                  thickness: 1,
                                 ),
                               ],
+                            )
+                                : Container(),
+                            biayaSpb != 0
+                                ? Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .spaceBetween,
+                                  children: [
+                                    Text("SPb ke-1",
+                                        style: blackFontStyle3),
+                                    Text(
+                                        NumberFormat.currency(
+                                            symbol: 'IDR ',
+                                            decimalDigits: 0,
+                                            locale: 'id-ID')
+                                            .format(biayaSpb),
+                                        style: blackFontStyle3),
+                                  ],
+                                ),
+                                Text(
+                                  "Sumbangan Pengembangan",
+                                  style: blueFontStyle.copyWith(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Divider(
+                                  color:
+                                  CupertinoColors.systemGrey3,
+                                  thickness: 1,
+                                ),
+                              ],
+                            )
+                                : Container(),
+                            biayaSpp != 0
+                                ? Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "SPP ke-1",
+                                      style: blackFontStyle3,
+                                    ),
+                                    Text(
+                                        NumberFormat.currency(
+                                            symbol: 'IDR ',
+                                            decimalDigits: 0,
+                                            locale: 'id-ID')
+                                            .format(biayaSpp),
+                                        style: blackFontStyle3)
+                                  ],
+                                ),
+                                Text(
+                                  "Sumbangan Pendidikan Persemester",
+                                  style: blueFontStyle.copyWith(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Divider(
+                                  color:
+                                  CupertinoColors.systemGrey3,
+                                  thickness: 1,
+                                ),
+                              ],
+                            )
+                                : Container(),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Angsuran Pertama",
+                                    style: blackFontStyle3.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(angsuranpertama),
+                                    style: blackFontStyle3.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
+                          ],
+                        ),
+                      )
+                    ]),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: mainColor1, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Angsuran Selanjutnya",
+                          style: blackFontStyle3.copyWith(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          NumberFormat.currency(
+                              symbol: 'IDR ',
+                              decimalDigits: 0,
+                              locale: 'id-ID')
+                              .format(double.parse(
+                              angsuranselanjutnya.toString())),
+                          style: blackFontStyle3.copyWith(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.white,
+                  //     borderRadius: BorderRadius.circular(7.0),
+                  //   ),
+                  //   padding: const EdgeInsets.all(10.0),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text("Angsuran Selanjutnya"),
+                  //       Text("Rp.100.000")
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+
+            // Container(
+            //   alignment: Alignment.centerLeft,
+            //   color: Color(0xFFFFCE00),
+            //   height: 50,
+            //   width: MediaQuery.of(context).size.width,
+            //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //   child: Text(
+            //     programstudi,
+            //     style: _styleText(2),
+            //   ),
+            // ),
+
+            //Tabel Spb
+            biayaSpb != 0
+                ? Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: mainColor1, width: 0.5),
+                  bottom: BorderSide(color: mainColor1, width: 0.5),
+                ),
+                color: Colors.white,
+              ),
+              child: ExpansionTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      spb_spp != 0
+                          ? "Tabel Angsuran SPb"
+                          : "Tabel Angsuran Biaya Kuliah",
+                      textAlign: TextAlign.start,
+                      style: blueFontStyle.copyWith(
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Biaya SPb bisa diangsur ${valwaktuspb=='' ?  defaultvaktuspb : valwaktuspb }x atau bulanan",
+                      style: blackFontStyle3.copyWith(fontSize: 12),
+                    ),
+                  ],
+                ),
+                children: [
+                  Container(
+                    color: CupertinoColors.systemGrey6,
+                    child: Column(
+                      children: [
+                        Container(
+                          //child: _loadingSpp("spb",dataAngsurSpb.length)
+                          child: dataAngsurSpb.length == 0
+                              ? Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(
+                                    mainColor1),
+                              ))
+                              : Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8),
+                            child:
+                            dataAngsurSpb[0]
+                                .angsuranSpb ==
+                                "0"
+                                ? Center(
+                                child: Container(
+                                  padding: EdgeInsets
+                                      .symmetric(
+                                      vertical: 8),
+                                  child: Text(
+                                      "Tidak Ada Biaya SPb",
+                                      style:
+                                      blackFontStyle2),
+                                ))
+                                : Container(
+                              child: SizedBox(
+                                height: 56,
+                                width:
+                                MediaQuery.of(
+                                    context)
+                                    .size
+                                    .width,
+                                child: ListView
+                                    .builder(
+                                    itemCount:
+                                    1,
+                                    scrollDirection:
+                                    Axis
+                                        .horizontal,
+                                    itemBuilder:
+                                        (context,
+                                        index) {
+                                      return Container(
+                                        padding:
+                                        EdgeInsets.symmetric(horizontal: 16),
+                                        child:
+                                        CustomRadioButton(
+                                          width:
+                                          100,
+                                          enableShape:
+                                          true,
+                                          elevation:
+                                          1,
+                                          padding:
+                                          0,
+                                          spacing:
+                                          0.0,
+                                          autoWidth:
+                                          false,
+                                          enableButtonWrap:
+                                          true,
+                                          wrapAlignment:
+                                          WrapAlignment.start,
+                                          horizontal:
+                                          false,
+                                          absoluteZeroSpacing:
+                                          false,
+                                          unSelectedColor:
+                                          whiteColor,
+                                          // buttonLables: [
+                                          //   '36 x ',
+                                          //   '12 x ',
+                                          //   '7 x ',
+                                          //   '4 x ',
+                                          //   '1 x ',
+                                          // ],
+                                          //  buttonValues: [
+                                          //   '36 x ',
+                                          //   '12 x ',
+                                          //   '7 x ',
+                                          //   '4 x ',
+                                          //   '1 x ',
+                                          // ],
+                                          buttonLables:
+                                          dataAngsurSpb.map((item) {
+                                            return item.angsuranSpb +
+                                                " X";
+                                          }).toList(),
+                                          buttonValues:
+                                          dataAngsurSpb.map((item) {
+                                            return item.angsuranSpb;
+                                          }).toList(),
+                                          defaultSelected:
+                                          dataAngsurSpb[0].angsuranSpb,
+                                          radioButtonValue:
+                                              (value) {
+                                            setState(() {
+                                              _loadingfSpb = true;
+                                              //valwaktuspb = value;
+                                              //getBiayaSipemaAngsurSpb();
+                                              _loadingProcess("spb", value);
+                                            });
+                                            // print(
+                                            //     "SPB nilai ${valwaktuspb}");
+                                          },
+                                          buttonTextStyle:
+                                          ButtonTextStyle(
+                                            selectedColor:
+                                            Colors.white,
+                                            unSelectedColor:
+                                            mainColor1,
+                                            textStyle:
+                                            blackFontStyle3.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+
+                                          selectedColor:
+                                          mainColor1,
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
                             children: [
                               Container(
-                                color: CupertinoColors.systemGrey6,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: mainColor1, width: 2),
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   children: [
-                                    Container(
-                                      //child: _loadingSpp("spb",dataAngsurSpb.length)
-                                      child: dataAngsurSpb.length == 0
-                                          ? Center(
-                                              child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      mainColor1),
-                                            ))
-                                          : Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8),
-                                              child:
-                                                  dataAngsurSpb[0]
-                                                              .angsuranSpb ==
-                                                          "0"
-                                                      ? Center(
-                                                          child: Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 8),
-                                                          child: Text(
-                                                              "Tidak Ada Biaya SPb",
-                                                              style:
-                                                                  blackFontStyle2),
-                                                        ))
-                                                      : Container(
-                                                          child: SizedBox(
-                                                            height: 56,
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            child: ListView
-                                                                .builder(
-                                                                    itemCount:
-                                                                        1,
-                                                                    scrollDirection:
-                                                                        Axis
-                                                                            .horizontal,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Container(
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(horizontal: 16),
-                                                                        child:
-                                                                            CustomRadioButton(
-                                                                          width:
-                                                                              100,
-                                                                          enableShape:
-                                                                              true,
-                                                                          elevation:
-                                                                              1,
-                                                                          padding:
-                                                                              0,
-                                                                          spacing:
-                                                                              0.0,
-                                                                          autoWidth:
-                                                                              false,
-                                                                          enableButtonWrap:
-                                                                              true,
-                                                                          wrapAlignment:
-                                                                              WrapAlignment.start,
-                                                                          horizontal:
-                                                                              false,
-                                                                          absoluteZeroSpacing:
-                                                                              false,
-                                                                          unSelectedColor:
-                                                                              whiteColor,
-                                                                          // buttonLables: [
-                                                                          //   '36 x ',
-                                                                          //   '12 x ',
-                                                                          //   '7 x ',
-                                                                          //   '4 x ',
-                                                                          //   '1 x ',
-                                                                          // ],
-                                                                          //  buttonValues: [
-                                                                          //   '36 x ',
-                                                                          //   '12 x ',
-                                                                          //   '7 x ',
-                                                                          //   '4 x ',
-                                                                          //   '1 x ',
-                                                                          // ],
-                                                                          buttonLables:
-                                                                              dataAngsurSpb.map((item) {
-                                                                            return item.angsuranSpb +
-                                                                                " X";
-                                                                          }).toList(),
-                                                                          buttonValues:
-                                                                              dataAngsurSpb.map((item) {
-                                                                            return item.angsuranSpb;
-                                                                          }).toList(),
-                                                                          defaultSelected:
-                                                                              dataAngsurSpb[0].angsuranSpb,
-                                                                          radioButtonValue:
-                                                                              (value) {
-                                                                            setState(() {
-                                                                              _loadingfSpb = true;
-                                                                              //valwaktuspb = value;
-                                                                              //getBiayaSipemaAngsurSpb();
-                                                                              _loadingProcess("spb", value);
-                                                                            });
-                                                                            // print(
-                                                                            //     "SPB nilai ${valwaktuspb}");
-                                                                          },
-                                                                          buttonTextStyle:
-                                                                              ButtonTextStyle(
-                                                                            selectedColor:
-                                                                                Colors.white,
-                                                                            unSelectedColor:
-                                                                                mainColor1,
-                                                                            textStyle:
-                                                                                blackFontStyle3.copyWith(
-                                                                              fontSize: 12,
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                          ),
-
-                                                                          selectedColor:
-                                                                              mainColor1,
-                                                                        ),
-                                                                      );
-                                                                    }),
-                                                          ),
-                                                        ),
-                                            ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Cicilan",
+                                          style: blueFontStyle
+                                              .copyWith(
+                                              fontSize: 14,
+                                              fontWeight:
+                                              FontWeight
+                                                  .bold),
+                                        ),
+                                        Text(
+                                          "Biaya",
+                                          style: blueFontStyle
+                                              .copyWith(
+                                              fontSize: 14,
+                                              fontWeight:
+                                              FontWeight
+                                                  .bold),
+                                        )
+                                      ],
+                                    ),
+                                    Divider(
+                                      height: 20,
+                                      thickness: 2,
+                                      color: mainColor1,
                                     ),
                                     Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: mainColor1, width: 2),
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      "Cicilan",
-                                                      style: blueFontStyle
-                                                          .copyWith(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                    ),
-                                                    Text(
-                                                      "Biaya",
-                                                      style: blueFontStyle
-                                                          .copyWith(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                    )
-                                                  ],
-                                                ),
-                                                Divider(
-                                                  height: 20,
-                                                  thickness: 2,
-                                                  color: mainColor1,
-                                                ),
-                                                Container(
-                                                  child: dataAngsurSpbAngsur
-                                                              .length ==
-                                                          0
-                                                      ? Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                      Color>(
-                                                                  mainColor1),
-                                                        ))
-                                                      :
-                                                      /*Container(
+                                      child: dataAngsurSpbAngsur
+                                          .length ==
+                                          0
+                                          ? Center(
+                                          child:
+                                          CircularProgressIndicator(
+                                            valueColor:
+                                            AlwaysStoppedAnimation<
+                                                Color>(
+                                                mainColor1),
+                                          ))
+                                          :
+                                      /*Container(
                                     child: dataAngsurSpbAngsur[0].waktuAngsuran ==
                                             "1000"
                                         ? Text("")
@@ -1124,268 +1122,268 @@ class _CekbiayaState extends State<Cekbiaya> {
                                       )
                                     )
                                   ),*/
-                                                      _loadingSpb("spb",
-                                                          dataAngsurSpb.length),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
+                                      _loadingSpb("spb",
+                                          dataAngsurSpb.length),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                        )
-                      : Container(),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+                : Container(),
 
-                  //Tabel Spp
-                  biayaSpp != 0
-                      ? Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: mainColor1, width: 0.5),
+            //Tabel Spp
+            biayaSpp != 0
+                ? Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: mainColor1, width: 0.5),
+                ),
+                color: Colors.white,
+              ),
+              child: ExpansionTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      spb_spp != 0
+                          ? "Tabel Angsuran SPP"
+                          : "Tabel Angsuran Biaya Kuliah",
+                      textAlign: TextAlign.start,
+                      style: blueFontStyle.copyWith(
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Biaya SPP bisa diangsur  ${valwaktuspp=='' ?  6 : valwaktuspp}x atau bulanan",
+                      style: blackFontStyle3.copyWith(fontSize: 12),
+                    ),
+                  ],
+                ),
+                children: [
+                  Container(
+                    color: CupertinoColors.systemGrey6,
+                    child: Column(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: dataAngsurSpp.length == 0
+                              ? Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                AlwaysStoppedAnimation<Color>(
+                                    mainColor1),
+                              ))
+                              : Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8),
+                            child:
+                            dataAngsurSpp[0]
+                                .angsuranSpb ==
+                                "0"
+                                ? Center(
+                                child: Container(
+                                  padding: EdgeInsets
+                                      .symmetric(
+                                      vertical: 8),
+                                  child: Text(
+                                      "Tidak Ada Biaya SPP",
+                                      style:
+                                      blackFontStyle2),
+                                ))
+                                : SizedBox(
+                              height: 56,
+                              width: MediaQuery.of(
+                                  context)
+                                  .size
+                                  .width,
+                              child:
+                              ListView.builder(
+                                  itemCount: 1,
+                                  scrollDirection:
+                                  Axis
+                                      .horizontal,
+                                  itemBuilder:
+                                      (context,
+                                      index) {
+                                    return Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                          16),
+                                      child:
+                                      CustomRadioButton(
+                                        width:
+                                        100,
+                                        enableShape:
+                                        true,
+                                        elevation:
+                                        1,
+                                        padding:
+                                        0,
+                                        spacing:
+                                        0.0,
+                                        autoWidth:
+                                        false,
+                                        enableButtonWrap:
+                                        true,
+                                        wrapAlignment:
+                                        WrapAlignment.start,
+                                        horizontal:
+                                        false,
+                                        absoluteZeroSpacing:
+                                        false,
+                                        unSelectedColor:
+                                        whiteColor,
+                                        // buttonLables: [
+                                        //   '36 x ',
+                                        //   '12 x ',
+                                        //   '7 x ',
+                                        //   '4 x ',
+                                        //   '1 x ',
+                                        // ],
+                                        //  buttonValues: [
+                                        //   '36 x ',
+                                        //   '12 x ',
+                                        //   '7 x ',
+                                        //   '4 x ',
+                                        //   '1 x ',
+                                        // ],
+                                        buttonLables:
+                                        dataAngsurSpp.map((item) {
+                                          return item.angsuranSpb +
+                                              " X";
+                                        }).toList(),
+                                        buttonValues:
+                                        dataAngsurSpp.map((item) {
+                                          return item
+                                              .angsuranSpb;
+                                        }).toList(),
+                                        defaultSelected:
+                                        dataAngsurSpp[0].angsuranSpb,
+                                        radioButtonValue:
+                                            (value) {
+                                          setState(
+                                                  () {
+                                                _loadingfSpp =
+                                                true;
+                                                /*valwaktuspp = value;
+                                    angsurgetBiayaSipemaAngsurSpp();*/
+                                                _loadingProcess("spp",
+                                                    value);
+                                              });
+                                          //print("SPP nilai ${valwaktuspp}");
+                                        },
+                                        buttonTextStyle:
+                                        ButtonTextStyle(
+                                          selectedColor:
+                                          Colors.white,
+                                          unSelectedColor:
+                                          mainColor1,
+                                          textStyle:
+                                          blackFontStyle3.copyWith(
+                                            fontSize:
+                                            12,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                        selectedColor:
+                                        mainColor1,
+                                      ),
+                                    );
+                                  }),
                             ),
-                            color: Colors.white,
                           ),
-                          child: ExpansionTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        ),
+                        Container(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: mainColor1, width: 2),
+                              color: Colors.white,
+                              borderRadius:
+                              BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
                               children: [
-                                Text(
-                                  spb_spp != 0
-                                      ? "Tabel Angsuran SPP"
-                                      : "Tabel Angsuran Biaya Kuliah",
-                                  textAlign: TextAlign.start,
-                                  style: blueFontStyle.copyWith(
-                                      fontWeight: FontWeight.bold),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Cicilan",
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "Biaya",
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.bold),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 5,
+                                Divider(
+                                  height: 20,
+                                  thickness: 2,
+                                  color: mainColor1,
                                 ),
-                                Text(
-                                  "Biaya SPP bisa diangsur  ${valwaktuspp=='' ?  6 : valwaktuspp}x atau bulanan",
-                                  style: blackFontStyle3.copyWith(fontSize: 12),
+                                Container(
+                                  //child: Text("asa")
+                                  child: dataAngsurSppAngsur
+                                      .length ==
+                                      0
+                                      ? Center(
+                                      child:
+                                      CircularProgressIndicator(
+                                        valueColor:
+                                        AlwaysStoppedAnimation<
+                                            Color>(
+                                            mainColor1),
+                                      ))
+                                      : _loadingSpp(
+                                      "spp",
+                                      dataAngsurSppAngsur
+                                          .length),
                                 ),
                               ],
                             ),
-                            children: [
-                              Container(
-                                color: CupertinoColors.systemGrey6,
-                                child: Column(
-                                  //crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      child: dataAngsurSpp.length == 0
-                                          ? Center(
-                                              child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      mainColor1),
-                                            ))
-                                          : Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8),
-                                              child:
-                                                  dataAngsurSpp[0]
-                                                              .angsuranSpb ==
-                                                          "0"
-                                                      ? Center(
-                                                          child: Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 8),
-                                                          child: Text(
-                                                              "Tidak Ada Biaya SPP",
-                                                              style:
-                                                                  blackFontStyle2),
-                                                        ))
-                                                      : SizedBox(
-                                                          height: 56,
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          child:
-                                                              ListView.builder(
-                                                                  itemCount: 1,
-                                                                  scrollDirection:
-                                                                      Axis
-                                                                          .horizontal,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    return Container(
-                                                                      padding: EdgeInsets.symmetric(
-                                                                          horizontal:
-                                                                              16),
-                                                                      child:
-                                                                          CustomRadioButton(
-                                                                        width:
-                                                                            100,
-                                                                        enableShape:
-                                                                            true,
-                                                                        elevation:
-                                                                            1,
-                                                                        padding:
-                                                                            0,
-                                                                        spacing:
-                                                                            0.0,
-                                                                        autoWidth:
-                                                                            false,
-                                                                        enableButtonWrap:
-                                                                            true,
-                                                                        wrapAlignment:
-                                                                            WrapAlignment.start,
-                                                                        horizontal:
-                                                                            false,
-                                                                        absoluteZeroSpacing:
-                                                                            false,
-                                                                        unSelectedColor:
-                                                                            whiteColor,
-                                                                        // buttonLables: [
-                                                                        //   '36 x ',
-                                                                        //   '12 x ',
-                                                                        //   '7 x ',
-                                                                        //   '4 x ',
-                                                                        //   '1 x ',
-                                                                        // ],
-                                                                        //  buttonValues: [
-                                                                        //   '36 x ',
-                                                                        //   '12 x ',
-                                                                        //   '7 x ',
-                                                                        //   '4 x ',
-                                                                        //   '1 x ',
-                                                                        // ],
-                                                                        buttonLables:
-                                                                            dataAngsurSpp.map((item) {
-                                                                          return item.angsuranSpb +
-                                                                              " X";
-                                                                        }).toList(),
-                                                                        buttonValues:
-                                                                            dataAngsurSpp.map((item) {
-                                                                          return item
-                                                                              .angsuranSpb;
-                                                                        }).toList(),
-                                                                        defaultSelected:
-                                                                            dataAngsurSpp[0].angsuranSpb,
-                                                                        radioButtonValue:
-                                                                            (value) {
-                                                                          setState(
-                                                                              () {
-                                                                            _loadingfSpp =
-                                                                                true;
-                                                                            /*valwaktuspp = value;
-                                    angsurgetBiayaSipemaAngsurSpp();*/
-                                                                            _loadingProcess("spp",
-                                                                                value);
-                                                                          });
-                                                                          //print("SPP nilai ${valwaktuspp}");
-                                                                        },
-                                                                        buttonTextStyle:
-                                                                            ButtonTextStyle(
-                                                                          selectedColor:
-                                                                              Colors.white,
-                                                                          unSelectedColor:
-                                                                              mainColor1,
-                                                                          textStyle:
-                                                                              blackFontStyle3.copyWith(
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                        ),
-                                                                        selectedColor:
-                                                                            mainColor1,
-                                                                      ),
-                                                                    );
-                                                                  }),
-                                                        ),
-                                            ),
-                                    ),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: mainColor1, width: 2),
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "Cicilan",
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  "Biaya",
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
-                                            ),
-                                            Divider(
-                                              height: 20,
-                                              thickness: 2,
-                                              color: mainColor1,
-                                            ),
-                                            Container(
-                                              //child: Text("asa")
-                                              child: dataAngsurSppAngsur
-                                                          .length ==
-                                                      0
-                                                  ? Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                      valueColor:
-                                                          AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                              mainColor1),
-                                                    ))
-                                                  : _loadingSpp(
-                                                      "spp",
-                                                      dataAngsurSppAngsur
-                                                          .length),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
                           ),
-                        )
-                      : Container(),
-
-                  SizedBox(height: 64)
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
+            )
+                : Container(),
+
+            SizedBox(height: 64)
+          ],
+        ),
+      ),
       bottomSheet: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -1399,15 +1397,15 @@ class _CekbiayaState extends State<Cekbiaya> {
         height: 64,
         child: Center(
             child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.5,
-          height: 40,
-          child: EduButton(
-            buttonText: "Daftar",
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => (Daftar_kuliah(
+              width: MediaQuery.of(context).size.width / 1.5,
+              height: 40,
+              child: EduButton(
+                buttonText: "Daftar",
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => (Daftar_kuliah(
                             campus: widget.campus,
                             kodejurusan: widget.kodejurusan,
                             kodeprogram: widget.kodeprogram,
@@ -1421,213 +1419,208 @@ class _CekbiayaState extends State<Cekbiaya> {
                             namaspp: widget.namaspp,
                             namaformulir: widget.namaformulir,
                             angkatan:
-                                widget.angkatan == null ? "" : widget.angkatan,
+                            widget.angkatan == null ? "" : widget.angkatan,
                             tahunangkatan: widget.tahunangkatan == null
                                 ? ""
                                 : widget.tahunangkatan,
                             wilayah:
-                                widget.wilayah == null ? "" : widget.wilayah,
+                            widget.wilayah == null ? "" : widget.wilayah,
                             namakonversi: widget.namakonversi == null
                                 ? ""
                                 : widget.namakonversi,
                             kmhsmaba:
-                                widget.kmhsmaba == null ? "" : widget.kmhsmaba,
+                            widget.kmhsmaba == null ? "" : widget.kmhsmaba,
                             perpus:
-                                widget.perpus == null ? "" : widget.perpus,
+                            widget.perpus == null ? "" : widget.perpus,
                             krs: widget.krs == null ? "" : widget.krs,
                             dpm: widget.dpm == null ? "" : widget.dpm,
                           ))));
-            },
-          ),
-        )),
+                },
+              ),
+            )),
       ),
     );
   }
 
   Widget _loadingSpp(var cat, var dataLength) {
     return cat == 0 || _loadingfSpp
-        //return _loadingfSpp
+    //return _loadingfSpp
         ? Container(
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[350],
-              highlightColor: Colors.white,
-              child: Column(
-                children: [
-                  Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[350]),
-                  ),
-                ],
-              ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[350],
+        highlightColor: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              height: 30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey[350]),
             ),
-          )
+          ],
+        ),
+      ),
+    )
         : Container(
-            child: dataAngsurSppAngsur[0].waktuAngsuran == "0"
-                ? Center(child: Text(""))
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: dataAngsurSppAngsur.length == 0
-                        ? 0
-                        : dataAngsurSppAngsur.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        //padding: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+      child: dataAngsurSppAngsur[0].waktuAngsuran == "0"
+          ? Center(child: Text(""))
+          : ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: dataAngsurSppAngsur.length == 0
+            ? 0
+            : dataAngsurSppAngsur.length,
+        itemBuilder: (BuildContext context, int index) {
+          print('spp itu sebenarnya apa? ${dataAngsurSppAngsur[index]
+              .biayaAngsuran
+              .toString()}');
+          return Container(
+            //padding: EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   borderRadius: BorderRadius.circular(7.0),
+                  // ),
+                    color: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                                // decoration: BoxDecoration(
-                                //   color: Colors.white,
-                                //   borderRadius: BorderRadius.circular(7.0),
-                                // ),
-                                color: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 5,
-                                ),
-                                child: Column(
-                                  children: [
-                                    // Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceBetween,
-                                    //   children: [
-                                    //     Text("Cicilan"),
-                                    //     Text("IDR")
-                                    //   ],
-                                    // ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            "${dataAngsurSppAngsur[index].waktuAngsuran.toString()} x",
-                                            style: blackFontStyle3.copyWith(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Text(
-                                          NumberFormat.currency(
-                                                  symbol: 'IDR ',
-                                                  decimalDigits: 0,
-                                                  locale: 'id-ID')
-                                              .format(double.parse(
-                                                  dataAngsurSppAngsur[index]
-                                                      .biayaAngsuran
-                                                      .toString())),
-                                          style: blackFontStyle3.copyWith(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      thickness: 1,
-                                      color: CupertinoColors.systemGrey5,
-                                    ),
-                                  ],
-                                )),
-                            //Divider(color: Colors.white10,),
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(
+                                "${dataAngsurSppAngsur[index].waktuAngsuran.toString()} x",
+                                style: blackFontStyle3.copyWith(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                  symbol: 'IDR ',
+                                  decimalDigits: 0,
+                                  locale: 'id-ID')
+                                  .format(double.parse(
+                                  dataAngsurSppAngsur[index]
+                                      .biayaAngsuran
+                                      .toString())),
+                              style: blackFontStyle3.copyWith(
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
-                      );
-                    },
-                  ),
+                        Divider(
+                          thickness: 1,
+                          color: CupertinoColors.systemGrey5,
+                        ),
+                      ],
+                    )),
+                //Divider(color: Colors.white10,),
+              ],
+            ),
           );
+        },
+      ),
+    );
   }
 
   Widget _loadingSpb(var cat, var dataLength) {
     return cat == 0 || _loadingfSpb
-        //return _loadingfSpp
+    //return _loadingfSpp
         ? Container(
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[350],
-              highlightColor: Colors.white,
-              child: Column(
-                children: [
-                  Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[350]),
-                  ),
-                ],
-              ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[350],
+        highlightColor: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              height: 30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey[350]),
             ),
-          )
+          ],
+        ),
+      ),
+    )
         : Container(
-            child: dataAngsurSpbAngsur[0].waktuAngsuran == "0"
-                ? Text("")
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: dataAngsurSpbAngsur.length == 0
-                        ? 0
-                        : dataAngsurSpbAngsur.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+      child: dataAngsurSpbAngsur[0].waktuAngsuran == "0"
+          ? Text("")
+          : ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: dataAngsurSpbAngsur.length == 0
+            ? 0
+            : dataAngsurSpbAngsur.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   borderRadius: BorderRadius.circular(7.0),
+                  // ),
+                    color: Colors.white,
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 5),
+                    child: Column(
+                      children: [
+                        // Row(
+                        //   mainAxisAlignment:
+                        //       MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text("Cicilan"),
+                        //     Text("IDR")
+                        //   ],
+                        // ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                                // decoration: BoxDecoration(
-                                //   color: Colors.white,
-                                //   borderRadius: BorderRadius.circular(7.0),
-                                // ),
-                                color: Colors.white,
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: Column(
-                                  children: [
-                                    // Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceBetween,
-                                    //   children: [
-                                    //     Text("Cicilan"),
-                                    //     Text("IDR")
-                                    //   ],
-                                    // ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            "${dataAngsurSpbAngsur[index].waktuAngsuran.toString()}",
-                                            style: blackFontStyle3.copyWith(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Text(
-                                          NumberFormat.currency(
-                                                  symbol: 'IDR ',
-                                                  decimalDigits: 0,
-                                                  locale: 'id-ID')
-                                              .format(dataAngsurSpbAngsur[index]
-                                                  .biayaAngsuran),
-                                          style: blackFontStyle3.copyWith(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      color: CupertinoColors.systemGrey3,
-                                      thickness: 1,
-                                    ),
-                                  ],
-                                )),
-                            //Divider(color: Colors.white10,),
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(
+                                "${dataAngsurSpbAngsur[index].waktuAngsuran.toString()}",
+                                style: blackFontStyle3.copyWith(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                  symbol: 'IDR ',
+                                  decimalDigits: 0,
+                                  locale: 'id-ID')
+                                  .format(dataAngsurSpbAngsur[index]
+                                  .biayaAngsuran),
+                              style: blackFontStyle3.copyWith(
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
-                      );
-                    },
-                  ),
+                        Divider(
+                          color: CupertinoColors.systemGrey3,
+                          thickness: 1,
+                        ),
+                      ],
+                    )),
+                //Divider(color: Colors.white10,),
+              ],
+            ),
           );
+        },
+      ),
+    );
   }
 
   void _loadingProcess(var cat, var value) {
@@ -1679,140 +1672,140 @@ class _CekbiayaState extends State<Cekbiaya> {
                     child: dataSipema.length == 0
                         ? Center(child: CircularProgressIndicator())
                         : ListView.builder(
-                            itemCount: dataSipema.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              List<Sipema> lastDataSipema = dataSipema[index];
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: lastDataSipema.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  Sipema datSipemaByIndex =
-                                      lastDataSipema[index];
+                      itemCount: dataSipema.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        List<Sipema> lastDataSipema = dataSipema[index];
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: lastDataSipema.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Sipema datSipemaByIndex =
+                            lastDataSipema[index];
 
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        //                      widget.campus.kode.toString(),
-                                        // widget.kodejurusan.toString()==null ? "a" : "a",
-                                        // widget.kodeprogram.toString(),
-                                        // widget.namaKelompok.toString())
-                                        kodejurusan =
-                                            datSipemaByIndex.detail.kodejrs;
-                                        kodeprogram =
-                                            datSipemaByIndex.detail.kodeprg;
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  //                      widget.campus.kode.toString(),
+                                  // widget.kodejurusan.toString()==null ? "a" : "a",
+                                  // widget.kodeprogram.toString(),
+                                  // widget.namaKelompok.toString())
+                                  kodejurusan =
+                                      datSipemaByIndex.detail.kodejrs;
+                                  kodeprogram =
+                                      datSipemaByIndex.detail.kodeprg;
 
-                                        namaKelompok =
-                                            datSipemaByIndex.detail.kelompok;
+                                  namaKelompok =
+                                      datSipemaByIndex.detail.kelompok;
 
-                                        dataAngsur = datSipemaByIndex.angsur;
-                                        biayapendaftaran =
-                                            datSipemaByIndex.itembayar.formulir;
-                                        biayajaket =
-                                            datSipemaByIndex.itembayar.jaket;
-                                        biayaSpp =
-                                            datSipemaByIndex.itembayar.spp;
-                                        biayaSpb =
-                                            datSipemaByIndex.itembayar.spb;
-                                        programstudi =
-                                            datSipemaByIndex.detail.jurusan;
-                                        programstudilulusan =
-                                            datSipemaByIndex.detail.lulusan;
+                                  dataAngsur = datSipemaByIndex.angsur;
+                                  biayapendaftaran =
+                                      datSipemaByIndex.itembayar.formulir;
+                                  biayajaket =
+                                      datSipemaByIndex.itembayar.jaket;
+                                  biayaSpp =
+                                      datSipemaByIndex.itembayar.spp;
+                                  biayaSpb =
+                                      datSipemaByIndex.itembayar.spb;
+                                  programstudi =
+                                      datSipemaByIndex.detail.jurusan;
+                                  programstudilulusan =
+                                      datSipemaByIndex.detail.lulusan;
 
-                                        angsuranpertama = biayaSpp +
-                                            biayaSpb +
-                                            //int.parse(biayapendaftaran) +
-                                            int.parse(biayajaket);
+                                  angsuranpertama = biayaSpp +
+                                      biayaSpb +
+                                      //int.parse(biayapendaftaran) +
+                                      int.parse(biayajaket);
 
-                                        if (biayaSpp == 0 || biayaSpb == 0) {
-                                          spb_spp = 0;
-                                        } else {
-                                          spb_spp = 1;
-                                        }
-                                        // print("spb_spp1${spb_spp}");
-                                        // print("spb_spp2${biayaSpp}");
-                                        // print("spb_spp3${biayaSpb}");
+                                  if (biayaSpp == 0 || biayaSpb == 0) {
+                                    spb_spp = 0;
+                                  } else {
+                                    spb_spp = 1;
+                                  }
+                                  // print("spb_spp1${spb_spp}");
+                                  // print("spb_spp2${biayaSpp}");
+                                  // print("spb_spp3${biayaSpb}");
 
-                                        // getBiayaSipemaAngsur();
+                                  // getBiayaSipemaAngsur();
 
-                                        //master
-                                        getBiayaSipemaAngsur();
-                                        getBiayaSipemaAngsurSPP();
-                                        //ansguran
-                                        getBiayaSipemaAngsurSpb();
-                                        angsurgetBiayaSipemaAngsurSpp();
+                                  //master
+                                  getBiayaSipemaAngsur();
+                                  getBiayaSipemaAngsurSPP();
+                                  //ansguran
+                                  getBiayaSipemaAngsurSpb();
+                                  angsurgetBiayaSipemaAngsurSpp();
 
-                                        Navigator.pop(context);
-                                      });
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: 20, right: 24, top: 15),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                  child: Text(
-                                                      "${datSipemaByIndex.detail.jurusan}",
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                      style: whiteFontStyle
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold))),
-                                              Flexible(
-                                                child: Text(
-                                                    "${datSipemaByIndex.detail.lulusan}",
-                                                    overflow: TextOverflow.clip,
-                                                    style:
-                                                        whiteFontStyle.copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 4,
-                                          ),
-                                          Text(
-                                              NumberFormat.currency(
-                                                      symbol: 'Rp. ',
-                                                      decimalDigits: 0,
-                                                      locale: 'id-ID')
-                                                  .format(double.parse(
-                                                      datSipemaByIndex
-                                                          .detail.bulanan)),
-                                              textAlign: TextAlign.left,
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 24, top: 15),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(
+                                            child: Text(
+                                                "${datSipemaByIndex.detail.jurusan}",
+                                                maxLines: 1,
+                                                overflow:
+                                                TextOverflow.clip,
+                                                style: whiteFontStyle
+                                                    .copyWith(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold))),
+                                        Flexible(
+                                          child: Text(
+                                              "${datSipemaByIndex.detail.lulusan}",
                                               overflow: TextOverflow.clip,
-                                              style: orenFontStyle.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFFFFCE00))),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(
-                                            color: Colors.white38,
-                                            thickness: 1,
-                                          ),
-                                        ],
-                                      ),
+                                              style:
+                                              whiteFontStyle.copyWith(
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold)),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                        NumberFormat.currency(
+                                            symbol: 'Rp. ',
+                                            decimalDigits: 0,
+                                            locale: 'id-ID')
+                                            .format(double.parse(
+                                            datSipemaByIndex
+                                                .detail.bulanan)),
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.clip,
+                                        style: orenFontStyle.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFFFFCE00))),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Divider(
+                                      color: Colors.white38,
+                                      thickness: 1,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

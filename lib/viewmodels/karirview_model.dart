@@ -1,32 +1,10 @@
 part of 'viewmodel.dart';
 
-// import 'dart:convert';
-// import 'dart:ffi';
-// import 'dart:io';
-
-// import 'dart:async';
-// import 'package:async/async.dart';
-// import 'package:flutter/material.dart';
-
-// import 'package:another_flushbar/flushbar.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_app_edunitas/constant/constant.dart';
-// import 'package:flutter_app_edunitas/model/Master/MasterDaerahModel.dart';
-// import 'package:flutter_app_edunitas/model/Master/MasterJurusanModel.dart';
-// import 'package:flutter_app_edunitas/model/Master/SmbModel.dart';
-// import 'package:flutter_app_edunitas/model/Master/StatusModel.dart';
-// import 'package:flutter_app_edunitas/model/karir/RiwayatLamaran.dart';
-// import 'package:flutter_app_edunitas/model/karir/SpesialisasiModel.dart';
-// import 'package:flutter_app_edunitas/model/karir/detailKarir.dart';
-// import 'package:flutter_app_edunitas/model/karir/ShowPengalamanModel.dart';
-// import 'package:flutter_app_edunitas/model/karir/ShowInfoTambahan.dart';
-// import 'package:http/http.dart' as http;
-
 class KarirViewModel {
   Future detailKarir(String cid) async {
     try {
       final response =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_karir"), body: {
+      await http.post(ConstanUrl().baseUrl + "detail_karir", body: {
         'cid': cid.toString(),
       });
 
@@ -34,8 +12,6 @@ class KarirViewModel {
       DetailKarirModel listData = DetailKarirModel.fromJson(jsondata);
 
       if (response.statusCode == 200) {
-        print("data detail_Karir");
-        //return DetailKarirModel.fromJson(jsonDecode(response.body));
         return listData;
       }
     } catch (e) {
@@ -45,27 +21,28 @@ class KarirViewModel {
   }
 
   Future simpan_karir(String cid, String keycode) async {
-    //http.post(NetworkConfig().baseUrl + "loginUser"
-    final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "simpan_karir"), body: {
-      'cid': cid,
-      'keycode': keycode,
-    });
+    try{
+      final response =
+      await http.post(ConstanUrl().baseUrl + "simpan_karir", body: {
+        'cid': cid,
+        'keycode': keycode,
+      });
+      final jsondata = jsonDecode(response.body);
 
-    print("simpankarir${cid}");
-    print("simpankarir${keycode}");
-    final jsondata = jsonDecode(response.body);
+      StatusModel listData = StatusModel.fromJson(jsondata);
 
-    StatusModel listData = StatusModel.fromJson(jsondata);
-
-    if (listData.status == 200) {
-      return listData;
-    } else if (listData.status == 400) {
-      return listData;
-    } else if (listData.status == 500) {
-      return listData;
-    } else {
-      print("gagal");
+      if (listData.status == 200) {
+        return listData;
+      } else if (listData.status == 400) {
+        return listData;
+      } else if (listData.status == 500) {
+        return listData;
+      } else {
+        print("gagal");
+        return null;
+      }
+    }catch(e){
+      print("gagal simpan_karir: "+e.toString());
       return null;
     }
   }
@@ -73,18 +50,17 @@ class KarirViewModel {
   Future<List<MasterJurusanModel>> karir_pendidikan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_pendidikan")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_pendidikan"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = masterJurusanModelFromJson(hasil.body);
         return data;
       } else {
-        print("error status " + hasil.statusCode.toString());
+        print("error karir_pendidikan: " + hasil.statusCode.toString());
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_pendidikan: "+e.toString());
       return null;
     }
   }
@@ -92,10 +68,9 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_spesialisasi() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_spesialisasi")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_spesialisasi"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = spesialisasiModelFromJson(hasil.body);
         return data;
       } else {
@@ -103,19 +78,17 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_spesialisasi: $e");
       return null;
     }
   }
 
-  //
   Future<List<SpesialisasiModel>> karir_jabatan() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_jabatan")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_jabatan"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = spesialisasiModelFromJson(hasil.body);
         return data;
       } else {
@@ -123,19 +96,17 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_jabatan $e");
       return null;
     }
   }
 
-  //
   Future<List<SpesialisasiModel>> karir_industri() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_industri")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_industri"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = spesialisasiModelFromJson(hasil.body);
         return data;
       } else {
@@ -143,20 +114,17 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_industri $e");
       return null;
     }
   }
-
-  //
 
   Future<List<SpesialisasiModel>> karir_bidang() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_bidang")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_bidang"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = spesialisasiModelFromJson(hasil.body);
         return data;
       } else {
@@ -164,7 +132,7 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_bidang $e");
       return null;
     }
   }
@@ -172,10 +140,9 @@ class KarirViewModel {
   Future<List<SpesialisasiModel>> karir_posisi() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_posisi")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_posisi"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        print("karir_posisi " + hasil.body);
         final data = spesialisasiModelFromJson(hasil.body);
         return data;
       } else {
@@ -183,7 +150,7 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_posisi: $e");
       return null;
     }
   }
@@ -191,10 +158,9 @@ class KarirViewModel {
   Future<List<SmbModel>> karir_tipe() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "karir_tipe")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "karir_tipe"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
-        print("data unitarea success");
         final data = smbModelFromJson(hasil.body);
         return data;
       } else {
@@ -202,7 +168,7 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error karir_tipe $e");
       return null;
     }
   }
@@ -210,7 +176,7 @@ class KarirViewModel {
   Future<List> wilayah_karir() async {
     try {
       http.Response hasil = await http.get(
-          Uri.parse(Uri.encodeFull(ConstanUrl().baseUrl + "wilayah_karir")),
+          Uri.encodeFull(ConstanUrl().baseUrl + "wilayah_karir"),
           headers: {"Accept": "application/json"});
       if (hasil.statusCode == 200) {
         print("data provinsi success");
@@ -221,24 +187,19 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error wilayah_karir $e");
       return null;
     }
   }
 
   Future<List<ShowPengalamanModel>> show_pengalaman(String keycode) async {
     try {
-      // http.Response hasil = await http.get(
-      //     Uri.encodeFull(ConstanUrl().baseUrl + "show_pengalaman"),
-      //     headers: {"Accept": "application/json"});
-
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_pengalaman"), body: {
+      await http.post(ConstanUrl().baseUrl + "show_pengalaman", body: {
         'keycode': keycode.toString(),
       });
 
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = showPengalamanModelFromJson(hasil.body);
         return data;
       } else {
@@ -246,151 +207,129 @@ class KarirViewModel {
         return null;
       }
     } catch (e) {
-      print("error catch $e");
+      print("error show_pengalaman $e");
       return null;
     }
   }
 
   Future hapus_pengalaman(String id) async {
-    //http.post(NetworkConfig().baseUrl + "loginUser"
-    final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_pengalaman"), body: {
-      'id': id,
-    });
+    try{
+      final response =
+      await http.post(ConstanUrl().baseUrl + "hapus_pengalaman", body: {
+        'id': id,
+      });
 
-    final jsondata = jsonDecode(response.body);
-    StatusModel listData = StatusModel.fromJson(jsondata);
+      final jsondata = jsonDecode(response.body);
+      StatusModel listData = StatusModel.fromJson(jsondata);
 
-    if (listData.status == 200) {
-      return listData;
-    } else if (listData.status == 400) {
-      return listData;
-    } else if (listData.status == 500) {
-      return listData;
-    } else {
-      print("gagal");
+      if (listData.status == 200) {
+        return listData;
+      } else if (listData.status == 400) {
+        return listData;
+      } else if (listData.status == 500) {
+        return listData;
+      } else {
+        print("gagal hapus_pengalaman");
+        return null;
+      }
+    }catch(e){
+      print("gagal hapus_pengalaman: "+e.toString());
+    }
+  }
+
+  Future simpan_pengalaman(String nama, String dari, String hingga,
+      String untilnow, String bidang, String spesialisasi, String negara,
+      String provinsi, String kota, String kecamatan, String kelurahan,
+      String alamat, String kodepos, String industri, String jabatan,
+      String gaji, String deskripsi, String posisi, String keycode) async {
+    try{
+      final response =
+      await http.post(ConstanUrl().baseUrl + "insert_pengalaman", body: {
+        'nama': nama,
+        'dari': dari,
+        'hingga': hingga,
+        'untilnow': untilnow,
+        'bidang': bidang,
+        'spesialisasi': spesialisasi,
+        'negara': negara,
+        'provinsi': provinsi,
+        'kota': kota,
+        'kecamatan': kecamatan,
+        'kelurahan': kelurahan,
+        'alamat': alamat,
+        'kodepos': kodepos,
+        'industri': industri,
+        'jabatan': jabatan,
+        'gaji': gaji,
+        'deskripsi': deskripsi,
+        'posisi': posisi,
+        'keycode': keycode,
+      });
+
+      final jsondata = jsonDecode(response.body);
+      StatusModel listData = StatusModel.fromJson(jsondata);
+
+      if (listData.status == 200) {
+        return listData;
+      } else if (listData.status == 400) {
+        return listData;
+      } else if (listData.status == 500) {
+        return listData;
+      } else {
+        print("gagal simpan_pengalaman");
+        return null;
+      }
+    }catch(e){
+      print("gagal simpan_pengalaman: "+ e.toString());
       return null;
     }
   }
 
-  Future simpan_pengalaman(
-      String nama,
-      String dari,
-      String hingga,
-      String untilnow,
-      String bidang,
-      String spesialisasi,
-      String negara,
-      String provinsi,
-      String kota,
-      String kecamatan,
-      String kelurahan,
-      String alamat,
-      String kodepos,
-      String industri,
-      String jabatan,
-      String gaji,
-      String deskripsi,
-      String posisi,
-      String keycode) async {
-    //http.post(NetworkConfig().baseUrl + "loginUser"
-    final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_pengalaman"), body: {
-      'nama': nama,
-      'dari': dari,
-      'hingga': hingga,
-      'untilnow': untilnow,
-      'bidang': bidang,
-      'spesialisasi': spesialisasi,
-      'negara': negara,
-      'provinsi': provinsi,
-      'kota': kota,
-      'kecamatan': kecamatan,
-      'kelurahan': kelurahan,
-      'alamat': alamat,
-      'kodepos': kodepos,
-      'industri': industri,
-      'jabatan': jabatan,
-      'gaji': gaji,
-      'deskripsi': deskripsi,
-      'posisi': posisi,
-      'keycode': keycode,
-    });
+  Future edit_pengalaman(String nama, String dari, String hingga, String untilnow,
+      String bidang, String spesialisasi, String negara, String provinsi,
+      String kota, String kecamatan, String kelurahan, String alamat, String kodepos,
+      String industri, String jabatan, String gaji, String deskripsi, String posisi,
+      String keycode, String id) async {
+    try{
+      final response =
+      await http.post(ConstanUrl().baseUrl + "edit_pengalaman", body: {
+        'nama': nama,
+        'dari': dari,
+        'hingga': hingga,
+        'untilnow': untilnow,
+        'bidang': bidang,
+        'spesialisasi': spesialisasi,
+        'negara': negara,
+        'provinsi': provinsi,
+        'kota': kota,
+        'kecamatan': kecamatan,
+        'kelurahan': kelurahan,
+        'alamat': alamat,
+        'kodepos': kodepos,
+        'industri': industri,
+        'jabatan': jabatan,
+        'gaji': gaji,
+        'deskripsi': deskripsi,
+        'posisi': posisi,
+        'keycode': keycode,
+        'id': id,
+      });
 
-    print("testing${response.body}");
-    final jsondata = jsonDecode(response.body);
-    StatusModel listData = StatusModel.fromJson(jsondata);
+      final jsondata = jsonDecode(response.body);
+      StatusModel listData = StatusModel.fromJson(jsondata);
 
-    if (listData.status == 200) {
-      return listData;
-    } else if (listData.status == 400) {
-      return listData;
-    } else if (listData.status == 500) {
-      return listData;
-    } else {
-      print("gagal");
-      return null;
-    }
-  }
-
-  Future edit_pengalaman(
-      String nama,
-      String dari,
-      String hingga,
-      String untilnow,
-      String bidang,
-      String spesialisasi,
-      String negara,
-      String provinsi,
-      String kota,
-      String kecamatan,
-      String kelurahan,
-      String alamat,
-      String kodepos,
-      String industri,
-      String jabatan,
-      String gaji,
-      String deskripsi,
-      String posisi,
-      String keycode,
-      String id) async {
-    //http.post(NetworkConfig().baseUrl + "loginUser"
-    final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "edit_pengalaman"), body: {
-      'nama': nama,
-      'dari': dari,
-      'hingga': hingga,
-      'untilnow': untilnow,
-      'bidang': bidang,
-      'spesialisasi': spesialisasi,
-      'negara': negara,
-      'provinsi': provinsi,
-      'kota': kota,
-      'kecamatan': kecamatan,
-      'kelurahan': kelurahan,
-      'alamat': alamat,
-      'kodepos': kodepos,
-      'industri': industri,
-      'jabatan': jabatan,
-      'gaji': gaji,
-      'deskripsi': deskripsi,
-      'posisi': posisi,
-      'keycode': keycode,
-      'id': id,
-    });
-
-    print("testing${response.body}");
-    final jsondata = jsonDecode(response.body);
-    StatusModel listData = StatusModel.fromJson(jsondata);
-
-    if (listData.status == 200) {
-      return listData;
-    } else if (listData.status == 400) {
-      return listData;
-    } else if (listData.status == 500) {
-      return listData;
-    } else {
-      print("gagal");
+      if (listData.status == 200) {
+        return listData;
+      } else if (listData.status == 400) {
+        return listData;
+      } else if (listData.status == 500) {
+        return listData;
+      } else {
+        print("gagal edit_pengalaman");
+        return null;
+      }
+    }catch(e){
+      print("gagal edit_pengalaman");
       return null;
     }
   }
@@ -402,7 +341,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "show_info_tambahan"), body: {
+      await http.post(ConstanUrl().baseUrl + "show_info_tambahan", body: {
         'keycode': keycode.toString(),
       });
 
@@ -421,14 +360,14 @@ class KarirViewModel {
   }
 
   Future insert_infotambahan(
-    String wilayah,
-    String penghasilan,
-    String deskripsi,
-    String keycode,
-  ) async {
+      String wilayah,
+      String penghasilan,
+      String deskripsi,
+      String keycode,
+      ) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "insert_infotambahan"), body: {
+    await http.post(ConstanUrl().baseUrl + "insert_infotambahan", body: {
       'wilayah': wilayah,
       'penghasilan': penghasilan,
       'deskripsi': deskripsi,
@@ -453,9 +392,8 @@ class KarirViewModel {
 
   Future hapus_infotambahan(String id) async {
     //http.post(NetworkConfig().baseUrl + "loginUser"
-    print("hapus_info_tambahan_id: "+id);
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "hapus_infotambahan"), body: {
+    await http.post(ConstanUrl().baseUrl + "hapus_infotambahan", body: {
       'id': id,
     });
 
@@ -481,7 +419,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "riwayat_lamaran"), body: {
+      await http.post(ConstanUrl().baseUrl + "riwayat_lamaran", body: {
         'keycode': keycode.toString(),
       });
 
@@ -640,15 +578,15 @@ class KarirViewModel {
     //formdata_logo
     var stream = formdata_comlogo != null
         ? new http.ByteStream(
-            DelegatingStream.typed(formdata_comlogo.openRead()))
+        DelegatingStream.typed(formdata_comlogo.openRead()))
         : "";
     //read size image
     var length =
-        formdata_comlogo != null ? await formdata_comlogo.length() : "";
+    formdata_comlogo != null ? await formdata_comlogo.length() : "";
     //multipart
     var multipart = formdata_comlogo != null
         ? http.MultipartFile('formdata_comlogo', stream, length,
-            filename: formdata_comlogo.path)
+        filename: formdata_comlogo.path)
         : File;
 
     String edited = email_edit != "" ? "?email=$email_edit&cid=$cid_edit" : "";
@@ -864,7 +802,7 @@ class KarirViewModel {
     String edited = email_edit != "" ? "?email=$email_edit&cid=$joe" : "";
 
     String _url_ =
-        email_edit != "" ? "?simpan_edit_singkat" : "simpan_singkat";
+    email_edit != "" ? "?simpan_edit_singkat" : "simpan_singkat";
     // String _urls = email_edit!=""?"simpan_singkat":"insert_posting_singkat";
     // String _base_url = email_edit!=""?"https://dev-api.p2k.co.id/karir/":ConstanUrl().baseUrl;
     // var request = http.MultipartRequest(
@@ -971,7 +909,7 @@ class KarirViewModel {
     if (response.statusCode == 200) {
       final jsondata = jsonDecode(responseString);
       StatusResponseKarirModel listData =
-          StatusResponseKarirModel.fromJson(jsondata);
+      StatusResponseKarirModel.fromJson(jsondata);
 
       if (response.statusCode == 200) {
         print("data detail_campus");
@@ -1187,7 +1125,7 @@ class KarirViewModel {
     if (response.statusCode == 200) {
       final jsondata = jsonDecode(responseString);
       StatusResponseKarirModel listData =
-          StatusResponseKarirModel.fromJson(jsondata);
+      StatusResponseKarirModel.fromJson(jsondata);
 
       if (response.statusCode == 200) {
         print("data detail_campus");
@@ -1295,31 +1233,31 @@ class KarirViewModel {
     //formdata_jobgambar2
     var streamimgoth1 = formdata_jobgambar2 != null
         ? new http.ByteStream(
-            DelegatingStream.typed(formdata_jobgambar2.openRead()))
+        DelegatingStream.typed(formdata_jobgambar2.openRead()))
         : "";
     //read size image
     var lengthimgoth1 =
-        formdata_jobgambar2 != null ? await formdata_jobgambar2.length() : "";
+    formdata_jobgambar2 != null ? await formdata_jobgambar2.length() : "";
     //multipart
     var multipartgambar2 = formdata_jobgambar2 != null
         ? http.MultipartFile(
-            'formdata_jobgambar2', streamimgoth1, lengthimgoth1,
-            filename: formdata_jobgambar2.path)
+        'formdata_jobgambar2', streamimgoth1, lengthimgoth1,
+        filename: formdata_jobgambar2.path)
         : File;
 
     // formdata_jobgambar3
     var streamimgoth2 = formdata_jobgambar3 != null
         ? new http.ByteStream(
-            DelegatingStream.typed(formdata_jobgambar3.openRead()))
+        DelegatingStream.typed(formdata_jobgambar3.openRead()))
         : "";
     //read size image
     var lengthimgoth2 =
-        formdata_jobgambar3 != null ? await formdata_jobgambar3.length() : "";
+    formdata_jobgambar3 != null ? await formdata_jobgambar3.length() : "";
     //multipart
     var multipartgambar3 = formdata_jobgambar3 != null
         ? http.MultipartFile(
-            'formdata_jobgambar3', streamimgoth2, lengthimgoth2,
-            filename: formdata_jobgambar3.path)
+        'formdata_jobgambar3', streamimgoth2, lengthimgoth2,
+        filename: formdata_jobgambar3.path)
         : "";
 
     // var request = http.MultipartRequest(
@@ -1519,7 +1457,7 @@ class KarirViewModel {
       String formdata_jobkatakunci,
       context) async {
     var stream =
-        new http.ByteStream(DelegatingStream.typed(formdata_jobpdf.openRead()));
+    new http.ByteStream(DelegatingStream.typed(formdata_jobpdf.openRead()));
     //read size image
     var length = await formdata_jobpdf.length();
     //multipart
@@ -1535,7 +1473,7 @@ class KarirViewModel {
         ? "https://dev-api.p2k.co.id/karir/"
         : ConstanUrl().baseUrl;
     var request =
-        http.MultipartRequest('POST', Uri.parse(_base_url + _urls + edited));
+    http.MultipartRequest('POST', Uri.parse(_base_url + _urls + edited));
 
     request.files.add(multipart);
     // request.fields['formdata_apikey'] = keycode; //2
@@ -1684,7 +1622,7 @@ class KarirViewModel {
   Future check_edit(String cid, String jenis_lowongan) async {
     try {
       final response =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_edit"), body: {
+      await http.post(ConstanUrl().baseUrl + "check_edit", body: {
         'cid': cid.toString(),
         'jenis_lowongan': jenis_lowongan.toString(),
       });
@@ -1706,24 +1644,17 @@ class KarirViewModel {
   Future<List<ListDetailJurusanPengelompok>> biayasipema_baru_kelompok(
       String kode_kampus, String kode_jurusan,String kodeprg) async {
     try {
-      // http.Response hasil = await http.get(
-      //     Uri.encodeFull(ConstanUrl().baseUrl + "biayasipema_baru_kelompok"),
-      //     headers: {"Accept": "application/json"});
-
       final hasil = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru_kelompok"), body: {
+          .post(ConstanUrl().baseUrl + "biayasipema_baru_kelompok", body: {
         'kode_kampus': kode_kampus.toString(),
         'kode_jurusan': kode_jurusan.toString(),
         'kodeprg': kodeprg.toString(),
       });
 
-      print("biayasipema_baru_kelompok" + hasil.body);
       if (hasil.statusCode == 200) {
-        // print(hasil.body);
         final data = listDetailJurusanPengelompokFromJson(hasil.body);
         return data;
       } else {
-        print("error status " + hasil.statusCode.toString());
         return null;
       }
     } catch (e) {
@@ -1740,7 +1671,7 @@ class KarirViewModel {
       //     headers: {"Accept": "application/json"});
 
       final hasil = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru_program"), body: {
+          .post(ConstanUrl().baseUrl + "biayasipema_baru_program", body: {
         'kode_kampus': kode_kampus.toString(),
         'kode_jurusan': kode_jurusan.toString(),
       });

@@ -4,11 +4,11 @@ class Daftar_kuliahWebJurusan extends StatefulWidget {
   final Photo campus;
   final String kodejurusan,
       namaJurusan,
-      //  namalulusan,
-      //namajaket,
+  //  namalulusan,
+  //namajaket,
 
-      //  kodeprogram,
-      // namaKelompok,
+  //  kodeprogram,
+  // namaKelompok,
       jenjang,
       status_agent;
   //final int namaspb, namaspp, namakonversi, perpus, kmhsmaba, krs, dpm;
@@ -57,16 +57,16 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
       wilayah,
       jurusan,
       namajaket,
-      // namaspp,
-      // namaspb,
+  // namaspp,
+  // namaspb,
       namaformulir,
       bulanan,
-      // namakonversi,
+  // namakonversi,
       tahunangkatan,
-      // kmhsmaba,
-      // perpus,
-      // krs,
-      // dpm,
+  // kmhsmaba,
+  // perpus,
+  // krs,
+  // dpm,
       first_kodeprogram,
       first_kelompok,
       first_lulusan,
@@ -78,7 +78,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   void getSipemaWhereKelompok(kode_kampus, kode_jurusan, kodeprogram) {
     KarirViewModel()
         .biayasipema_baru_kelompok(kode_kampus.toString(),
-            kode_jurusan.toString(), kodeprogram.toString())
+        kode_jurusan.toString(), kodeprogram.toString())
         .then((value) { //handled
       setState(() {
         //datasipemaKelompok = value;
@@ -148,7 +148,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   void getSipemaWhereprogram(kode_kampus, kode_jurusan) {
     KarirViewModel()
         .biayasipema_baru_program(
-            kode_kampus.toString(), kode_jurusan.toString())
+        kode_kampus.toString(), kode_jurusan.toString())
         .then((value) { //handled
       setState(() {
         datasipemaprogram = value == null ? [] : value;
@@ -216,7 +216,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   }
 
   //master spb
-  List<AngsuranSpbAngsuranModel> dataAngsurSpb = new List();
+  List<AngsuranModel> dataAngsurSpb = new List();
   int valangsuranspb = 0;
   var valwaktuspb;
   void getBiayaSipemaAngsur() {
@@ -250,7 +250,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   }
 
   //master spp
-  List<AngsuranSpbAngsuranModel> dataAngsurSpp = new List();
+  List<AngsuranModel> dataAngsurSpp = new List();
   int valangsuranspp = 0;
   var valwaktuspp;
   void getBiayaSipemaAngsurSPP() {
@@ -451,84 +451,81 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
         ),
         body: isConn == false || _loading == true
             ? Center(
-                child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: SpinKitThreeBounce(
-                  color: mainColor1,
-                ),
-              ))
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: SpinKitThreeBounce(
+                color: mainColor1,
+              ),
+            ))
             : Container(
-                child:
-                    // dialog_loading()
-                    // programperkuliahan == null ||
-                    //     dataAngsurSpb.length == 0 ||
-                    //     dataAngsurSpp.length == 0 ||
-                    ListView(
+          child:
+          // dialog_loading()
+          // programperkuliahan == null ||
+          //     dataAngsurSpb.length == 0 ||
+          //     dataAngsurSpp.length == 0 ||
+          ListView(
+            children: [
+              Container(
+                color: CupertinoColors.systemGrey5,
+                padding: EdgeInsets.all(10.0),
+                child: Stack(
                   children: [
                     Container(
-                      color: CupertinoColors.systemGrey5,
-                      padding: EdgeInsets.all(10.0),
-                      child: Stack(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            color: mainColor1,
+                          )),
+                    ),
+                    Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 60,
-                            child: ClipRRect(
+                              height: 60,
+                              width: 60,
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: Container(
-                                  color: mainColor1,
-                                )),
-                          ),
+                                child: Image.network(
+                                  widget.campus.logo,
+                                  fit: BoxFit.cover,
+                                  // height: MediaQuery.of(context).size.height / 9,
+                                  // width: MediaQuery.of(context).size.width / 3,
+                                ),
+                              )),
                           Container(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            margin: EdgeInsets.only(left: 16),
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                    height: 60,
-                                    width: 60,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      child: Image.network(
-                                        widget.campus.logo,
-                                        fit: BoxFit.cover,
-                                        // height: MediaQuery.of(context).size.height / 9,
-                                        // width: MediaQuery.of(context).size.width / 3,
-                                      ),
-                                    )),
+                                  width:
+                                  MediaQuery.of(context).size.width /
+                                      1.5,
+                                  child: Text(
+                                    widget.namaJurusan,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 16),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.5,
-                                        child: Text(
-                                          widget.namaJurusan,
-                                          style: whiteFontStyle.copyWith(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(top: 5),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.5,
-                                        child: Text(
-                                          widget.campus.nama,
-                                          style: whiteFontStyle.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
+                                  padding: EdgeInsets.only(top: 5),
+                                  width:
+                                  MediaQuery.of(context).size.width /
+                                      1.5,
+                                  child: Text(
+                                    widget.campus.nama,
+                                    style: whiteFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
@@ -537,1469 +534,1472 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                         ],
                       ),
                     ),
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Column(
+                  children: [
                     Container(
-                      color: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                            child: Text("Pilih Kelompok Lulusan:",
-                                style: blueFontStyle),
-                          ),
-                          Container(
-                            child: datasipemaKelompok.length == 0
-                                ? Container(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 24,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 240,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : Center(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        bottomModal2(context);
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.all(10.0),
-                                        margin: const EdgeInsets.fromLTRB(
-                                            24, 8, 24, 8),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            border: Border.all(
-                                                color: Colors.blueGrey)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Flexible(
-                                              child: Text(
-                                                programstudi2,
-                                                style: blackFontStyle3.copyWith(
-                                                    fontSize: 14),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            //Flexible(child: Text(programstudilulusan, style: _styleText(2),)),
-                                            Icon(
-                                              Icons.navigate_next,
-                                              color: mainColor1,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            endIndent: 0,
-                            indent: 16,
-                            height: 32,
-                            color: CupertinoColors.systemGrey4,
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                            child: Text("Program Perkuliahan Terpilih:",
-                                style: blueFontStyle),
-                          ),
-                          Container(
-                            child: datasipemaprogram.length == 0
-                                ? Container(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 24,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 240,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    height: 48,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: ListView.builder(
-                                        itemCount: 1,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 16),
-                                            child: CustomRadioButton(
-                                              width: 220,
-                                              enableShape: true,
-                                              elevation: 1,
-                                              padding: 0,
-                                              spacing: 5.0,
-                                              autoWidth: false,
-                                              enableButtonWrap: true,
-                                              wrapAlignment:
-                                                  WrapAlignment.start,
-                                              horizontal: false,
-                                              absoluteZeroSpacing: false,
-                                              unSelectedColor: whiteColor,
-                                              buttonLables:
-                                                  datasipemaprogram.map((item) {
-                                                return item.nama.toString();
-                                              }).toList(),
-                                              buttonValues:
-                                                  datasipemaprogram.map((item) {
-                                                return item.nama.toString() +
-                                                    "X" +
-                                                    item.kode.toString();
-                                              }).toList(),
-                                              defaultSelected:
-                                                  datasipemaprogram[0].nama +
-                                                      "X" +
-                                                      datasipemaprogram[0]
-                                                          .kode
-                                                          .toString(),
-                                              buttonTextStyle: ButtonTextStyle(
-                                                selectedColor: Colors.white,
-                                                unSelectedColor: mainColor1,
-                                                textStyle:
-                                                    blackFontStyle3.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              radioButtonValue: (value) {
-                                                setState(() {
-                                                  var arr = value.split('X');
-                                                  sipema_program_nama = arr[0];
-                                                  sipema_program_kode = arr[1];
-
-                                                  // sipema_program_nama = value;
-                                                  getSipemaWhereKelompok(
-                                                      widget.campus.kode
-                                                          .toString(),
-                                                      kodeweb.toString(),
-                                                      sipema_program_kode
-                                                          .toString());
-
-                                                  // _loading = true;
-
-                                                  // _loadingProcess();
-                                                });
-                                              },
-                                              selectedColor: mainColor1,
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            endIndent: 0,
-                            indent: 16,
-                            height: 32,
-                            color: CupertinoColors.systemGrey4,
-                          ),
-                          kelasapi.length == 0
-                              ? Container(
-                                  padding: EdgeInsets.symmetric(vertical: 4),
-                                  child: Shimmer.fromColors(
-                                    baseColor: Colors.grey[350],
-                                    highlightColor: Colors.white,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 24,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: Colors.grey[350]),
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: Colors.grey[350]),
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: Colors.grey[350]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : Column(children: [
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                                    child: Text("Pilih Waktu Kuliah",
-                                        style: blueFontStyle),
-                                  ),
-                                  Container(
-                                    child: Container(
-                                      height: 48,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: ListView.builder(
-                                          itemCount: 1,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16),
-                                              child: CustomRadioButton(
-                                                width: 100,
-                                                enableShape: true,
-                                                elevation: 1,
-                                                padding: 0,
-                                                spacing: 5.0,
-                                                autoWidth: false,
-                                                enableButtonWrap: true,
-                                                wrapAlignment:
-                                                    WrapAlignment.start,
-                                                horizontal: false,
-                                                absoluteZeroSpacing: false,
-                                                unSelectedColor: whiteColor,
-                                                buttonLables:
-                                                    kelasapi.map((item) {
-                                                  return item.title.toString();
-                                                }).toList(),
-                                                buttonValues:
-                                                    kelasapi.map((item) {
-                                                  return item.title.toString() +
-                                                      "X" +
-                                                      item.singkatan.toString();
-                                                }).toList(),
-                                                defaultSelected: defaultkelas
-                                                            .toString() ==
-                                                        null
-                                                    ? ''
-                                                    : defaultkelas.toString(),
-                                                buttonTextStyle:
-                                                    ButtonTextStyle(
-                                                  selectedColor: Colors.white,
-                                                  unSelectedColor: mainColor1,
-                                                  textStyle:
-                                                      blackFontStyle3.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                radioButtonValue: (value) {
-                                                  setState(() {
-                                                    var arr = value.split('X');
-                                                    namakelaswaktu = arr[0];
-                                                    namakelassingkatan = arr[1];
-                                                    // print("defaultkelas${arr}");
-                                                    // print("defaultkelas${arr[0]}");
-                                                    // print("defaultkelas${arr[1]}");
-                                                  });
-                                                },
-                                                selectedColor: mainColor1,
-                                              ),
-                                            );
-                                          }),
-                                    ),
-                                  ),
-                                ]),
-                          Container(
-                            child: valangsuranspb == 0
-                                ? Container()
-                                : Divider(
-                                    thickness: 1,
-                                    endIndent: 0,
-                                    indent: 16,
-                                    height: 32,
-                                    color: CupertinoColors.systemGrey4,
-                                  ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                            child: valangsuranspb == 0
-                                ? Container()
-                                : Text(
-                                    valangsuranspp == 0
-                                        ? "Pola Angsuran Biaya Kuliah"
-                                        : "Pola Angsuran SPb",
-                                    style: blueFontStyle),
-                          ),
-                          Container(
-                            child: dataAngsurSpb.length == 0
-                                ? Container(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 24,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    child: dataAngsurSpb[0].waktuAngsuran == "0"
-                                        ? Center(child: Container())
-                                        //  Center(
-                                        //     child: Container(
-                                        //     padding: EdgeInsets.symmetric(
-                                        //         vertical: 8),
-                                        //     child: Text("Tidak Ada Biaya SPb",
-                                        //         style: blackFontStyle2),
-                                        //   ))
-                                        : Container(
-                                            height: 48,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: ListView.builder(
-                                                itemCount: 1,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (context, index) {
-                                                  return Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 16),
-                                                    child: CustomRadioButton(
-                                                      width: 120,
-                                                      enableShape: true,
-                                                      elevation: 1,
-                                                      padding: 0,
-                                                      spacing: 5.0,
-                                                      autoWidth: false,
-                                                      enableButtonWrap: true,
-                                                      wrapAlignment:
-                                                          WrapAlignment.start,
-                                                      horizontal: false,
-                                                      absoluteZeroSpacing:
-                                                          false,
-                                                      unSelectedColor:
-                                                          whiteColor,
-                                                      // buttonLables: [
-                                                      //   '36 x ',
-                                                      //   '12 x ',
-                                                      //   '7 x ',
-                                                      //   '4 x ',
-                                                      //   '1 x ',
-                                                      // ],
-                                                      //  buttonValues: [
-                                                      //   '36 x ',
-                                                      //   '12 x ',
-                                                      //   '7 x ',
-                                                      //   '4 x ',
-                                                      //   '1 x ',
-                                                      // ],
-                                                      buttonLables:
-                                                          dataAngsurSpb
-                                                              .map((item) {
-                                                        return item
-                                                                .waktuAngsuran +
-                                                            "X " +
-                                                            // item.biayaAngsuran.toString();
-
-                                                            NumberFormat.currency(
-                                                                    symbol: '',
-                                                                    decimalDigits:
-                                                                        0,
-                                                                    locale:
-                                                                        'id-ID')
-                                                                .format(double
-                                                                    .parse(item
-                                                                        .biayaAngsuran
-                                                                        .toString()));
-                                                      }).toList(),
-                                                      buttonValues:
-                                                          dataAngsurSpb
-                                                              .map((item) {
-                                                        return item
-                                                                .waktuAngsuran +
-                                                            "X" +
-                                                            item.biayaAngsuran
-                                                                .toString();
-                                                      }).toList(),
-                                                      defaultSelected:
-                                                          dataAngsurSpb[0]
-                                                                  .waktuAngsuran +
-                                                              "X" +
-                                                              dataAngsurSpb[0]
-                                                                  .biayaAngsuran
-                                                                  .toString(),
-                                                      radioButtonValue:
-                                                          (value) {
-                                                        setState(() {
-                                                          print(
-                                                              "valuespb${value}");
-                                                          var arr =
-                                                              value.split('X');
-                                                          valwaktuspb = arr[0];
-                                                          valangsuranspb =
-                                                              int.parse(arr[1]);
-                                                          print(
-                                                              "valuespb${arr}");
-                                                          print(
-                                                              "valuespb${arr[0]}");
-                                                          print(
-                                                              "valuespb${arr[1]}");
-                                                        });
-                                                      },
-                                                      buttonTextStyle:
-                                                          ButtonTextStyle(
-                                                        selectedColor:
-                                                            Colors.white,
-                                                        unSelectedColor:
-                                                            mainColor1,
-                                                        textStyle:
-                                                            blackFontStyle3
-                                                                .copyWith(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-
-                                                      selectedColor: mainColor1,
-                                                    ),
-                                                  );
-                                                }),
-                                          )),
-                          ),
-                          Container(
-                            child: valangsuranspp == 0
-                                ? Container()
-                                : Divider(
-                                    thickness: 1,
-                                    endIndent: 0,
-                                    indent: 16,
-                                    height: 32,
-                                    color: CupertinoColors.systemGrey4,
-                                  ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                            child: valangsuranspp == 0
-                                ? Container()
-                                : Text(
-                                    valangsuranspb == 0
-                                        ? "Pola Angsuran Biaya Kuliah"
-                                        : "Pola Angsuran SPP",
-                                    style: blueFontStyle),
-                          ),
-                          Container(
-                            child: dataAngsurSpp.length == 0
-                                ? Container(
-                                    padding: EdgeInsets.symmetric(vertical: 4),
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 24,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.grey[350]),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    child: dataAngsurSpp[0].waktuAngsuran == "0"
-                                        ? Center(child: Container())
-
-                                        // Center(
-                                        //     child: Container(
-                                        //     padding: EdgeInsets.symmetric(
-                                        //         vertical: 8),
-                                        //     child: Text("Tidak Ada Biaya SPP",
-                                        //         style: blackFontStyle2),
-                                        //   ))
-
-                                        : Container(
-                                            height: 48,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: ListView.builder(
-                                                itemCount: 1,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (context, index) {
-                                                  return Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 16),
-                                                    child: CustomRadioButton(
-                                                      width: 130,
-                                                      enableShape: true,
-                                                      elevation: 0,
-                                                      padding: 0,
-                                                      spacing: 5.0,
-                                                      autoWidth: false,
-                                                      enableButtonWrap: true,
-                                                      wrapAlignment:
-                                                          WrapAlignment.start,
-                                                      horizontal: false,
-                                                      absoluteZeroSpacing:
-                                                          false,
-                                                      unSelectedColor:
-                                                          whiteColor,
-                                                      // buttonLables: [
-                                                      //   '36 x ',
-                                                      //   '12 x ',
-                                                      //   '7 x ',
-                                                      //   '4 x ',
-                                                      //   '1 x ',
-                                                      // ],
-                                                      //  buttonValues: [
-                                                      //   '36 x ',
-                                                      //   '12 x ',
-                                                      //   '7 x ',
-                                                      //   '4 x ',
-                                                      //   '1 x ',
-                                                      // ],
-                                                      buttonLables:
-                                                          dataAngsurSpp
-                                                              .map((item) {
-                                                        return item
-                                                                .waktuAngsuran +
-                                                            "X " +
-                                                            //  item.biayaAngsuran.toString();
-
-                                                            NumberFormat.currency(
-                                                                    symbol: '',
-                                                                    decimalDigits:
-                                                                        0,
-                                                                    locale:
-                                                                        'id-ID')
-                                                                .format(double
-                                                                    .parse(item
-                                                                        .biayaAngsuran
-                                                                        .toString()));
-                                                      }).toList(),
-                                                      buttonValues:
-                                                          dataAngsurSpp
-                                                              .map((item) {
-                                                        return item
-                                                                .waktuAngsuran +
-                                                            "X" +
-                                                            item.biayaAngsuran
-                                                                .toString();
-                                                      }).toList(),
-                                                      defaultSelected:
-                                                          dataAngsurSpp[0]
-                                                                  .waktuAngsuran +
-                                                              "X" +
-                                                              dataAngsurSpp[0]
-                                                                  .biayaAngsuran
-                                                                  .toString(),
-                                                      radioButtonValue:
-                                                          (value) {
-                                                        setState(() {
-                                                          print(
-                                                              "valuespp${value}");
-                                                          var arr =
-                                                              value.split('X');
-                                                          valwaktuspp = arr[0];
-                                                          valangsuranspp =
-                                                              int.parse(arr[1]);
-                                                          print(
-                                                              "valuespp${arr}");
-                                                          print(
-                                                              "valuespp${arr[0]}");
-                                                          print(
-                                                              "valuespp${arr[1]}");
-                                                        });
-                                                        //print("SPP nilai ${valwaktuspp}");
-                                                      },
-                                                      buttonTextStyle:
-                                                          ButtonTextStyle(
-                                                        selectedColor:
-                                                            Colors.white,
-                                                        unSelectedColor:
-                                                            mainColor1,
-                                                        textStyle:
-                                                            blackFontStyle3
-                                                                .copyWith(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-
-                                                      selectedColor: mainColor1,
-                                                    ),
-                                                  );
-                                                }),
-                                          )),
-                          ),
-                        ],
-                      ),
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                      child: Text("Pilih Kelompok Lulusan:",
+                          style: blueFontStyle),
                     ),
-                    SizedBox(height: 8),
                     Container(
-                      child: datasipemaprogram.length == 0 ||
-                              dataAngsurSpb.length == 0 ||
-                              dataAngsurSpp.length == 0
-                          ? Center(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 40,
-                                    decoration:
-                                        BoxDecoration(color: Colors.grey[350]),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : ExpandablePanel(
-                              theme: const ExpandableThemeData(
-                                headerAlignment:
-                                    ExpandablePanelHeaderAlignment.center,
-                                tapBodyToExpand: true,
-                                tapBodyToCollapse: true,
-                                hasIcon: false,
-                              ),
-                              header: Container(
-                                height: 48,
-                                color: yellowColor.withOpacity(1),
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      ExpandableIcon(
-                                        theme: const ExpandableThemeData(
-                                          expandIcon: Icons.arrow_right,
-                                          collapseIcon: Icons.arrow_drop_down,
-                                          iconColor: Colors.white,
-                                          iconSize: 24.0,
-                                          //iconRotationAngle: math.pi / 2,
-                                          iconPadding:
-                                              EdgeInsets.only(right: 8),
-                                          hasIcon: false,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          padding: EdgeInsets.only(right: 16),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Total Angsuran Petama",
-                                                style: blueFontStyle.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                NumberFormat.currency(
-                                                        symbol: 'IDR ',
-                                                        decimalDigits: 0,
-                                                        locale: 'id-ID')
-                                                    .format(angsuranpertama +
-                                                        valangsuranspb +
-                                                        valangsuranspp +
-                                                        perpus +
-                                                        kmhsmaba +
-                                                        krs +
-                                                        dpm),
-                                                style: blueFontStyle.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              expanded: Container(
-                                color: CupertinoColors.systemGrey6,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 24),
-                                  margin: EdgeInsets.symmetric(vertical: 16),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        child: valangsuranspb == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                      valangsuranspp == 0
-                                                          ? "Biaya Kuliah"
-                                                          : "SPB",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                    NumberFormat.currency(
-                                                            symbol: 'IDR ',
-                                                            decimalDigits: 0,
-                                                            locale: 'id-ID')
-                                                        .format(valangsuranspb ==
-                                                                0
-                                                            ? 0
-                                                            : valangsuranspb),
-                                                    style: blueFontStyle,
-                                                  )
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: valangsuranspb == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-                                      Container(
-                                        child: valangsuranspp == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                      valangsuranspb == 0
-                                                          ? "Biaya Kuliah"
-                                                          : "SPP",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(valangsuranspp ==
-                                                                  0
-                                                              ? 0
-                                                              : valangsuranspp),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: valangsuranspp == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-                                      Container(
-                                        child: namajaket == "0"
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("Jaket",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(int.parse(
-                                                              namajaket)),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-
-                                      Container(
-                                        child: namajaket == "0"
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-                                      Container(
-                                        child: kmhsmaba == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("Kmhs ",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(kmhsmaba),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: kmhsmaba == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-                                      Container(
-                                        child: perpus == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("Perpustakaan ",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(perpus),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: perpus == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-
-                                      Container(
-                                        child: krs == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("KRS ",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(krs),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: krs == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-
-                                      Container(
-                                        child: dpm == 0
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text("DPM ",
-                                                      style: blueFontStyle),
-                                                  Text(
-                                                      NumberFormat.currency(
-                                                              symbol: 'IDR ',
-                                                              decimalDigits: 0,
-                                                              locale: 'id-ID')
-                                                          .format(dpm),
-                                                      style: blueFontStyle)
-                                                ],
-                                              ),
-                                      ),
-                                      Container(
-                                        child: dpm == 0
-                                            ? Container()
-                                            : Divider(
-                                                thickness: 1,
-                                                color:
-                                                    CupertinoColors.systemGrey3,
-                                                height: 16,
-                                              ),
-                                      ),
-
-                                      // Row(
-                                      //   mainAxisAlignment:
-                                      //       MainAxisAlignment.spaceBetween,
-                                      //   children: [
-                                      //     Text("Lainnya", style: blueFontStyle),
-                                      //     Text(
-                                      //         NumberFormat.currency(
-                                      //                 symbol: 'IDR ',
-                                      //                 decimalDigits: 0,
-                                      //                 locale: 'id-ID')
-                                      //             .format(0),
-                                      //         style: blueFontStyle)
-                                      //   ],
-                                      // ),
-                                    ],
-                                    //softWrap: true,
-                                  ),
-                                ),
-                              ),
-                            ),
-                    ),
-                    ExpandablePanel(
-                      theme: const ExpandableThemeData(
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        tapBodyToExpand: true,
-                        tapBodyToCollapse: true,
-                        hasIcon: false,
-                      ),
-                      header: Container(
-                        height: 48,
-                        color: mainColor1,
-                        child: Container(
+                      child: datasipemaKelompok.length == 0
+                          ? Container(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
                           child: Row(
                             children: [
-                              ExpandableIcon(
-                                theme: const ExpandableThemeData(
-                                  expandIcon: Icons.arrow_right,
-                                  collapseIcon: Icons.arrow_drop_down,
-                                  iconColor: Colors.white,
-                                  iconSize: 24.0,
-                                  iconPadding: EdgeInsets.only(right: 8),
-                                  hasIcon: false,
-                                ),
+                              SizedBox(
+                                width: 24,
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 16),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Total Biaya",
-                                        style: whiteFontStyle.copyWith(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Container(
-                                        child: datasipemaprogram.length == 0 ||
-                                                dataAngsurSpb.length == 0 ||
-                                                dataAngsurSpp.length == 0
-                                            ? Center(
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 4),
-                                                  child: Shimmer.fromColors(
-                                                    baseColor: Colors.grey[350],
-                                                    highlightColor:
-                                                        Colors.white,
-                                                    child: Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              4,
-                                                      height: 24,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          color:
-                                                              Colors.grey[350]),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            : Text(
-                                                NumberFormat.currency(
-                                                        symbol: 'IDR ',
-                                                        decimalDigits: 0,
-                                                        locale: 'id-ID')
-                                                    .format(angsuranpertama +
-                                                        valangsuranspb +
-                                                        valangsuranspp +
-                                                        int.parse(
-                                                            namaformulir) +
-                                                        perpus +
-                                                        kmhsmaba +
-                                                        krs +
-                                                        dpm),
-                                                style: whiteFontStyle.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              Container(
+                                height: 40,
+                                width: 240,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      expanded: Container(
-                        color: CupertinoColors.systemGrey6,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 24),
-                          margin: EdgeInsets.symmetric(vertical: 16),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Pendaftaran",
-                                    style: blueFontStyle,
+                      )
+                          : Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            bottomModal2(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10.0),
+                            margin: const EdgeInsets.fromLTRB(
+                                24, 8, 24, 8),
+                            width:
+                            MediaQuery.of(context).size.width,
+                            height: 48,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(10.0),
+                                border: Border.all(
+                                    color: Colors.blueGrey)),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    programstudi2,
+                                    style: blackFontStyle3.copyWith(
+                                        fontSize: 14),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  Container(
-                                    child: datasipemaprogram.length == 0 ||
-                                            dataAngsurSpb.length == 0 ||
-                                            dataAngsurSpp.length == 0
-                                        ? Center(
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 4),
-                                              child: Shimmer.fromColors(
-                                                baseColor: Colors.grey[350],
-                                                highlightColor: Colors.white,
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  height: 24,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      color: Colors.grey[350]),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Text(
-                                            NumberFormat.currency(
-                                                    symbol: 'IDR ',
-                                                    decimalDigits: 0,
-                                                    locale: 'id-ID')
-                                                .format(
-                                                    int.parse(namaformulir)),
-                                            style: blueFontStyle,
-                                          ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                thickness: 1,
-                                color: CupertinoColors.systemGrey3,
-                                height: 16,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Angsuran Pertama",
-                                    style: blueFontStyle,
-                                  ),
-                                  Container(
-                                    child: datasipemaprogram.length == 0 ||
-                                            dataAngsurSpb.length == 0 ||
-                                            dataAngsurSpp.length == 0
-                                        ? Center(
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 4),
-                                              child: Shimmer.fromColors(
-                                                baseColor: Colors.grey[350],
-                                                highlightColor: Colors.white,
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  height: 24,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      color: Colors.grey[350]),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Text(
-                                            NumberFormat.currency(
-                                                    symbol: 'IDR ',
-                                                    decimalDigits: 0,
-                                                    locale: 'id-ID')
-                                                .format(angsuranpertama +
-                                                    valangsuranspb +
-                                                    valangsuranspp +
-                                                    perpus +
-                                                    kmhsmaba +
-                                                    krs +
-                                                    dpm),
-                                            style: blueFontStyle,
-                                          ),
-                                  )
-                                ],
-                              ),
-                            ],
-                            //softWrap: true,
+                                ),
+                                //Flexible(child: Text(programstudilulusan, style: _styleText(2),)),
+                                Icon(
+                                  Icons.navigate_next,
+                                  color: mainColor1,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
+                    Divider(
+                      thickness: 1,
+                      endIndent: 0,
+                      indent: 16,
+                      height: 32,
+                      color: CupertinoColors.systemGrey4,
+                    ),
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black38,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 3.0)
-                        ],
-                      ),
-                      height: 64,
-                      child: datasipemaprogram.length == 0 ||
-                              dataAngsurSpb.length == 0 ||
-                              dataAngsurSpp.length == 0
-                          ? Center(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.5,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.grey[350]),
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                      child: Text("Program Perkuliahan Terpilih:",
+                          style: blueFontStyle),
+                    ),
+                    Container(
+                      child: datasipemaprogram.length == 0
+                          ? Container(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 24,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 240,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                          : Container(
+                        height: 48,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView.builder(
+                            itemCount: 1,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16),
+                                child: CustomRadioButton(
+                                  width: 220,
+                                  enableShape: true,
+                                  elevation: 1,
+                                  padding: 0,
+                                  spacing: 5.0,
+                                  autoWidth: false,
+                                  enableButtonWrap: true,
+                                  wrapAlignment:
+                                  WrapAlignment.start,
+                                  horizontal: false,
+                                  absoluteZeroSpacing: false,
+                                  unSelectedColor: whiteColor,
+                                  buttonLables:
+                                  datasipemaprogram.map((item) {
+                                    return item.nama.toString();
+                                  }).toList(),
+                                  buttonValues:
+                                  datasipemaprogram.map((item) {
+                                    return item.nama.toString() +
+                                        "X" +
+                                        item.kode.toString();
+                                  }).toList(),
+                                  defaultSelected:
+                                  datasipemaprogram[0].nama +
+                                      "X" +
+                                      datasipemaprogram[0]
+                                          .kode
+                                          .toString(),
+                                  buttonTextStyle: ButtonTextStyle(
+                                    selectedColor: Colors.white,
+                                    unSelectedColor: mainColor1,
+                                    textStyle:
+                                    blackFontStyle3.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
+                                  radioButtonValue: (value) {
+                                    setState(() {
+                                      var arr = value.split('X');
+                                      sipema_program_nama = arr[0];
+                                      sipema_program_kode = arr[1];
+
+                                      // sipema_program_nama = value;
+                                      getSipemaWhereKelompok(
+                                          widget.campus.kode
+                                              .toString(),
+                                          kodeweb.toString(),
+                                          sipema_program_kode
+                                              .toString());
+
+                                      // _loading = true;
+
+                                      // _loadingProcess();
+                                    });
+                                  },
+                                  selectedColor: mainColor1,
                                 ),
-                              ),
-                            )
-                          : Center(
-                              child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.5,
+                              );
+                            }),
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      endIndent: 0,
+                      indent: 16,
+                      height: 32,
+                      color: CupertinoColors.systemGrey4,
+                    ),
+                    kelasapi.length == 0
+                        ? Container(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[350],
+                        highlightColor: Colors.white,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 24,
+                            ),
+                            Container(
                               height: 40,
-                              child: EduButton(
-                                buttonText: "Lanjut Daftar",
-                                onPressed: () {
-                                  globalkey == null
-                                      ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  (DaftarNonLogin(
-
-                                                      //session
-                                                      varpendidikan:
-                                                          varpendidikan == null
-                                                              ? ""
-                                                              : varpendidikan
-                                                                  .toString(),
-                                                      varnama: varnama == null
-                                                          ? ""
-                                                          : varnama.toString(),
-                                                      varnohp: varnohp == null
-                                                          ? ""
-                                                          : varnohp.toString(),
-                                                      varnowa: varnowa == null
-                                                          ? ""
-                                                          : varnowa.toString(),
-                                                      campus: widget.campus,
-                                                      angkatan: angkatan,
-                                                      tahunangkatan:
-                                                          tahunangkatan,
-                                                      wilayah: wilayah,
-                                                      namakonversi:
-                                                          namakonversi == null
-                                                              ? ""
-                                                              : namakonversi,
-                                                      kodejurusan: kodejurusan.length ==
-                                                              0
-                                                          ? widget.kodejurusan
-                                                              .toString()
-                                                          : kodejurusan.toString() ==
-                                                                  null
-                                                              ? ""
-                                                              : kodejurusan.length ==
-                                                                      0
-                                                                  ? widget
-                                                                      .kodejurusan
-                                                                      .toString()
-                                                                  : kodejurusan
-                                                                      .toString(),
-                                                      kodeprogram: kodeprogram
-                                                                  .length ==
-                                                              0
-                                                          ? first_kodeprogram
-                                                              .toString()
-                                                          : kodeprogram.toString() ==
-                                                                  null
-                                                              ? ""
-                                                              : kodeprogram.length ==
-                                                                      0
-                                                                  ? first_kodeprogram
-                                                                      .toString()
-                                                                  : kodeprogram
-                                                                      .toString(),
-                                                      namaJurusan: namaJurusan
-                                                                  .length ==
-                                                              0
-                                                          ? widget.namaJurusan.toString()
-                                                          : namaJurusan.toString() == null
-                                                              ? ""
-                                                              : namaJurusan.length == 0
-                                                                  ? widget.namaJurusan.toString()
-                                                                  : namaJurusan.toString(),
-                                                      namalulusan: namalulusan.length == 0
-                                                          ? first_lulusan.toString()
-                                                          : namalulusan.toString() == null
-                                                              ? ""
-                                                              : namalulusan.length == 0
-                                                                  ? first_lulusan.toString()
-                                                                  : namalulusan.toString(),
-                                                      namajaket: namajaket,
-                                                      namaspb: namaspb,
-                                                      namaspp: namaspp,
-                                                      namaformulir: namaformulir,
-                                                      programperkuliahan: sipema_program_nama,
-                                                      namakelompok: namaKelompok.length == 0
-                                                          ? first_kelompok.toString()
-                                                          : namaKelompok.toString() == null
-                                                              ? ""
-                                                              : namaKelompok.length == 0
-                                                                  ? first_kelompok.toString()
-                                                                  : namaKelompok.toString(),
-                                                      namakelaswaktu: namakelaswaktu,
-                                                      namakelassingkatan: namakelassingkatan,
-                                                      waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
-                                                      angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
-                                                      waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspb.toString(),
-                                                      angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
-                                                      perpus: perpus,
-                                                      kmhsmaba: kmhsmaba,
-                                                      krs: krs,
-                                                      dpm: dpm,
-                                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))))
-                                      : Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => (Daftar(
-
-                                                  //session
-                                                  varpendidikan: varpendidikan == null ? "" : varpendidikan.toString(),
-                                                  varnama: varnama == null ? "" : varnama.toString(),
-                                                  varnohp: varnohp == null ? "" : varnohp.toString(),
-                                                  varnowa: varnowa == null ? "" : varnowa.toString(),
-                                                  campus: widget.campus,
-                                                  angkatan: angkatan,
-                                                  tahunangkatan: tahunangkatan,
-                                                  wilayah: wilayah,
-                                                  namakonversi: namakonversi == null ? "" : namakonversi,
-                                                  kodejurusan: kodejurusan.length == 0
-                                                      ? widget.kodejurusan.toString()
-                                                      : kodejurusan.toString() == null
-                                                          ? ""
-                                                          : kodejurusan.length == 0
-                                                              ? widget.kodejurusan.toString()
-                                                              : kodejurusan.toString(),
-                                                  kodeprogram: kodeprogram.length == 0
-                                                      ? first_kodeprogram.toString()
-                                                      : kodeprogram.toString() == null
-                                                          ? ""
-                                                          : kodeprogram.length == 0
-                                                              ? first_kodeprogram.toString()
-                                                              : kodeprogram.toString(),
-                                                  namaJurusan: namaJurusan.length == 0
-                                                      ? widget.namaJurusan.toString()
-                                                      : namaJurusan.toString() == null
-                                                          ? ""
-                                                          : namaJurusan.length == 0
-                                                              ? widget.namaJurusan.toString()
-                                                              : namaJurusan.toString(),
-                                                  namalulusan: namalulusan.length == 0
-                                                      ? first_lulusan.toString()
-                                                      : namalulusan.toString() == null
-                                                          ? ""
-                                                          : namalulusan.length == 0
-                                                              ? first_lulusan.toString()
-                                                              : namalulusan.toString(),
-                                                  namajaket: namajaket,
-                                                  namaspb: namaspb,
-                                                  namaspp: namaspp,
-                                                  namaformulir: namaformulir,
-                                                  programperkuliahan: sipema_program_nama,
-                                                  namakelompok: namaKelompok.length == 0
-                                                      ? first_kelompok.toString()
-                                                      : namaKelompok.toString() == null
-                                                          ? ""
-                                                          : namaKelompok.length == 0
-                                                              ? first_kelompok.toString()
-                                                              : namaKelompok.toString(),
-                                                  namakelaswaktu: namakelaswaktu,
-                                                  namakelassingkatan: namakelassingkatan,
-                                                  waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
-                                                  angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
-                                                  waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspb.toString(),
-                                                  angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
-                                                  perpus: perpus,
-                                                  kmhsmaba: kmhsmaba,
-                                                  krs: krs,
-                                                  dpm: dpm,
-                                                  keycode : globalkey == null ? "" : globalkey.toString(),
-                                                  status_agent: widget.status_agent == null ? "" : widget.status_agent.toString(),
-                                                  totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))));
-                                },
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(20),
+                                  color: Colors.grey[350]),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(20),
+                                  color: Colors.grey[350]),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(20),
+                                  color: Colors.grey[350]),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                        : Column(children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                        child: Text("Pilih Waktu Kuliah",
+                            style: blueFontStyle),
+                      ),
+                      Container(
+                        child: Container(
+                          height: 48,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                              itemCount: 1,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: CustomRadioButton(
+                                    width: 100,
+                                    enableShape: true,
+                                    elevation: 1,
+                                    padding: 0,
+                                    spacing: 5.0,
+                                    autoWidth: false,
+                                    enableButtonWrap: true,
+                                    wrapAlignment:
+                                    WrapAlignment.start,
+                                    horizontal: false,
+                                    absoluteZeroSpacing: false,
+                                    unSelectedColor: whiteColor,
+                                    buttonLables:
+                                    kelasapi.map((item) {
+                                      return item.title.toString();
+                                    }).toList(),
+                                    buttonValues:
+                                    kelasapi.map((item) {
+                                      return item.title.toString() +
+                                          "X" +
+                                          item.singkatan.toString();
+                                    }).toList(),
+                                    defaultSelected: defaultkelas
+                                        .toString() ==
+                                        null
+                                        ? ''
+                                        : defaultkelas.toString(),
+                                    buttonTextStyle:
+                                    ButtonTextStyle(
+                                      selectedColor: Colors.white,
+                                      unSelectedColor: mainColor1,
+                                      textStyle:
+                                      blackFontStyle3.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    radioButtonValue: (value) {
+                                      setState(() {
+                                        var arr = value.split('X');
+                                        namakelaswaktu = arr[0];
+                                        namakelassingkatan = arr[1];
+                                        // print("defaultkelas${arr}");
+                                        // print("defaultkelas${arr[0]}");
+                                        // print("defaultkelas${arr[1]}");
+                                      });
+                                    },
+                                    selectedColor: mainColor1,
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
+                    ]),
+                    Container(
+                      child: valangsuranspb == 0
+                          ? Container()
+                          : Divider(
+                        thickness: 1,
+                        endIndent: 0,
+                        indent: 16,
+                        height: 32,
+                        color: CupertinoColors.systemGrey4,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                      child: valangsuranspb == 0
+                          ? Container()
+                          : Text(
+                          valangsuranspp == 0
+                              ? "Pola Angsuran Biaya Kuliah"
+                              : "Pola Angsuran SPb",
+                          style: blueFontStyle),
+                    ),
+                    Container(
+                      child: dataAngsurSpb.length == 0
+                          ? Container(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 24,
                               ),
-                            )),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                          : Container(
+                          child: dataAngsurSpb[0].waktuAngsuran == "0"
+                              ? Center(child: Container())
+                          //  Center(
+                          //     child: Container(
+                          //     padding: EdgeInsets.symmetric(
+                          //         vertical: 8),
+                          //     child: Text("Tidak Ada Biaya SPb",
+                          //         style: blackFontStyle2),
+                          //   ))
+                              : Container(
+                            height: 48,
+                            width: MediaQuery.of(context)
+                                .size
+                                .width,
+                            child: ListView.builder(
+                                itemCount: 1,
+                                scrollDirection:
+                                Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    padding:
+                                    EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: CustomRadioButton(
+                                      width: 120,
+                                      enableShape: true,
+                                      elevation: 1,
+                                      padding: 0,
+                                      spacing: 5.0,
+                                      autoWidth: false,
+                                      enableButtonWrap: true,
+                                      wrapAlignment:
+                                      WrapAlignment.start,
+                                      horizontal: false,
+                                      absoluteZeroSpacing:
+                                      false,
+                                      unSelectedColor:
+                                      whiteColor,
+                                      // buttonLables: [
+                                      //   '36 x ',
+                                      //   '12 x ',
+                                      //   '7 x ',
+                                      //   '4 x ',
+                                      //   '1 x ',
+                                      // ],
+                                      //  buttonValues: [
+                                      //   '36 x ',
+                                      //   '12 x ',
+                                      //   '7 x ',
+                                      //   '4 x ',
+                                      //   '1 x ',
+                                      // ],
+                                      buttonLables:
+                                      dataAngsurSpb
+                                          .map((item) {
+                                        return item
+                                            .waktuAngsuran +
+                                            "X " +
+                                            // item.biayaAngsuran.toString();
+
+                                            NumberFormat.currency(
+                                                symbol: '',
+                                                decimalDigits:
+                                                0,
+                                                locale:
+                                                'id-ID')
+                                                .format(double
+                                                .parse(item
+                                                .biayaAngsuran
+                                                .toString()));
+                                      }).toList(),
+                                      buttonValues:
+                                      dataAngsurSpb
+                                          .map((item) {
+                                        return item
+                                            .waktuAngsuran +
+                                            "X" +
+                                            item.biayaAngsuran
+                                                .toString();
+                                      }).toList(),
+                                      defaultSelected:
+                                      dataAngsurSpb[0]
+                                          .waktuAngsuran +
+                                          "X" +
+                                          dataAngsurSpb[0]
+                                              .biayaAngsuran
+                                              .toString(),
+                                      radioButtonValue:
+                                          (value) {
+                                        setState(() {
+                                          print(
+                                              "valuespb${value}");
+                                          var arr =
+                                          value.split('X');
+                                          valwaktuspb = arr[0];
+                                          valangsuranspb =
+                                              int.parse(arr[1]);
+                                          print(
+                                              "valuespb${arr}");
+                                          print(
+                                              "valuespb${arr[0]}");
+                                          print(
+                                              "valuespb${arr[1]}");
+                                        });
+                                      },
+                                      buttonTextStyle:
+                                      ButtonTextStyle(
+                                        selectedColor:
+                                        Colors.white,
+                                        unSelectedColor:
+                                        mainColor1,
+                                        textStyle:
+                                        blackFontStyle3
+                                            .copyWith(
+                                          fontSize: 12,
+                                          fontWeight:
+                                          FontWeight.bold,
+                                        ),
+                                      ),
+
+                                      selectedColor: mainColor1,
+                                    ),
+                                  );
+                                }),
+                          )),
+                    ),
+                    Container(
+                      child: valangsuranspp == 0
+                          ? Container()
+                          : Divider(
+                        thickness: 1,
+                        endIndent: 0,
+                        indent: 16,
+                        height: 32,
+                        color: CupertinoColors.systemGrey4,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                      child: valangsuranspp == 0
+                          ? Container()
+                          : Text(
+                          valangsuranspb == 0
+                              ? "Pola Angsuran Biaya Kuliah"
+                              : "Pola Angsuran SPP",
+                          style: blueFontStyle),
+                    ),
+                    Container(
+                      child: dataAngsurSpp.length == 0
+                          ? Container(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 24,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    color: Colors.grey[350]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                          : Container(
+                          child: dataAngsurSpp[0].waktuAngsuran == "0"
+                              ? Center(child: Container())
+
+                          // Center(
+                          //     child: Container(
+                          //     padding: EdgeInsets.symmetric(
+                          //         vertical: 8),
+                          //     child: Text("Tidak Ada Biaya SPP",
+                          //         style: blackFontStyle2),
+                          //   ))
+
+                              : Container(
+                            height: 48,
+                            width: MediaQuery.of(context)
+                                .size
+                                .width,
+                            child: ListView.builder(
+                                itemCount: 1,
+                                scrollDirection:
+                                Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    padding:
+                                    EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: CustomRadioButton(
+                                      width: 130,
+                                      enableShape: true,
+                                      elevation: 0,
+                                      padding: 0,
+                                      spacing: 5.0,
+                                      autoWidth: false,
+                                      enableButtonWrap: true,
+                                      wrapAlignment:
+                                      WrapAlignment.start,
+                                      horizontal: false,
+                                      absoluteZeroSpacing:
+                                      false,
+                                      unSelectedColor:
+                                      whiteColor,
+                                      // buttonLables: [
+                                      //   '36 x ',
+                                      //   '12 x ',
+                                      //   '7 x ',
+                                      //   '4 x ',
+                                      //   '1 x ',
+                                      // ],
+                                      //  buttonValues: [
+                                      //   '36 x ',
+                                      //   '12 x ',
+                                      //   '7 x ',
+                                      //   '4 x ',
+                                      //   '1 x ',
+                                      // ],
+                                      buttonLables:
+                                      dataAngsurSpp
+                                          .map((item) {
+                                        return item
+                                            .waktuAngsuran +
+                                            "X " +
+                                            //  item.biayaAngsuran.toString();
+
+                                            NumberFormat.currency(
+                                                symbol: '',
+                                                decimalDigits:
+                                                0,
+                                                locale:
+                                                'id-ID')
+                                                .format(double
+                                                .parse(item
+                                                .biayaAngsuran
+                                                .toString()));
+                                      }).toList(),
+                                      buttonValues:
+                                      dataAngsurSpp
+                                          .map((item) {
+                                        return item
+                                            .waktuAngsuran +
+                                            "X" +
+                                            item.biayaAngsuran
+                                                .toString();
+                                      }).toList(),
+                                      defaultSelected:
+                                      dataAngsurSpp[0]
+                                          .waktuAngsuran +
+                                          "X" +
+                                          dataAngsurSpp[0]
+                                              .biayaAngsuran
+                                              .toString(),
+                                      radioButtonValue:
+                                          (value) {
+                                        setState(() {
+                                          print(
+                                              "valuespp${value}");
+                                          var arr =
+                                          value.split('X');
+                                          valwaktuspp = arr[0];
+                                          valangsuranspp =
+                                              int.parse(arr[1]);
+                                          print(
+                                              "valuespp${arr}");
+                                          print(
+                                              "valuespp${arr[0]}");
+                                          print(
+                                              "valuespp${arr[1]}");
+                                        });
+                                        //print("SPP nilai ${valwaktuspp}");
+                                      },
+                                      buttonTextStyle:
+                                      ButtonTextStyle(
+                                        selectedColor:
+                                        Colors.white,
+                                        unSelectedColor:
+                                        mainColor1,
+                                        textStyle:
+                                        blackFontStyle3
+                                            .copyWith(
+                                          fontSize: 12,
+                                          fontWeight:
+                                          FontWeight.bold,
+                                        ),
+                                      ),
+
+                                      selectedColor: mainColor1,
+                                    ),
+                                  );
+                                }),
+                          )),
                     ),
                   ],
                 ),
-              ));
+              ),
+              SizedBox(height: 8),
+              Container(
+                child: datasipemaprogram.length == 0 ||
+                    dataAngsurSpb.length == 0 ||
+                    dataAngsurSpp.length == 0
+                    ? Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[350],
+                      highlightColor: Colors.white,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 40,
+                        decoration:
+                        BoxDecoration(color: Colors.grey[350]),
+                      ),
+                    ),
+                  ),
+                )
+                    : ExpandablePanel(
+                  theme: const ExpandableThemeData(
+                    headerAlignment:
+                    ExpandablePanelHeaderAlignment.center,
+                    tapBodyToExpand: true,
+                    tapBodyToCollapse: true,
+                    hasIcon: false,
+                  ),
+                  header: Container(
+                    height: 48,
+                    color: yellowColor.withOpacity(1),
+                    child: Container(
+                      child: Row(
+                        children: [
+                          ExpandableIcon(
+                            theme: const ExpandableThemeData(
+                              expandIcon: Icons.arrow_right,
+                              collapseIcon: Icons.arrow_drop_down,
+                              iconColor: Colors.white,
+                              iconSize: 24.0,
+                              //iconRotationAngle: math.pi / 2,
+                              iconPadding:
+                              EdgeInsets.only(right: 8),
+                              hasIcon: false,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.only(right: 16),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Total Angsuran Petama",
+                                    style: blueFontStyle.copyWith(
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  ),
+                                  Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(angsuranpertama +
+                                        valangsuranspb +
+                                        valangsuranspp +
+                                        perpus +
+                                        kmhsmaba +
+                                        krs +
+                                        dpm),
+                                    style: blueFontStyle.copyWith(
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  expanded: Container(
+                    color: CupertinoColors.systemGrey6,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      margin: EdgeInsets.symmetric(vertical: 16),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: valangsuranspb == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text(
+                                    valangsuranspp == 0
+                                        ? "Biaya Kuliah"
+                                        : "SPB",
+                                    style: blueFontStyle),
+                                Text(
+                                  NumberFormat.currency(
+                                      symbol: 'IDR ',
+                                      decimalDigits: 0,
+                                      locale: 'id-ID')
+                                      .format(valangsuranspb ==
+                                      0
+                                      ? 0
+                                      : valangsuranspb),
+                                  style: blueFontStyle,
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: valangsuranspb == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+                          Container(
+                            child: valangsuranspp == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text(
+                                    valangsuranspb == 0
+                                        ? "Biaya Kuliah"
+                                        : "SPP",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(valangsuranspp ==
+                                        0
+                                        ? 0
+                                        : valangsuranspp),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: valangsuranspp == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+                          Container(
+                            child: namajaket == "0"
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text("Jaket",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(int.parse(
+                                        namajaket)),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+
+                          Container(
+                            child: namajaket == "0"
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+                          Container(
+                            child: kmhsmaba == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text("Kmhs ",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(kmhsmaba),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: kmhsmaba == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+                          Container(
+                            child: perpus == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text("Perpustakaan ",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(perpus),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: perpus == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+
+                          Container(
+                            child: krs == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text("KRS ",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(krs),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: krs == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+
+                          Container(
+                            child: dpm == 0
+                                ? Container()
+                                : Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Text("DPM ",
+                                    style: blueFontStyle),
+                                Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(dpm),
+                                    style: blueFontStyle)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: dpm == 0
+                                ? Container()
+                                : Divider(
+                              thickness: 1,
+                              color:
+                              CupertinoColors.systemGrey3,
+                              height: 16,
+                            ),
+                          ),
+
+                          // Row(
+                          //   mainAxisAlignment:
+                          //       MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text("Lainnya", style: blueFontStyle),
+                          //     Text(
+                          //         NumberFormat.currency(
+                          //                 symbol: 'IDR ',
+                          //                 decimalDigits: 0,
+                          //                 locale: 'id-ID')
+                          //             .format(0),
+                          //         style: blueFontStyle)
+                          //   ],
+                          // ),
+                        ],
+                        //softWrap: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ExpandablePanel(
+                theme: const ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToExpand: true,
+                  tapBodyToCollapse: true,
+                  hasIcon: false,
+                ),
+                header: Container(
+                  height: 48,
+                  color: mainColor1,
+                  child: Container(
+                    child: Row(
+                      children: [
+                        ExpandableIcon(
+                          theme: const ExpandableThemeData(
+                            expandIcon: Icons.arrow_right,
+                            collapseIcon: Icons.arrow_drop_down,
+                            iconColor: Colors.white,
+                            iconSize: 24.0,
+                            iconPadding: EdgeInsets.only(right: 8),
+                            hasIcon: false,
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(right: 16),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Biaya",
+                                  style: whiteFontStyle.copyWith(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Container(
+                                  child: datasipemaprogram.length == 0 ||
+                                      dataAngsurSpb.length == 0 ||
+                                      dataAngsurSpp.length == 0
+                                      ? Center(
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      child: Shimmer.fromColors(
+                                        baseColor: Colors.grey[350],
+                                        highlightColor:
+                                        Colors.white,
+                                        child: Container(
+                                          width:
+                                          MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              4,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(20),
+                                              color:
+                                              Colors.grey[350]),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                      : Text(
+                                    NumberFormat.currency(
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0,
+                                        locale: 'id-ID')
+                                        .format(angsuranpertama +
+                                        valangsuranspb +
+                                        valangsuranspp +
+                                        int.parse(
+                                            namaformulir) +
+                                        perpus +
+                                        kmhsmaba +
+                                        krs +
+                                        dpm),
+                                    style: whiteFontStyle.copyWith(
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                expanded: Container(
+                  color: CupertinoColors.systemGrey6,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    margin: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Pendaftaran",
+                              style: blueFontStyle,
+                            ),
+                            Container(
+                              child: datasipemaprogram.length == 0 ||
+                                  dataAngsurSpb.length == 0 ||
+                                  dataAngsurSpp.length == 0
+                                  ? Center(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 4),
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[350],
+                                    highlightColor: Colors.white,
+                                    child: Container(
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width /
+                                          4,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          color: Colors.grey[350]),
+                                    ),
+                                  ),
+                                ),
+                              )
+                                  : Text(
+                                NumberFormat.currency(
+                                    symbol: 'IDR ',
+                                    decimalDigits: 0,
+                                    locale: 'id-ID')
+                                    .format(
+                                    int.parse(namaformulir)),
+                                style: blueFontStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: CupertinoColors.systemGrey3,
+                          height: 16,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Angsuran Pertama",
+                              style: blueFontStyle,
+                            ),
+                            Container(
+                              child: datasipemaprogram.length == 0 ||
+                                  dataAngsurSpb.length == 0 ||
+                                  dataAngsurSpp.length == 0
+                                  ? Center(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 4),
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey[350],
+                                    highlightColor: Colors.white,
+                                    child: Container(
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width /
+                                          4,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              20),
+                                          color: Colors.grey[350]),
+                                    ),
+                                  ),
+                                ),
+                              )
+                                  : Text(
+                                NumberFormat.currency(
+                                    symbol: 'IDR ',
+                                    decimalDigits: 0,
+                                    locale: 'id-ID')
+                                    .format(angsuranpertama +
+                                    valangsuranspb +
+                                    valangsuranspp +
+                                    perpus +
+                                    kmhsmaba +
+                                    krs +
+                                    dpm),
+                                style: blueFontStyle,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                      //softWrap: true,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black38,
+                        offset: Offset(0.0, 0.0),
+                        blurRadius: 3.0)
+                  ],
+                ),
+                height: 64,
+                child: datasipemaprogram.length == 0 ||
+                    dataAngsurSpb.length == 0 ||
+                    dataAngsurSpp.length == 0
+                    ? Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[350],
+                      highlightColor: Colors.white,
+                      child: Container(
+                        width:
+                        MediaQuery.of(context).size.width / 1.5,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey[350]),
+                      ),
+                    ),
+                  ),
+                )
+                    : Center(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      height: 40,
+                      child: EduButton(
+                        buttonText: "Lanjut Daftar",
+                        onPressed: () {
+                          globalkey == null
+                              ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  (DaftarNonLogin(
+
+                                    //session
+                                      varpendidikan:
+                                      varpendidikan == null
+                                          ? ""
+                                          : varpendidikan
+                                          .toString(),
+                                      varnama: varnama == null
+                                          ? ""
+                                          : varnama.toString(),
+                                      varnohp: varnohp == null
+                                          ? ""
+                                          : varnohp.toString(),
+                                      varnowa: varnowa == null
+                                          ? ""
+                                          : varnowa.toString(),
+                                      campus: widget.campus,
+                                      angkatan: angkatan,
+                                      tahunangkatan:
+                                      tahunangkatan,
+                                      wilayah: wilayah,
+                                      namakonversi:
+                                      namakonversi == null
+                                          ? ""
+                                          : namakonversi,
+                                      kodejurusan: kodejurusan.length ==
+                                          0
+                                          ? widget.kodejurusan
+                                          .toString()
+                                          : kodejurusan.toString() ==
+                                          null
+                                          ? ""
+                                          : kodejurusan.length ==
+                                          0
+                                          ? widget
+                                          .kodejurusan
+                                          .toString()
+                                          : kodejurusan
+                                          .toString(),
+                                      kodeprogram: kodeprogram
+                                          .length ==
+                                          0
+                                          ? first_kodeprogram
+                                          .toString()
+                                          : kodeprogram.toString() ==
+                                          null
+                                          ? ""
+                                          : kodeprogram.length ==
+                                          0
+                                          ? first_kodeprogram
+                                          .toString()
+                                          : kodeprogram
+                                          .toString(),
+                                      namaJurusan: namaJurusan
+                                          .length ==
+                                          0
+                                          ? widget.namaJurusan.toString()
+                                          : namaJurusan.toString() == null
+                                          ? ""
+                                          : namaJurusan.length == 0
+                                          ? widget.namaJurusan.toString()
+                                          : namaJurusan.toString(),
+                                      namalulusan: namalulusan.length == 0
+                                          ? first_lulusan.toString()
+                                          : namalulusan.toString() == null
+                                          ? ""
+                                          : namalulusan.length == 0
+                                          ? first_lulusan.toString()
+                                          : namalulusan.toString(),
+                                      namajaket: namajaket,
+                                      namaspb: namaspb,
+                                      namaspp: namaspp,
+                                      namaformulir: namaformulir,
+                                      programperkuliahan: sipema_program_nama,
+                                      namakelompok: namaKelompok.length == 0
+                                          ? first_kelompok.toString()
+                                          : namaKelompok.toString() == null
+                                          ? ""
+                                          : namaKelompok.length == 0
+                                          ? first_kelompok.toString()
+                                          : namaKelompok.toString(),
+                                      namakelaswaktu: namakelaswaktu,
+                                      namakelassingkatan: namakelassingkatan,
+                                      waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
+                                      angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
+                                      waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspb.toString(),
+                                      angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
+                                      perpus: perpus,
+                                      kmhsmaba: kmhsmaba,
+                                      krs: krs,
+                                      dpm: dpm,
+                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))))
+                              : Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => (Daftar(
+
+                                    //session
+                                      varpendidikan: varpendidikan == null ? "" : varpendidikan.toString(),
+                                      varnama: varnama == null ? "" : varnama.toString(),
+                                      varnohp: varnohp == null ? "" : varnohp.toString(),
+                                      varnowa: varnowa == null ? "" : varnowa.toString(),
+                                      campus: widget.campus,
+                                      angkatan: angkatan,
+                                      tahunangkatan: tahunangkatan,
+                                      wilayah: wilayah,
+                                      namakonversi: namakonversi == null ? "" : namakonversi,
+                                      kodejurusan: kodejurusan.length == 0
+                                          ? widget.kodejurusan.toString()
+                                          : kodejurusan.toString() == null
+                                          ? ""
+                                          : kodejurusan.length == 0
+                                          ? widget.kodejurusan.toString()
+                                          : kodejurusan.toString(),
+                                      kodeprogram: kodeprogram.length == 0
+                                          ? first_kodeprogram.toString()
+                                          : kodeprogram.toString() == null
+                                          ? ""
+                                          : kodeprogram.length == 0
+                                          ? first_kodeprogram.toString()
+                                          : kodeprogram.toString(),
+                                      namaJurusan: namaJurusan.length == 0
+                                          ? widget.namaJurusan.toString()
+                                          : namaJurusan.toString() == null
+                                          ? ""
+                                          : namaJurusan.length == 0
+                                          ? widget.namaJurusan.toString()
+                                          : namaJurusan.toString(),
+                                      namalulusan: namalulusan.length == 0
+                                          ? first_lulusan.toString()
+                                          : namalulusan.toString() == null
+                                          ? ""
+                                          : namalulusan.length == 0
+                                          ? first_lulusan.toString()
+                                          : namalulusan.toString(),
+                                      namajaket: namajaket,
+                                      namaspb: namaspb,
+                                      namaspp: namaspp,
+                                      namaformulir: namaformulir,
+                                      programperkuliahan: sipema_program_nama,
+                                      namakelompok: namaKelompok.length == 0
+                                          ? first_kelompok.toString()
+                                          : namaKelompok.toString() == null
+                                          ? ""
+                                          : namaKelompok.length == 0
+                                          ? first_kelompok.toString()
+                                          : namaKelompok.toString(),
+                                      namakelaswaktu: namakelaswaktu,
+                                      namakelassingkatan: namakelassingkatan,
+                                      waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
+                                      angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
+                                      waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspb.toString(),
+                                      angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
+                                      perpus: perpus,
+                                      kmhsmaba: kmhsmaba,
+                                      krs: krs,
+                                      dpm: dpm,
+                                      keycode : globalkey == null ? "" : globalkey.toString(),
+                                      status_agent: widget.status_agent == null ? "" : widget.status_agent.toString(),
+                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))));
+                        },
+                      ),
+                    )),
+              ),
+            ],
+          ),
+        ));
   }
 
   Future bottomModal2(BuildContext context) {
@@ -2031,139 +2031,139 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                   child: Expanded(
                     child: datasipemaKelompok.length == 0
                         ? Center(
-                            child: SpinKitThreeBounce(
-                            color: Colors.white,
-                          ))
+                        child: SpinKitThreeBounce(
+                          color: Colors.white,
+                        ))
                         : ListView.builder(
-                            itemCount: datasipemaKelompok.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    kodejurusan =
-                                        datasipemaKelompok[index].kodejrs;
-                                    kodeprogram =
-                                        datasipemaKelompok[index].kodeprg;
+                      itemCount: datasipemaKelompok.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              kodejurusan =
+                                  datasipemaKelompok[index].kodejrs;
+                              kodeprogram =
+                                  datasipemaKelompok[index].kodeprg;
 
-                                    namaKelompok =
-                                        datasipemaKelompok[index].kelompok;
-                                    namalulusan =
-                                        datasipemaKelompok[index].lulusan;
+                              namaKelompok =
+                                  datasipemaKelompok[index].kelompok;
+                              namalulusan =
+                                  datasipemaKelompok[index].lulusan;
 
-                                    // // dataAngsur = datSipemaByIndex.angsur;
-                                    program = datasipemaKelompok[index].program;
-                                    angkatan =
-                                        datasipemaKelompok[index].angkatan;
-                                    tahun = datasipemaKelompok[index].tahun;
-                                    wilayah = datasipemaKelompok[index].wilayah;
-                                    jurusan = datasipemaKelompok[index].jurusan;
-                                    lulusan = datasipemaKelompok[index].lulusan;
+                              // // dataAngsur = datSipemaByIndex.angsur;
+                              program = datasipemaKelompok[index].program;
+                              angkatan =
+                                  datasipemaKelompok[index].angkatan;
+                              tahun = datasipemaKelompok[index].tahun;
+                              wilayah = datasipemaKelompok[index].wilayah;
+                              jurusan = datasipemaKelompok[index].jurusan;
+                              lulusan = datasipemaKelompok[index].lulusan;
 
-                                    bulanan = datasipemaKelompok[index].bulanan;
-                                    namajaket = datasipemaKelompok[index].jaket;
-                                    namaspp = datasipemaKelompok[index].spp;
-                                    namaspb = datasipemaKelompok[index].spb;
-                                    namaformulir =
-                                        datasipemaKelompok[index].formulir;
-                                    angkatan =
-                                        datasipemaKelompok[index].angkatan;
-                                    wilayah = datasipemaKelompok[index].wilayah;
-                                    namakonversi = 0;
-                                    tahunangkatan =
-                                        datasipemaKelompok[index].tahun;
-                                    kmhsmaba =
-                                        datasipemaKelompok[index].kmhsmaba;
-                                    perpus = datasipemaKelompok[index].perpus;
-                                    krs = datasipemaKelompok[index].krs;
-                                    dpm = datasipemaKelompok[index].dpm;
+                              bulanan = datasipemaKelompok[index].bulanan;
+                              namajaket = datasipemaKelompok[index].jaket;
+                              namaspp = datasipemaKelompok[index].spp;
+                              namaspb = datasipemaKelompok[index].spb;
+                              namaformulir =
+                                  datasipemaKelompok[index].formulir;
+                              angkatan =
+                                  datasipemaKelompok[index].angkatan;
+                              wilayah = datasipemaKelompok[index].wilayah;
+                              namakonversi = 0;
+                              tahunangkatan =
+                                  datasipemaKelompok[index].tahun;
+                              kmhsmaba =
+                                  datasipemaKelompok[index].kmhsmaba;
+                              perpus = datasipemaKelompok[index].perpus;
+                              krs = datasipemaKelompok[index].krs;
+                              dpm = datasipemaKelompok[index].dpm;
 
-                                    angsuranpertama = int.parse(namajaket);
+                              angsuranpertama = int.parse(namajaket);
 
-                                    programstudi2 = lulusan.toString();
+                              programstudi2 = lulusan.toString();
 
-                                    getBiayaSipemaAngsur();
-                                    getBiayaSipemaAngsurSPP();
-                                    datacampuskelas();
+                              getBiayaSipemaAngsur();
+                              getBiayaSipemaAngsurSPP();
+                              datacampuskelas();
 
-                                    Navigator.pop(context);
+                              Navigator.pop(context);
 
-                                    //bikin loading fullscreen disini
+                              //bikin loading fullscreen disini
 
-                                    _loading = true;
+                              _loading = true;
 
-                                    _loadingProcess();
+                              _loadingProcess();
 
-                                    ///
-                                    ///
-                                    ///.
-                                    ///
-                                    ///
-                                    ///
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 24, top: 15),
+                              ///
+                              ///
+                              ///.
+                              ///
+                              ///
+                              ///
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 20, right: 24, top: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width:
+                                  MediaQuery.of(context).size.width,
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                datasipemaKelompok[index]
-                                                    .lulusan,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.clip,
-                                                style: whiteFontStyle.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            SizedBox(height: 4),
-                                            Text(
-                                                datasipemaKelompok[index]
-                                                    .jurusan,
-                                                overflow: TextOverflow.clip,
-                                                style: whiteFontStyle.copyWith(
-                                                    fontSize: 12)),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      // Text(
-                                      //     NumberFormat.currency(
-                                      //             symbol: 'Rp. ',
-                                      //             decimalDigits: 0,
-                                      //             locale: 'id-ID')
-                                      //         .format(double.parse(
-                                      //             datSipemaByIndex
-                                      //                 .detail.bulanan)),
-                                      //     textAlign: TextAlign.left,
-                                      //     overflow: TextOverflow.clip,
-                                      //     style: orenFontStyle.copyWith(
-                                      //         fontSize: 14,
-                                      //         fontWeight: FontWeight.bold,
-                                      //         color: Color(0xFFFFCE00))),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Divider(
-                                        color: Colors.white38,
-                                        thickness: 1,
-                                      ),
+                                      Text(
+                                          datasipemaKelompok[index]
+                                              .lulusan,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.clip,
+                                          style: whiteFontStyle.copyWith(
+                                              fontWeight:
+                                              FontWeight.bold)),
+                                      SizedBox(height: 4),
+                                      Text(
+                                          datasipemaKelompok[index]
+                                              .jurusan,
+                                          overflow: TextOverflow.clip,
+                                          style: whiteFontStyle.copyWith(
+                                              fontSize: 12)),
                                     ],
                                   ),
                                 ),
-                              );
-                            },
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                // Text(
+                                //     NumberFormat.currency(
+                                //             symbol: 'Rp. ',
+                                //             decimalDigits: 0,
+                                //             locale: 'id-ID')
+                                //         .format(double.parse(
+                                //             datSipemaByIndex
+                                //                 .detail.bulanan)),
+                                //     textAlign: TextAlign.left,
+                                //     overflow: TextOverflow.clip,
+                                //     style: orenFontStyle.copyWith(
+                                //         fontSize: 14,
+                                //         fontWeight: FontWeight.bold,
+                                //         color: Color(0xFFFFCE00))),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Divider(
+                                  color: Colors.white38,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
                           ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

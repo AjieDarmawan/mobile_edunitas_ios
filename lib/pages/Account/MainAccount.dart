@@ -42,11 +42,11 @@ class _MainAccountState extends State<MainAccount> {
   }
 
   String fcmToken;
-  //final FirebaseMessaging _fcm = FirebaseMessaging();
+  final FirebaseMessaging _fcm = FirebaseMessaging();
 
   _getFcmToken() async {
-    // fcmToken = await _fcm.getToken();
-    // print("fcmtoken: " + fcmToken);
+    fcmToken = await _fcm.getToken();
+    print("fcmtoken: " + fcmToken);
   }
 
   String varnama,
@@ -353,9 +353,19 @@ class _MainAccountState extends State<MainAccount> {
         });
   }
 
+  Widget _loadingViewToNext() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext builderContext) {
+          return SpinKitThreeBounce(
+            color: Colors.white,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    datausers();
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -363,716 +373,712 @@ class _MainAccountState extends State<MainAccount> {
         appBar: globalkey == null
             ? null
             : AppBar(
-                backwardsCompatibility: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarIconBrightness: Brightness.light,
-                  statusBarColor: Colors.transparent,
-                ),
-                backgroundColor: mainColor1,
-                automaticallyImplyLeading: false,
-                title: Text(
-                  "Akun Saya",
-                  style: whiteFontStyle,
-                ),
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: () {
-                      setState(() {
-                        _loadingView();
-                        getPreferences();
-                        conn();
-                      });
-                    },
-                  )
-                ],
-              ),
+          backwardsCompatibility: false,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.light,
+            statusBarColor: Colors.transparent,
+          ),
+          backgroundColor: mainColor1,
+          automaticallyImplyLeading: false,
+          title: Text(
+            "Akun Saya",
+            style: whiteFontStyle,
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                setState(() {
+                  _loadingView();
+                  getPreferences();
+                  conn();
+                });
+              },
+            )
+          ],
+        ),
         body: globalkey == null
             ? NonLogin()
             : SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                  color: CupertinoColors.white,
+                  child: Stack(
+                    children: [
+                      _background(),
+                      varnama != null
+                          ? _foreground()
+                          : _foregroundLoading(),
+                    ],
+                  )),
+              SizedBox(
+                height: 24,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                        color: CupertinoColors.white,
-                        child: Stack(
-                          children: [
-                            _background(),
-                            varnama != null
-                                ? _foreground()
-                                : _foregroundLoading(),
-                          ],
-                        )),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Text(
-                              "Dashboard Kampus",
-                              style: blackFontStyle3,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: varnama != null
-                                ? Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          checksingkron();
-                                        },
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.5,
-                                          height: 48,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: mainColor1, width: 2)),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Icon(
-                                                Icons.school_rounded,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "Mahasiswa",
-                                                style: blueFontStyle.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Opacity(
-                                        opacity: 1,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        (SingkronPartner())));
-                                          },
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: mainColor1,
-                                                    width: 2)),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Icon(
-                                                  Icons.supervisor_account,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Partner Kampus",
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                          ),
-                        ],
+                      child: Text(
+                        "Dashboard Kampus",
+                        style: blackFontStyle3,
                       ),
                     ),
-                    Divider(),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: varnama != null
+                          ? Row(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            child: Text(
-                              "Dashboard Lowongan Kerja",
-                              style: blackFontStyle3,
+                          GestureDetector(
+                            onTap: () {
+                              checksingkron();
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width /
+                                  2.5,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: mainColor1, width: 2)),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    Icons.school_rounded,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Mahasiswa",
+                                    style: blueFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: varnama != null
-                                ? Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      (KarirList(
-                                                        namalengkap:
-                                                            varnama == null
-                                                                ? ""
-                                                                : varnama,
-                                                        tempatlahir:
-                                                            vartempat_lahir ==
-                                                                    null
-                                                                ? ""
-                                                                : vartempat_lahir,
-                                                        tanggallahir:
-                                                            vartgl_lahir == null
-                                                                ? ""
-                                                                : vartgl_lahir,
-                                                        nohp: varnohp == null
-                                                            ? ""
-                                                            : varnohp,
-                                                        nowa: varnowa == null
-                                                            ? ""
-                                                            : varnowa,
-                                                        pendidikan:
-                                                            varpendidikan ==
-                                                                    null
-                                                                ? ""
-                                                                : varpendidikan,
-                                                        gender:
-                                                            vargender == null
-                                                                ? ""
-                                                                : vargender,
-                                                        alamat:
-                                                            varalamat == null
-                                                                ? ""
-                                                                : varalamat,
-                                                        foto_me: foto_me == null
-                                                            ? ""
-                                                            : foto_me,
-                                                        keycode: globalkey
-                                                                    .toString() ==
-                                                                null
-                                                            ? ""
-                                                            : globalkey
-                                                                .toString(),
-                                                        //   ),
-                                                      ))));
-                                        },
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.5,
-                                          height: 48,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: mainColor1, width: 2)),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Icon(
-                                                Icons.work,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "Karir Saya",
-                                                style: blueFontStyle.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Opacity(
-                                        opacity: 1,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        (MePartnerKarir(
-                                                          email: globalEmail
-                                                                      .toString() ==
-                                                                  null
-                                                              ? ""
-                                                              : globalEmail
-                                                                  .toString(),
-                                                          keycode: globalkey
-                                                                      .toString() ==
-                                                                  null
-                                                              ? ""
-                                                              : globalkey
-                                                                  .toString(),
-                                                        ))));
-                                          },
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: mainColor1,
-                                                    width: 2)),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Icon(
-                                                  Icons.group_add,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Partner Karir",
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey[350],
-                                      highlightColor: Colors.white,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.5,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[350],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                          Opacity(
+                            opacity: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        (SingkronPartner())));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: mainColor1,
+                                        width: 2)),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10,
                                     ),
-                                  ),
+                                    Icon(
+                                      Icons.supervisor_account,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Partner Kampus",
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight:
+                                          FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    Divider(),
-
-                    //todo donation takedown due apple strict rules
-                    // Container(
-                    //   width: MediaQuery.of(context).size.width,
-                    //   margin: EdgeInsets.symmetric(horizontal: 16),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Container(
-                    //         child: Text(
-                    //           "Dashboard Pemberi Beasiswa",
-                    //           style: blackFontStyle3,
-                    //         ),
-                    //       ),
-                    //       Container(
-                    //         padding: EdgeInsets.symmetric(
-                    //             horizontal: 8, vertical: 16),
-                    //         child: varnama != null
-                    //             ? Row(
-                    //                 crossAxisAlignment:
-                    //                     CrossAxisAlignment.start,
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: [
-                    //                   GestureDetector(
-                    //                     onTap: () {
-                    //                       Navigator.push(
-                    //                           context,
-                    //                           MaterialPageRoute(
-                    //                               builder: (context) =>
-                    //                                   (MeDonasi(
-                    //                                     keycode: globalkey
-                    //                                                 .toString() ==
-                    //                                             null
-                    //                                         ? ""
-                    //                                         : globalkey
-                    //                                             .toString(),
-                    //                                   ))));
-                    //                     },
-                    //                     child: Container(
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width /
-                    //                           2.5,
-                    //                       height: 48,
-                    //                       decoration: BoxDecoration(
-                    //                           color: Colors.white,
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10),
-                    //                           border: Border.all(
-                    //                               color: mainColor1, width: 2)),
-                    //                       child: Row(
-                    //                         children: [
-                    //                           SizedBox(
-                    //                             width: 10,
-                    //                           ),
-                    //                           Icon(
-                    //                             Icons.favorite_outlined,
-                    //                           ),
-                    //                           SizedBox(
-                    //                             width: 5,
-                    //                           ),
-                    //                           Text(
-                    //                             "Donasi Saya",
-                    //                             style: blueFontStyle.copyWith(
-                    //                                 fontSize: 12,
-                    //                                 fontWeight:
-                    //                                     FontWeight.bold),
-                    //                           )
-                    //                         ],
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                   Opacity(
-                    //                     opacity: 1,
-                    //                     child: GestureDetector(
-                    //                       onTap: () {
-                    //                         Navigator.push(
-                    //                             context,
-                    //                             MaterialPageRoute(
-                    //                                 builder: (context) =>
-                    //                                     (MePartnerDonasi(
-                    //                                        keycode: globalkey
-                    //                                                 .toString() ==
-                    //                                             null
-                    //                                         ? ""
-                    //                                         : globalkey
-                    //                                             .toString(),
-                    //                                       data_me: data_me,
-                    //                                     ))));
-                    //                       },
-                    //                       child: Container(
-                    //                         width: MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width /
-                    //                             2.5,
-                    //                         height: 48,
-                    //                         decoration: BoxDecoration(
-                    //                             color: Colors.white,
-                    //                             borderRadius:
-                    //                                 BorderRadius.circular(10),
-                    //                             border: Border.all(
-                    //                                 color: mainColor1,
-                    //                                 width: 2)),
-                    //                         child: Row(
-                    //                           children: [
-                    //                             SizedBox(
-                    //                               width: 10,
-                    //                             ),
-                    //                             Icon(
-                    //                               Icons.volunteer_activism,
-                    //                             ),
-                    //                             SizedBox(
-                    //                               width: 5,
-                    //                             ),
-                    //                             Text(
-                    //                               "Galang Dana",
-                    //                               style: blueFontStyle.copyWith(
-                    //                                   fontSize: 12,
-                    //                                   fontWeight:
-                    //                                       FontWeight.bold),
-                    //                             )
-                    //                           ],
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               )
-                    //             : Container(
-                    //                 child: Shimmer.fromColors(
-                    //                   baseColor: Colors.grey[350],
-                    //                   highlightColor: Colors.white,
-                    //                   child: Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceBetween,
-                    //                     children: [
-                    //                       Container(
-                    //                         width: MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width /
-                    //                             2.5,
-                    //                         height: 48,
-                    //                         decoration: BoxDecoration(
-                    //                           color: Colors.grey[350],
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10),
-                    //                         ),
-                    //                       ),
-                    //                       Container(
-                    //                         width: MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width /
-                    //                             2.5,
-                    //                         height: 48,
-                    //                         decoration: BoxDecoration(
-                    //                           color: Colors.grey[350],
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10),
-                    //                         ),
-                    //                       ),
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-
-                    SizedBox(
-                      height: 24,
-                    ),
-                    varnama != null
-                        ? Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                top: BorderSide(color: mainColor1, width: 0.5),
-                                bottom:
-                                    BorderSide(color: mainColor1, width: 0.5),
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      ListDatadiri(
-                                    namalengkap: varnama == null ? "" : varnama,
-                                    tempatlahir: vartempat_lahir == null
-                                        ? ""
-                                        : vartempat_lahir,
-                                    tanggallahir: vartgl_lahir == null
-                                        ? ""
-                                        : vartgl_lahir,
-                                    nohp: varnohp == null ? "" : varnohp,
-                                    nowa: varnowa == null ? "" : varnowa,
-                                    pendidikan: varpendidikan == null
-                                        ? ""
-                                        : varpendidikan,
-                                    gender: vargender == null ? "" : vargender,
-                                    alamat: varalamat == null ? "" : varalamat,
-                                    foto_me: foto_me == null ? "" : foto_me,
-                                    keycode: globalkey.toString() == null
-                                        ? ""
-                                        : globalkey.toString(),
-                                    //   ),
-                                  ),
-                                ));
-
-                                // Navigator.of(context).push(new MaterialPageRoute(
-                                //   builder: (BuildContext context) => EditAccount(
-                                //     namalengkap: varnama == null ? "" : varnama ,
-                                //     tempatlahir: vartempat_lahir == null ? "" : vartempat_lahir,
-                                //     tanggallahir: vartgl_lahir == null ? "" :vartgl_lahir ,
-                                //     nohp: varnohp == null ? "" : varnohp,
-                                //     nowa: varnowa == null ? "" : varnowa ,
-                                //     pendidikan: varpendidikan == null ? "" : varpendidikan,
-                                //     gender: vargender == null ? "" : vargender,
-                                //     alamat: varalamat == null ? "" : varalamat,
-                                //     foto_me: foto_me == null ? "" : foto_me,
-                                //   ),
-                                // ));
-                              },
-                              leading: Icon(
-                                Icons.person,
-                                color: mainColor1,
-                              ),
-                              title: Text(
-                                "Ubah Info Pribadi",
-                                style: blackFontStyle2,
-                              ),
-                              trailing: Icon(
-                                Icons.navigate_next,
-                                color: mainColor1,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            padding: EdgeInsets.only(top: 8),
-                            child: Shimmer.fromColors(
-                              baseColor: Colors.grey[350],
-                              highlightColor: Colors.white,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
+                      )
+                          : Container(
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
                                 height: 48,
-                                color: Colors.grey[350],
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                          ),
-                    varnama != null
-                        ? Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom:
-                                    BorderSide(color: mainColor1, width: 0.5),
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      PasswordGanti(
-                                    email: globalEmail,
-                                  ),
-                                ));
-                              },
-                              leading: Icon(
-                                Icons.settings,
-                                color: mainColor1,
-                              ),
-                              title: Text(
-                                "Ganti Password",
-                                style: blackFontStyle2,
-                              ),
-                              trailing: Icon(
-                                Icons.navigate_next,
-                                color: mainColor1,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            padding: EdgeInsets.only(top: 8),
-                            child: Shimmer.fromColors(
-                              baseColor: Colors.grey[350],
-                              highlightColor: Colors.white,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
                                 height: 48,
-                                color: Colors.grey[350],
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 24),
-                      height: 48,
-                      width: 250,
-                      child: EduButtonSecond(
-                        onPressed: () {
-                          _showcontent();
-                        },
-                        buttonText: "Keluar",
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              Divider(),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Text(
+                        "Dashboard Lowongan Kerja",
+                        style: blackFontStyle3,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: varnama != null
+                          ? Row(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      (KarirList(
+                                        namalengkap:
+                                        varnama == null
+                                            ? ""
+                                            : varnama,
+                                        tempatlahir:
+                                        vartempat_lahir ==
+                                            null
+                                            ? ""
+                                            : vartempat_lahir,
+                                        tanggallahir:
+                                        vartgl_lahir == null
+                                            ? ""
+                                            : vartgl_lahir,
+                                        nohp: varnohp == null
+                                            ? ""
+                                            : varnohp,
+                                        nowa: varnowa == null
+                                            ? ""
+                                            : varnowa,
+                                        pendidikan:
+                                        varpendidikan ==
+                                            null
+                                            ? ""
+                                            : varpendidikan,
+                                        gender:
+                                        vargender == null
+                                            ? ""
+                                            : vargender,
+                                        alamat:
+                                        varalamat == null
+                                            ? ""
+                                            : varalamat,
+                                        foto_me: foto_me == null
+                                            ? ""
+                                            : foto_me,
+                                        keycode: globalkey
+                                            .toString() ==
+                                            null
+                                            ? ""
+                                            : globalkey
+                                            .toString(),
+                                        //   ),
+                                      ))));
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width /
+                                  2.5,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: mainColor1, width: 2)),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    Icons.work,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Karir Saya",
+                                    style: blueFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Opacity(
+                            opacity: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        (MePartnerKarir(
+                                          email: globalEmail
+                                              .toString() ==
+                                              null
+                                              ? ""
+                                              : globalEmail
+                                              .toString(),
+                                          keycode: globalkey
+                                              .toString() ==
+                                              null
+                                              ? ""
+                                              : globalkey
+                                              .toString(),
+                                        ))));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: mainColor1,
+                                        width: 2)),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.group_add,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Partner Karir",
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight:
+                                          FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                          : Container(
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Text(
+                        "Dashboard Pemberi Beasiswa",
+                        style: blackFontStyle3,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: varnama != null
+                          ? Row(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      (MeDonasi(
+                                        keycode: globalkey
+                                            .toString() ==
+                                            null
+                                            ? ""
+                                            : globalkey
+                                            .toString(),
+                                      ))));
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width /
+                                  2.5,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: mainColor1, width: 2)),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    Icons.favorite_outlined,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Donasi Saya",
+                                    style: blueFontStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Opacity(
+                            opacity: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        (MePartnerDonasi(
+                                          keycode: globalkey
+                                              .toString() ==
+                                              null
+                                              ? ""
+                                              : globalkey
+                                              .toString(),
+                                          data_me: data_me,
+                                        ))));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: mainColor1,
+                                        width: 2)),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.volunteer_activism,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Galang Dana",
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight:
+                                          FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                          : Container(
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey[350],
+                          highlightColor: Colors.white,
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    2.5,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[350],
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              varnama != null
+                  ? Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: mainColor1, width: 0.5),
+                    bottom:
+                    BorderSide(color: mainColor1, width: 0.5),
+                  ),
+                  color: Colors.white,
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          ListDatadiri(
+                            namalengkap: varnama == null ? "" : varnama,
+                            tempatlahir: vartempat_lahir == null
+                                ? ""
+                                : vartempat_lahir,
+                            tanggallahir: vartgl_lahir == null
+                                ? ""
+                                : vartgl_lahir,
+                            nohp: varnohp == null ? "" : varnohp,
+                            nowa: varnowa == null ? "" : varnowa,
+                            pendidikan: varpendidikan == null
+                                ? ""
+                                : varpendidikan,
+                            gender: vargender == null ? "" : vargender,
+                            alamat: varalamat == null ? "" : varalamat,
+                            foto_me: foto_me == null ? "" : foto_me,
+                            keycode: globalkey.toString() == null
+                                ? ""
+                                : globalkey.toString(),
+                            //   ),
+                          ),
+                    ));
+
+                    // Navigator.of(context).push(new MaterialPageRoute(
+                    //   builder: (BuildContext context) => EditAccount(
+                    //     namalengkap: varnama == null ? "" : varnama ,
+                    //     tempatlahir: vartempat_lahir == null ? "" : vartempat_lahir,
+                    //     tanggallahir: vartgl_lahir == null ? "" :vartgl_lahir ,
+                    //     nohp: varnohp == null ? "" : varnohp,
+                    //     nowa: varnowa == null ? "" : varnowa ,
+                    //     pendidikan: varpendidikan == null ? "" : varpendidikan,
+                    //     gender: vargender == null ? "" : vargender,
+                    //     alamat: varalamat == null ? "" : varalamat,
+                    //     foto_me: foto_me == null ? "" : foto_me,
+                    //   ),
+                    // ));
+                  },
+                  leading: Icon(
+                    Icons.person,
+                    color: mainColor1,
+                  ),
+                  title: Text(
+                    "Ubah Info Pribadi",
+                    style: blackFontStyle2,
+                  ),
+                  trailing: Icon(
+                    Icons.navigate_next,
+                    color: mainColor1,
+                  ),
+                ),
+              )
+                  : Container(
+                padding: EdgeInsets.only(top: 8),
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey[350],
+                  highlightColor: Colors.white,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 48,
+                    color: Colors.grey[350],
+                  ),
+                ),
+              ),
+              varnama != null
+                  ? Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom:
+                    BorderSide(color: mainColor1, width: 0.5),
+                  ),
+                  color: Colors.white,
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(new MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          PasswordGanti(
+                            email: globalEmail,
+                          ),
+                    ));
+                  },
+                  leading: Icon(
+                    Icons.settings,
+                    color: mainColor1,
+                  ),
+                  title: Text(
+                    "Ganti Password",
+                    style: blackFontStyle2,
+                  ),
+                  trailing: Icon(
+                    Icons.navigate_next,
+                    color: mainColor1,
+                  ),
+                ),
+              )
+                  : Container(
+                padding: EdgeInsets.only(top: 8),
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey[350],
+                  highlightColor: Colors.white,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 48,
+                    color: Colors.grey[350],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 24),
+                height: 48,
+                width: 250,
+                child: EduButtonSecond(
+                  onPressed: () {
+                    _showcontent();
+                  },
+                  buttonText: "Keluar",
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -1195,8 +1201,8 @@ class _MainAccountState extends State<MainAccount> {
                         vargender == "L"
                             ? "Laki - Laki"
                             : vargender == "P"
-                                ? "Perempuan"
-                                : "",
+                            ? "Perempuan"
+                            : "",
                         style: blueFontStyle.copyWith(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
@@ -1325,75 +1331,62 @@ class _MainAccountState extends State<MainAccount> {
   }
 
   void checksingkron() {
+    _loadingViewToNext();
     Apiinfoview_model().check_singkron(globalEmail.toString()).then((value) {
       //handled
       StatusModel data = value;
 
       if (data.status == 200) {
+        Navigator.of(context).pop();
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => (List_me_campus(
-                      email: globalEmail.toString() == null
-                          ? ""
-                          : globalEmail.toString(),
-                      keycode: globalkey.toString() == null
-                          ? ""
-                          : globalkey.toString(),
-                      namalengkap: varnama == null ? "" : varnama,
-                      logo_me: logo_me == null ? "" : logo_me,
-                      prodi_me: prodi_me == null ? "" : prodi_me,
-                      campus_me: campus_me == null ? "" : campus_me,
-                      no_virtual: no_virtual == null ? "" : no_virtual,
-                      kelas_me: kelas_me == null ? "" : kelas_me,
-                      nosel: nosel == null ? "" : nosel,
-                      singkatan_me: singkatan_me == null ? "" : singkatan_me,
-                      kode_campus_me: kode_campus_me.toString() == null
-                          ? ""
-                          : kode_campus_me.toString(),
-                    ))));
+                  email: globalEmail.toString() == null
+                      ? ""
+                      : globalEmail.toString(),
+                  keycode: globalkey.toString() == null
+                      ? ""
+                      : globalkey.toString(),
+                  namalengkap: varnama == null ? "" : varnama,
+                  logo_me: logo_me == null ? "" : logo_me,
+                  prodi_me: prodi_me == null ? "" : prodi_me,
+                  campus_me: campus_me == null ? "" : campus_me,
+                  no_virtual: no_virtual == null ? "" : no_virtual,
+                  kelas_me: kelas_me == null ? "" : kelas_me,
+                  nosel: nosel == null ? "" : nosel,
+                  singkatan_me: singkatan_me == null ? "" : singkatan_me,
+                  kode_campus_me: kode_campus_me.toString() == null
+                      ? ""
+                      : kode_campus_me.toString(),
+                ))));
       } else if (data.status == 400) {
-        /*Flushbar(
-          title: "Error",
-          message: "Belum Pernah Singkron",
-          duration: Duration(seconds: 3),
-          flushbarPosition: FlushbarPosition.TOP,
-          flushbarStyle: FlushbarStyle.FLOATING,
-          reverseAnimationCurve: Curves.decelerate,
-          forwardAnimationCurve: Curves.fastOutSlowIn,
-          boxShadows: [
-            BoxShadow(
-                color: Colors.black38,
-                offset: Offset(0.0, 3.0),
-                blurRadius: 3.0)
-          ],
-          backgroundColor: Colors.red[600],
-        )..show(context);*/
-
+        Navigator.of(context).pop();
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => (SingkronKampus(
-                      email: globalEmail.toString() == null
-                          ? ""
-                          : globalEmail.toString(),
-                      keycode: globalkey.toString() == null
-                          ? ""
-                          : globalkey.toString(),
-                      namalengkap: varnama == null ? "" : varnama,
-                      logo_me: logo_me == null ? "" : logo_me,
-                      prodi_me: prodi_me == null ? "" : prodi_me,
-                      campus_me: campus_me == null ? "" : campus_me,
-                      no_virtual: no_virtual == null ? "" : no_virtual,
-                      kelas_me: kelas_me == null ? "" : kelas_me,
-                      nosel: nosel == null ? "" : nosel,
-                      singkatan_me: singkatan_me == null ? "" : singkatan_me,
-                      kode_campus_me: kode_campus_me.toString() == null
-                          ? ""
-                          : kode_campus_me.toString(),
-                    ))));
+                  email: globalEmail.toString() == null
+                      ? ""
+                      : globalEmail.toString(),
+                  keycode: globalkey.toString() == null
+                      ? ""
+                      : globalkey.toString(),
+                  namalengkap: varnama == null ? "" : varnama,
+                  logo_me: logo_me == null ? "" : logo_me,
+                  prodi_me: prodi_me == null ? "" : prodi_me,
+                  campus_me: campus_me == null ? "" : campus_me,
+                  no_virtual: no_virtual == null ? "" : no_virtual,
+                  kelas_me: kelas_me == null ? "" : kelas_me,
+                  nosel: nosel == null ? "" : nosel,
+                  singkatan_me: singkatan_me == null ? "" : singkatan_me,
+                  kode_campus_me: kode_campus_me.toString() == null
+                      ? ""
+                      : kode_campus_me.toString(),
+                ))));
         // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
       } else if (data.status == 404) {
+        Navigator.of(context).pop();
         Flushbar(
           title: "Error",
           message: "Gagal",

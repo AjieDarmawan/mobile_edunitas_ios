@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-List<AngsuranSpbAngsuranModel> angsuranSpbAngsuranModelFromJson(String str) => List<AngsuranSpbAngsuranModel>.from(json.decode(str).map((x) => AngsuranSpbAngsuranModel.fromJson(x)));
+List<AngsuranModel> angsuranSpbAngsuranModelFromJson(String str) => List<AngsuranModel>.from(json.decode(str).map((x) => AngsuranModel.fromJson(x)));
 
-String angsuranSpbAngsuranModelToJson(List<AngsuranSpbAngsuranModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String angsuranSpbAngsuranModelToJson(List<AngsuranModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class AngsuranSpbAngsuranModel {
-    AngsuranSpbAngsuranModel({
+class AngsuranModel {
+    AngsuranModel({
         this.waktuAngsuran,
         this.biayaAngsuran,
     });
@@ -17,7 +17,7 @@ class AngsuranSpbAngsuranModel {
     String waktuAngsuran;
     int biayaAngsuran;
 
-    factory AngsuranSpbAngsuranModel.fromJson(Map<String, dynamic> json) => AngsuranSpbAngsuranModel(
+    factory AngsuranModel.fromJson(Map<String, dynamic> json) => AngsuranModel(
         waktuAngsuran: json["waktu_angsuran"] == null ? null : json["waktu_angsuran"],
         biayaAngsuran: json["biaya_angsuran"] == null ? null : json["biaya_angsuran"],
     );

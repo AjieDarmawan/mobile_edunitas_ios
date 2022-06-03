@@ -2,36 +2,42 @@ part of 'viewmodel.dart';
 
 class sipemaview_model {
   Future getBiayaSipema(String kodekampus) async {
-    final response =
-    await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipema"), body: {
-      'kode_kampus': kodekampus.toString(),
-    });
+    try{
+      final response =
+      await http.post(ConstanUrl().baseUrl + "biayasipema", body: {
+        'kode_kampus': kodekampus.toString(),
+      });
 
-    if (response.statusCode == 200) {
-      print("data sipema success");
-      return SipemaModel.fromJson(jsonDecode(response.body)).sipema;
+      if (response.statusCode == 200) {
+        print("data sipema success");
+        return SipemaModel.fromJson(jsonDecode(response.body)).sipema;
+      }
+    }catch(e){
+      print("error getBiayaSipema: "+e.toString());
+      return null;
     }
   }
 
 
   Future getBiayaSipema_web(String kodekampus,String kodeacid) async {
+    print("jdod_: " + kodeacid);
     final response =
-    await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipema_baru"), body: {
+    await http.post(ConstanUrl().baseUrl + "biayasipema_baru", body: {
       'kode_kampus': kodekampus.toString(),
       'kode_acid':kodeacid.toString(),
     });
 
     if (response.statusCode == 200) {
-      print("data sipema success");
+      print("data sipema success" +  kodeacid.toString());
       return SipemaWebModel.fromJson(jsonDecode(response.body)).sipema;
     }
   }
 
-  Future<List<AngsuranSpbModel>> getBiayaSipemaAngsuran(
+  Future<List<AngsuranMasterModel>> getBiayaSipemaAngsuranSPBMaster(
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuran"), body: {
+      await http.post(ConstanUrl().baseUrl + "biayasipemaangsuran", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -49,16 +55,16 @@ class sipemaview_model {
     }
   }
 
-  Future<List<AngsuranSpbModel>> getBiayaSipemaAngsuranSpp(
+  Future<List<AngsuranMasterModel>> getBiayaSipemaAngsuranSPPMaster(
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "masterbiayasipemaangsuranSpp"), body: {
+          .post(ConstanUrl().baseUrl + "masterbiayasipemaangsuranSpp", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
-         'kelompok': kelompok.toString(),
-        
+        'kelompok': kelompok.toString(),
+
       });
 
       if (response.statusCode == 200) {
@@ -72,11 +78,11 @@ class sipemaview_model {
     }
   }
 
-  Future<List<AngsuranSpbAngsuranModel>> getBiayaSipemaAngsuranSpb(
+  Future<List<AngsuranModel>> getBiayaSipemaAngsuranSpb(
       String kodekampus, String kodejrs, String kodeprg, String waktu, String kelompok) async {
     try {
       final response = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuranSpb"), body: {
+          .post(ConstanUrl().baseUrl + "biayasipemaangsuranSpb", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -85,12 +91,12 @@ class sipemaview_model {
       });
 
       if (response.statusCode == 200) {
-        print("wkwkwkwkk"+response.body);
-        print("wkwkwkwkk_kodekampus"+kodekampus);
-        print("wkwkwkwkk_kodejrs"+kodejrs);
-        print("wkwkwkwkk_kodeprg"+kodeprg);
-         print("wkwkwkwkk_kelompok"+kelompok);
-        print("data biayasipemaangsuranSpb success");
+        // print("wkwkwkwkk"+response.body);
+        // print("wkwkwkwkk_kodekampus"+kodekampus);
+        // print("wkwkwkwkk_kodejrs"+kodejrs);
+        // print("wkwkwkwkk_kodeprg"+kodeprg);
+        //  print("wkwkwkwkk_kelompok"+kelompok);
+        // print("data biayasipemaangsuranSpb success");
         final data = angsuranSpbAngsuranModelFromJson(response.body);
         return data;
       }
@@ -100,16 +106,17 @@ class sipemaview_model {
     }
   }
 
-  Future<List<AngsuranSpbAngsuranModel>> angsurangetBiayaSipemaSpp(
+  Future<List<AngsuranModel>> angsurangetBiayaSipemaSpp(
       String kodekampus, String kodejrs, String kodeprg, String waktu,String kelompok) async {
+    //print('geng spp: '+'\nkode_kampus:'+kodekampus.toString()+'\nkodejrs:'+kodejrs.toString()+'\nkodeprg:'+kodeprg.toString()+'\nwaktu:'+ waktu.toString()+'\nkelompok:'+kelompok.toString());
     try {
       final response = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "biayasipemaangsuranSpp"), body: {
+          .post(ConstanUrl().baseUrl + "biayasipemaangsuranSpp", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
         'waktu': waktu.toString(),
-         'kelompok': kelompok.toString(),
+        'kelompok': kelompok.toString(),
       });
 
       if (response.statusCode == 200) {
@@ -123,15 +130,15 @@ class sipemaview_model {
     }
   }
 
-   Future<List<AngsuranSpbAngsuranModel>> daftarangsuranspp(
+  Future<List<AngsuranModel>> daftarangsuranspp(
       String kodekampus, String kodejrs, String kodeprg) async {
     try {
       final response = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "angsuranspp"), body: {
+          .post(ConstanUrl().baseUrl + "angsuranspp", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
-       // 'waktu': waktu.toString(),
+        // 'waktu': waktu.toString(),
       });
 
       if (response.statusCode == 200) {
@@ -145,16 +152,16 @@ class sipemaview_model {
     }
   }
 
-    Future<List<AngsuranSpbAngsuranModel>> daftarangsuranspb(
+  Future<List<AngsuranModel>> daftarangsuranspb(
       String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response = await http
-          .post(Uri.parse(ConstanUrl().baseUrl + "angsuranspb"), body: {
+          .post(ConstanUrl().baseUrl + "angsuranspb", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
         'kelompok':kelompok.toString(),
-       // 'waktu': waktu.toString(),
+        // 'waktu': waktu.toString(),
       });
 
       if (response.statusCode == 200) {
@@ -168,14 +175,14 @@ class sipemaview_model {
     }
   }
 
- Future<List<CheckProdiSearchModel>> check_prodi_search(
+  Future<List<CheckProdiSearchModel>> check_prodi_search(
       String kodekampus, String kodejrs) async {
     try {
       final response =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "check_prodi_search"), body: {
+      await http.post(ConstanUrl().baseUrl + "check_prodi_search", body: {
         'kode_kampus': kodekampus.toString(),
         'kode_jurusan': kodejrs.toString(),
-       
+
       });
 
       print("prodi${response.body}");
