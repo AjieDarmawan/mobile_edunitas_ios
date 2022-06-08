@@ -32,3 +32,4 @@ part 'SingkronKampus.dart';
 part 'mainKampus.dart';
 part 'list_me_campus.dart';
 part 'info_pembayaran.dart';
+part 'info_pembayaran_debug.dart';

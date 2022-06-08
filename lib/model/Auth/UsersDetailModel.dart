@@ -35,7 +35,8 @@ class UsersDetailModel {
     this.nosel,
     this.singkatan,
     this.kodecampus,
-     this.foto,
+    this.foto,
+    this.nim,
   });
 
   factory UsersDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -46,7 +47,7 @@ class UsersDetailModel {
         pendidikan: json["pendidikan"] == null ? null : json["pendidikan"],
         tempatLahir: json["tempat_lahir"] == null ? null : json["tempat_lahir"],
         tanggalLahir:
-            json["tanggal_lahir"] == null ? null : json["tanggal_lahir"],
+        json["tanggal_lahir"] == null ? null : json["tanggal_lahir"],
         genre: json["genre"] == null ? null : json["genre"],
         noHp: json["no_hp"] == null ? null : json["no_hp"],
         noWa: json["no_wa"] == null ? null : json["no_wa"],
@@ -62,7 +63,8 @@ class UsersDetailModel {
         nosel: json["nosel"] == null ? null : json["nosel"],
         singkatan: json["singkatan"] == null ? null : json["singkatan"],
         kodecampus: json["kodecampus"] == null ? null : json["kodecampus"],
-         foto: json["foto"] == null ? null : json["foto"],
+        foto: json["foto"] == null ? null : json["foto"],
+        nim: json["nim"] == null ? null : json["nim"],
         medsos: json["medsos"],
         alamat: json["alamat"],
       );
@@ -91,31 +93,33 @@ class UsersDetailModel {
   String singkatan;
   String kodecampus;
   String foto;
+  String nim;
 
   Map<String, dynamic> toJson() => {
-        "status": status == null ? null : status,
-        "nama": nama == null ? null : nama,
-        "email": email == null ? null : email,
-        "pendidikan": pendidikan == null ? null : pendidikan,
-        "tempat_lahir": tempatLahir == null ? null : tempatLahir,
-        "tanggal_lahir": tanggalLahir == null ? null : tanggalLahir,
-        "genre": genre == null ? null : genre,
-        "no_hp": noHp == null ? null : noHp,
-        "no_wa": noWa == null ? null : noWa,
-        "no_ktp": noKtp,
-        "no_ibu": noIbu == null ? null : noIbu,
-        "no_ayah": noAyah == null ? null : noAyah,
-        "agama": agama == null ? null : agama,
-        "no_virtual": no_virtual == null ? null : no_virtual,
-        "campus": campus == null ? null : campus,
-        "prodi": prodi == null ? null : prodi,
-        "logo": logo == null ? null : logo,
-        "kelas": kelas == null ? null : kelas,
-        "nosel": nosel == null ? null : nosel,
-        "singkatan": singkatan == null ? null : singkatan,
-        "kodecampus": kodecampus == null ? null : kodecampus,
-        "foto": foto == null ? null : foto,
-        "medsos": medsos,
-        "alamat": alamat,
-      };
+    "status": status == null ? null : status,
+    "nama": nama == null ? null : nama,
+    "email": email == null ? null : email,
+    "pendidikan": pendidikan == null ? null : pendidikan,
+    "tempat_lahir": tempatLahir == null ? null : tempatLahir,
+    "tanggal_lahir": tanggalLahir == null ? null : tanggalLahir,
+    "genre": genre == null ? null : genre,
+    "no_hp": noHp == null ? null : noHp,
+    "no_wa": noWa == null ? null : noWa,
+    "no_ktp": noKtp,
+    "no_ibu": noIbu == null ? null : noIbu,
+    "no_ayah": noAyah == null ? null : noAyah,
+    "agama": agama == null ? null : agama,
+    "no_virtual": no_virtual == null ? null : no_virtual,
+    "campus": campus == null ? null : campus,
+    "prodi": prodi == null ? null : prodi,
+    "logo": logo == null ? null : logo,
+    "kelas": kelas == null ? null : kelas,
+    "nosel": nosel == null ? null : nosel,
+    "singkatan": singkatan == null ? null : singkatan,
+    "kodecampus": kodecampus == null ? null : kodecampus,
+    "foto": foto == null ? null : foto,
+    "nim": nim == null ? null : nim,
+    "medsos": medsos,
+    "alamat": alamat,
+  };
 }

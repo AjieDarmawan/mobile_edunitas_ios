@@ -66,7 +66,8 @@ class _List_me_campusState extends State<List_me_campus> {
       nosel,
       singkatan_me,
       kode_campus_me,
-      foto_me;
+      foto_me,
+      nim;
   void datausers() {
     UserViewModel().users_detail(widget.email.toString()).then((value) {//handled
       UsersDetailModel data = value;
@@ -91,6 +92,7 @@ class _List_me_campusState extends State<List_me_campus> {
           singkatan_me = data.singkatan;
           kode_campus_me = data.kodecampus;
           foto_me = data.foto;
+          nim = data.nim;
         });
       }
     }).catchError((erro){
@@ -149,323 +151,328 @@ class _List_me_campusState extends State<List_me_campus> {
       body: SafeArea(
         child: SingleChildScrollView(
             child: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Row(
+              padding: EdgeInsets.all(20),
+              child: Column(
                 children: [
-                  // Container(
-                  //   width: 90,
-                  //   height: 90,
-                  //   child: Card(
-                  //     borderOnForeground: true,
-                  //     color: Colors.grey,
-                  //   ),
-                  // ),
-                  Container(
-                      height: 48,
-                      width: 48,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.network(
-                          logo_me == null ? "" : logo_me,
-                          // height: MediaQuery.of(context).size.height / 9,
-                          // width: MediaQuery.of(context).size.width / 3,
+                  Row(
+                    children: [
+                      // Container(
+                      //   width: 90,
+                      //   height: 90,
+                      //   child: Card(
+                      //     borderOnForeground: true,
+                      //     color: Colors.grey,
+                      //   ),
+                      // ),
+                      Container(
+                          height: 48,
+                          width: 48,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                              logo_me == null ? "" : logo_me,
+                              // height: MediaQuery.of(context).size.height / 9,
+                              // width: MediaQuery.of(context).size.width / 3,
+                            ),
+                          )),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1.4,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              singkatan_me == null ? "" : singkatan_me.toString(),
+                              style: blueFontStyleBold,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              campus_me == null ? "" : campus_me.toString(),
+                              style: blackFontStyle3,
+                              maxLines: 2,
+                            )
+                          ],
                         ),
-                      )),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  _divider(),
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.4,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.all(10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          singkatan_me == null ? "" : singkatan_me.toString(),
-                          style: blueFontStyleBold,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Program",
+                              style: blackFontStyle3,
+                            ),
+                            Text(
+                              kelas_me == null ? "" : kelas_me,
+                              style: blueFontStyleBold,
+                            )
+                          ],
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 4,
                         ),
-                        Text(
-                          campus_me == null ? "" : campus_me.toString(),
-                          style: blackFontStyle3,
-                          maxLines: 2,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              _divider(),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Program",
-                          style: blackFontStyle3,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Jurusan",
+                              style: blackFontStyle3,
+                            ),
+                            Text(
+                              prodi_me == null ? "" : prodi_me.toString(),
+                              style: blueFontStyleBold,
+                            )
+                          ],
                         ),
-                        Text(
-                          kelas_me == null ? "" : kelas_me,
-                          style: blueFontStyleBold,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Jurusan",
-                          style: blackFontStyle3,
+                        SizedBox(
+                          height: 4,
                         ),
-                        Text(
-                          prodi_me == null ? "" : prodi_me.toString(),
-                          style: blueFontStyleBold,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "NIM",
-                          style: blackFontStyle3,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "NIM",
+                              style: blackFontStyle3,
+                            ),
+                            Text(
+                              "-",
+                              style: blueFontStyleBold,
+                            )
+                          ],
                         ),
-                        Text(
-                          "-",
-                          style: blueFontStyleBold,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "VA",
-                          style: blackFontStyle3,
+                        SizedBox(
+                          height: 4,
                         ),
-                        Text(
-                          no_virtual.toString(),
-                          style: blueFontStyleBold,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Status",
-                          style: blackFontStyle3,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "VA",
+                              style: blackFontStyle3,
+                            ),
+                            Text(
+                              no_virtual.toString(),
+                              style: blueFontStyleBold,
+                            )
+                          ],
                         ),
-                        Text(
-                          "Aktif",
-                          style:
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Status",
+                              style: blackFontStyle3,
+                            ),
+                            Text(
+                              "Aktif",
+                              style:
                               blueFontStyleBold.copyWith(color: Colors.green),
-                        )
+                            )
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              _dividerBawah(),
-              Container(
-                child: ListTile(
-                  leading: Icon(
-                    Icons.account_balance_wallet,
-                    color: mainColor1,
                   ),
-                  title: Text(
-                    'Info Pembayaran',
-                    style: blackFontStyle3,
+                  SizedBox(
+                    height: 16,
                   ),
-                  trailing: Icon(Icons.navigate_next),
-                  dense: true,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => (InfoPembayaran(
+                  _dividerBawah(),
+                  Container(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.account_balance_wallet,
+                        color: mainColor1,
+                      ),
+                      title: Text(
+                        'Info Pembayaran',
+                        style: blackFontStyle3,
+                      ),
+                      trailing: Icon(Icons.navigate_next),
+                      dense: true,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              //todo: ini debug buat debug, pastikan pakai InfoPembayaran saat rilis
+                                builder: (context) => (InfoPembayaranDebug(
                                   namalengkap: varnama == null ? "" : varnama,
                                   logo_me: logo_me == null ? "" : logo_me,
                                   prodi_me: prodi_me == null ? "" : prodi_me,
                                   campus_me: campus_me == null ? "" : campus_me,
                                   no_virtual:
-                                      no_virtual == null ? "" : no_virtual,
+                                  no_virtual == null ? "" : no_virtual,
                                   kelas_me: kelas_me == null ? "" : kelas_me,
                                   nosel: nosel == null ? "" : nosel,
                                   singkatan_me:
-                                      singkatan_me == null ? "" : singkatan_me,
+                                  singkatan_me == null ? "" : singkatan_me,
                                   keycode: widget.keycode == null
                                       ? ""
                                       : widget.keycode.toString(),
                                   kode_campus_me:
-                                      kode_campus_me.toString() == null
-                                          ? ""
-                                          : kode_campus_me.toString(),
+                                  kode_campus_me.toString() == null
+                                      ? ""
+                                      : kode_campus_me.toString(),
+                                  nim:
+                                  nim.toString() == null
+                                      ? "-"
+                                      : nim.toString(),
                                 ))));
-                  },
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.calendar_today,
-                      color: mainColor1,
+                      },
                     ),
-                    title: Text(
-                      'Jadwal Kuliah',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
                   ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.assignment_turned_in,
-                      color: mainColor1,
-                    ),
-                    title: Text(
-                      'Nilai',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
-                  ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.person_add_alt_1,
-                      color: mainColor1,
-                    ),
-                    title: Text(
-                      'Absensi',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
-                  ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.assignment,
-                      color: mainColor1,
-                    ),
-                    title: Text(
-                      'Jadwal Ujian',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
-                  ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: Container(
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.insert_chart,
-                        color: mainColor1,
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.calendar_today,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Jadwal Kuliah',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
                       ),
-                      title: Text(
-                        'Kurikulum',
-                        style: blackFontStyle3,
+                    ),
+                  ),
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.assignment_turned_in,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Nilai',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
                       ),
-                      trailing: Icon(Icons.navigate_next),
-                      dense: true,
-                      //onTap: () {},
                     ),
                   ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.calendar_today,
-                      color: mainColor1,
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.person_add_alt_1,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Absensi',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
+                      ),
                     ),
-                    title: Text(
-                      'Kalender Akademik',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
                   ),
-                ),
-              ),
-              _dividerBawah(),
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.chat,
-                      color: mainColor1,
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.assignment,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Jadwal Ujian',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
+                      ),
                     ),
-                    title: Text(
-                      'Saran',
-                      style: blackFontStyle3,
-                    ),
-                    trailing: Icon(Icons.navigate_next),
-                    dense: true,
-                    //onTap: () {},
                   ),
-                ),
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: Container(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.insert_chart,
+                            color: mainColor1,
+                          ),
+                          title: Text(
+                            'Kurikulum',
+                            style: blackFontStyle3,
+                          ),
+                          trailing: Icon(Icons.navigate_next),
+                          dense: true,
+                          //onTap: () {},
+                        ),
+                      ),
+                    ),
+                  ),
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.calendar_today,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Kalender Akademik',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
+                      ),
+                    ),
+                  ),
+                  _dividerBawah(),
+                  Opacity(
+                    opacity: 0.5,
+                    child: Container(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.chat,
+                          color: mainColor1,
+                        ),
+                        title: Text(
+                          'Saran',
+                          style: blackFontStyle3,
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                        dense: true,
+                        //onTap: () {},
+                      ),
+                    ),
+                  ),
+                  _dividerBawah(),
+                ],
               ),
-              _dividerBawah(),
-            ],
-          ),
-        )),
+            )),
       ),
     );
   }

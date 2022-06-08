@@ -72,10 +72,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
             finalList.map((e) => e.map((e) => e).toList()).toList();
         List<List<Sipema>> dataSipema2 = lastList.map((e) => e).toList();
         dataSipema = dataSipema2;
-        // List<Sipema> lastDataSipema = dataSipema[0];
-        // Sipema datSipemaByIndex = lastDataSipema[0];
-
-        // namakonversi = datSipemaByIndex.itembayar.itembayar;
         dataSipema_lenght = dataSipema.length;
       });
     }).catchError((erro) {
@@ -238,7 +234,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     //periodicMethod();
   }
 
-  //watchout, maybe you need it later
   Future<bool> _backPressed() {
     widget.routef == "DaftarOnline"
         ? Navigator.pop(context)
@@ -320,7 +315,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     }
 
     return WillPopScope(
-      //onWillPop: _backPressed,
+      onWillPop: _backPressed,
       child: Scaffold(
           body: isConn == false
               ? Center(
@@ -1427,7 +1422,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                   child: EduButtonSecond(
                                                     onPressed: () {
                                                       // checkEmailAndPassowrd();
-
                                                       Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
@@ -1456,18 +1450,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                                         : xweb
                                                                             .label
                                                                             .toString(),
-                                                                    // kodeprogram: labelprogram
-                                                                    //             .toString() ==
-                                                                    //         null
-                                                                    //     ? ""
-                                                                    //     : labelprogram
-                                                                    //         .toString(),
-                                                                    // namaKelompok: labelkelompok
-                                                                    //             .toString() ==
-                                                                    //         null
-                                                                    //     ? ""
-                                                                    //     : labelkelompok
-                                                                    //         .toString(),
                                                                   ))));
                                                     },
                                                     buttonText: "Cek Biaya",
@@ -1566,12 +1548,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     height: 200,
                     child: Align(
                         alignment: FractionalOffset.bottomCenter,
-                        // child: DetailBottomSheet(
-                        //     campus: widget.campus,
-                        //     jurusan: widget.routef == 'SearchKampusHasil'
-                        //         ? widget.nilaijurusan
-                        //         : widget.kodejurusan,
-                        //     routef: widget.routef),
                         child: DetailBottomSheetWebJurusan(
                             campus: widget.campus,
                             jurusan: widget.routef == 'SearchKampusHasil'

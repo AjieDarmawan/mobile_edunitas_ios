@@ -4,20 +4,20 @@
 
 import 'dart:convert';
 
-List<AngsuranSpbModel> angsuranSpbModelFromJson(String str) => List<AngsuranSpbModel>.from(
-    json.decode(str).map((x) => AngsuranSpbModel.fromJson(x)));
+List<AngsuranMasterModel> angsuranSpbModelFromJson(String str) => List<AngsuranMasterModel>.from(
+    json.decode(str).map((x) => AngsuranMasterModel.fromJson(x)));
 
-String angsuranSpbModelToJson(List<AngsuranSpbModel> data) =>
+String angsuranSpbModelToJson(List<AngsuranMasterModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class AngsuranSpbModel {
-    AngsuranSpbModel({
+class AngsuranMasterModel {
+    AngsuranMasterModel({
         this.angsuranSpb,
     });
 
     String angsuranSpb;
 
-    factory AngsuranSpbModel.fromJson(Map<String, dynamic> json) => AngsuranSpbModel(
+    factory AngsuranMasterModel.fromJson(Map<String, dynamic> json) => AngsuranMasterModel(
         angsuranSpb: json["angsuran_spb"] == null ? null : json["angsuran_spb"],
     );
 
