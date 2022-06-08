@@ -23,7 +23,7 @@ class NoTransaction extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  "Mohon Maaf !",
+                  "Belum Ada Tagihan.",
                   textAlign: TextAlign.center,
                   style: blueFontStyle.copyWith(
                     fontSize: 24,
@@ -37,7 +37,7 @@ class NoTransaction extends StatelessWidget {
               Container(
                 width: 300,
                 child: Text(
-                  "Saat ini kamu belum melakukan transaksi.",
+                  "Terimakasih, seluruh transaksi kamu sudah terbayar.",
                   textAlign: TextAlign.center,
                   style: blackFontStyle1.copyWith(
                     fontSize: 14,
