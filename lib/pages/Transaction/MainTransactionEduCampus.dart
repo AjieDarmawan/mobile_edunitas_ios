@@ -73,15 +73,11 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   var data = [];
   List<Params> item;
   void getdatatrans(globalkey2) {
-    print("globalkey2${globalkey.toString()}");
+    print("globalkey2: ${globalkey.toString()}");
     Transactionview_model().getransaction(globalkey2).then((value1) {
       //handled
-      print(value1);
       setState(() {
-        // Transaction2Model data = value1;
         datatrans = value1;
-
-        // item = value1[0].;
       });
     }).catchError((erro) {
       print("do_list_transaction_err: " + erro.toString());
@@ -273,7 +269,6 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
 
   @override
   Widget build(BuildContext context) {
-    print("datatrans${datatrans}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -283,7 +278,9 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
               child: globalkey == null
                   ? NonLogin()
                   : Container(
-                child: datatrans == null || datatrans.length == 0
+                child: datatrans == null
+                    ? ErrorDataHandler(context)
+                    : datatrans.length == 0
                     ? shimmerLoading()
                     : Container(
                   child: datatrans[0].noinvoice == "tes"

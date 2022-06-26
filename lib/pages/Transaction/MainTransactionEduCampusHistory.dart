@@ -26,12 +26,13 @@ class _MainTransactionEduCampusHistoryState
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
         globalEmail = sessionManager.email;
-        print("email${globalEmail}");
-        print("globalkey${globalkey}");
-        print("mystatus${mystatus}");
+        print("email ${globalEmail}");
+        print("globalkey ${globalkey}");
+        print("mystatus ${mystatus}");
       });
     });
     List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
+    getdatatrans(globalkey); //ngorek isi list dari api
   }
 
   String _wStatus(stat) {
@@ -65,7 +66,7 @@ class _MainTransactionEduCampusHistoryState
   }
 
   void onErrHandling(erro) {
-    print("do_login_err: " + erro.toString());
+    print("do_getransactionHistory_err: " + erro.toString());
     if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
@@ -99,32 +100,25 @@ class _MainTransactionEduCampusHistoryState
   @override
   void initState() {
     super.initState();
-    //getdatatrans();
-    getPreferences();
-    getdatatrans(globalkey);
-    // setState(() {
-    //   globalkey = globalkey;
-    // });
+    getPreferences(); //getPreferences udah sekalian ngisi list
   }
 
   @override
   Widget build(BuildContext context) {
-    getdatatrans(globalkey);
-    print("datatrans${datatrans}");
     return Scaffold(
         backgroundColor: CupertinoColors.systemGrey6,
         body: Container(
             child: globalkey == null
                 ? NonLogin()
                 : Container(
-              child: datatrans == null || datatrans.length == 0
+              child: datatrans==null
+                  ? ErrorDataHandler(context)
+                  : datatrans.length == 0
                   ? Center(child: SpinKitThreeBounce(color: mainColor1))
                   : Center(
                 child: Container(
                   child: ListView.builder(
-                      itemCount: datatrans.length == 0
-                          ? 0
-                          : datatrans.length,
+                      itemCount: datatrans.length,
                       itemBuilder: (context, index) {
                         return datatrans[0].noinvoice == "tes"
                             ? Container(
