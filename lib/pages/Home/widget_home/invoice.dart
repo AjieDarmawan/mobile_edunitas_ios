@@ -36,16 +36,19 @@ class _InvoiceState extends State<Invoice> {
   void getmetodepembayaran() async {
     Masterview_model()
         .metodepembayaran(
-        widget.kodekampus.toString(), widget.keycode.toString()).then((value2) {//handled
+        widget.kodekampus.toString(), widget.keycode.toString())
+        .then((value2) {
+      //handled
       setState(() {
         datametodepembayran = value2;
         logometode = datametodepembayran[0].logo;
         namametode = datametodepembayran[0].metode;
         no_pembayaran_pev = datametodepembayran[0].no_pembayaran_pev;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
-    });;
+    });
+    ;
   }
 
   String no_virtual = "";
@@ -53,16 +56,20 @@ class _InvoiceState extends State<Invoice> {
     Masterview_model()
         .va(
       widget.keycode.toString(),
-      widget.id_invoice.toString(),).then((value2) {//handled
+      widget.id_invoice.toString(),
+    )
+        .then((value2) {
+      //handled
       LoginModel data = value2;
       if (data.status == 200) {
         setState(() {
           no_virtual = data.message;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
-    });;
+    });
+    ;
   }
 
   var globalkey = "", globalEmail = "";
@@ -70,7 +77,8 @@ class _InvoiceState extends State<Invoice> {
   var mystatus = false;
   SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
+    await sessionManager.getPreference().then((value) {
+      //handled
       setState(() {
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
@@ -82,6 +90,8 @@ class _InvoiceState extends State<Invoice> {
     });
   }
 
+  String bayar_t_tanggal = '';
+
   String varnama,
       varemail,
       vargenre,
@@ -92,7 +102,8 @@ class _InvoiceState extends State<Invoice> {
       varnohp,
       varnowa;
   void datausers(globalemail) {
-    UserViewModel().users_detail(globalemail).then((value) {//handled
+    UserViewModel().users_detail(globalemail).then((value) {
+      //handled
       UsersDetailModel data = value;
 
       if (data.status == 200) {
@@ -102,19 +113,21 @@ class _InvoiceState extends State<Invoice> {
           varalamat = data.alamat;
           varpendidikan = data.pendidikan;
           varnohp = data.noHp;
-          bayar_t_tanggal = widget.bayar_tiap_tanggal==null
-              ?'0'
-              :widget.bayar_tiap_tanggal;
+          bayar_t_tanggal = widget.bayar_tiap_tanggal == null
+              ? '5'
+              : widget.bayar_tiap_tanggal;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+
+
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -147,7 +160,7 @@ class _InvoiceState extends State<Invoice> {
   }
 
   bool isFromAgensi;
-  String bayar_t_tanggal = '0';
+
 
   @override
   void initState() {
@@ -155,7 +168,7 @@ class _InvoiceState extends State<Invoice> {
     getmetodepembayaran();
     getPreferences();
     getva();
-    isFromAgensi = widget.status_agent==null?false:true;
+    isFromAgensi = widget.status_agent == null ? false : true;
   }
 
   @override
@@ -509,20 +522,7 @@ class _InvoiceState extends State<Invoice> {
                             fontSize: 14, fontWeight: FontWeight.bold))
                   ],
                 )),
-            SizedBox(height: 24),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Bayar setiap tanggal",
-                        style: blackFontStyle3.copyWith(
-                            fontSize: 14, fontWeight: FontWeight.bold)),
-                    Text(bayar_t_tanggal,
-                        style: blackFontStyle3.copyWith(
-                            fontSize: 14, fontWeight: FontWeight.bold))
-                  ],
-                )),
+
             SizedBox(height: 24),
             Container(
               decoration: BoxDecoration(
@@ -570,12 +570,12 @@ class _InvoiceState extends State<Invoice> {
               height: 48,
               child: EduButtonSecond(
                 onPressed: () {
-                  print("isfromagensi: "+isFromAgensi.toString());
-                  if(isFromAgensi){
+                  print("isfromagensi: " + isFromAgensi.toString());
+                  if (isFromAgensi) {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => Navigation_bottom(),
                     ));
-                  }else{
+                  } else {
                     //Navigator.popUntil(context, (route) => route.isFirst);
                     Navigator.pop(context);
                   }
@@ -583,6 +583,28 @@ class _InvoiceState extends State<Invoice> {
                 buttonText: "Selesai",
               ),
             ),
+            SizedBox(height: 24),
+
+            Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red.withOpacity(0.2),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  text:
+                  'Note: Pembayaran Uang Kuliah selambat-lambatnya dibayarkan ',
+                  style: TextStyle(fontSize: 12, color: Colors.red),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'tanggal $bayar_t_tanggal setiap bulannya',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

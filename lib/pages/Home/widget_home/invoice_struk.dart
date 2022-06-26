@@ -10,17 +10,20 @@ class InvoiceStruk extends StatefulWidget {
       namaJurusan,
       kodekampus,
       id_invoice,
-      waktu;
+      waktu,
+      bayar_tiap_tanggal;
   InvoiceStruk(
       {this.params,
-      this.logo,
-      this.nama,
-      this.singktan,
-      this.formulir,
-      this.keycode,
-      this.namaJurusan,
-      this.kodekampus,
-      this.id_invoice,this.waktu});
+        this.logo,
+        this.nama,
+        this.singktan,
+        this.formulir,
+        this.keycode,
+        this.namaJurusan,
+        this.kodekampus,
+        this.id_invoice,
+        this.waktu,
+        this.bayar_tiap_tanggal});
 
   @override
   _InvoiceStrukState createState() => _InvoiceStrukState();
@@ -32,7 +35,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
   void getmetodepembayaran() async {
     Masterview_model()
         .metodepembayaran(
-            widget.kodekampus.toString(), widget.keycode.toString())
+        widget.kodekampus.toString(), widget.keycode.toString())
         .then((value2) {
       setState(() {
         datametodepembayran = value2;
@@ -77,6 +80,8 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
     });
   }
 
+  String bayar_t_tanggal = '';
+
   String varnama,
       varemail,
       vargenre,
@@ -97,6 +102,9 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
           varalamat = data.alamat;
           varpendidikan = data.pendidikan;
           varnohp = data.noHp;
+          bayar_t_tanggal = widget.bayar_tiap_tanggal == null
+              ? '5'
+              : widget.bayar_tiap_tanggal;
         });
       }
     });
@@ -168,10 +176,10 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                     child: widget.logo == null
                         ? Text("")
                         : ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child:
-                                Image.network(widget.logo, fit: BoxFit.cover),
-                          ),
+                      borderRadius: BorderRadius.circular(10),
+                      child:
+                      Image.network(widget.logo, fit: BoxFit.cover),
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -238,6 +246,56 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                 Container(
                   child: widget.params == null
                       ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        Table(
+                          children: [
+                            TableRow(children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Formulir",
+                                  style: blueFontStyle,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "1",
+                                  style: blueFontStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  NumberFormat.currency(
+                                      symbol: 'Rp ',
+                                      decimalDigits: 0,
+                                      locale: 'id-ID')
+                                      .format(
+                                      double.parse(widget.formulir)),
+                                  style: blueFontStyle.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ])
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                      : Column(
+                      children:
+                      widget.params.params.map<Widget>((document) {
+                        var data = document.split('#');
+
+                        return Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
                             children: [
@@ -247,7 +305,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "Formulir",
+                                        data[0],
                                         style: blueFontStyle,
                                         textAlign: TextAlign.left,
                                       ),
@@ -255,7 +313,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "1",
+                                        data[1],
                                         style: blueFontStyle,
                                         textAlign: TextAlign.center,
                                       ),
@@ -264,71 +322,21 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                                       padding: EdgeInsets.all(10),
                                       child: Text(
                                         NumberFormat.currency(
-                                                symbol: 'Rp ',
-                                                decimalDigits: 0,
-                                                locale: 'id-ID')
-                                            .format(
-                                                double.parse(widget.formulir)),
-                                        style: blueFontStyle.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0,
+                                            locale: 'id-ID')
+                                            .format(double.parse(data[2])),
+                                        style: blueFontStyle,
                                         textAlign: TextAlign.end,
                                       ),
                                     ),
-                                  ])
+                                  ]),
                                 ],
-                              )
+                              ),
                             ],
                           ),
-                        )
-                      : Column(
-                          children:
-                              widget.params.params.map<Widget>((document) {
-                          var data = document.split('#');
-
-                          return Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: [
-                                Table(
-                                  children: [
-                                    TableRow(children: [
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          data[0],
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          data[1],
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          NumberFormat.currency(
-                                                  symbol: 'Rp ',
-                                                  decimalDigits: 0,
-                                                  locale: 'id-ID')
-                                              .format(double.parse(data[2])),
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList()),
+                        );
+                      }).toList()),
                 ),
 
                 Container(
@@ -357,9 +365,9 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                               padding: EdgeInsets.all(10),
                               child: Text(
                                 NumberFormat.currency(
-                                        symbol: 'Rp ',
-                                        decimalDigits: 0,
-                                        locale: 'id-ID')
+                                    symbol: 'Rp ',
+                                    decimalDigits: 0,
+                                    locale: 'id-ID')
                                     .format(double.parse(widget.formulir)),
                                 style: whiteFontStyle.copyWith(
                                   fontSize: 14,
@@ -425,34 +433,34 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                 child: no_virtual == null
                     ? Center(child: CircularProgressIndicator())
                     : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("No Virtual Akun",
-                              style: blackFontStyle3.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.copy,
-                                  color: mainColor1,
-                                ),
-                                onPressed: () {
-                                  Clipboard.setData(new ClipboardData(
-                                      text: no_virtual.toString()));
-                                  Fluttertoast.showToast(
-                                      msg: "Copied",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.TOP,
-                                      timeInSecForIosWeb: 1,
-                                      fontSize: 16.0);
-                                },
-                              ),
-                              Text(no_virtual.toString(), style: blueFontStyle)
-                            ],
-                          )
-                        ],
-                      )),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("No Virtual Akun",
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.copy,
+                            color: mainColor1,
+                          ),
+                          onPressed: () {
+                            Clipboard.setData(new ClipboardData(
+                                text: no_virtual.toString()));
+                            Fluttertoast.showToast(
+                                msg: "Copied",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.TOP,
+                                timeInSecForIosWeb: 1,
+                                fontSize: 16.0);
+                          },
+                        ),
+                        Text(no_virtual.toString(), style: blueFontStyle)
+                      ],
+                    )
+                  ],
+                )),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
@@ -467,7 +475,7 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                   ],
                 )),
             SizedBox(height: 24),
-             Container(
+            Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -475,12 +483,15 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                     Text("Tanggal Bayar",
                         style: blackFontStyle3.copyWith(
                             fontSize: 14, fontWeight: FontWeight.bold)),
-                    Text(widget.waktu.toString == null ? "" : widget.waktu.toString(),
+                    Text(
+                        widget.waktu.toString == null
+                            ? ""
+                            : widget.waktu.toString(),
                         style: blackFontStyle3.copyWith(
                             fontSize: 14, fontWeight: FontWeight.bold))
                   ],
                 )),
-                SizedBox(height: 24),
+            SizedBox(height: 24),
             Container(
               decoration: BoxDecoration(
                 border: Border(
@@ -519,6 +530,28 @@ class _InvoiceStrukState extends State<InvoiceStruk> {
                 buttonText: "Selesai",
               ),
             ),
+            SizedBox(height: 24),
+
+            Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red.withOpacity(0.2),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  text:
+                  'Note: Pembayaran Uang Kuliah selambat-lambatnya dibayarkan ',
+                  style: TextStyle(fontSize: 12, color: Colors.red),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'tanggal $bayar_t_tanggal setiap bulannya',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

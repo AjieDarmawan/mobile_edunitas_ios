@@ -13,29 +13,31 @@ class ShowKeterampilan extends StatefulWidget {
 class _ShowKeterampilanState extends State<ShowKeterampilan> {
   List<ShowKemampuanModel> datakemampuan = new List();
   void getkemampuan() async {
-    UserViewModel().show_kemampuan(widget.keycode.toString()).then((value2) {//handled
+    UserViewModel().show_kemampuan(widget.keycode.toString()).then((value2) {
+      //handled
       setState(() {
         datakemampuan = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   List<ShowBahasaModel> databahasa = new List();
   void getbahasa() async {
-    UserViewModel().show_bahasa(widget.keycode.toString()).then((value2) {//handled
+    UserViewModel().show_bahasa(widget.keycode.toString()).then((value2) {
+      //handled
       setState(() {
         databahasa = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -83,38 +85,33 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
   }
 
   void prepareBackButtonKeterampilan() async {
-    var result = await Navigator.of(context)
-        .push(new MaterialPageRoute(
-      builder: (BuildContext context) =>
-          KemampuanDatadiri(
-            keycode: widget.keycode == null
-                ? ""
-                : widget.keycode.toString(),
-            status: "insert",
-          ),
+    var result = await Navigator.of(context).push(new MaterialPageRoute(
+      builder: (BuildContext context) => KemampuanDatadiri(
+        keycode: widget.keycode == null ? "" : widget.keycode.toString(),
+        status: "insert",
+      ),
     ));
-    if (result!=null) getkemampuan();
+    if (result != null) getkemampuan();
   }
 
   void prepareBackButtonBahasa() async {
-    var result = await Navigator.of(context)
-        .push(new MaterialPageRoute(
-      builder: (BuildContext context) =>
-          BahasaDatadiri(
-            keycode: widget.keycode == null
-                ? ""
-                : widget.keycode.toString(),
-            status: "insert",
-          ),
+    var result = await Navigator.of(context).push(new MaterialPageRoute(
+      builder: (BuildContext context) => BahasaDatadiri(
+        keycode: widget.keycode == null ? "" : widget.keycode.toString(),
+        status: "insert",
+      ),
     ));
-    if (result!=null) getbahasa();
+    if (result != null) getbahasa();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      //onWillPop: _backPressed,
-      child: Scaffold(
+    return
+      // WillPopScope(
+      //   //onWillPop: _backPressed,
+      //   child:
+      // );
+      Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backwardsCompatibility: false,
@@ -221,82 +218,79 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                     ),
                     datakemampuan == null
                         ? Container(
-                            height: 16,
-                          )
+                      height: 16,
+                    )
                         : ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: datakemampuan.length,
-                            itemBuilder: (context, index) {
-                              final xkemampuan = datakemampuan[index];
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: datakemampuan.length,
+                        itemBuilder: (context, index) {
+                          final xkemampuan = datakemampuan[index];
 
-                              return Column(
-                                children: [
-                                  Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          //xkemampuan.nama == null
+                                          xkemampuan.kemampuan == null
+                                              ? ""
+                                          //: xkemampuan.nama,
+                                              : xkemampuan.kemampuan,
+                                          style: blueFontStyle.copyWith(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                         children: [
-                                          Expanded(
-                                            child: Text(
-                                              //xkemampuan.nama == null
-                                              xkemampuan.kemampuan == null
-                                                  ? ""
-                                                  //: xkemampuan.nama,
-                                                  : xkemampuan.kemampuan,
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                          Text(
+                                            "Tingkat",
+                                            style: blackFontStyle2.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
                                           ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                "Tingkat",
-                                                style: blackFontStyle2.copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                //xkemampuan.industriNama == null
-                                                xkemampuan.tingkatan == null
-                                                    ? ""
-                                                    //: xkemampuan.industriNama,
-                                                    : xkemampuan.tingkatan,
-                                                style: blackFontStyle2.copyWith(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
+                                          Text(
+                                            //xkemampuan.industriNama == null
+                                            xkemampuan.tingkatan == null
+                                                ? ""
+                                            //: xkemampuan.industriNama,
+                                                : xkemampuan.tingkatan,
+                                            style: blackFontStyle2.copyWith(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.edit_outlined,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: () {
-                                              modalShowKemampuan(
-                                                  context,
-                                                  xkemampuan.id.toString(),
-                                                  xkemampuan,
-                                                  widget.keycode);
-                                            },
-                                          )
-                                        ]),
-                                  ),
-                                  Divider()
-                                ],
-                              );
-                            }),
+                                        ],
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: () {
+                                          modalShowKemampuan(
+                                              context,
+                                              xkemampuan.id.toString(),
+                                              xkemampuan,
+                                              widget.keycode);
+                                        },
+                                      )
+                                    ]),
+                              ),
+                              Divider()
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -350,114 +344,110 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                     ),
                     databahasa == null
                         ? Container(
-                            height: 16,
-                          )
+                      height: 16,
+                    )
                         : ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: databahasa.length,
-                            itemBuilder: (context, index) {
-                              final xdatabaahasa = databahasa[index];
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: databahasa.length,
+                        itemBuilder: (context, index) {
+                          final xdatabaahasa = databahasa[index];
 
-                              return Column(
-                                children: [
-                                  Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          //xpengalaman.nama == null
+                                          xdatabaahasa.bahasa == null
+                                              ? ""
+                                          //: xdatabaahasa.nama,
+                                              : xdatabaahasa.bahasa,
+                                          style: blueFontStyle.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                         children: [
-                                          Expanded(
-                                            child: Text(
-                                              //xpengalaman.nama == null
-                                              xdatabaahasa.bahasa == null
-                                                  ? ""
-                                                  //: xdatabaahasa.nama,
-                                                  : xdatabaahasa.bahasa,
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                          Text(
+                                            "Tingkat Tulisan",
+                                            style: blackFontStyle2.copyWith(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w400),
                                           ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                "Tingkat Tulisan",
-                                                style: blackFontStyle2.copyWith(
-                                                    fontSize: 11,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                //xdatabaahasa.industriNama == null
-                                                xdatabaahasa.tulisan == null
-                                                    ? ""
-                                                    //: xdatabaahasa.industriNama,
-                                                    : xdatabaahasa.tulisan,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
+                                          Text(
+                                            //xdatabaahasa.industriNama == null
+                                            xdatabaahasa.tulisan == null
+                                                ? ""
+                                            //: xdatabaahasa.industriNama,
+                                                : xdatabaahasa.tulisan,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: 8),
-                                              height: 24,
-                                              width: 1,
-                                              color: Colors.grey),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                "Tingkat Lisan",
-                                                style: blackFontStyle2.copyWith(
-                                                    fontSize: 11,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                //xpengalaman.industriNama == null
-                                                xdatabaahasa.lisan == null
-                                                    ? ""
-                                                    //: xpengalaman.industriNama,
-                                                    : xdatabaahasa.lisan,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
+                                        ],
+                                      ),
+                                      Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          height: 24,
+                                          width: 1,
+                                          color: Colors.grey),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "Tingkat Lisan",
+                                            style: blackFontStyle2.copyWith(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w400),
                                           ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.edit_outlined,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: () {
-                                              modalShowBahasa(
-                                                  context,
-                                                  xdatabaahasa.id.toString(),
-                                                  xdatabaahasa,
-                                                  widget.keycode);
-                                            },
-                                          )
-                                        ]),
-                                  ),
-                                  Divider()
-                                ],
-                              );
-                            }),
+                                          Text(
+                                            //xpengalaman.industriNama == null
+                                            xdatabaahasa.lisan == null
+                                                ? ""
+                                            //: xpengalaman.industriNama,
+                                                : xdatabaahasa.lisan,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: () {
+                                          modalShowBahasa(
+                                              context,
+                                              xdatabaahasa.id.toString(),
+                                              xdatabaahasa,
+                                              widget.keycode);
+                                        },
+                                      )
+                                    ]),
+                              ),
+                              Divider()
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   void modalShowKemampuan(context, id, xkemampuan, keycode) {
@@ -524,11 +514,11 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                (KemampuanDatadiri(
-                                                  keycode: keycode,
-                                                  xkemampuan: xkemampuan,
-                                                  status: "update",
-                                                ))));
+                                            (KemampuanDatadiri(
+                                              keycode: keycode,
+                                              xkemampuan: xkemampuan,
+                                              status: "update",
+                                            ))));
                                     //edit(context,xpengalaman);
                                   },
                                   buttonText: "Edit",
@@ -562,7 +552,8 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
   }
 
   Future<bool> hapus_kemampuan(context, id) {
-    UserViewModel().hapus_kemampuan(id.toString()).then((value) {//handled
+    UserViewModel().hapus_kemampuan(id.toString()).then((value) {
+      //handled
       StatusModel data = value;
 
       print("hapus :" + data.status.toString());
@@ -627,7 +618,7 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
         print("pengalaman hapus err: " + data.status.toString());
         Navigator.pop(context);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       Navigator.pop(context);
       onErrHandling(erro);
     });
@@ -697,11 +688,11 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                (BahasaDatadiri(
-                                                  keycode: keycode,
-                                                  xbahasa: xbahasa,
-                                                  status: "update",
-                                                ))));
+                                            (BahasaDatadiri(
+                                              keycode: keycode,
+                                              xbahasa: xbahasa,
+                                              status: "update",
+                                            ))));
                                     //edit(context,xpengalaman);
                                   },
                                   buttonText: "Edit",
@@ -735,7 +726,8 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
   }
 
   Future<bool> hapus_bahasa(context, id) {
-    UserViewModel().hapus_bahasa(id.toString()).then((value) {//handled
+    UserViewModel().hapus_bahasa(id.toString()).then((value) {
+      //handled
       StatusModel data = value;
 
       print("hapus :" + data.status.toString());
@@ -800,7 +792,7 @@ class _ShowKeterampilanState extends State<ShowKeterampilan> {
         print("pengalaman hapus err: " + data.status.toString());
         Navigator.pop(context);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       Navigator.pop(context);
       onErrHandling(erro);
     });
