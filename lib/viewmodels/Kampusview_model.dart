@@ -26,7 +26,7 @@ class Kampusview_model {
     List<Photo> _photos = [];
     try {
       final response =
-          await http.get(Uri.parse("https://dev-api.edunitas.com/list_campus?page=1"));
+      await http.get(Uri.parse("https://dev-api.edunitas.com/list_campus?page=1"));
       List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
       _photos.addAll(fetchedPhotos);
       return _photos;
@@ -39,7 +39,7 @@ class Kampusview_model {
   Future<List> SearchgetKampusFront(String search) async {
     try {
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus_home"), body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus_home"), body: {
         'search': search.toString(),
       });
 
@@ -64,7 +64,7 @@ class Kampusview_model {
       String nilaiunitarea, String jurusan, String kelas) async {
     try {
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus"), body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "search_campus"), body: {
         'unitarea': nilaiunitarea.toString(),
         'jurusan': jurusan.toString(),
         'kelas': kelas.toString(),
@@ -110,17 +110,17 @@ class Kampusview_model {
   //   }
   // }
 
-   Future detailCampus(String kodekampus) async {
+  Future detailCampus(String kodekampus) async {
     try {
       final response =
-         // await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus2"), body: {
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus2"), body: {
+      // await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus2"), body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "detail_campus2"), body: {
         'kode_kampus': kodekampus.toString(),
       });
 
       final jsondata = jsonDecode(response.body);
       DetailCampusModel2 listData = DetailCampusModel2.fromJson(jsondata);
-    
+
 
       if (response.statusCode == 200) {
         print("data detail_campus");
@@ -136,7 +136,7 @@ class Kampusview_model {
   Future<List> search_prodi(String nilaiarea) async {
     try {
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "search_prodi"), body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "search_prodi"), body: {
         'unitarea': nilaiarea.toString(),
       });
       if (hasil.statusCode == 200) {
@@ -187,7 +187,7 @@ class Kampusview_model {
   Future campuskelas(String kodekampus, String kodejrs, String kodeprg) async {
     try {
       final hasil =
-          await http.post(Uri.parse(ConstanUrl().baseUrl + "campuskelas"), body: {
+      await http.post(Uri.parse(ConstanUrl().baseUrl + "campuskelas"), body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
@@ -216,66 +216,66 @@ class Kampusview_model {
   }
 
   Future pendaftaran(
-    String keycode,
-    String kodecampus,
-    String prodi,
-    String kelas,
-    String pendidikan,
-    String kelompok,
-    String item, //5
-    String total,
-    String tahun,
-    String angkatan,
-    String waktu,
-    String smb, //10
-    String label_kampus,
-    String label_kelas,
-    String label_waktu,
-    String label_prodi,
-    String label_wilayah, //15
-    String nama,
-    String tem_lahir,
-    String tgl_lahir,
-    String gender,
-    String email, //20
-    String no_hp,
-    String no_wa,
-    String nikktp,
-    String ayahkandung,
-    String ibukandung, //25
-    String alamat1,
-    String kodepos,
-    String kota,
-    String kecamatan,
-    String kelurahan, //30
-    String kodejrs,
-    String wkt_kul,
-    String smb_informasi,
-    String kode_gsf,
-    String konversi, //35
-    String formulir,
-    String jaket,
-    String spb,
-    String spp,
-    String pengalaman,
-    String pengalaman_dari,
-    String pengalaman_hingga,
-    String namaperusahaan,
-    String posisi,
-    //pendidikan
-    String jurusan,
-    String thnlulus,
-    String nilaiakhir,
-    String daripendidikan,
-    String poin_redeem,
-    String diskon_redeem,
-    String key_redeem,
-    String status_agent,
-    String keycode_agent,
-    String bayar_tiap_tgl,
-  ) async {
+      String keycode,
+      String kodecampus,
+      String prodi,
+      String kelas,
+      String pendidikan,
+      String kelompok,
+      String item, //5
+      String total,
+      String tahun,
+      String angkatan,
+      String waktu,
+      String smb, //10
+      String label_kampus,
+      String label_kelas,
+      String label_waktu,
+      String label_prodi,
+      String label_wilayah, //15
+      String nama,
+      String tem_lahir,
+      String tgl_lahir,
+      String gender,
+      String email, //20
+      String no_hp,
+      String no_wa,
+      String nikktp,
+      String ayahkandung,
+      String ibukandung, //25
+      String alamat1,
+      String kodepos,
+      String kota,
+      String kecamatan,
+      String kelurahan, //30
+      String kodejrs,
+      String wkt_kul,
+      String smb_informasi,
+      String kode_gsf,
+      String konversi, //35
+      String formulir,
+      String jaket,
+      String spb,
+      String spp,
+      String pengalaman,
+      String pengalaman_dari,
+      String pengalaman_hingga,
+      String namaperusahaan,
+      String posisi,
+      //pendidikan
+      String jurusan,
+      String thnlulus,
+      String nilaiakhir,
+      String daripendidikan,
+      String poin_redeem,
+      String diskon_redeem,
+      String key_redeem,
+      String status_agent,
+      String keycode_agent,
+      String bayar_tiap_tgl,
+      ) async {
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema"), body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema"), body: {
       'keycode': keycode.toString(),
       'kodecampus': kodecampus.toString(), // zzz
       'prodi': prodi.toString(), //s1k1
@@ -360,62 +360,62 @@ class Kampusview_model {
   }
 
   Future pendaftaran_nonregistrasi(
-    String keycode,
-    String kodecampus,
-    String prodi,
-    String kelas,
-    String pendidikan,
-    String kelompok,
-    String item, //5
-    String total,
-    String tahun,
-    String angkatan,
-    String waktu,
-    String smb, //10
-    String label_kampus,
-    String label_kelas,
-    String label_waktu,
-    String label_prodi,
-    String label_wilayah, //15
-    String nama,
-    String tem_lahir,
-    String tgl_lahir,
-    String gender,
-    String email, //20
-    String no_hp,
-    String no_wa,
-    String nikktp,
-    String ayahkandung,
-    String ibukandung, //25
-    String alamat1,
-    String kodepos,
-    String kota,
-    String kecamatan,
-    String kelurahan, //30
-    String kodejrs,
-    String wkt_kul,
-    String smb_informasi,
-    String kode_gsf,
-    String konversi, //35
-    String formulir,
-    String jaket,
-    String spb,
-    String spp,
-    String pengalaman,
-    String pengalaman_dari,
-    String pengalaman_hingga,
-    String namaperusahaan,
-    String posisi,
-    //pendidikan
-    String jurusan,
-    String thnlulus,
-    String nilaiakhir,
-    String daripendidikan,
-    String poin_redeem,
-    String diskon_redeem,
-    String key_redeem,
-    String bayar_tiap_tgl,
-  ) async {
+      String keycode,
+      String kodecampus,
+      String prodi,
+      String kelas,
+      String pendidikan,
+      String kelompok,
+      String item, //5
+      String total,
+      String tahun,
+      String angkatan,
+      String waktu,
+      String smb, //10
+      String label_kampus,
+      String label_kelas,
+      String label_waktu,
+      String label_prodi,
+      String label_wilayah, //15
+      String nama,
+      String tem_lahir,
+      String tgl_lahir,
+      String gender,
+      String email, //20
+      String no_hp,
+      String no_wa,
+      String nikktp,
+      String ayahkandung,
+      String ibukandung, //25
+      String alamat1,
+      String kodepos,
+      String kota,
+      String kecamatan,
+      String kelurahan, //30
+      String kodejrs,
+      String wkt_kul,
+      String smb_informasi,
+      String kode_gsf,
+      String konversi, //35
+      String formulir,
+      String jaket,
+      String spb,
+      String spp,
+      String pengalaman,
+      String pengalaman_dari,
+      String pengalaman_hingga,
+      String namaperusahaan,
+      String posisi,
+      //pendidikan
+      String jurusan,
+      String thnlulus,
+      String nilaiakhir,
+      String daripendidikan,
+      String poin_redeem,
+      String diskon_redeem,
+      String key_redeem,
+      String bayar_tiap_tgl,
+      ) async {
     final response = await http.post(
         Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema_pendaftaran_nonlogin"),
         body: {
@@ -546,7 +546,7 @@ class Kampusview_model {
 
   Future count_read(String keycode) async {
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "count_read"), body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "count_read"), body: {
       'keycode': keycode,
     });
 
@@ -565,7 +565,7 @@ class Kampusview_model {
 
   Future delete_message(String id) async {
     final response =
-        await http.post(Uri.parse(ConstanUrl().baseUrl + "delete_message"), body: {
+    await http.post(Uri.parse(ConstanUrl().baseUrl + "delete_message"), body: {
       'id': id,
     });
 

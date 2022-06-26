@@ -1856,97 +1856,97 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                   (DaftarNonLogin(
 
                                     //session
-                                      varpendidikan:
-                                      varpendidikan == null
-                                          ? ""
-                                          : varpendidikan
-                                          .toString(),
-                                      varnama: varnama == null
-                                          ? ""
-                                          : varnama.toString(),
-                                      varnohp: varnohp == null
-                                          ? ""
-                                          : varnohp.toString(),
-                                      varnowa: varnowa == null
-                                          ? ""
-                                          : varnowa.toString(),
-                                      campus: widget.campus,
-                                      angkatan: angkatan,
-                                      tahunangkatan:
-                                      tahunangkatan,
-                                      wilayah: wilayah,
-                                      namakonversi:
-                                      namakonversi == null
-                                          ? ""
-                                          : namakonversi,
-                                      kodejurusan: kodejurusan.length ==
-                                          0
-                                          ? widget.kodejurusan
-                                          .toString()
-                                          : kodejurusan.toString() ==
-                                          null
-                                          ? ""
-                                          : kodejurusan.length ==
-                                          0
-                                          ? widget
-                                          .kodejurusan
-                                          .toString()
-                                          : kodejurusan
-                                          .toString(),
-                                      kodeprogram: kodeprogram
-                                          .length ==
-                                          0
-                                          ? first_kodeprogram
-                                          .toString()
-                                          : kodeprogram.toString() ==
-                                          null
-                                          ? ""
-                                          : kodeprogram.length ==
-                                          0
-                                          ? first_kodeprogram
-                                          .toString()
-                                          : kodeprogram
-                                          .toString(),
-                                      namaJurusan: namaJurusan
-                                          .length ==
-                                          0
-                                          ? widget.namaJurusan.toString()
-                                          : namaJurusan.toString() == null
-                                          ? ""
-                                          : namaJurusan.length == 0
-                                          ? widget.namaJurusan.toString()
-                                          : namaJurusan.toString(),
-                                      namalulusan: namalulusan.length == 0
-                                          ? first_lulusan.toString()
-                                          : namalulusan.toString() == null
-                                          ? ""
-                                          : namalulusan.length == 0
-                                          ? first_lulusan.toString()
-                                          : namalulusan.toString(),
-                                      namajaket: namajaket,
-                                      namaspb: namaspb,
-                                      namaspp: namaspp,
-                                      namaformulir: namaformulir,
-                                      programperkuliahan: sipema_program_nama,
-                                      namakelompok: namaKelompok.length == 0
-                                          ? first_kelompok.toString()
-                                          : namaKelompok.toString() == null
-                                          ? ""
-                                          : namaKelompok.length == 0
-                                          ? first_kelompok.toString()
-                                          : namaKelompok.toString(),
-                                      namakelaswaktu: namakelaswaktu,
-                                      namakelassingkatan: namakelassingkatan,
-                                      waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
-                                      angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
-                                      waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspp.toString(),
-                                      angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
-                                      perpus: perpus,
-                                      kmhsmaba: kmhsmaba,
-                                      krs: krs,
-                                      dpm: dpm,
-                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
-                                      bayar_tiap_tgl: bayartiaptanggal_terpilih,
+                                    varpendidikan:
+                                    varpendidikan == null
+                                        ? ""
+                                        : varpendidikan
+                                        .toString(),
+                                    varnama: varnama == null
+                                        ? ""
+                                        : varnama.toString(),
+                                    varnohp: varnohp == null
+                                        ? ""
+                                        : varnohp.toString(),
+                                    varnowa: varnowa == null
+                                        ? ""
+                                        : varnowa.toString(),
+                                    campus: widget.campus,
+                                    angkatan: angkatan,
+                                    tahunangkatan:
+                                    tahunangkatan,
+                                    wilayah: wilayah,
+                                    namakonversi:
+                                    namakonversi == null
+                                        ? ""
+                                        : namakonversi,
+                                    kodejurusan: kodejurusan.length ==
+                                        0
+                                        ? widget.kodejurusan
+                                        .toString()
+                                        : kodejurusan.toString() ==
+                                        null
+                                        ? ""
+                                        : kodejurusan.length ==
+                                        0
+                                        ? widget
+                                        .kodejurusan
+                                        .toString()
+                                        : kodejurusan
+                                        .toString(),
+                                    kodeprogram: kodeprogram
+                                        .length ==
+                                        0
+                                        ? first_kodeprogram
+                                        .toString()
+                                        : kodeprogram.toString() ==
+                                        null
+                                        ? ""
+                                        : kodeprogram.length ==
+                                        0
+                                        ? first_kodeprogram
+                                        .toString()
+                                        : kodeprogram
+                                        .toString(),
+                                    namaJurusan: namaJurusan
+                                        .length ==
+                                        0
+                                        ? widget.namaJurusan.toString()
+                                        : namaJurusan.toString() == null
+                                        ? ""
+                                        : namaJurusan.length == 0
+                                        ? widget.namaJurusan.toString()
+                                        : namaJurusan.toString(),
+                                    namalulusan: namalulusan.length == 0
+                                        ? first_lulusan.toString()
+                                        : namalulusan.toString() == null
+                                        ? ""
+                                        : namalulusan.length == 0
+                                        ? first_lulusan.toString()
+                                        : namalulusan.toString(),
+                                    namajaket: namajaket,
+                                    namaspb: namaspb,
+                                    namaspp: namaspp,
+                                    namaformulir: namaformulir,
+                                    programperkuliahan: sipema_program_nama,
+                                    namakelompok: namaKelompok.length == 0
+                                        ? first_kelompok.toString()
+                                        : namaKelompok.toString() == null
+                                        ? ""
+                                        : namaKelompok.length == 0
+                                        ? first_kelompok.toString()
+                                        : namaKelompok.toString(),
+                                    namakelaswaktu: namakelaswaktu,
+                                    namakelassingkatan: namakelassingkatan,
+                                    waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
+                                    angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
+                                    waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspp.toString(),
+                                    angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
+                                    perpus: perpus,
+                                    kmhsmaba: kmhsmaba,
+                                    krs: krs,
+                                    dpm: dpm,
+                                    totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
+                                    bayar_tiap_tgl: bayartiaptanggal_terpilih,
                                   ))))
                               : Navigator.push(
                               context,
@@ -1954,69 +1954,69 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                   builder: (context) => (Daftar(
 
                                     //session
-                                      varpendidikan: varpendidikan == null ? "" : varpendidikan.toString(),
-                                      varnama: varnama == null ? "" : varnama.toString(),
-                                      varnohp: varnohp == null ? "" : varnohp.toString(),
-                                      varnowa: varnowa == null ? "" : varnowa.toString(),
-                                      campus: widget.campus,
-                                      angkatan: angkatan,
-                                      tahunangkatan: tahunangkatan,
-                                      wilayah: wilayah,
-                                      namakonversi: namakonversi == null ? "" : namakonversi,
-                                      kodejurusan: kodejurusan.length == 0
-                                          ? widget.kodejurusan.toString()
-                                          : kodejurusan.toString() == null
-                                          ? ""
-                                          : kodejurusan.length == 0
-                                          ? widget.kodejurusan.toString()
-                                          : kodejurusan.toString(),
-                                      kodeprogram: kodeprogram.length == 0
-                                          ? first_kodeprogram.toString()
-                                          : kodeprogram.toString() == null
-                                          ? ""
-                                          : kodeprogram.length == 0
-                                          ? first_kodeprogram.toString()
-                                          : kodeprogram.toString(),
-                                      namaJurusan: namaJurusan.length == 0
-                                          ? widget.namaJurusan.toString()
-                                          : namaJurusan.toString() == null
-                                          ? ""
-                                          : namaJurusan.length == 0
-                                          ? widget.namaJurusan.toString()
-                                          : namaJurusan.toString(),
-                                      namalulusan: namalulusan.length == 0
-                                          ? first_lulusan.toString()
-                                          : namalulusan.toString() == null
-                                          ? ""
-                                          : namalulusan.length == 0
-                                          ? first_lulusan.toString()
-                                          : namalulusan.toString(),
-                                      namajaket: namajaket,
-                                      namaspb: namaspb,
-                                      namaspp: namaspp,
-                                      namaformulir: namaformulir,
-                                      programperkuliahan: sipema_program_nama,
-                                      namakelompok: namaKelompok.length == 0
-                                          ? first_kelompok.toString()
-                                          : namaKelompok.toString() == null
-                                          ? ""
-                                          : namaKelompok.length == 0
-                                          ? first_kelompok.toString()
-                                          : namaKelompok.toString(),
-                                      namakelaswaktu: namakelaswaktu,
-                                      namakelassingkatan: namakelassingkatan,
-                                      waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
-                                      angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
-                                      waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspp.toString(),
-                                      angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
-                                      perpus: perpus,
-                                      kmhsmaba: kmhsmaba,
-                                      krs: krs,
-                                      dpm: dpm,
-                                      keycode : globalkey == null ? "" : globalkey.toString(),
-                                      status_agent: widget.status_agent == null ? "" : widget.status_agent.toString(),
-                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
-                                      bayar_tiap_tgl: bayartiaptanggal_terpilih,
+                                    varpendidikan: varpendidikan == null ? "" : varpendidikan.toString(),
+                                    varnama: varnama == null ? "" : varnama.toString(),
+                                    varnohp: varnohp == null ? "" : varnohp.toString(),
+                                    varnowa: varnowa == null ? "" : varnowa.toString(),
+                                    campus: widget.campus,
+                                    angkatan: angkatan,
+                                    tahunangkatan: tahunangkatan,
+                                    wilayah: wilayah,
+                                    namakonversi: namakonversi == null ? "" : namakonversi,
+                                    kodejurusan: kodejurusan.length == 0
+                                        ? widget.kodejurusan.toString()
+                                        : kodejurusan.toString() == null
+                                        ? ""
+                                        : kodejurusan.length == 0
+                                        ? widget.kodejurusan.toString()
+                                        : kodejurusan.toString(),
+                                    kodeprogram: kodeprogram.length == 0
+                                        ? first_kodeprogram.toString()
+                                        : kodeprogram.toString() == null
+                                        ? ""
+                                        : kodeprogram.length == 0
+                                        ? first_kodeprogram.toString()
+                                        : kodeprogram.toString(),
+                                    namaJurusan: namaJurusan.length == 0
+                                        ? widget.namaJurusan.toString()
+                                        : namaJurusan.toString() == null
+                                        ? ""
+                                        : namaJurusan.length == 0
+                                        ? widget.namaJurusan.toString()
+                                        : namaJurusan.toString(),
+                                    namalulusan: namalulusan.length == 0
+                                        ? first_lulusan.toString()
+                                        : namalulusan.toString() == null
+                                        ? ""
+                                        : namalulusan.length == 0
+                                        ? first_lulusan.toString()
+                                        : namalulusan.toString(),
+                                    namajaket: namajaket,
+                                    namaspb: namaspb,
+                                    namaspp: namaspp,
+                                    namaformulir: namaformulir,
+                                    programperkuliahan: sipema_program_nama,
+                                    namakelompok: namaKelompok.length == 0
+                                        ? first_kelompok.toString()
+                                        : namaKelompok.toString() == null
+                                        ? ""
+                                        : namaKelompok.length == 0
+                                        ? first_kelompok.toString()
+                                        : namaKelompok.toString(),
+                                    namakelaswaktu: namakelaswaktu,
+                                    namakelassingkatan: namakelassingkatan,
+                                    waktuspb: valwaktuspb.toString() == null ? '' : valwaktuspb.toString(),
+                                    angsuranspb: valangsuranspb.toString() == null ? '' : valangsuranspb.toString(),
+                                    waktuspp: valwaktuspp.toString() == null ? '' : valwaktuspp.toString(),
+                                    angsuranspp: valangsuranspp.toString() == null ? '' : valangsuranspp.toString(),
+                                    perpus: perpus,
+                                    kmhsmaba: kmhsmaba,
+                                    krs: krs,
+                                    dpm: dpm,
+                                    keycode : globalkey == null ? "" : globalkey.toString(),
+                                    status_agent: widget.status_agent == null ? "" : widget.status_agent.toString(),
+                                    totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
+                                    bayar_tiap_tgl: bayartiaptanggal_terpilih,
                                   ))));
                         },
                       ),
