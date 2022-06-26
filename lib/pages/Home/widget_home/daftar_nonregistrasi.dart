@@ -22,7 +22,8 @@ class DaftarNonLogin extends StatefulWidget {
       varnama,
       varnohp,
       varnowa,
-      varpendidikan;
+      varpendidikan,
+      bayar_tiap_tgl;
   final int namaspb,
       namaspp,
       totalbiaya,
@@ -62,6 +63,7 @@ class DaftarNonLogin extends StatefulWidget {
     this.perpus,
     this.krs,
     this.dpm,
+    this.bayar_tiap_tgl,
   });
   @override
   _DaftarNonLoginState createState() => _DaftarNonLoginState();
@@ -1604,6 +1606,8 @@ class _DaftarNonLoginState extends State<DaftarNonLogin> {
       poin_redeem.toString(),
       diskon_redeem.toString(),
       key_redeem.toString(),
+      //bayar tiap tanggal
+      widget.bayar_tiap_tgl,
     )
         .then((value) {//handled
       StatusModel data = value;
@@ -1652,6 +1656,7 @@ class _DaftarNonLoginState extends State<DaftarNonLogin> {
                       kodekampus:
                           widget.campus.kode == null ? "" : widget.campus.kode,
                       id_invoice: no_virtual == null ? "" : no_virtual,
+                    bayar_tiap_tanggal: widget.bayar_tiap_tgl,
                     ))));
       } else if (data.status == 400) {
         Flushbar(

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final usersDetailModel = usersDetailModelFromJson(jsonString);
-
 import 'dart:convert';
 
 UsersDetailModel usersDetailModelFromJson(String str) =>
@@ -37,6 +33,7 @@ class UsersDetailModel {
     this.kodecampus,
     this.foto,
     this.nim,
+    this.setiap,
   });
 
   factory UsersDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -65,6 +62,7 @@ class UsersDetailModel {
         kodecampus: json["kodecampus"] == null ? null : json["kodecampus"],
         foto: json["foto"] == null ? null : json["foto"],
         nim: json["nim"] == null ? null : json["nim"],
+        setiap: json["setiap"] == null ? null : json["setiap"],
         medsos: json["medsos"],
         alamat: json["alamat"],
       );
@@ -94,6 +92,7 @@ class UsersDetailModel {
   String kodecampus;
   String foto;
   String nim;
+  String setiap;
 
   Map<String, dynamic> toJson() => {
     "status": status == null ? null : status,
@@ -121,5 +120,6 @@ class UsersDetailModel {
     "nim": nim == null ? null : nim,
     "medsos": medsos,
     "alamat": alamat,
+    "setiap": setiap,
   };
 }

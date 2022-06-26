@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final transactionModel = transactionModelFromJson(jsonString);
-
 import 'dart:convert';
 
 List<TransactionModel> transactionModelFromJson(String str) =>
@@ -39,6 +35,7 @@ class TransactionModel {
     this.spp_qty,
     this.spp_harga,
     this.params,
+    this.setiap,
   });
  
   String id;
@@ -69,6 +66,7 @@ class TransactionModel {
   String spp;
   String spp_qty;
   String spp_harga;
+  String setiap;
 
   Params params;
 
@@ -103,6 +101,7 @@ class TransactionModel {
         spp_qty: json["spp_qty"] == null ? null : json["spp_qty"],
         spp_harga: json["spp_harga"] == null ? null : json["spp_harga"],
         params: json["params"] == null ? null : Params.fromJson(json["params"]),
+        setiap: json["setiap"] == null ? null : json["setiap"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -131,6 +130,7 @@ class TransactionModel {
         "spp": spp == null ? null : spp,
         "spp_qty": spp_qty == null ? null : spp_qty,
         "spp_harga": spp_harga == null ? null : spp_harga,
+        "setiap": setiap == null ? null : setiap,
         "params": params == null ? null : params.toJson(),
       };
 }

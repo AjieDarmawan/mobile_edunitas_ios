@@ -10,7 +10,8 @@ class Invoice extends StatefulWidget {
       namaJurusan,
       kodekampus,
       id_invoice,
-      status_agent;
+      status_agent,
+      bayar_tiap_tanggal;
 
   Invoice(
       {this.params,
@@ -22,7 +23,8 @@ class Invoice extends StatefulWidget {
       this.namaJurusan,
       this.kodekampus,
       this.id_invoice,
-        this.status_agent});
+      this.status_agent,
+      this.bayar_tiap_tanggal});
 
   @override
   _InvoiceState createState() => _InvoiceState();
@@ -100,6 +102,9 @@ class _InvoiceState extends State<Invoice> {
           varalamat = data.alamat;
           varpendidikan = data.pendidikan;
           varnohp = data.noHp;
+          bayar_t_tanggal = widget.bayar_tiap_tanggal==null
+              ?'0'
+              :widget.bayar_tiap_tanggal;
         });
       }
     }).catchError((erro){
@@ -142,6 +147,7 @@ class _InvoiceState extends State<Invoice> {
   }
 
   bool isFromAgensi;
+  String bayar_t_tanggal = '0';
 
   @override
   void initState() {
@@ -499,6 +505,20 @@ class _InvoiceState extends State<Invoice> {
                         style: blackFontStyle3.copyWith(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                     Text(varnama == null ? "" : varnama,
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold))
+                  ],
+                )),
+            SizedBox(height: 24),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Bayar setiap tanggal",
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text(bayar_t_tanggal,
                         style: blackFontStyle3.copyWith(
                             fontSize: 14, fontWeight: FontWeight.bold))
                   ],

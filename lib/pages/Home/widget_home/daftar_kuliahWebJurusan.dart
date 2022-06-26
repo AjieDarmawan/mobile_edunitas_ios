@@ -73,6 +73,11 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
       lulusan,
       programstudi2;
 
+  List<String> listtanggalhard = ['1','2','3','4','5','6','7','8','9','10',
+    '11','12','13','14','15','16','17','18','19','20','21','22','23','24',
+    '25','26','27','28','29','30','31'];
+  String bayartiaptanggal_terpilih = '1';
+
   //kelompok where
   List<ListDetailJurusanPengelompok> datasipemaKelompok = new List();
   void getSipemaWhereKelompok(kode_kampus, kode_jurusan, kodeprogram) {
@@ -1241,6 +1246,22 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                 }),
                           )),
                     ),
+                    Container(
+                      child: DropdownButton<String>(
+                        hint: Text('Bayar setiap tanggal '+bayartiaptanggal_terpilih),
+                        items: listtanggalhard.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (tglnya) {
+                          setState(() {
+                            bayartiaptanggal_terpilih = tglnya.toString();
+                          });
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -1924,7 +1945,9 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                       kmhsmaba: kmhsmaba,
                                       krs: krs,
                                       dpm: dpm,
-                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))))
+                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
+                                      bayar_tiap_tgl: bayartiaptanggal_terpilih,
+                                  ))))
                               : Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -1992,7 +2015,9 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                       dpm: dpm,
                                       keycode : globalkey == null ? "" : globalkey.toString(),
                                       status_agent: widget.status_agent == null ? "" : widget.status_agent.toString(),
-                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba))));
+                                      totalbiaya: angsuranpertama + valangsuranspb + valangsuranspp + int.parse(namaformulir) + perpus + kmhsmaba,
+                                      bayar_tiap_tgl: bayartiaptanggal_terpilih,
+                                  ))));
                         },
                       ),
                     )),

@@ -24,7 +24,8 @@ class Daftar extends StatefulWidget {
       varnowa,
       varpendidikan,
       status_agent,
-      keycode;
+      keycode,
+      bayar_tiap_tgl;
   final int namaspb,
       namaspp,
       totalbiaya,
@@ -66,6 +67,7 @@ class Daftar extends StatefulWidget {
     this.perpus,
     this.status_agent,
     this.keycode,
+    this.bayar_tiap_tgl,
   });
   @override
   _DaftarState createState() => _DaftarState();
@@ -1820,6 +1822,7 @@ class _DaftarState extends State<Daftar> {
       key_redeem.toString(),
       widget.status_agent.toString(),
       keycode_agent.toString() == null ? "" : keycode_agent.toString(),
+      widget.bayar_tiap_tgl
     )
         .then((value) {//handled
       StatusModel data = value;
@@ -1868,6 +1871,7 @@ class _DaftarState extends State<Daftar> {
                           widget.campus.kode == null ? "" : widget.campus.kode,
                       id_invoice: no_virtual == null ? "" : no_virtual,
                   status_agent: widget.status_agent,
+                  bayar_tiap_tanggal: widget.bayar_tiap_tgl,
                     ))));
       } else if (data.status == 400) {
         Flushbar(

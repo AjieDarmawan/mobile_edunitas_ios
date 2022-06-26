@@ -356,6 +356,7 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
                                                                                 null
                                                                             ? ""
                                                                             : datatrans[0],
+                                                                        bayar_tiap_tanggal: datatrans[0].setiap,
                                                                       ))));
                                                     },
                                                     child: Container(

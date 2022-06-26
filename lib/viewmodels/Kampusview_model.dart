@@ -272,6 +272,7 @@ class Kampusview_model {
     String key_redeem,
     String status_agent,
     String keycode_agent,
+    String bayar_tiap_tgl,
   ) async {
     final response =
         await http.post(Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema"), body: {
@@ -319,6 +320,7 @@ class Kampusview_model {
       'spb': spb.toString(), //46:100
       'spp': spp.toString(), //6:5000
       'konversi': konversi.toString(), //1
+      'setiap': bayar_tiap_tgl.toString(),
 
       //pengalaman
       'pengalaman': pengalaman.toString(),
@@ -412,6 +414,7 @@ class Kampusview_model {
     String poin_redeem,
     String diskon_redeem,
     String key_redeem,
+    String bayar_tiap_tgl,
   ) async {
     final response = await http.post(
         Uri.parse(ConstanUrl().baseUrl + "integrasi_sipema_pendaftaran_nonlogin"),
@@ -460,6 +463,7 @@ class Kampusview_model {
           'spb': spb.toString(), //46:100
           'spp': spp.toString(), //6:5000
           'konversi': konversi.toString(), //1
+          'setiap': bayar_tiap_tgl.toString(),
 
           //pengalaman
           'pengalaman': pengalaman.toString(),
