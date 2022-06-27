@@ -28,9 +28,9 @@ TextStyle blackFontStyle1 = GoogleFonts.montserrat()
 TextStyle blackFontStyle2 = GoogleFonts.montserrat()
     .copyWith(color: blackColor, fontSize: 16, fontWeight: FontWeight.w500);
 TextStyle blackFontStyle3 =
-GoogleFonts.montserrat().copyWith(color: blackColor);
+    GoogleFonts.montserrat().copyWith(color: blackColor);
 TextStyle blackFontStyle4 =
-GoogleFonts.montserrat().copyWith(color: blackColor, fontSize: 9);
+    GoogleFonts.montserrat().copyWith(color: blackColor, fontSize: 9);
 
 TextStyle blackFontStyle1Bold = GoogleFonts.montserrat()
     .copyWith(color: blackColor, fontSize: 22, fontWeight: FontWeight.bold);
@@ -122,10 +122,10 @@ class EduButton extends StatelessWidget {
   final Color buttonColor, textColor;
   EduButton(
       {@required this.onPressed,
-        this.buttonText,
-        this.textSize,
-        this.buttonColor,
-        this.textColor});
+      this.buttonText,
+      this.textSize,
+      this.buttonColor,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -203,16 +203,29 @@ class EduButtonSecondIcon extends StatelessWidget {
 }
 
 Widget ErrorDataHandler(context) {
-  return SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height/2,
-        child: Center(
-          child: Text('Error Data'),
+  return Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 250,
+          child: Image.asset('assets/noTransactionxhdpi.png'),
         ),
-      ),
+        SizedBox(
+          height: 48.0,
+        ),
+        Text(
+          'Terjadi Kesalahan',
+          style: blueFontStyleBold.copyWith(fontSize: 18),
+        ),
+        SizedBox(
+          height: 16.0,
+        ),
+        Text(
+          'Silahkan ulangi beberapa saat lagi.',
+          style: blackFontStyle3,
+        ),
+      ],
     ),
   );
 }
