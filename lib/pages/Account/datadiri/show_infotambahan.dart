@@ -15,18 +15,19 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
   void getInfo() async {
     KarirViewModel()
         .show_info_tambahan(widget.keycode.toString())
-        .then((value2) {//handled
+        .then((value2) {
+      //handled
       setState(() {
         datainfo = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -72,35 +73,34 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
   }
 
   void prepareBackButton() async {
-    var result = await Navigator.of(context)
-        .push(new MaterialPageRoute(
-      builder: (BuildContext context) =>
-          InsertInfoTambahan(
-            keycode: widget.keycode == null
-                ? ""
-                : widget.keycode.toString(),
-          ),
+    var result = await Navigator.of(context).push(new MaterialPageRoute(
+      builder: (BuildContext context) => InsertInfoTambahan(
+        keycode: widget.keycode == null ? "" : widget.keycode.toString(),
+      ),
     ));
-    if (result!=null) getInfo();
+    if (result != null) getInfo();
   }
 
-  void prepareBackButtonEdit(String keycode, ShowInfotambahanModel xdatainfo) async {
+  void prepareBackButtonEdit(
+      String keycode, ShowInfotambahanModel xdatainfo) async {
     var result = await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-            (InsertInfoTambahan(
+            builder: (context) => (InsertInfoTambahan(
               keycode: keycode,
               xdatainfo: xdatainfo,
             ))));
-    if (result!=null) getInfo();
+    if (result != null) getInfo();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      //onWillPop: _backPressed,
-      child: Scaffold(
+    return
+      // WillPopScope(
+      //   //onWillPop: _backPressed,
+      //   child:
+      // );
+      Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backwardsCompatibility: false,
@@ -256,145 +256,143 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
                           ),
                           datainfo == null
                               ? Container(
-                                  height: 32,
-                                  child: EduButtonSecond(
-                                    buttonText: "Tambah",
-                                    onPressed: () {
-                                      prepareBackButton();
-                                    },
-                                  ),
-                                )
+                            height: 32,
+                            child: EduButtonSecond(
+                              buttonText: "Tambah",
+                              onPressed: () {
+                                prepareBackButton();
+                              },
+                            ),
+                          )
                               : Container()
                         ],
                       ),
                     ),
                     datainfo == null
                         ? Container(
-                            height: 16,
-                          )
+                      height: 16,
+                    )
                         : ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: datainfo.length,
-                            itemBuilder: (context, index) {
-                              final xdatainfo = datainfo[index];
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: datainfo.length,
+                        itemBuilder: (context, index) {
+                          final xdatainfo = datainfo[index];
 
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Wilayah yang diinginkan :",
-                                              style: blackFontStyle1.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.edit_outlined,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: () {
-                                                modalShowInfoTambahan(context,
-                                                    xdatainfo, widget.keycode);
-                                              },
-                                            )
-                                          ],
-                                        ),
-                                        Text(
-                                          xdatainfo.wilayah == null
-                                              ? ""
-                                              : xdatainfo.wilayah.toString(),
-                                          style: blueFontStyle.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Divider(),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Penghasilan Minimal :",
+                                          "Wilayah yang diinginkan :",
                                           style: blackFontStyle1.copyWith(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        xdatainfo.penghasilan == null
-                                            ? Text("")
-                                            : Text(
-                                                NumberFormat.currency(
-                                                        symbol: 'IDR ',
-                                                        decimalDigits: 0,
-                                                        locale: 'id-ID')
-                                                    .format(
-                                                        xdatainfo.penghasilan),
-                                                style: blueFontStyle.copyWith(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.clip,
-                                              ),
-                                        Divider(),
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.edit_outlined,
+                                            color: Colors.grey,
+                                          ),
+                                          onPressed: () {
+                                            modalShowInfoTambahan(context,
+                                                xdatainfo, widget.keycode);
+                                          },
+                                        )
                                       ],
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Informasi lainnya ( Hobi, Url Portofolio, dll ) :",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          xdatainfo.deskripsi == null
-                                              ? ""
-                                              : xdatainfo.deskripsi.toString(),
-                                          style: blueFontStyle.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Divider(),
-                                      ],
+                                    Text(
+                                      xdatainfo.wilayah == null
+                                          ? ""
+                                          : xdatainfo.wilayah.toString(),
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
-                              );
-                            }),
+                                    Divider(),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Penghasilan Minimal :",
+                                      style: blackFontStyle1.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    xdatainfo.penghasilan == null
+                                        ? Text("")
+                                        : Text(
+                                      NumberFormat.currency(
+                                          symbol: 'IDR ',
+                                          decimalDigits: 0,
+                                          locale: 'id-ID')
+                                          .format(
+                                          xdatainfo.penghasilan),
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                    ),
+                                    Divider(),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Informasi lainnya ( Hobi, Url Portofolio, dll ) :",
+                                      style: blackFontStyle1.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      xdatainfo.deskripsi == null
+                                          ? ""
+                                          : xdatainfo.deskripsi.toString(),
+                                      style: blueFontStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Divider(),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   void modalShowInfoTambahan(context, xdatainfo, keycode) {
@@ -490,7 +488,8 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
   }
 
   Future<bool> hapus_datainfo(context, keycode) {
-    KarirViewModel().hapus_infotambahan(keycode.toString()).then((value) {//handled
+    KarirViewModel().hapus_infotambahan(keycode.toString()).then((value) {
+      //handled
       StatusModel data = value;
 
       if (data.status == 200) {
@@ -557,7 +556,7 @@ class _ShowInfoTambahanState extends State<ShowInfoTambahan> {
         )..show(context);
         // Toast.show(data.message, context, duration: 3, gravity: Toast.BOTTOM);
       } else {}
-    }).catchError((erro){
+    }).catchError((erro) {
       Navigator.pop(context);
       onErrHandling(erro);
     });

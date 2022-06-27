@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final transactionModel = transactionModelFromJson(jsonString);
-
 import 'dart:convert';
 
 List<TransactionModel> transactionModelFromJson(String str) =>
@@ -39,8 +35,9 @@ class TransactionModel {
     this.spp_qty,
     this.spp_harga,
     this.params,
+    this.setiap,
   });
- 
+
   String id;
   String billtype;
   String noinvoice;
@@ -69,16 +66,17 @@ class TransactionModel {
   String spp;
   String spp_qty;
   String spp_harga;
+  String setiap;
 
   Params params;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
-         id: json["id"] == null ? null : json["id"],
+        id: json["id"] == null ? null : json["id"],
         billtype: json["billtype"] == null ? null : json["billtype"],
         noinvoice: json["noinvoice"] == null ? null : json["noinvoice"],
         totalpembayaran:
-            json["totalpembayaran"] == null ? null : json["totalpembayaran"],
+        json["totalpembayaran"] == null ? null : json["totalpembayaran"],
         status: json["status"] == null ? null : json["status"],
         nama: json["nama"] == null ? null : json["nama"],
         kampus: json["kampus"] == null ? null : json["kampus"],
@@ -90,9 +88,9 @@ class TransactionModel {
         waktu: json["waktu"] == null ? null : json["waktu"],
         formulir: json["formulir"] == null ? null : json["formulir"],
         formulir_qty:
-            json["formulir_qty"] == null ? null : json["formulir_qty"],
+        json["formulir_qty"] == null ? null : json["formulir_qty"],
         formulir_harga:
-            json["formulir_harga"] == null ? null : json["formulir_harga"],
+        json["formulir_harga"] == null ? null : json["formulir_harga"],
         jaket: json["jaket"] == null ? null : json["jaket"],
         jaket_qty: json["jaket_qty"] == null ? null : json["jaket_qty"],
         jaket_harga: json["jaket_harga"] == null ? null : json["jaket_harga"],
@@ -103,36 +101,38 @@ class TransactionModel {
         spp_qty: json["spp_qty"] == null ? null : json["spp_qty"],
         spp_harga: json["spp_harga"] == null ? null : json["spp_harga"],
         params: json["params"] == null ? null : Params.fromJson(json["params"]),
+        setiap: json["setiap"] == null ? null : json["setiap"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "billtype": billtype == null ? null : billtype,
-        "noinvoice": noinvoice == null ? null : noinvoice,
-        "totalpembayaran": totalpembayaran == null ? null : totalpembayaran,
-        "status": status == null ? null : status,
-        "nama": nama == null ? null : nama,
-        "kampus": kampus == null ? null : kampus,
-        "prodi": prodi == null ? null : prodi,
-        "kelas": kelas == null ? null : kelas,
-        "logo": logo == null ? null : logo,
-        "singkatan": singkatan == null ? null : singkatan,
-        "kode": kode == null ? null : kode,
-        "waktu": waktu == null ? null : waktu,
-        "formulir": formulir == null ? null : formulir,
-        "formulir_qty": formulir_qty == null ? null : formulir_qty,
-        "formulir_harga": formulir_harga == null ? null : formulir_harga,
-        "jaket": jaket == null ? null : jaket,
-        "jaket_qty": jaket_qty == null ? null : jaket_qty,
-        "jaket_harga": jaket_harga == null ? null : jaket_harga,
-        "spb": spb == null ? null : spb,
-        "spb_qty": spb_qty == null ? null : spb_qty,
-        "spb_harga": spb_harga == null ? null : spb_harga,
-        "spp": spp == null ? null : spp,
-        "spp_qty": spp_qty == null ? null : spp_qty,
-        "spp_harga": spp_harga == null ? null : spp_harga,
-        "params": params == null ? null : params.toJson(),
-      };
+    "id": id == null ? null : id,
+    "billtype": billtype == null ? null : billtype,
+    "noinvoice": noinvoice == null ? null : noinvoice,
+    "totalpembayaran": totalpembayaran == null ? null : totalpembayaran,
+    "status": status == null ? null : status,
+    "nama": nama == null ? null : nama,
+    "kampus": kampus == null ? null : kampus,
+    "prodi": prodi == null ? null : prodi,
+    "kelas": kelas == null ? null : kelas,
+    "logo": logo == null ? null : logo,
+    "singkatan": singkatan == null ? null : singkatan,
+    "kode": kode == null ? null : kode,
+    "waktu": waktu == null ? null : waktu,
+    "formulir": formulir == null ? null : formulir,
+    "formulir_qty": formulir_qty == null ? null : formulir_qty,
+    "formulir_harga": formulir_harga == null ? null : formulir_harga,
+    "jaket": jaket == null ? null : jaket,
+    "jaket_qty": jaket_qty == null ? null : jaket_qty,
+    "jaket_harga": jaket_harga == null ? null : jaket_harga,
+    "spb": spb == null ? null : spb,
+    "spb_qty": spb_qty == null ? null : spb_qty,
+    "spb_harga": spb_harga == null ? null : spb_harga,
+    "spp": spp == null ? null : spp,
+    "spp_qty": spp_qty == null ? null : spp_qty,
+    "spp_harga": spp_harga == null ? null : spp_harga,
+    "setiap": setiap == null ? null : setiap,
+    "params": params == null ? null : params.toJson(),
+  };
 }
 
 enum Billtype {
@@ -145,7 +145,7 @@ final billtypeValues = EnumValues({
   "KONFIRMASI PEMABAYARAN BULANAN": Billtype.KONFIRMASI_PEMABAYARAN_BULANAN,
   "KONFIRMASI PEMABAYARAN FORMULIR": Billtype.KONFIRMASI_PEMABAYARAN_FORMULIR,
   "KONFIRMASI PEMABAYARAN PENDAFTARAN":
-      Billtype.KONFIRMASI_PEMABAYARAN_PENDAFTARAN
+  Billtype.KONFIRMASI_PEMABAYARAN_PENDAFTARAN
 });
 
 enum Kampus {
@@ -156,7 +156,7 @@ enum Kampus {
 
 final kampusValues = EnumValues({
   "Institut Sains dan Teknologi Al Kamal":
-      Kampus.INSTITUT_SAINS_DAN_TEKNOLOGI_AL_KAMAL,
+  Kampus.INSTITUT_SAINS_DAN_TEKNOLOGI_AL_KAMAL,
   "Politeknik Nasional Denpasar": Kampus.POLITEKNIK_NASIONAL_DENPASAR,
   "Universitas IT Giland Ganesha": Kampus.UNIVERSITAS_IT_GILAND_GANESHA
 });
@@ -191,20 +191,20 @@ class Params {
   Spp spp;
 
   factory Params.fromJson(Map<String, dynamic> json) => Params(
-        formulir: json["formulir"] == null
-            ? null
-            : Formulir.fromJson(json["formulir"]),
-        jaket: json["jaket"] == null ? null : Jaket.fromJson(json["jaket"]),
-        spb: json["spb"] == null ? null : Spb.fromJson(json["spb"]),
-        spp: json["spp"] == null ? null : Spp.fromJson(json["spp"]),
-      );
+    formulir: json["formulir"] == null
+        ? null
+        : Formulir.fromJson(json["formulir"]),
+    jaket: json["jaket"] == null ? null : Jaket.fromJson(json["jaket"]),
+    spb: json["spb"] == null ? null : Spb.fromJson(json["spb"]),
+    spp: json["spp"] == null ? null : Spp.fromJson(json["spp"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "formulir": formulir == null ? null : formulir.toJson(),
-        "jaket": jaket == null ? null : jaket.toJson(),
-        "spb": spb == null ? null : spb.toJson(),
-        "spp": spp == null ? null : spp.toJson(),
-      };
+    "formulir": formulir == null ? null : formulir.toJson(),
+    "jaket": jaket == null ? null : jaket.toJson(),
+    "spb": spb == null ? null : spb.toJson(),
+    "spp": spp == null ? null : spp.toJson(),
+  };
 }
 
 class Formulir {
@@ -217,15 +217,15 @@ class Formulir {
   String formulirHarga;
 
   factory Formulir.fromJson(Map<String, dynamic> json) => Formulir(
-        formulirQty: json["formulir_qty"] == null ? null : json["formulir_qty"],
-        formulirHarga:
-            json["formulir_harga"] == null ? null : json["formulir_harga"],
-      );
+    formulirQty: json["formulir_qty"] == null ? null : json["formulir_qty"],
+    formulirHarga:
+    json["formulir_harga"] == null ? null : json["formulir_harga"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "formulir_qty": formulirQty == null ? null : formulirQty,
-        "formulir_harga": formulirHarga == null ? null : formulirHarga,
-      };
+    "formulir_qty": formulirQty == null ? null : formulirQty,
+    "formulir_harga": formulirHarga == null ? null : formulirHarga,
+  };
 }
 
 class Jaket {
@@ -238,14 +238,14 @@ class Jaket {
   String jaketHarga;
 
   factory Jaket.fromJson(Map<String, dynamic> json) => Jaket(
-        jaketQty: json["jaket_qty"] == null ? null : json["jaket_qty"],
-        jaketHarga: json["jaket_harga"] == null ? null : json["jaket_harga"],
-      );
+    jaketQty: json["jaket_qty"] == null ? null : json["jaket_qty"],
+    jaketHarga: json["jaket_harga"] == null ? null : json["jaket_harga"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "jaket_qty": jaketQty == null ? null : jaketQty,
-        "jaket_harga": jaketHarga == null ? null : jaketHarga,
-      };
+    "jaket_qty": jaketQty == null ? null : jaketQty,
+    "jaket_harga": jaketHarga == null ? null : jaketHarga,
+  };
 }
 
 class Spb {
@@ -258,14 +258,14 @@ class Spb {
   String spbHarga;
 
   factory Spb.fromJson(Map<String, dynamic> json) => Spb(
-        spbQty: json["spb_qty"] == null ? null : json["spb_qty"],
-        spbHarga: json["spb_harga"] == null ? null : json["spb_harga"],
-      );
+    spbQty: json["spb_qty"] == null ? null : json["spb_qty"],
+    spbHarga: json["spb_harga"] == null ? null : json["spb_harga"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "spb_qty": spbQty == null ? null : spbQty,
-        "spb_harga": spbHarga == null ? null : spbHarga,
-      };
+    "spb_qty": spbQty == null ? null : spbQty,
+    "spb_harga": spbHarga == null ? null : spbHarga,
+  };
 }
 
 class Spp {
@@ -278,14 +278,14 @@ class Spp {
   String sppHarga;
 
   factory Spp.fromJson(Map<String, dynamic> json) => Spp(
-        sppQty: json["spp_qty"] == null ? null : json["spp_qty"],
-        sppHarga: json["spp_harga"] == null ? null : json["spp_harga"],
-      );
+    sppQty: json["spp_qty"] == null ? null : json["spp_qty"],
+    sppHarga: json["spp_harga"] == null ? null : json["spp_harga"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "spp_qty": sppQty == null ? null : sppQty,
-        "spp_harga": sppHarga == null ? null : sppHarga,
-      };
+    "spp_qty": sppQty == null ? null : sppQty,
+    "spp_harga": sppHarga == null ? null : sppHarga,
+  };
 }
 
 enum Singkatan { KAMPUS_DEMO_IT, POLNAS, ISTA }

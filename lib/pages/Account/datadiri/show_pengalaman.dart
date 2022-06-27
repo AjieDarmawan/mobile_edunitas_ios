@@ -13,18 +13,19 @@ class ShowPengalaman extends StatefulWidget {
 class _ShowPengalamanState extends State<ShowPengalaman> {
   List<ShowPengalamanModel> datapengalaman = new List();
   void getPengalaman() async {
-    KarirViewModel().show_pengalaman(widget.keycode.toString()).then((value2) {//handled
+    KarirViewModel().show_pengalaman(widget.keycode.toString()).then((value2) {
+      //handled
       setState(() {
         datapengalaman = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -70,37 +71,36 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
   }
 
   void prepareBackButton() async {
-    var result = await Navigator.of(context)
-        .push(new MaterialPageRoute(
-      builder: (BuildContext context) =>
-          PenglamanDatadiri(
-            keycode: widget.keycode == null
-                ? ""
-                : widget.keycode.toString(),
-          ),
+    var result = await Navigator.of(context).push(new MaterialPageRoute(
+      builder: (BuildContext context) => PenglamanDatadiri(
+        keycode: widget.keycode == null ? "" : widget.keycode.toString(),
+      ),
     ));
-    if (result!=null) getPengalaman();
+    if (result != null) getPengalaman();
   }
 
-  void prepareBackButtonEdit(String keycode, ShowPengalamanModel xdatainfo) async {
+  void prepareBackButtonEdit(
+      String keycode, ShowPengalamanModel xdatainfo) async {
     var result = await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-            (editPengalaman(
+            builder: (context) => (editPengalaman(
               keycode: keycode,
               xpengalaman: xdatainfo,
             ))));
-    if (result!=null) {
+    if (result != null) {
       getPengalaman();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      //onWillPop: _backPressed,
-      child: Scaffold(
+    return
+      // WillPopScope(
+      //   //onWillPop: _backPressed,
+      //   child:
+      // );
+      Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backwardsCompatibility: false,
@@ -207,213 +207,212 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
                     ),
                     datapengalaman == null
                         ? Container(
-                            height: 16,
-                          )
+                      height: 16,
+                    )
                         : ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: datapengalaman.length,
-                            itemBuilder: (context, index) {
-                              final xpengalaman = datapengalaman[index];
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: datapengalaman.length,
+                        itemBuilder: (context, index) {
+                          final xpengalaman = datapengalaman[index];
 
-                              return Column(
-                                children: [
-                                  Container(
-                                    color: Colors.blue[50],
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              "${xpengalaman.posisiNama == null ? '' : xpengalaman.posisiNama} ",
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.edit_outlined,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: () {
-                                              modalShow(
-                                                  context,
-                                                  xpengalaman.id.toString(),
-                                                  xpengalaman,
-                                                  widget.keycode);
-                                            },
-                                          )
-                                        ]),
-                                  ),
-                                  Divider(
-                                    height: 0,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "${xpengalaman.nama == null ? "" : xpengalaman.nama} | ${xpengalaman.wilayahKota == null ? '' : xpengalaman.wilayahKota}",
-                                          style: blackFontStyle1.copyWith(
-                                              fontSize: 16,
+                          return Column(
+                            children: [
+                              Container(
+                                color: Colors.blue[50],
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${xpengalaman.posisiNama == null ? '' : xpengalaman.posisiNama} ",
+                                          style: blueFontStyle.copyWith(
+                                              fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                         ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: () {
+                                          modalShow(
+                                              context,
+                                              xpengalaman.id.toString(),
+                                              xpengalaman,
+                                              widget.keycode);
+                                        },
+                                      )
+                                    ]),
+                              ),
+                              Divider(
+                                height: 0,
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${xpengalaman.nama == null ? "" : xpengalaman.nama} | ${xpengalaman.wilayahKota == null ? '' : xpengalaman.wilayahKota}",
+                                      style: blackFontStyle1.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                        "${xpengalaman.dari == null ? '' : xpengalaman.dari} - ${xpengalaman.hingga == null ? '' : xpengalaman.hingga}"),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
                                         Text(
-                                            "${xpengalaman.dari == null ? '' : xpengalaman.dari} - ${xpengalaman.hingga == null ? '' : xpengalaman.hingga}"),
+                                          "Industri",
+                                          style: blackFontStyle2.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            xpengalaman.industriNama == null
+                                                ? ""
+                                                : xpengalaman.industriNama,
+                                            style: blueFontStyle,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
-                                    child: Column(
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Industri",
-                                              style: blackFontStyle2.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                xpengalaman.industriNama == null
-                                                    ? ""
-                                                    : xpengalaman.industriNama,
-                                                style: blueFontStyle,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                          ],
+                                        Text(
+                                          "Spesialisasi",
+                                          style: blackFontStyle2.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Divider(),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Spesialisasi",
-                                              style: blackFontStyle2.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                xpengalaman.spesialisasiNama ==
-                                                        null
-                                                    ? ""
-                                                    : xpengalaman
-                                                        .spesialisasiNama,
-                                                style: blueFontStyle,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                          ],
+                                        SizedBox(
+                                          width: 16,
                                         ),
-                                        Divider(),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Bidang pekerjaan",
-                                              style: blackFontStyle2.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                xpengalaman.bidangNama == null
-                                                    ? ""
-                                                    : xpengalaman.bidangNama,
-                                                style: blueFontStyle,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                          ],
+                                        Expanded(
+                                          child: Text(
+                                            xpengalaman.spesialisasiNama ==
+                                                null
+                                                ? ""
+                                                : xpengalaman
+                                                .spesialisasiNama,
+                                            style: blueFontStyle,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.right,
+                                          ),
                                         ),
-                                        Divider(),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Jabatan",
-                                              style: blackFontStyle2.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                xpengalaman.jabatanNama == null
-                                                    ? ""
-                                                    : xpengalaman.jabatanNama,
-                                                style: blueFontStyle,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                          ],
+                                      ],
+                                    ),
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Bidang pekerjaan",
+                                          style: blackFontStyle2.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Divider(),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Gaji bulanan",
-                                              style: blackFontStyle2.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            Expanded(
-                                                child: Text(
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            xpengalaman.bidangNama == null
+                                                ? ""
+                                                : xpengalaman.bidangNama,
+                                            style: blueFontStyle,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Jabatan",
+                                          style: blackFontStyle2.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            xpengalaman.jabatanNama == null
+                                                ? ""
+                                                : xpengalaman.jabatanNama,
+                                            style: blueFontStyle,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Gaji bulanan",
+                                          style: blackFontStyle2.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Text(
                                               NumberFormat.currency(
-                                                      symbol: 'IDR ',
-                                                      decimalDigits: 0,
-                                                      locale: 'id-ID')
+                                                  symbol: 'IDR ',
+                                                  decimalDigits: 0,
+                                                  locale: 'id-ID')
                                                   .format(xpengalaman.gaji),
                                               style: blueFontStyle.copyWith(
                                                 fontWeight: FontWeight.bold,
@@ -422,22 +421,22 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.right,
                                             )),
-                                          ],
-                                        ),
-                                        Divider(),
-                                        Text(xpengalaman.deskripsi == null
-                                            ? ""
-                                            : xpengalaman.deskripsi.length >= 10
-                                                ? xpengalaman.deskripsi
-                                                        .substring(0, 10) +
-                                                    '..'
-                                                : '')
                                       ],
                                     ),
-                                  ),
-                                ],
-                              );
-                            }),
+                                    Divider(),
+                                    Text(xpengalaman.deskripsi == null
+                                        ? ""
+                                        : xpengalaman.deskripsi.length >= 10
+                                        ? xpengalaman.deskripsi
+                                        .substring(0, 10) +
+                                        '..'
+                                        : '')
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -445,8 +444,7 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   void modalShow(context, id, xpengalaman, keycode) {
@@ -543,7 +541,8 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
   }
 
   Future<bool> hapus(context, id) {
-    KarirViewModel().hapus_pengalaman(id.toString()).then((value) {//handled
+    KarirViewModel().hapus_pengalaman(id.toString()).then((value) {
+      //handled
       StatusModel data = value;
 
       print("hapus :" + data.status.toString());
@@ -608,7 +607,7 @@ class _ShowPengalamanState extends State<ShowPengalaman> {
         print("pengalaman hapus err: " + data.status.toString());
         Navigator.pop(context);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final transaction2Model = transaction2ModelFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Transaction2Model> transaction2ModelFromJson(String str) => List<Transaction2Model>.from(json.decode(str).map((x) => Transaction2Model.fromJson(x)));
@@ -36,6 +32,7 @@ class Transaction2Model {
         this.spp_qty,
         this.spp_harga,
         this.params,
+        this.setiap,
     });
 
     String id;
@@ -63,6 +60,7 @@ class Transaction2Model {
     String spp;
     String spp_qty;
     String spp_harga;
+    String setiap;
     List<String> params;
 
     factory Transaction2Model.fromJson(Map<String, dynamic> json) => Transaction2Model(
@@ -91,6 +89,7 @@ class Transaction2Model {
         spp: json["spp"] == null ? null : json["spp"],
         spp_qty: json["spp_qty"] == null ? null : json["spp_qty"],
         spp_harga: json["spp_harga"] == null ? null : json["spp_harga"],
+        setiap: json["setiap"] == null ? null : json["setiap"],
         params: json["params"] == null ? null : List<String>.from(json["params"].map((x) => x)),
     );
 
@@ -120,6 +119,7 @@ class Transaction2Model {
         "spp": spp == null ? null : spp,
         "spp_qty": spp_qty == null ? null : spp_qty,
         "spp_harga": spp_harga == null ? null : spp_harga,
+        "setiap": setiap == null ? null : setiap,
         "params": params == null ? null : List<dynamic>.from(params.map((x) => x)),
     };
 }

@@ -10,19 +10,21 @@ class Invoice extends StatefulWidget {
       namaJurusan,
       kodekampus,
       id_invoice,
-      status_agent;
+      status_agent,
+      bayar_tiap_tanggal;
 
   Invoice(
       {this.params,
-      this.logo,
-      this.nama,
-      this.singktan,
-      this.formulir,
-      this.keycode,
-      this.namaJurusan,
-      this.kodekampus,
-      this.id_invoice,
-        this.status_agent});
+        this.logo,
+        this.nama,
+        this.singktan,
+        this.formulir,
+        this.keycode,
+        this.namaJurusan,
+        this.kodekampus,
+        this.id_invoice,
+        this.status_agent,
+        this.bayar_tiap_tanggal});
 
   @override
   _InvoiceState createState() => _InvoiceState();
@@ -34,16 +36,19 @@ class _InvoiceState extends State<Invoice> {
   void getmetodepembayaran() async {
     Masterview_model()
         .metodepembayaran(
-            widget.kodekampus.toString(), widget.keycode.toString()).then((value2) {//handled
+        widget.kodekampus.toString(), widget.keycode.toString())
+        .then((value2) {
+      //handled
       setState(() {
         datametodepembayran = value2;
         logometode = datametodepembayran[0].logo;
         namametode = datametodepembayran[0].metode;
         no_pembayaran_pev = datametodepembayran[0].no_pembayaran_pev;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
-    });;
+    });
+    ;
   }
 
   String no_virtual = "";
@@ -51,16 +56,20 @@ class _InvoiceState extends State<Invoice> {
     Masterview_model()
         .va(
       widget.keycode.toString(),
-      widget.id_invoice.toString(),).then((value2) {//handled
+      widget.id_invoice.toString(),
+    )
+        .then((value2) {
+      //handled
       LoginModel data = value2;
       if (data.status == 200) {
         setState(() {
           no_virtual = data.message;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
-    });;
+    });
+    ;
   }
 
   var globalkey = "", globalEmail = "";
@@ -68,7 +77,8 @@ class _InvoiceState extends State<Invoice> {
   var mystatus = false;
   SessionManager sessionManager = SessionManager();
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
+    await sessionManager.getPreference().then((value) {
+      //handled
       setState(() {
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
@@ -80,6 +90,8 @@ class _InvoiceState extends State<Invoice> {
     });
   }
 
+  String bayar_t_tanggal = '';
+
   String varnama,
       varemail,
       vargenre,
@@ -90,7 +102,8 @@ class _InvoiceState extends State<Invoice> {
       varnohp,
       varnowa;
   void datausers(globalemail) {
-    UserViewModel().users_detail(globalemail).then((value) {//handled
+    UserViewModel().users_detail(globalemail).then((value) {
+      //handled
       UsersDetailModel data = value;
 
       if (data.status == 200) {
@@ -100,16 +113,21 @@ class _InvoiceState extends State<Invoice> {
           varalamat = data.alamat;
           varpendidikan = data.pendidikan;
           varnohp = data.noHp;
+          bayar_t_tanggal = widget.bayar_tiap_tanggal == null
+              ? '5'
+              : widget.bayar_tiap_tanggal;
         });
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+
+
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -143,13 +161,14 @@ class _InvoiceState extends State<Invoice> {
 
   bool isFromAgensi;
 
+
   @override
   void initState() {
     super.initState();
     getmetodepembayaran();
     getPreferences();
     getva();
-    isFromAgensi = widget.status_agent==null?false:true;
+    isFromAgensi = widget.status_agent == null ? false : true;
   }
 
   @override
@@ -205,10 +224,10 @@ class _InvoiceState extends State<Invoice> {
                     child: widget.logo == null
                         ? Text("")
                         : ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child:
-                                Image.network(widget.logo, fit: BoxFit.cover),
-                          ),
+                      borderRadius: BorderRadius.circular(10),
+                      child:
+                      Image.network(widget.logo, fit: BoxFit.cover),
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -275,6 +294,56 @@ class _InvoiceState extends State<Invoice> {
                 Container(
                   child: widget.params == null
                       ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        Table(
+                          children: [
+                            TableRow(children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Formulir",
+                                  style: blueFontStyle,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "1",
+                                  style: blueFontStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  NumberFormat.currency(
+                                      symbol: 'Rp ',
+                                      decimalDigits: 0,
+                                      locale: 'id-ID')
+                                      .format(
+                                      double.parse(widget.formulir)),
+                                  style: blueFontStyle.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ])
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                      : Column(
+                      children:
+                      widget.params.params.map<Widget>((document) {
+                        var data = document.split('#');
+
+                        return Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
                             children: [
@@ -284,7 +353,7 @@ class _InvoiceState extends State<Invoice> {
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "Formulir",
+                                        data[0],
                                         style: blueFontStyle,
                                         textAlign: TextAlign.left,
                                       ),
@@ -292,7 +361,7 @@ class _InvoiceState extends State<Invoice> {
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "1",
+                                        data[1],
                                         style: blueFontStyle,
                                         textAlign: TextAlign.center,
                                       ),
@@ -301,71 +370,21 @@ class _InvoiceState extends State<Invoice> {
                                       padding: EdgeInsets.all(10),
                                       child: Text(
                                         NumberFormat.currency(
-                                                symbol: 'Rp ',
-                                                decimalDigits: 0,
-                                                locale: 'id-ID')
-                                            .format(
-                                                double.parse(widget.formulir)),
-                                        style: blueFontStyle.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0,
+                                            locale: 'id-ID')
+                                            .format(double.parse(data[2])),
+                                        style: blueFontStyle,
                                         textAlign: TextAlign.end,
                                       ),
                                     ),
-                                  ])
+                                  ]),
                                 ],
-                              )
+                              ),
                             ],
                           ),
-                        )
-                      : Column(
-                          children:
-                              widget.params.params.map<Widget>((document) {
-                          var data = document.split('#');
-
-                          return Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: [
-                                Table(
-                                  children: [
-                                    TableRow(children: [
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          data[0],
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          data[1],
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          NumberFormat.currency(
-                                                  symbol: 'Rp ',
-                                                  decimalDigits: 0,
-                                                  locale: 'id-ID')
-                                              .format(double.parse(data[2])),
-                                          style: blueFontStyle,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList()),
+                        );
+                      }).toList()),
                 ),
 
                 Container(
@@ -394,9 +413,9 @@ class _InvoiceState extends State<Invoice> {
                               padding: EdgeInsets.all(10),
                               child: Text(
                                 NumberFormat.currency(
-                                        symbol: 'Rp ',
-                                        decimalDigits: 0,
-                                        locale: 'id-ID')
+                                    symbol: 'Rp ',
+                                    decimalDigits: 0,
+                                    locale: 'id-ID')
                                     .format(double.parse(widget.formulir)),
                                 style: whiteFontStyle.copyWith(
                                   fontSize: 14,
@@ -462,34 +481,34 @@ class _InvoiceState extends State<Invoice> {
                 child: namametode == null
                     ? Center(child: CircularProgressIndicator())
                     : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("No Virtual Akun",
-                              style: blackFontStyle3.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold)),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.copy,
-                                  color: mainColor1,
-                                ),
-                                onPressed: () {
-                                  Clipboard.setData(new ClipboardData(
-                                      text: no_virtual.toString()));
-                                  Fluttertoast.showToast(
-                                      msg: "Copied",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.TOP,
-                                      timeInSecForIosWeb: 1,
-                                      fontSize: 16.0);
-                                },
-                              ),
-                              Text(no_virtual.toString(), style: blueFontStyle)
-                            ],
-                          )
-                        ],
-                      )),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("No Virtual Akun",
+                        style: blackFontStyle3.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.copy,
+                            color: mainColor1,
+                          ),
+                          onPressed: () {
+                            Clipboard.setData(new ClipboardData(
+                                text: no_virtual.toString()));
+                            Fluttertoast.showToast(
+                                msg: "Copied",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.TOP,
+                                timeInSecForIosWeb: 1,
+                                fontSize: 16.0);
+                          },
+                        ),
+                        Text(no_virtual.toString(), style: blueFontStyle)
+                      ],
+                    )
+                  ],
+                )),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
@@ -503,6 +522,7 @@ class _InvoiceState extends State<Invoice> {
                             fontSize: 14, fontWeight: FontWeight.bold))
                   ],
                 )),
+
             SizedBox(height: 24),
             Container(
               decoration: BoxDecoration(
@@ -550,12 +570,12 @@ class _InvoiceState extends State<Invoice> {
               height: 48,
               child: EduButtonSecond(
                 onPressed: () {
-                  print("isfromagensi: "+isFromAgensi.toString());
-                  if(isFromAgensi){
+                  print("isfromagensi: " + isFromAgensi.toString());
+                  if (isFromAgensi) {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => Navigation_bottom(),
                     ));
-                  }else{
+                  } else {
                     //Navigator.popUntil(context, (route) => route.isFirst);
                     Navigator.pop(context);
                   }
@@ -563,6 +583,28 @@ class _InvoiceState extends State<Invoice> {
                 buttonText: "Selesai",
               ),
             ),
+            SizedBox(height: 24),
+
+            Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red.withOpacity(0.2),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  text:
+                  'Note: Pembayaran Uang Kuliah selambat-lambatnya dibayarkan ',
+                  style: TextStyle(fontSize: 12, color: Colors.red),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'tanggal $bayar_t_tanggal setiap bulannya',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

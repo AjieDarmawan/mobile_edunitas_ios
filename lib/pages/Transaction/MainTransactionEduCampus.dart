@@ -73,15 +73,11 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
   var data = [];
   List<Params> item;
   void getdatatrans(globalkey2) {
-    print("globalkey2${globalkey.toString()}");
+    print("globalkey2: ${globalkey.toString()}");
     Transactionview_model().getransaction(globalkey2).then((value1) {
       //handled
-      print(value1);
       setState(() {
-        // Transaction2Model data = value1;
         datatrans = value1;
-
-        // item = value1[0].;
       });
     }).catchError((erro) {
       print("do_list_transaction_err: " + erro.toString());
@@ -273,7 +269,6 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
 
   @override
   Widget build(BuildContext context) {
-    print("datatrans${datatrans}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -283,490 +278,493 @@ class _MainTransactionEduCampusState extends State<MainTransactionEduCampus> {
               child: globalkey == null
                   ? NonLogin()
                   : Container(
-                      child: datatrans == null || datatrans.length == 0
-                          ? shimmerLoading()
-                          : Container(
-                              child: datatrans[0].noinvoice == "tes"
-                                  ? Container(
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              1.3,
-                                      child: NoTransaction())
-                                  : SingleChildScrollView(
+                child: datatrans == null
+                    ? ErrorDataHandler(context)
+                    : datatrans.length == 0
+                    ? shimmerLoading()
+                    : Container(
+                  child: datatrans[0].noinvoice == "tes"
+                      ? Container(
+                      height:
+                      MediaQuery.of(context).size.height /
+                          1.3,
+                      child: NoTransaction())
+                      : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        10)),
+                                elevation: 2,
+                                margin: EdgeInsets.all(10),
+                                borderOnForeground: true,
+                                child: InkWell(
+                                  customBorder:
+                                  RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        10),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder:
+                                                (context) =>
+                                            (Invoice(
+                                              id_invoice: datatrans[0].id ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].id,
+                                              logo: datatrans[0].logo ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].logo,
+                                              nama: datatrans[0].kampus ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].kampus,
+                                              singktan: datatrans[0].singkatan ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].singkatan,
+                                              formulir: datatrans[0].totalpembayaran ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].totalpembayaran,
+                                              keycode: globalkey ==
+                                                  null
+                                                  ? ""
+                                                  : globalkey,
+                                              namaJurusan: datatrans[0].prodi ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].prodi,
+                                              kodekampus: datatrans[0].kode ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0].kode,
+                                              params: datatrans[0] ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[0],
+                                              bayar_tiap_tanggal: datatrans[0].setiap,
+                                            ))));
+                                  },
+                                  child: Container(
+                                      padding:
+                                      EdgeInsets.all(10),
                                       child: Column(
                                         children: [
-                                          Container(
-                                            child: Column(
-                                              children: [
-                                                Card(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  elevation: 2,
-                                                  margin: EdgeInsets.all(10),
-                                                  borderOnForeground: true,
-                                                  child: InkWell(
-                                                    customBorder:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      (Invoice(
-                                                                        id_invoice: datatrans[0].id ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].id,
-                                                                        logo: datatrans[0].logo ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].logo,
-                                                                        nama: datatrans[0].kampus ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].kampus,
-                                                                        singktan: datatrans[0].singkatan ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].singkatan,
-                                                                        formulir: datatrans[0].totalpembayaran ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].totalpembayaran,
-                                                                        keycode: globalkey ==
-                                                                                null
-                                                                            ? ""
-                                                                            : globalkey,
-                                                                        namaJurusan: datatrans[0].prodi ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].prodi,
-                                                                        kodekampus: datatrans[0].kode ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0].kode,
-                                                                        params: datatrans[0] ==
-                                                                                null
-                                                                            ? ""
-                                                                            : datatrans[0],
-                                                                      ))));
-                                                    },
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+                                              Text(
+                                                datatrans[0].waktu ==
+                                                    null
+                                                    ? ""
+                                                    : datatrans[
+                                                0]
+                                                    .waktu,
+                                                style: blackFontStyle3
+                                                    .copyWith(
+                                                    fontSize:
+                                                    12),
+                                                overflow:
+                                                TextOverflow
+                                                    .ellipsis,
+                                                textAlign:
+                                                TextAlign
+                                                    .left,
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets
+                                                    .only(
+                                                    left:
+                                                    10),
+                                                child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(12.0),
                                                     child: Container(
-                                                        padding:
-                                                            EdgeInsets.all(10),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  datatrans[0].waktu ==
-                                                                          null
-                                                                      ? ""
-                                                                      : datatrans[
-                                                                              0]
-                                                                          .waktu,
-                                                                  style: blackFontStyle3
-                                                                      .copyWith(
-                                                                          fontSize:
-                                                                              12),
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                ),
-                                                                Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          left:
-                                                                              10),
-                                                                  child: ClipRRect(
-                                                                      borderRadius: BorderRadius.circular(12.0),
-                                                                      child: Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            24,
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(horizontal: 10),
-                                                                        color: Colors
-                                                                            .red,
-                                                                        child:
-                                                                            Text(
-                                                                          datatrans[0].status == null
-                                                                              ? ""
-                                                                              : "Tagihan",
-                                                                          style: whiteFontStyle.copyWith(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 11),
-                                                                        ),
-                                                                      )),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Divider(
-                                                              color: Colors
-                                                                  .black38,
-                                                              height: 20,
-                                                              thickness: 1,
-                                                            ),
-                                                            Column(
-                                                              children: [
-                                                                Text(
-                                                                  datatrans[0].billtype ==
-                                                                          null
-                                                                      ? ""
-                                                                      : datatrans[
-                                                                              0]
-                                                                          .billtype,
-                                                                  style: blueFontStyle.copyWith(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                Divider(
-                                                                  color: Colors
-                                                                      .black38,
-                                                                  height: 20,
-                                                                  thickness: 1,
-                                                                ),
-                                                                Container(
-                                                                  child: Row(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Container(
-                                                                        margin: EdgeInsets.symmetric(
-                                                                            horizontal:
-                                                                                10),
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              48,
-                                                                          height:
-                                                                              48,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            boxShadow: [
-                                                                              BoxShadow(color: Colors.black38, offset: Offset(0.0, 0.0), blurRadius: 1.0)
-                                                                            ],
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10),
-                                                                            image:
-                                                                                DecorationImage(image: NetworkImage(datatrans[0].logo), fit: BoxFit.cover),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            1.45,
-                                                                        child:
-                                                                            Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              datatrans[0].kampus == null ? "" : datatrans[0].kampus,
-                                                                              style: blackFontStyle3.copyWith(fontSize: 12),
-                                                                              //maxLines: 2,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              textAlign: TextAlign.left,
-                                                                            ),
-                                                                            Text(
-                                                                              datatrans[0].prodi == null ? "" : datatrans[0].prodi,
-                                                                              style: blackFontStyle3.copyWith(fontSize: 12),
-                                                                              textAlign: TextAlign.left,
-                                                                            ),
-                                                                            Text(
-                                                                              datatrans[0].kelas == null ? "" : datatrans[0].kelas,
-                                                                              style: blackFontStyle3.copyWith(fontSize: 12),
-                                                                              textAlign: TextAlign.left,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 16,
-                                                                ),
-                                                                Table(
-                                                                  children: [
-                                                                    TableRow(
-                                                                        decoration:
-                                                                            BoxDecoration(color: Colors.blue[100]),
-                                                                        children: [
-                                                                          Container(
-                                                                            padding:
-                                                                                EdgeInsets.all(10),
-                                                                            child:
-                                                                                Text(
-                                                                              "Item",
-                                                                              style: blueFontStyle,
-                                                                              textAlign: TextAlign.start,
-                                                                            ),
-                                                                          ),
-                                                                          Container(
-                                                                            padding:
-                                                                                EdgeInsets.symmetric(vertical: 10),
-                                                                            child:
-                                                                                Text(
-                                                                              "Pembayaran",
-                                                                              style: blueFontStyle,
-                                                                              textAlign: TextAlign.center,
-                                                                            ),
-                                                                          ),
-                                                                          Container(
-                                                                            padding:
-                                                                                EdgeInsets.all(10),
-                                                                            child:
-                                                                                Text(
-                                                                              "Nominal",
-                                                                              style: blueFontStyle,
-                                                                              textAlign: TextAlign.end,
-                                                                            ),
-                                                                          ),
-                                                                        ]),
-                                                                  ],
-                                                                ),
-                                                                Container(
-                                                                  child: datatrans[0]
-                                                                              .billtype ==
-                                                                          "KONFIRMASI PEMBAYARAN PENDAFTARAN"
-                                                                      ? _registrasi(
-                                                                          datatrans)
-                                                                      : _formulir(
-                                                                          datatrans),
-                                                                ),
-                                                              ],
-                                                            )
+                                                      alignment:
+                                                      Alignment.center,
+                                                      height:
+                                                      24,
+                                                      padding:
+                                                      EdgeInsets.symmetric(horizontal: 10),
+                                                      color: Colors
+                                                          .red,
+                                                      child:
+                                                      Text(
+                                                        datatrans[0].status == null
+                                                            ? ""
+                                                            : "Tagihan",
+                                                        style: whiteFontStyle.copyWith(
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 11),
+                                                      ),
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
+                                          Divider(
+                                            color: Colors
+                                                .black38,
+                                            height: 20,
+                                            thickness: 1,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                datatrans[0].billtype ==
+                                                    null
+                                                    ? ""
+                                                    : datatrans[
+                                                0]
+                                                    .billtype,
+                                                style: blueFontStyle.copyWith(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold),
+                                              ),
+                                              Divider(
+                                                color: Colors
+                                                    .black38,
+                                                height: 20,
+                                                thickness: 1,
+                                              ),
+                                              Container(
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .center,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.symmetric(
+                                                          horizontal:
+                                                          10),
+                                                      child:
+                                                      Container(
+                                                        width:
+                                                        48,
+                                                        height:
+                                                        48,
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(color: Colors.black38, offset: Offset(0.0, 0.0), blurRadius: 1.0)
                                                           ],
-                                                        )),
-                                                  ),
+                                                          borderRadius:
+                                                          BorderRadius.circular(10),
+                                                          image:
+                                                          DecorationImage(image: NetworkImage(datatrans[0].logo), fit: BoxFit.cover),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: MediaQuery.of(context).size.width /
+                                                          1.45,
+                                                      child:
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            datatrans[0].kampus == null ? "" : datatrans[0].kampus,
+                                                            style: blackFontStyle3.copyWith(fontSize: 12),
+                                                            //maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.left,
+                                                          ),
+                                                          Text(
+                                                            datatrans[0].prodi == null ? "" : datatrans[0].prodi,
+                                                            style: blackFontStyle3.copyWith(fontSize: 12),
+                                                            textAlign: TextAlign.left,
+                                                          ),
+                                                          Text(
+                                                            datatrans[0].kelas == null ? "" : datatrans[0].kelas,
+                                                            style: blackFontStyle3.copyWith(fontSize: 12),
+                                                            textAlign: TextAlign.left,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 16,
+                                              ),
+                                              Table(
+                                                children: [
+                                                  TableRow(
+                                                      decoration:
+                                                      BoxDecoration(color: Colors.blue[100]),
+                                                      children: [
+                                                        Container(
+                                                          padding:
+                                                          EdgeInsets.all(10),
+                                                          child:
+                                                          Text(
+                                                            "Item",
+                                                            style: blueFontStyle,
+                                                            textAlign: TextAlign.start,
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                          EdgeInsets.symmetric(vertical: 10),
+                                                          child:
+                                                          Text(
+                                                            "Pembayaran",
+                                                            style: blueFontStyle,
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                          EdgeInsets.all(10),
+                                                          child:
+                                                          Text(
+                                                            "Nominal",
+                                                            style: blueFontStyle,
+                                                            textAlign: TextAlign.end,
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                ],
+                                              ),
+                                              Container(
+                                                child: datatrans[0]
+                                                    .billtype ==
+                                                    "KONFIRMASI PEMBAYARAN PENDAFTARAN"
+                                                    ? _registrasi(
+                                                    datatrans)
+                                                    : _formulir(
+                                                    datatrans),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding:
+                          EdgeInsets.only(bottom: 10),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              physics:
+                              NeverScrollableScrollPhysics(),
+                              itemCount: datatrans.length,
+                              itemBuilder: (context, index) {
+                                return index != 0
+                                    ? Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(
+                                          10)),
+                                  elevation: 2,
+                                  margin: EdgeInsets
+                                      .fromLTRB(10, 10,
+                                      10, 0),
+                                  borderOnForeground:
+                                  true,
+                                  child: InkWell(
+                                    customBorder:
+                                    RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(
+                                          10),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                              (Invoice(
+                                                id_invoice: datatrans[index].id == null
+                                                    ? ""
+                                                    : datatrans[index].id,
+                                                logo: datatrans[index].logo == null
+                                                    ? ""
+                                                    : datatrans[index].logo,
+                                                nama: datatrans[index].kampus == null
+                                                    ? ""
+                                                    : datatrans[index].kampus,
+                                                singktan: datatrans[index].singkatan == null
+                                                    ? ""
+                                                    : datatrans[index].singkatan,
+                                                formulir: datatrans[index].totalpembayaran == null
+                                                    ? ""
+                                                    : datatrans[index].totalpembayaran,
+                                                keycode: globalkey == null
+                                                    ? ""
+                                                    : globalkey,
+                                                namaJurusan: datatrans[index].prodi == null
+                                                    ? ""
+                                                    : datatrans[index].prodi,
+                                                kodekampus: datatrans[index].kode == null
+                                                    ? ""
+                                                    : datatrans[index].kode,
+                                                params: datatrans[index] == null
+                                                    ? ""
+                                                    : datatrans[index],
+                                              ))));
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets
+                                            .symmetric(
+                                            horizontal:
+                                            16,
+                                            vertical:
+                                            10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  datatrans[index].waktu == null
+                                                      ? ""
+                                                      : datatrans[index].waktu,
+                                                  style:
+                                                  blackFontStyle3.copyWith(fontSize: 12),
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+                                                  textAlign:
+                                                  TextAlign.left,
+                                                ),
+                                                Container(
+                                                  margin:
+                                                  EdgeInsets.only(left: 10),
+                                                  child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      child: Container(
+                                                        alignment: Alignment.center,
+                                                        height: 24,
+                                                        padding: EdgeInsets.symmetric(horizontal: 10),
+                                                        color: Colors.red,
+                                                        child: Text(
+                                                          datatrans[index].status == null ? "" : "Tagihan",
+                                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11),
+                                                        ),
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          Container(
-                                            padding:
-                                                EdgeInsets.only(bottom: 10),
-                                            child: ListView.builder(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemCount: datatrans.length,
-                                                itemBuilder: (context, index) {
-                                                  return index != 0
-                                                      ? Card(
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10)),
-                                                          elevation: 2,
-                                                          margin: EdgeInsets
-                                                              .fromLTRB(10, 10,
-                                                                  10, 0),
-                                                          borderOnForeground:
-                                                              true,
-                                                          child: InkWell(
-                                                            customBorder:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                            ),
-                                                            onTap: () {
-                                                              Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          (Invoice(
-                                                                            id_invoice: datatrans[index].id == null
-                                                                                ? ""
-                                                                                : datatrans[index].id,
-                                                                            logo: datatrans[index].logo == null
-                                                                                ? ""
-                                                                                : datatrans[index].logo,
-                                                                            nama: datatrans[index].kampus == null
-                                                                                ? ""
-                                                                                : datatrans[index].kampus,
-                                                                            singktan: datatrans[index].singkatan == null
-                                                                                ? ""
-                                                                                : datatrans[index].singkatan,
-                                                                            formulir: datatrans[index].totalpembayaran == null
-                                                                                ? ""
-                                                                                : datatrans[index].totalpembayaran,
-                                                                            keycode: globalkey == null
-                                                                                ? ""
-                                                                                : globalkey,
-                                                                            namaJurusan: datatrans[index].prodi == null
-                                                                                ? ""
-                                                                                : datatrans[index].prodi,
-                                                                            kodekampus: datatrans[index].kode == null
-                                                                                ? ""
-                                                                                : datatrans[index].kode,
-                                                                            params: datatrans[index] == null
-                                                                                ? ""
-                                                                                : datatrans[index],
-                                                                          ))));
-                                                            },
-                                                            child: Container(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            16,
-                                                                        vertical:
-                                                                            10),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Text(
-                                                                          datatrans[index].waktu == null
-                                                                              ? ""
-                                                                              : datatrans[index].waktu,
-                                                                          style:
-                                                                              blackFontStyle3.copyWith(fontSize: 12),
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          textAlign:
-                                                                              TextAlign.left,
-                                                                        ),
-                                                                        Container(
-                                                                          margin:
-                                                                              EdgeInsets.only(left: 10),
-                                                                          child: ClipRRect(
-                                                                              borderRadius: BorderRadius.circular(12.0),
-                                                                              child: Container(
-                                                                                alignment: Alignment.center,
-                                                                                height: 24,
-                                                                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                                                                color: Colors.red,
-                                                                                child: Text(
-                                                                                  datatrans[index].status == null ? "" : "Tagihan",
-                                                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11),
-                                                                                ),
-                                                                              )),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Divider(
-                                                                      color: Colors
-                                                                          .black38,
-                                                                      height:
-                                                                          20,
-                                                                      thickness:
-                                                                          1,
-                                                                    ),
-                                                                    Text(
-                                                                      datatrans[index].billtype ==
-                                                                              null
-                                                                          ? ""
-                                                                          : datatrans[index]
-                                                                              .billtype,
-                                                                      style: blueFontStyle.copyWith(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height: 5,
-                                                                    ),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          datatrans[index].kampus == null
-                                                                              ? ""
-                                                                              : datatrans[index].kampus,
-                                                                          style:
-                                                                              blackFontStyle3.copyWith(fontSize: 12),
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                          textAlign:
-                                                                              TextAlign.left,
-                                                                        ),
-                                                                        Text(
-                                                                          datatrans[index].prodi == null
-                                                                              ? ""
-                                                                              : datatrans[index].prodi,
-                                                                          style:
-                                                                              blackFontStyle3.copyWith(fontSize: 12),
-                                                                          textAlign:
-                                                                              TextAlign.left,
-                                                                        ),
-                                                                        Text(
-                                                                          datatrans[index].kelas == null
-                                                                              ? ""
-                                                                              : datatrans[index].kelas,
-                                                                          style:
-                                                                              blackFontStyle3.copyWith(fontSize: 12),
-                                                                          textAlign:
-                                                                              TextAlign.left,
-                                                                        ),
-                                                                        Divider(
-                                                                          color:
-                                                                              Colors.black38,
-                                                                          height:
-                                                                              20,
-                                                                          thickness:
-                                                                              1,
-                                                                        ),
-                                                                        Container(
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
-                                                                            children: [
-                                                                              Text(
-                                                                                "Total",
-                                                                                style: blueFontStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
-                                                                              ),
-                                                                              Text(
-                                                                                //datatrans[index].totalpembayaran == null ? "" : "Rp. ${datatrans[index].totalpembayaran}",
-                                                                                NumberFormat.currency(symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID').format(double.parse(datatrans[index].totalpembayaran)),
-                                                                                style: blueFontStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
-                                                                                textAlign: TextAlign.left,
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                )),
-                                                          ),
-                                                        )
-                                                      : Container();
-                                                }),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                            ),
-                    )),
+                                            Divider(
+                                              color: Colors
+                                                  .black38,
+                                              height:
+                                              20,
+                                              thickness:
+                                              1,
+                                            ),
+                                            Text(
+                                              datatrans[index].billtype ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[index]
+                                                  .billtype,
+                                              style: blueFontStyle.copyWith(
+                                                  fontWeight:
+                                                  FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  datatrans[index].kampus == null
+                                                      ? ""
+                                                      : datatrans[index].kampus,
+                                                  style:
+                                                  blackFontStyle3.copyWith(fontSize: 12),
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+                                                  textAlign:
+                                                  TextAlign.left,
+                                                ),
+                                                Text(
+                                                  datatrans[index].prodi == null
+                                                      ? ""
+                                                      : datatrans[index].prodi,
+                                                  style:
+                                                  blackFontStyle3.copyWith(fontSize: 12),
+                                                  textAlign:
+                                                  TextAlign.left,
+                                                ),
+                                                Text(
+                                                  datatrans[index].kelas == null
+                                                      ? ""
+                                                      : datatrans[index].kelas,
+                                                  style:
+                                                  blackFontStyle3.copyWith(fontSize: 12),
+                                                  textAlign:
+                                                  TextAlign.left,
+                                                ),
+                                                Divider(
+                                                  color:
+                                                  Colors.black38,
+                                                  height:
+                                                  20,
+                                                  thickness:
+                                                  1,
+                                                ),
+                                                Container(
+                                                  child:
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        "Total",
+                                                        style: blueFontStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                                                      ),
+                                                      Text(
+                                                        //datatrans[index].totalpembayaran == null ? "" : "Rp. ${datatrans[index].totalpembayaran}",
+                                                        NumberFormat.currency(symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID').format(double.parse(datatrans[index].totalpembayaran)),
+                                                        style: blueFontStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )),
+                                  ),
+                                )
+                                    : Container();
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )),
           onRefresh: getData,
           color: mainColor1,
         ),
@@ -781,48 +779,48 @@ Widget _formulir(datatrans) {
     children: [
       Column(
           children: datatrans[0].params.map<Widget>((document) {
-        var data = document.split('#');
-        return Container(
-          child: Column(
-            children: [
-              Table(
+            var data = document.split('#');
+            return Container(
+              child: Column(
                 children: [
-                  TableRow(children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        data[0],
-                        style: blueFontStyle,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        data[1],
-                        style: blueFontStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        NumberFormat.currency(
+                  Table(
+                    children: [
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            data[0],
+                            style: blueFontStyle,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            data[1],
+                            style: blueFontStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            NumberFormat.currency(
                                 symbol: 'Rp ',
                                 decimalDigits: 0,
                                 locale: 'id-ID')
-                            .format(double.parse(data[2])),
-                        style: blueFontStyle,
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ]),
+                                .format(double.parse(data[2])),
+                            style: blueFontStyle,
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ]),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        );
-      }).toList()),
+            );
+          }).toList()),
       Table(children: [
         TableRow(decoration: BoxDecoration(color: Colors.blue[50]), children: [
           Container(
@@ -841,7 +839,7 @@ Widget _formulir(datatrans) {
             padding: EdgeInsets.all(10),
             child: Text(
               NumberFormat.currency(
-                      symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID')
+                  symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID')
                   .format(double.parse(datatrans[0].totalpembayaran)),
               style: blueFontStyle.copyWith(
                 fontSize: 14,
@@ -918,48 +916,48 @@ Widget _registrasi(datatrans) {
     children: [
       Column(
           children: datatrans[0].params.map<Widget>((document) {
-        var data = document.split('#');
-        return Container(
-          child: Column(
-            children: [
-              Table(
+            var data = document.split('#');
+            return Container(
+              child: Column(
                 children: [
-                  TableRow(children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        data[0],
-                        style: blueFontStyle,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        data[1],
-                        style: blueFontStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        NumberFormat.currency(
+                  Table(
+                    children: [
+                      TableRow(children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            data[0],
+                            style: blueFontStyle,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            data[1],
+                            style: blueFontStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            NumberFormat.currency(
                                 symbol: 'Rp ',
                                 decimalDigits: 0,
                                 locale: 'id-ID')
-                            .format(double.parse(data[2])),
-                        style: blueFontStyle,
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ]),
+                                .format(double.parse(data[2])),
+                            style: blueFontStyle,
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ]),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        );
-      }).toList()),
+            );
+          }).toList()),
       Table(children: [
         TableRow(decoration: BoxDecoration(color: Colors.blue[50]), children: [
           Container(
@@ -978,7 +976,7 @@ Widget _registrasi(datatrans) {
             padding: EdgeInsets.all(10),
             child: Text(
               NumberFormat.currency(
-                      symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID')
+                  symbol: 'Rp ', decimalDigits: 0, locale: 'id-ID')
                   .format(double.parse(datatrans[0].totalpembayaran)),
               style: blueFontStyle.copyWith(
                 fontSize: 14,

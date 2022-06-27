@@ -32,6 +32,7 @@ class _MainTransactionEduDonasiHistoryState
       });
     });
     List<String> _statusPembayaran = ["Menunggu Pembayaran", "Sukses", "Gagal"];
+    getdatatrans(globalkey); //ngorek isi list dari api
   }
 
   var datatrans = [];
@@ -85,485 +86,480 @@ class _MainTransactionEduDonasiHistoryState
   @override
   void initState() {
     super.initState();
-    //getdatatrans();
-    //getPreferences();
-    getdatatrans(globalkey);
-    // setState(() {
-    //   globalkey = globalkey;
-    // });
+    getPreferences();  //getPreferences udah sekalian ngisi list
   }
 
   @override
   Widget build(BuildContext context) {
-    getdatatrans(globalkey);
-    print("datatrans${datatrans}");
     return Scaffold(
         backgroundColor: CupertinoColors.systemGrey6,
         body: Container(
             child: globalkey == null
                 ? NonLogin()
                 : Container(
-                    child: datatrans == null || datatrans.length == 0
-                        ? Center(child: SpinKitThreeBounce(color: mainColor1))
-                        : Center(
-                            child: Container(
-                              child: ListView.builder(
-                                  itemCount: datatrans.length == 0
-                                      ? 0
-                                      : datatrans.length,
-                                  itemBuilder: (context, index) {
-                                    return datatrans[0].cid == "tes"
-                                        ? Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                1.3,
-                                            child: NoTransaction())
-                                        : Container(
-                                            child: Card(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            elevation: 2,
-                                            margin: EdgeInsets.fromLTRB(
-                                                10, 10, 10, 0),
-                                            borderOnForeground: true,
-                                            child: InkWell(
-                                              customBorder:
-                                                  RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            (InvoiceDonasiStruk(
-                                                              no_reff: datatrans[
-                                                                              index]
-                                                                          .noreff
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .noreff
-                                                                      .toString(),
-                                                              trx_id: datatrans[
-                                                                              index]
-                                                                          .trx_id
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .trx_id
-                                                                      .toString(),
-                                                              nopembayaran: datatrans[
-                                                                              index]
-                                                                          .nopembayaran
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .nopembayaran
-                                                                      .toString(),
-                                                              donaturname: datatrans[
-                                                                              index]
-                                                                          .donaturname
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .donaturname
-                                                                      .toString(),
-                                                              isanonim: datatrans[
-                                                                              index]
-                                                                          .isanonim
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .isanonim
-                                                                      .toString(),
-                                                              nowa: datatrans[index]
-                                                                          .nowa
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .nowa
-                                                                      .toString(),
-                                                              notlp: datatrans[
-                                                                              index]
-                                                                          .notlp
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .notlp
-                                                                      .toString(),
-                                                              nominal: datatrans[
-                                                                              index]
-                                                                          .nominal
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .nominal
-                                                                      .toString(),
-                                                              champaigner: datatrans[
-                                                                              index]
-                                                                          .champaigner
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .champaigner
-                                                                      .toString(),
-                                                              judul: datatrans[
-                                                                              index]
-                                                                          .judul
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .judul
-                                                                      .toString(),
-                                                              seolink: datatrans[
-                                                                              index]
-                                                                          .seolink
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .seolink
-                                                                      .toString(),
-                                                              novirtual_bni: datatrans[
-                                                                              index]
-                                                                          .novirtualBni
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .novirtualBni
-                                                                      .toString(),
-                                                              channel: datatrans[
-                                                                              index]
-                                                                          .channel
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .channel
-                                                                      .toString(),
-                                                              method: datatrans[
-                                                                              index]
-                                                                          .metode
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .metode
-                                                                      .toString(),
-                                                              images: datatrans[
-                                                                              index]
-                                                                          .images
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .images
-                                                                      .toString(),
-                                                              label_an: "",
-                                                              label_rek: "",
-                                                              label_bank: "",
-                                                              loopitem: "",
-                                                              routeref:
-                                                                  "transaksi",
-                                                              nama_bank: datatrans[
-                                                                              index]
-                                                                          .nama_bank
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .nama_bank
-                                                                      .toString(),
-                                                              txttime: datatrans[
-                                                                              index]
-                                                                          .txttime
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .txttime
-                                                                      .toString(),
-                                                              txtdate: datatrans[
-                                                                              index]
-                                                                          .txtdate
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .txtdate
-                                                                      .toString(),
-                                                              nominaltrf: datatrans[
-                                                                              index]
-                                                                          .nominaltrf
-                                                                          .toString() ==
-                                                                      null
-                                                                  ? ""
-                                                                  : datatrans[
-                                                                          index]
-                                                                      .nominaltrf
-                                                                      .toString(),
-                                                            ))));
-                                              },
-                                              child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 16,
-                                                      vertical: 10),
+              child: datatrans==null
+                  ? ErrorDataHandler(context)
+                  : datatrans.length == 0
+                  ? Center(child: SpinKitThreeBounce(color: mainColor1))
+                  : Center(
+                child: Container(
+                  child: ListView.builder(
+                      itemCount: datatrans.length == 0
+                          ? 0
+                          : datatrans.length,
+                      itemBuilder: (context, index) {
+                        return datatrans[0].cid == "tes"
+                            ? Container(
+                            height: MediaQuery.of(context)
+                                .size
+                                .height /
+                                1.3,
+                            child: NoTransaction())
+                            : Container(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(10)),
+                              elevation: 2,
+                              margin: EdgeInsets.fromLTRB(
+                                  10, 10, 10, 0),
+                              borderOnForeground: true,
+                              child: InkWell(
+                                customBorder:
+                                RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(10),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          (InvoiceDonasiStruk(
+                                            no_reff: datatrans[
+                                            index]
+                                                .noreff
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .noreff
+                                                .toString(),
+                                            trx_id: datatrans[
+                                            index]
+                                                .trx_id
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .trx_id
+                                                .toString(),
+                                            nopembayaran: datatrans[
+                                            index]
+                                                .nopembayaran
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .nopembayaran
+                                                .toString(),
+                                            donaturname: datatrans[
+                                            index]
+                                                .donaturname
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .donaturname
+                                                .toString(),
+                                            isanonim: datatrans[
+                                            index]
+                                                .isanonim
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .isanonim
+                                                .toString(),
+                                            nowa: datatrans[index]
+                                                .nowa
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .nowa
+                                                .toString(),
+                                            notlp: datatrans[
+                                            index]
+                                                .notlp
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .notlp
+                                                .toString(),
+                                            nominal: datatrans[
+                                            index]
+                                                .nominal
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .nominal
+                                                .toString(),
+                                            champaigner: datatrans[
+                                            index]
+                                                .champaigner
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .champaigner
+                                                .toString(),
+                                            judul: datatrans[
+                                            index]
+                                                .judul
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .judul
+                                                .toString(),
+                                            seolink: datatrans[
+                                            index]
+                                                .seolink
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .seolink
+                                                .toString(),
+                                            novirtual_bni: datatrans[
+                                            index]
+                                                .novirtualBni
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .novirtualBni
+                                                .toString(),
+                                            channel: datatrans[
+                                            index]
+                                                .channel
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .channel
+                                                .toString(),
+                                            method: datatrans[
+                                            index]
+                                                .metode
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .metode
+                                                .toString(),
+                                            images: datatrans[
+                                            index]
+                                                .images
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .images
+                                                .toString(),
+                                            label_an: "",
+                                            label_rek: "",
+                                            label_bank: "",
+                                            loopitem: "",
+                                            routeref:
+                                            "transaksi",
+                                            nama_bank: datatrans[
+                                            index]
+                                                .nama_bank
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .nama_bank
+                                                .toString(),
+                                            txttime: datatrans[
+                                            index]
+                                                .txttime
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .txttime
+                                                .toString(),
+                                            txtdate: datatrans[
+                                            index]
+                                                .txtdate
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .txtdate
+                                                .toString(),
+                                            nominaltrf: datatrans[
+                                            index]
+                                                .nominaltrf
+                                                .toString() ==
+                                                null
+                                                ? ""
+                                                : datatrans[
+                                            index]
+                                                .nominaltrf
+                                                .toString(),
+                                          ))));
+                                },
+                                child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 10),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: Container(
                                                   child: Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
                                                     children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Expanded(
-                                                              child: Container(
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Invoice No",
-                                                                  style: blackFontStyle3
-                                                                      .copyWith(
-                                                                          fontSize:
-                                                                              10),
-                                                                ),
-                                                                Text(
-                                                                  datatrans[index]
-                                                                              .trx_id ==
-                                                                          null
-                                                                      ? ""
-                                                                      : datatrans[
-                                                                              index]
-                                                                          .trx_id,
-                                                                  style: blueFontStyle.copyWith(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )),
-                                                          Container(
-                                                            child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15.0),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 30,
-                                                                  padding: EdgeInsets
-                                                                      .symmetric(
-                                                                          horizontal:
-                                                                              20),
-                                                                  color: Colors
-                                                                      .green,
-                                                                  child: Text(
-                                                                    "Suksess",
-                                                                    style: whiteFontStyle.copyWith(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            11),
-                                                                  ),
-                                                                )),
-                                                          ),
-                                                        ],
+                                                      Text(
+                                                        "Invoice No",
+                                                        style: blackFontStyle3
+                                                            .copyWith(
+                                                            fontSize:
+                                                            10),
                                                       ),
-                                                      Divider(
-                                                        color: Colors.black38,
-                                                        height: 20,
-                                                        thickness: 1,
+                                                      Text(
+                                                        datatrans[index]
+                                                            .trx_id ==
+                                                            null
+                                                            ? ""
+                                                            : datatrans[
+                                                        index]
+                                                            .trx_id,
+                                                        style: blueFontStyle.copyWith(
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .bold),
+                                                        textAlign:
+                                                        TextAlign
+                                                            .left,
                                                       ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            datatrans[index]
-                                                                        .nama ==
-                                                                    null
-                                                                ? ""
-                                                                : datatrans[
-                                                                        index]
-                                                                    .nama,
-                                                            style: blackFontStyle1
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 4,
-                                                          ),
-                                                          Text(
-                                                            datatrans[index]
-                                                                        .singkatan ==
-                                                                    null
-                                                                ? ""
-                                                                : datatrans[
-                                                                        index]
-                                                                    .singkatan,
-                                                            style: blackFontStyle2
-                                                                .copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        14),
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 4,
-                                                          ),
-                                                          Text(
-                                                            datatrans[index]
-                                                                        .tanggal ==
-                                                                    null
-                                                                ? ""
-                                                                : datatrans[
-                                                                        index]
-                                                                    .tanggal,
-                                                            style: blackFontStyle2
-                                                                .copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        14),
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                          ),
-                                                          Divider(
-                                                            color:
-                                                                Colors.black38,
-                                                            height: 20,
-                                                            thickness: 1,
-                                                          ),
-                                                          Container(
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Container(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      1.9,
-                                                                  height: 40,
-                                                                  child: Text(
-                                                                    datatrans[index].title ==
-                                                                            null
-                                                                        ? ""
-                                                                        : datatrans[index]
-                                                                            .title,
-                                                                    style: blueFontStyle.copyWith(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    maxLines: 2,
-                                                                  ),
-                                                                ),
-                                                                Container(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        NumberFormat.currency(
-                                                                                symbol: 'Rp ',
-                                                                                decimalDigits: 0,
-                                                                                locale: 'id-ID')
-                                                                            .format(datatrans[index].nominaltrf),
-                                                                        style: blueFontStyle.copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            fontSize: 16),
-                                                                        textAlign:
-                                                                            TextAlign.left,
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      )
                                                     ],
+                                                  ),
+                                                )),
+                                            Container(
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      15.0),
+                                                  child:
+                                                  Container(
+                                                    alignment:
+                                                    Alignment
+                                                        .center,
+                                                    height: 30,
+                                                    padding: EdgeInsets
+                                                        .symmetric(
+                                                        horizontal:
+                                                        20),
+                                                    color: Colors
+                                                        .green,
+                                                    child: Text(
+                                                      "Suksess",
+                                                      style: whiteFontStyle.copyWith(
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold,
+                                                          fontSize:
+                                                          11),
+                                                    ),
                                                   )),
                                             ),
-                                          ));
-                                  }),
-                            ),
-                          ),
-                  )));
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Colors.black38,
+                                          height: 20,
+                                          thickness: 1,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              datatrans[index]
+                                                  .nama ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[
+                                              index]
+                                                  .nama,
+                                              style: blackFontStyle1
+                                                  .copyWith(
+                                                  fontSize:
+                                                  12,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold),
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow
+                                                  .ellipsis,
+                                              textAlign:
+                                              TextAlign.left,
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              datatrans[index]
+                                                  .singkatan ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[
+                                              index]
+                                                  .singkatan,
+                                              style: blackFontStyle2
+                                                  .copyWith(
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w400,
+                                                  fontSize:
+                                                  14),
+                                              textAlign:
+                                              TextAlign.left,
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              datatrans[index]
+                                                  .tanggal ==
+                                                  null
+                                                  ? ""
+                                                  : datatrans[
+                                              index]
+                                                  .tanggal,
+                                              style: blackFontStyle2
+                                                  .copyWith(
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w400,
+                                                  fontSize:
+                                                  14),
+                                              textAlign:
+                                              TextAlign.left,
+                                            ),
+                                            Divider(
+                                              color:
+                                              Colors.black38,
+                                              height: 20,
+                                              thickness: 1,
+                                            ),
+                                            Container(
+                                              width:
+                                              MediaQuery.of(
+                                                  context)
+                                                  .size
+                                                  .width,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .width /
+                                                        1.9,
+                                                    height: 40,
+                                                    child: Text(
+                                                      datatrans[index].title ==
+                                                          null
+                                                          ? ""
+                                                          : datatrans[index]
+                                                          .title,
+                                                      style: blueFontStyle.copyWith(
+                                                          fontSize:
+                                                          12,
+                                                          fontWeight:
+                                                          FontWeight.bold),
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      textAlign:
+                                                      TextAlign
+                                                          .left,
+                                                      maxLines: 2,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        Text(
+                                                          NumberFormat.currency(
+                                                              symbol: 'Rp ',
+                                                              decimalDigits: 0,
+                                                              locale: 'id-ID')
+                                                              .format(datatrans[index].nominaltrf),
+                                                          style: blueFontStyle.copyWith(
+                                                              fontWeight:
+                                                              FontWeight.bold,
+                                                              fontSize: 16),
+                                                          textAlign:
+                                                          TextAlign.left,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                              ),
+                            ));
+                      }),
+                ),
+              ),
+            )));
   }
 }

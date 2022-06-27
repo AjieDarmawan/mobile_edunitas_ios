@@ -24,7 +24,8 @@ class Daftar extends StatefulWidget {
       varnowa,
       varpendidikan,
       status_agent,
-      keycode;
+      keycode,
+      bayar_tiap_tgl;
   final int namaspb,
       namaspp,
       totalbiaya,
@@ -66,6 +67,7 @@ class Daftar extends StatefulWidget {
     this.perpus,
     this.status_agent,
     this.keycode,
+    this.bayar_tiap_tgl,
   });
   @override
   _DaftarState createState() => _DaftarState();
@@ -96,7 +98,7 @@ class _DaftarState extends State<Daftar> {
   void block_pendidikan() {
     Masterview_model()
         .pendidikan_registrasi_daftar_mapping(
-            widget.varpendidikan, widget.kodejurusan.substring(0, 2))
+        widget.varpendidikan, widget.kodejurusan.substring(0, 2))
         .then((value) {//handled
       StatusModel data = value;
 
@@ -128,96 +130,96 @@ class _DaftarState extends State<Daftar> {
 
   Future<bool> _onWillPop() {
     return showDialog(
-          context: context,
-          builder: (context) => Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)), //this right here
-            child: Container(
-              height: 270,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)), //this right here
+        child: Container(
+          height: 270,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  //color: Colors.red,
+                  height: 100,
+                  child: Image.asset(
+                    "assets/dialog/dialogaskxhd.png",
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                Column(
                   children: [
                     Container(
-                      //color: Colors.red,
-                      height: 100,
-                      child: Image.asset(
-                        "assets/dialog/dialogaskxhd.png",
-                        fit: BoxFit.fitHeight,
+                      height: 32,
+                      child: Text(
+                        'Simpan Perubahan ?',
+                        style: blueFontStyle.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 32,
-                          child: Text(
-                            'Simpan Perubahan ?',
-                            style: blueFontStyle.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Text(
-                          'Simpan perubahan ke dalam wishlist',
-                          style: blackFontStyle3,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    Text(
+                      'Simpan perubahan ke dalam wishlist',
+                      style: blackFontStyle3,
+                      textAlign: TextAlign.center,
                     ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 32,
-                            child: EduButtonSecond(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .push(new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Navigation_bottom(),
-                                ));
-                                //Navigator.pop(context);
-                              },
-                              buttonText: "Tidak",
-                            ),
-                          ),
-                          SizedBox(
-                            width: 100,
-                            height: 32,
-                            child: EduButton(
-                              onPressed: () {
-                                simpan();
-                              },
-                              buttonText: "Simpan",
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
                   ],
                 ),
-              ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        height: 32,
+                        child: EduButtonSecond(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Navigation_bottom(),
+                            ));
+                            //Navigator.pop(context);
+                          },
+                          buttonText: "Tidak",
+                        ),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        height: 32,
+                        child: EduButton(
+                          onPressed: () {
+                            simpan();
+                          },
+                          buttonText: "Simpan",
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-        ) ??
+        ),
+      ),
+    ) ??
         false;
   }
 
   void simpan() {
     Whitlistview_model()
         .simpanwhitlist(
-            globalkey.toString(),
-            widget.namalulusan.toString(),
-            "wishlist",
-            widget.campus.singkatan.toString(),
-            widget.campus.nama.toString(),
-            widget.campus.website.toString(),
-            widget.kodejurusan,
-            widget.kodeprogram,
-            "origin")
+        globalkey.toString(),
+        widget.namalulusan.toString(),
+        "wishlist",
+        widget.campus.singkatan.toString(),
+        widget.campus.nama.toString(),
+        widget.campus.website.toString(),
+        widget.kodejurusan,
+        widget.kodeprogram,
+        "origin")
         .then((value) {//handled
       StatusModel data = value;
 
@@ -517,7 +519,7 @@ class _DaftarState extends State<Daftar> {
       context: context,
       builder: (context) => Dialog(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Container(
           height: 270,
           child: Padding(
@@ -580,7 +582,7 @@ class _DaftarState extends State<Daftar> {
                             print("promo${etkodepromo2.text.toString()}");
                             Eduinfoview_model()
                                 .check_promo(etkodepromo2.text.toString(),
-                                    widget.campus.kode.toString())
+                                widget.campus.kode.toString())
                                 .then((value) {//handled
                               StatusModel data = value;
 
@@ -725,819 +727,819 @@ class _DaftarState extends State<Daftar> {
             backgroundColor: mainColor1,
           ),
           body:
-              // globalkey == null
-              // ? DaftarNonLogin(
+          // globalkey == null
+          // ? DaftarNonLogin(
 
-              // )
-              // :
+          // )
+          // :
 
-              isConn == false
-                  ? Center(
-                      child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: SpinKitThreeBounce(color: mainColor1),
-                    ))
-                  : ListView(
-                      children: [
-                        Container(
-                            color:
-                                block == 2 ? Colors.red[100] : Colors.blue[100],
-                            child: Container(
-                              padding: EdgeInsets.all(16),
-                              child: block == 2
-                                  ? Text(
-                                      "ANDA BELUM BOLEH MENDAFTAR DI PRODI INI KARENA PENDIKAN BELUM MENCUKUPI")
-                                  : Text(
-                                      "Satu langkah lagi untuk berhasil mendaftarkan diri, pastikan melengkapi data dengan benar",
-                                      style: blueFontStyle,
-                                    ), //todo disable selesai button
-                            )),
-                        Stepper(
-                          physics: ClampingScrollPhysics(),
-                          steps: [
-                            Step(
-                                isActive: currentStep == 0 ? true : false,
-                                title: Row(
+          isConn == false
+              ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: SpinKitThreeBounce(color: mainColor1),
+              ))
+              : ListView(
+            children: [
+              Container(
+                  color:
+                  block == 2 ? Colors.red[100] : Colors.blue[100],
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: block == 2
+                        ? Text(
+                        "ANDA BELUM BOLEH MENDAFTAR DI PRODI INI KARENA PENDIKAN BELUM MENCUKUPI")
+                        : Text(
+                      "Satu langkah lagi untuk berhasil mendaftarkan diri, pastikan melengkapi data dengan benar",
+                      style: blueFontStyle,
+                    ), //todo disable selesai button
+                  )),
+              Stepper(
+                physics: ClampingScrollPhysics(),
+                steps: [
+                  Step(
+                      isActive: currentStep == 0 ? true : false,
+                      title: Row(
+                        children: [
+                          Text("Data diri",
+                              style: blackFontStyle2.copyWith(
+                                  fontWeight: FontWeight.bold)),
+                          Text("*",
+                              style: TextStyle(color: Colors.red)),
+                        ],
+                      ),
+                      content: Container(
+                          child: Form(
+                            key: _formKeys[0],
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                // TextFormField(
+                                //   controller: etemail,
+                                //   decoration:
+                                //       InputDecoration(labelText: 'Email'),
+                                //   validator: (value) {
+                                //     if (value.isEmpty) {
+                                //       return 'Mohon isi Email';
+                                //     }
+                                //     return null;
+                                //   },
+                                // ),
+                                Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
                                   children: [
-                                    Text("Data diri",
-                                        style: blackFontStyle2.copyWith(
-                                            fontWeight: FontWeight.bold)),
-                                    Text("*",
-                                        style: TextStyle(color: Colors.red)),
+                                    Text(
+                                      "Email",
+                                      style: blackFontStyle3,
+                                    ),
+                                    Text(
+                                      globalEmail,
+                                      style: blackFontStyle2,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    )
                                   ],
                                 ),
-                                content: Container(
-                                    child: Form(
-                                  key: _formKeys[0],
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                TextFormField(
+                                  controller: etnamalengkap,
+                                  decoration: InputDecoration(
+                                      labelText: 'Nama Lengkap'),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Mohon isi Nama Lengkap';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextFormField(
+                                  controller: etnamapanggilan,
+                                  decoration: InputDecoration(
+                                      labelText: 'Nama Panggilan'),
+                                ),
+                                TextFormField(
+                                  controller: etnoktp,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                      labelText: 'Nomor KTP'),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Mohon isi nomor KTP';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                Container(
+                                  child: Row(
                                     children: [
-                                      // TextFormField(
-                                      //   controller: etemail,
-                                      //   decoration:
-                                      //       InputDecoration(labelText: 'Email'),
-                                      //   validator: (value) {
-                                      //     if (value.isEmpty) {
-                                      //       return 'Mohon isi Email';
-                                      //     }
-                                      //     return null;
-                                      //   },
-                                      // ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Email",
-                                            style: blackFontStyle3,
-                                          ),
-                                          Text(
-                                            globalEmail,
-                                            style: blackFontStyle2,
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          )
-                                        ],
-                                      ),
-                                      TextFormField(
-                                        controller: etnamalengkap,
-                                        decoration: InputDecoration(
-                                            labelText: 'Nama Lengkap'),
-                                        validator: (value) {
-                                          if (value.isEmpty) {
-                                            return 'Mohon isi Nama Lengkap';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                      TextFormField(
-                                        controller: etnamapanggilan,
-                                        decoration: InputDecoration(
-                                            labelText: 'Nama Panggilan'),
-                                      ),
-                                      TextFormField(
-                                        controller: etnoktp,
-                                        keyboardType: TextInputType.number,
-                                        decoration: InputDecoration(
-                                            labelText: 'Nomor KTP'),
-                                        validator: (value) {
-                                          if (value.isEmpty) {
-                                            return 'Mohon isi nomor KTP';
-                                          }
-                                          return null;
-                                        },
-                                      ),
                                       Container(
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  bottom: 8, right: 15),
-                                              child: Text(
-                                                "+62",
-                                                style: blackFontStyle2,
-                                              ),
-                                            ),
-                                            Flexible(
-                                              child: TextFormField(
-                                                controller: etnohp,
-                                                maxLength: 15,
-                                                keyboardType:
-                                                    TextInputType.phone,
-                                                decoration: InputDecoration(
-                                                    labelText: 'Nomor Telepon'),
-                                                validator: (value) {
-                                                  String fchar = value !=
-                                                              null ||
-                                                          value != ""
-                                                      ? value.substring(0, 1)
-                                                      : "0";
-                                                  if (value.length < 10) {
-                                                    return "Nomor salah, gunakan lebih dari 10 angka";
-                                                  } else if (fchar != '8') {
-                                                    return "Masukan nomor dengan benar";
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                              ),
-                                            )
-                                          ],
+                                        padding: EdgeInsets.only(
+                                            bottom: 8, right: 15),
+                                        child: Text(
+                                          "+62",
+                                          style: blackFontStyle2,
                                         ),
                                       ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  bottom: 8, right: 15),
-                                              child: Text(
-                                                "+62",
-                                                style: blackFontStyle2,
-                                              ),
-                                            ),
-                                            Flexible(
-                                              child: TextFormField(
-                                                controller: etnowa,
-                                                maxLength: 15,
-                                                keyboardType:
-                                                    TextInputType.phone,
-                                                decoration: InputDecoration(
-                                                    labelText:
-                                                        'Nomor Whatsapp'),
-                                                validator: (value) {
-                                                  String fchar = value !=
-                                                              null ||
-                                                          value != ""
-                                                      ? value.substring(0, 1)
-                                                      : "0";
-                                                  if (value.length < 10) {
-                                                    return "Nomor salah, gunakan lebih dari 10 angka";
-                                                  } else if (fchar != '8') {
-                                                    return "Masukan nomor dengan benar";
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                              ),
-                                            )
-                                          ],
+                                      Flexible(
+                                        child: TextFormField(
+                                          controller: etnohp,
+                                          maxLength: 15,
+                                          keyboardType:
+                                          TextInputType.phone,
+                                          decoration: InputDecoration(
+                                              labelText: 'Nomor Telepon'),
+                                          validator: (value) {
+                                            String fchar = value !=
+                                                null ||
+                                                value != ""
+                                                ? value.substring(0, 1)
+                                                : "0";
+                                            if (value.length < 10) {
+                                              return "Nomor salah, gunakan lebih dari 10 angka";
+                                            } else if (fchar != '8') {
+                                              return "Masukan nomor dengan benar";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                         ),
-                                      ),
-                                      TextFormField(
-                                        controller: etttl,
-                                        decoration: InputDecoration(
-                                            labelText: 'Tempat Lahir'),
-                                        validator: (value) {
-                                          if (value.isEmpty) {
-                                            return 'Mohon isi Tempat Lahir';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                      SizedBox(height: 16),
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.date_range_rounded,
-                                            color: Colors.blue,
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              selectDueDate(context);
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  dateText == ""
-                                                      ? "Pilih Tanggal Lahir"
-                                                      : dateText,
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Colors.blue),
-                                                ),
-                                                Text(
-                                                  "*",
-                                                  style: TextStyle(
-                                                      color: Colors.red),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                      )
                                     ],
                                   ),
-                                ))),
-                            Step(
-                                isActive: currentStep == 1 ? true : false,
-                                title: Text("Pendidikan Terakhir",
-                                    style: blackFontStyle2.copyWith(
-                                        fontWeight: FontWeight.bold)),
-                                content: Container(
-                                  child: Form(
-                                    key: _formKeys[1],
-                                    child: Column(
-                                      children: [
-                                        // TextFormField(
-                                        //   decoration: InputDecoration(
-                                        //       labelText: 'Tingkat Pendidikan'),
-                                        //   validator: (value) {
-                                        //     if (value.isEmpty) {
-                                        //       return 'Mohon isi Tingkat Pendidikan';
-                                        //     }
-                                        //     return null;
-                                        //   },
-                                        // ),
-                                        Center(
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                11,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                style: TextStyle(
-                                                    fontSize: 16.0,
-                                                    color: Colors.black),
-                                                value: valpendidikan,
-                                                //value: valPendidikan == null ? valPendidikan : buildingTypes.where( (i) => i.name == valPendidikan.name).first as BuildingType,
-                                                hint: Text("Pilih Pendidikan"),
-                                                items:
-                                                    datapendidikan.map((item) {
-                                                  return DropdownMenuItem(
-                                                    child: Text(item.nama),
-                                                    value: item.kode.toString(),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (value) async {
-                                                  // dataCity = await network.getCity(value);
-                                                  setState(() {
-                                                    valpendidikan = value;
-                                                    // valCity = null;
-                                                  });
-                                                  //print(dataCity);
-                                                },
-                                              ),
-                                            ),
-                                          ),
+                                ),
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            bottom: 8, right: 15),
+                                        child: Text(
+                                          "+62",
+                                          style: blackFontStyle2,
                                         ),
-                                        TextFormField(
+                                      ),
+                                      Flexible(
+                                        child: TextFormField(
+                                          controller: etnowa,
+                                          maxLength: 15,
+                                          keyboardType:
+                                          TextInputType.phone,
                                           decoration: InputDecoration(
-                                              labelText: 'Jurusan'),
-                                          /*validator: (value) {
+                                              labelText:
+                                              'Nomor Whatsapp'),
+                                          validator: (value) {
+                                            String fchar = value !=
+                                                null ||
+                                                value != ""
+                                                ? value.substring(0, 1)
+                                                : "0";
+                                            if (value.length < 10) {
+                                              return "Nomor salah, gunakan lebih dari 10 angka";
+                                            } else if (fchar != '8') {
+                                              return "Masukan nomor dengan benar";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: etttl,
+                                  decoration: InputDecoration(
+                                      labelText: 'Tempat Lahir'),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Mohon isi Tempat Lahir';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 16),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.date_range_rounded,
+                                      color: Colors.blue,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        selectDueDate(context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            dateText == ""
+                                                ? "Pilih Tanggal Lahir"
+                                                : dateText,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.blue),
+                                          ),
+                                          Text(
+                                            "*",
+                                            style: TextStyle(
+                                                color: Colors.red),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ))),
+                  Step(
+                      isActive: currentStep == 1 ? true : false,
+                      title: Text("Pendidikan Terakhir",
+                          style: blackFontStyle2.copyWith(
+                              fontWeight: FontWeight.bold)),
+                      content: Container(
+                        child: Form(
+                          key: _formKeys[1],
+                          child: Column(
+                            children: [
+                              // TextFormField(
+                              //   decoration: InputDecoration(
+                              //       labelText: 'Tingkat Pendidikan'),
+                              //   validator: (value) {
+                              //     if (value.isEmpty) {
+                              //       return 'Mohon isi Tingkat Pendidikan';
+                              //     }
+                              //     return null;
+                              //   },
+                              // ),
+                              Center(
+                                child: Container(
+                                  width: MediaQuery.of(context)
+                                      .size
+                                      .width,
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      11,
+                                  child: Padding(
+                                    padding:
+                                    const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black),
+                                      value: valpendidikan,
+                                      //value: valPendidikan == null ? valPendidikan : buildingTypes.where( (i) => i.name == valPendidikan.name).first as BuildingType,
+                                      hint: Text("Pilih Pendidikan"),
+                                      items:
+                                      datapendidikan.map((item) {
+                                        return DropdownMenuItem(
+                                          child: Text(item.nama),
+                                          value: item.kode.toString(),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) async {
+                                        // dataCity = await network.getCity(value);
+                                        setState(() {
+                                          valpendidikan = value;
+                                          // valCity = null;
+                                        });
+                                        //print(dataCity);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    labelText: 'Jurusan'),
+                                /*validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Mohon isi Jurusan';
                                             }
                                             return null;
                                           },*/
-                                        ),
-                                        TextFormField(
-                                          controller: ettahunkelulusan,
-                                          keyboardType: TextInputType.number,
-                                          maxLength: 4,
-                                          decoration: InputDecoration(
-                                              labelText: 'Tahun Kelulusan'),
-                                          /*validator: (value) {
+                              ),
+                              TextFormField(
+                                controller: ettahunkelulusan,
+                                keyboardType: TextInputType.number,
+                                maxLength: 4,
+                                decoration: InputDecoration(
+                                    labelText: 'Tahun Kelulusan'),
+                                /*validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Mohon isi Tahun Kelulusan';
                                             }
                                             return null;
                                           },*/
-                                        ),
-                                        TextFormField(
-                                          //controller: ettahuninstitusi,
-                                          //maxLength: 4,
-                                          //keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                              labelText: 'Nama Institusi'),
-                                        ),
-                                        TextFormField(
-                                          controller: etnilaiakhir,
-                                          keyboardType: TextInputType.number,
-                                          maxLength: 3,
-                                          decoration: InputDecoration(
-                                              labelText: 'Nilai Akhir'),
-                                          /*validator: (value) {
+                              ),
+                              TextFormField(
+                                //controller: ettahuninstitusi,
+                                //maxLength: 4,
+                                //keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                    labelText: 'Nama Institusi'),
+                              ),
+                              TextFormField(
+                                controller: etnilaiakhir,
+                                keyboardType: TextInputType.number,
+                                maxLength: 3,
+                                decoration: InputDecoration(
+                                    labelText: 'Nilai Akhir'),
+                                /*validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Mohon isi Nilai Akhir';
                                             }
                                             return null;
                                           },*/
-                                        ),
-                                        TextFormField(
-                                          controller: etdari,
-                                          keyboardType: TextInputType.number,
-                                          maxLength: 3,
-                                          decoration: InputDecoration(
-                                              labelText: 'Dari'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                            Step(
-                                isActive: currentStep == 2 ? true : false,
-                                title: Text("Riwayat Pekerjaan",
-                                    style: blackFontStyle2.copyWith(
-                                        fontWeight: FontWeight.bold)),
-                                content: Container(
-                                  child: Form(
-                                    key: _formKeys[2],
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Sudah Pernah Bekerja ?",
-                                            style: blackFontStyle2.copyWith(
-                                                color: Colors.black87)),
-                                        Center(
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.3,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                11,
-                                            // decoration: BoxDecoration(
-                                            //     borderRadius: BorderRadius.circular(7.0),
-                                            //     border: Border.all(color: Colors.blueGrey)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                value: valpengalaman,
-                                                hint: Text("Pilih "),
-                                                items: pengalaman.map((item) {
-                                                  return DropdownMenuItem(
-                                                    child: Text(item['isi']),
-                                                    value: item['inisial'],
-                                                  );
-                                                }).toList(),
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    valpengalaman = value;
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Visibility(
-                                            visible: setpengalaman,
-                                            child: Column(
-                                              children: [
-                                                // TextFormField(
-                                                //   controller: etsudahbekerja,
-                                                //   decoration: InputDecoration(
-                                                //       labelText: 'Sudah Bekerja ?'),
-                                                //   // validator: ,
-                                                // ),
-                                                TextFormField(
-                                                  controller: etnamaperusahaan,
-                                                  decoration: InputDecoration(
-                                                      labelText:
-                                                          'Nama Perusahaan'),
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty || value.length < 1) {
-                                                  //     return 'Please enter postc';
-                                                  //   }
-                                                  //   return '';
-                                                  // },
-                                                ),
-                                                // TextFormField(
-                                                //   controller: etbekerjadari,
-                                                //   decoration: InputDecoration(
-                                                //       labelText: 'Bekerja Dari'),
-                                                //   // validator: (value) {
-                                                //   //   if (value.isEmpty || value.length < 1) {
-                                                //   //     return 'Please Bekerja';
-                                                //   //   }
-                                                //   //   return '';
-                                                //   // },
-                                                // ),
-                                                SizedBox(height: 16),
-                                                Row(children: <Widget>[
-                                                  Text("Bekerja Dari"),
-                                                  Text(
-                                                    "*",
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  )
-                                                ]),
-                                                SizedBox(height: 10),
-                                                Row(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.date_range,
-                                                      color: Colors.blue,
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        selectDueDateDari(
-                                                            context);
-                                                      },
-                                                      child: Text(
-                                                        dateTextdari == ""
-                                                            ? "Bekerja Dari"
-                                                            : dateTextdari,
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                // TextFormField(
-                                                //   controller: etbekerjasampai,
-                                                //   decoration: InputDecoration(
-                                                //       labelText: 'Bekerja Samapi'),
-                                                //   // validator: (value) {
-                                                //   //   if (value.isEmpty || value.length < 1) {
-                                                //   //     return 'Please Bekerja';
-                                                //   //   }
-                                                //   //   return '';
-                                                //   // },
-                                                // ),
-                                                SizedBox(height: 16),
-                                                Row(children: <Widget>[
-                                                  Text("Bekerja Sampai"),
-                                                  Text(
-                                                    "*",
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  )
-                                                ]),
-                                                SizedBox(height: 10),
-                                                Row(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.date_range,
-                                                      color: Colors.blue,
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        selectDueDateHingga(
-                                                            context);
-                                                      },
-                                                      child: Text(
-                                                        dateTexthingga == ""
-                                                            ? "Bekerja Sampai"
-                                                            : dateTexthingga,
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                TextFormField(
-                                                  controller: etposisi,
-                                                  decoration: InputDecoration(
-                                                      labelText: 'Posisi'),
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty || value.length < 1) {
-                                                  //     return 'Please Posisi';
-                                                  //   }
-                                                  //   return '';
-                                                  // },
-                                                ),
-                                                TextFormField(
-                                                  controller: etspesialisasi,
-                                                  decoration: InputDecoration(
-                                                      labelText:
-                                                          'Spesialisasi'),
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty || value.length < 1) {
-                                                  //     return 'Please Spesialisasi';
-                                                  //   }
-                                                  //   return '';
-                                                  // },
-                                                ),
-                                                TextFormField(
-                                                  controller: etbidangpekerjaan,
-                                                  decoration: InputDecoration(
-                                                      labelText:
-                                                          'Bidang Bekerjaan'),
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty || value.length < 1) {
-                                                  //     return 'Bidang Bekerjaan';
-                                                  //   }
-                                                  //   return '';
-                                                  // },
-                                                ),
-                                                TextFormField(
-                                                  controller: etdeskripsi,
-                                                  decoration: InputDecoration(
-                                                      labelText: 'Deskripsi'),
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty || value.length < 1) {
-                                                  //     return 'Deskripsi';
-                                                  //   }
-                                                  //   return '';
-                                                  // },
-                                                ),
-                                              ],
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                            Step(
-                              isActive: currentStep == 3 ? true : false,
-                              title: Text("Sumber Informasi",
+                              ),
+                              TextFormField(
+                                controller: etdari,
+                                keyboardType: TextInputType.number,
+                                maxLength: 3,
+                                decoration: InputDecoration(
+                                    labelText: 'Dari'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                  Step(
+                      isActive: currentStep == 2 ? true : false,
+                      title: Text("Riwayat Pekerjaan",
+                          style: blackFontStyle2.copyWith(
+                              fontWeight: FontWeight.bold)),
+                      content: Container(
+                        child: Form(
+                          key: _formKeys[2],
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: [
+                              Text("Sudah Pernah Bekerja ?",
                                   style: blackFontStyle2.copyWith(
-                                      fontWeight: FontWeight.bold)),
-                              content: widget.status_agent == '1'
-                                  ? Container(
-                                      child: Column(
-                                        children: [
-                                          RichText(
-                                            text: TextSpan(
-                                              text:
-                                                  "Anda telah direkomendasikan oleh ",
-                                              style: blueFontStyle.copyWith(
-                                                  fontSize: 14),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: nama_agent.toString() ==
-                                                          null
-                                                      ? ""
-                                                      : nama_agent.toString(),
-                                                  // varnama.toString() == null
-                                                  // ? ""
-                                                  // : varnama.toString(),
-                                                  style: blackFontStyle1Bold
-                                                      .copyWith(fontSize: 14),
-                                                ),
-                                                TextSpan(
-                                                  text: ' untuk mendaftar di ',
-                                                  style: blueFontStyle.copyWith(
-                                                      fontSize: 14),
-                                                ),
-                                                TextSpan(
-                                                  text: widget.campus.nama
-                                                              .toString() ==
-                                                          null
-                                                      ? ""
-                                                      : widget.campus.nama
-                                                          .toString(),
-                                                  style: blackFontStyle1Bold
-                                                      .copyWith(fontSize: 14),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 24,
-                                          ),
-                                          Container(
-                                            height: 160,
-                                            width: 250,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              child: Image.network(
-                                                gambar_selfi == null
-                                                    ? ""
-                                                    : gambar_selfi,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : Container(
-                                      child: Form(
-                                        key: _formKeys[3],
-                                        child: Column(
-                                          children: [
-                                            // TextFormField(
-                                            //   controller: etmendatapkaninformasi,
-                                            //   decoration: InputDecoration(
-                                            //       labelText:
-                                            //           'Saya Mendapatkan Informasi Dari'),
-                                            //   validator: (value) {
-                                            //     if (value.isEmpty) {
-                                            //       return 'Mohon isi ';
-                                            //     }
-                                            //     return null;
-                                            //   },
-                                            // ),
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8),
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                value: valSumber,
-                                                hint: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Pilih Sumber Informasi",
-                                                    ),
-                                                    Text(
-                                                      "*",
-                                                      style: TextStyle(
-                                                          color: Colors.red),
-                                                    )
-                                                  ],
-                                                ),
-                                                items: dataSumber.map((item) {
-                                                  return DropdownMenuItem(
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          item.name,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    value: item.name.toString(),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    valSumber = value;
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                            // Container(
-                                            //   padding:
-                                            //       EdgeInsets.symmetric(vertical: 8),
-                                            //   width:
-                                            //       MediaQuery.of(context).size.width,
-                                            //   child: TextFormField(
-                                            //     enabled: false,
-                                            //     controller: etkodepromo,
-                                            //     decoration: InputDecoration(
-                                            //         labelText: 'Masukan Kode Promo'),
-                                            //   ),
-                                            // ),
-
-                                            SizedBox(height: 24),
-
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                  color: Colors.grey,
-                                                )),
-                                              ),
-                                              child: ListTile(
-                                                onTap: () {
-                                                  _showcontent();
-                                                },
-                                                title: Text(
-                                                    "Punya kode promo ?",
-                                                    style: blackFontStyle2
-                                                        .copyWith(
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                trailing: Icon(
-                                                  Icons.navigate_next,
-                                                  color: mainColor1,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(top: 8),
-                                              child: key_redeem == "1"
-                                                  ? Container(
-                                                      height: 24,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      decoration: BoxDecoration(
-                                                          color: yellowColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                      child: Center(
-                                                        child: Text(
-                                                            "Promo berhasil digunakan",
-                                                            style: blueFontStyle
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal)),
-                                                      ),
-                                                    )
-                                                  : Text(""),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                          ],
-                          currentStep: currentStep,
-                          onStepContinue: next,
-                          onStepTapped: (step) => goTo(step),
-                          onStepCancel: cancel,
-                          controlsBuilder: (BuildContext context, {VoidCallback onStepContinue,
-                            VoidCallback onStepCancel}) {
-                            return Container(
-                              padding: EdgeInsets.symmetric(vertical: 24),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Container(
-                                    height: 32,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child: EduButtonSecond(
-                                      onPressed: currentStep == 0
-                                          ? _onWillPop
-                                          : onStepCancel,
-                                      buttonText: 'Batal',
+                                      color: Colors.black87)),
+                              Center(
+                                child: Container(
+                                  width: MediaQuery.of(context)
+                                      .size
+                                      .width /
+                                      1.3,
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      11,
+                                  // decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(7.0),
+                                  //     border: Border.all(color: Colors.blueGrey)),
+                                  child: Padding(
+                                    padding:
+                                    const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      value: valpengalaman,
+                                      hint: Text("Pilih "),
+                                      items: pengalaman.map((item) {
+                                        return DropdownMenuItem(
+                                          child: Text(item['isi']),
+                                          value: item['inisial'],
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          valpengalaman = value;
+                                        });
+                                      },
                                     ),
                                   ),
-                                  Container(
-                                    height: 32,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child: loading == true
-                                        ? Center(
-                                            child: SpinKitFadingCircle(
-                                              color: orenColor,
+                                ),
+                              ),
+                              Visibility(
+                                  visible: setpengalaman,
+                                  child: Column(
+                                    children: [
+                                      // TextFormField(
+                                      //   controller: etsudahbekerja,
+                                      //   decoration: InputDecoration(
+                                      //       labelText: 'Sudah Bekerja ?'),
+                                      //   // validator: ,
+                                      // ),
+                                      TextFormField(
+                                        controller: etnamaperusahaan,
+                                        decoration: InputDecoration(
+                                            labelText:
+                                            'Nama Perusahaan'),
+                                        // validator: (value) {
+                                        //   if (value.isEmpty || value.length < 1) {
+                                        //     return 'Please enter postc';
+                                        //   }
+                                        //   return '';
+                                        // },
+                                      ),
+                                      // TextFormField(
+                                      //   controller: etbekerjadari,
+                                      //   decoration: InputDecoration(
+                                      //       labelText: 'Bekerja Dari'),
+                                      //   // validator: (value) {
+                                      //   //   if (value.isEmpty || value.length < 1) {
+                                      //   //     return 'Please Bekerja';
+                                      //   //   }
+                                      //   //   return '';
+                                      //   // },
+                                      // ),
+                                      SizedBox(height: 16),
+                                      Row(children: <Widget>[
+                                        Text("Bekerja Dari"),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(
+                                              color: Colors.red),
+                                        )
+                                      ]),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.date_range,
+                                            color: Colors.blue,
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              selectDueDateDari(
+                                                  context);
+                                            },
+                                            child: Text(
+                                              dateTextdari == ""
+                                                  ? "Bekerja Dari"
+                                                  : dateTextdari,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.blue),
                                             ),
                                           )
-                                        : EduButton(
-                                            onPressed: () {
-                                              currentStep == 3
-                                                  ? block == 2
-                                                      ? doNothing()
-                                                      : isConn == false
-                                                          ? noConnCheck()
-                                                          : check()
-                                                  : next();
-                                            },
-                                            buttonColor: block == 2
-                                                ? Colors.grey
-                                                : yellowColor,
-                                            textColor: block == 2
-                                                ? Colors.white
-                                                : mainColor1,
-                                            buttonText: currentStep == 3
-                                                ? "Selesai"
-                                                : "Lanjut",
+                                        ],
+                                      ),
+                                      // TextFormField(
+                                      //   controller: etbekerjasampai,
+                                      //   decoration: InputDecoration(
+                                      //       labelText: 'Bekerja Samapi'),
+                                      //   // validator: (value) {
+                                      //   //   if (value.isEmpty || value.length < 1) {
+                                      //   //     return 'Please Bekerja';
+                                      //   //   }
+                                      //   //   return '';
+                                      //   // },
+                                      // ),
+                                      SizedBox(height: 16),
+                                      Row(children: <Widget>[
+                                        Text("Bekerja Sampai"),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(
+                                              color: Colors.red),
+                                        )
+                                      ]),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.date_range,
+                                            color: Colors.blue,
                                           ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                          TextButton(
+                                            onPressed: () {
+                                              selectDueDateHingga(
+                                                  context);
+                                            },
+                                            child: Text(
+                                              dateTexthingga == ""
+                                                  ? "Bekerja Sampai"
+                                                  : dateTexthingga,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.blue),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      TextFormField(
+                                        controller: etposisi,
+                                        decoration: InputDecoration(
+                                            labelText: 'Posisi'),
+                                        // validator: (value) {
+                                        //   if (value.isEmpty || value.length < 1) {
+                                        //     return 'Please Posisi';
+                                        //   }
+                                        //   return '';
+                                        // },
+                                      ),
+                                      TextFormField(
+                                        controller: etspesialisasi,
+                                        decoration: InputDecoration(
+                                            labelText:
+                                            'Spesialisasi'),
+                                        // validator: (value) {
+                                        //   if (value.isEmpty || value.length < 1) {
+                                        //     return 'Please Spesialisasi';
+                                        //   }
+                                        //   return '';
+                                        // },
+                                      ),
+                                      TextFormField(
+                                        controller: etbidangpekerjaan,
+                                        decoration: InputDecoration(
+                                            labelText:
+                                            'Bidang Bekerjaan'),
+                                        // validator: (value) {
+                                        //   if (value.isEmpty || value.length < 1) {
+                                        //     return 'Bidang Bekerjaan';
+                                        //   }
+                                        //   return '';
+                                        // },
+                                      ),
+                                      TextFormField(
+                                        controller: etdeskripsi,
+                                        decoration: InputDecoration(
+                                            labelText: 'Deskripsi'),
+                                        // validator: (value) {
+                                        //   if (value.isEmpty || value.length < 1) {
+                                        //     return 'Deskripsi';
+                                        //   }
+                                        //   return '';
+                                        // },
+                                      ),
+                                    ],
+                                  )),
+                            ],
+                          ),
                         ),
-                        /*Container(
+                      )),
+                  Step(
+                    isActive: currentStep == 3 ? true : false,
+                    title: Text("Sumber Informasi",
+                        style: blackFontStyle2.copyWith(
+                            fontWeight: FontWeight.bold)),
+                    content: widget.status_agent == '1'
+                        ? Container(
+                      child: Column(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text:
+                              "Anda telah direkomendasikan oleh ",
+                              style: blueFontStyle.copyWith(
+                                  fontSize: 14),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: nama_agent.toString() ==
+                                      null
+                                      ? ""
+                                      : nama_agent.toString(),
+                                  // varnama.toString() == null
+                                  // ? ""
+                                  // : varnama.toString(),
+                                  style: blackFontStyle1Bold
+                                      .copyWith(fontSize: 14),
+                                ),
+                                TextSpan(
+                                  text: ' untuk mendaftar di ',
+                                  style: blueFontStyle.copyWith(
+                                      fontSize: 14),
+                                ),
+                                TextSpan(
+                                  text: widget.campus.nama
+                                      .toString() ==
+                                      null
+                                      ? ""
+                                      : widget.campus.nama
+                                      .toString(),
+                                  style: blackFontStyle1Bold
+                                      .copyWith(fontSize: 14),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Container(
+                            height: 160,
+                            width: 250,
+                            child: ClipRRect(
+                              borderRadius:
+                              BorderRadius.circular(10.0),
+                              child: Image.network(
+                                gambar_selfi == null
+                                    ? ""
+                                    : gambar_selfi,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                        : Container(
+                      child: Form(
+                        key: _formKeys[3],
+                        child: Column(
+                          children: [
+                            // TextFormField(
+                            //   controller: etmendatapkaninformasi,
+                            //   decoration: InputDecoration(
+                            //       labelText:
+                            //           'Saya Mendapatkan Informasi Dari'),
+                            //   validator: (value) {
+                            //     if (value.isEmpty) {
+                            //       return 'Mohon isi ';
+                            //     }
+                            //     return null;
+                            //   },
+                            // ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8),
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width,
+                              child: DropdownButton(
+                                isExpanded: true,
+                                value: valSumber,
+                                hint: Row(
+                                  children: [
+                                    Text(
+                                      "Pilih Sumber Informasi",
+                                    ),
+                                    Text(
+                                      "*",
+                                      style: TextStyle(
+                                          color: Colors.red),
+                                    )
+                                  ],
+                                ),
+                                items: dataSumber.map((item) {
+                                  return DropdownMenuItem(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          item.name,
+                                        ),
+                                      ],
+                                    ),
+                                    value: item.name.toString(),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    valSumber = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            // Container(
+                            //   padding:
+                            //       EdgeInsets.symmetric(vertical: 8),
+                            //   width:
+                            //       MediaQuery.of(context).size.width,
+                            //   child: TextFormField(
+                            //     enabled: false,
+                            //     controller: etkodepromo,
+                            //     decoration: InputDecoration(
+                            //         labelText: 'Masukan Kode Promo'),
+                            //   ),
+                            // ),
+
+                            SizedBox(height: 24),
+
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey,
+                                    )),
+                              ),
+                              child: ListTile(
+                                onTap: () {
+                                  _showcontent();
+                                },
+                                title: Text(
+                                    "Punya kode promo ?",
+                                    style: blackFontStyle2
+                                        .copyWith(
+                                        fontSize: 14,
+                                        fontWeight:
+                                        FontWeight
+                                            .bold)),
+                                trailing: Icon(
+                                  Icons.navigate_next,
+                                  color: mainColor1,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 8),
+                              child: key_redeem == "1"
+                                  ? Container(
+                                height: 24,
+                                width:
+                                MediaQuery.of(context)
+                                    .size
+                                    .width,
+                                decoration: BoxDecoration(
+                                    color: yellowColor,
+                                    borderRadius:
+                                    BorderRadius
+                                        .circular(5)),
+                                child: Center(
+                                  child: Text(
+                                      "Promo berhasil digunakan",
+                                      style: blueFontStyle
+                                          .copyWith(
+                                          fontSize:
+                                          12,
+                                          fontWeight:
+                                          FontWeight
+                                              .normal)),
+                                ),
+                              )
+                                  : Text(""),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                currentStep: currentStep,
+                onStepContinue: next,
+                onStepTapped: (step) => goTo(step),
+                onStepCancel: cancel,
+                controlsBuilder: (BuildContext context, {VoidCallback onStepContinue,
+                  VoidCallback onStepCancel}) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          height: 32,
+                          width:
+                          MediaQuery.of(context).size.width / 2.8,
+                          child: EduButtonSecond(
+                            onPressed: currentStep == 0
+                                ? _onWillPop
+                                : onStepCancel,
+                            buttonText: 'Batal',
+                          ),
+                        ),
+                        Container(
+                          height: 32,
+                          width:
+                          MediaQuery.of(context).size.width / 2.8,
+                          child: loading == true
+                              ? Center(
+                            child: SpinKitFadingCircle(
+                              color: orenColor,
+                            ),
+                          )
+                              : EduButton(
+                            onPressed: () {
+                              currentStep == 3
+                                  ? block == 2
+                                  ? doNothing()
+                                  : isConn == false
+                                  ? noConnCheck()
+                                  : check()
+                                  : next();
+                            },
+                            buttonColor: block == 2
+                                ? Colors.grey
+                                : yellowColor,
+                            textColor: block == 2
+                                ? Colors.white
+                                : mainColor1,
+                            buttonText: currentStep == 3
+                                ? "Selesai"
+                                : "Lanjut",
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              /*Container(
                                                                   height: 48,
                                                                   padding: EdgeInsets.symmetric(horizontal: 48),
                                                                   child: loading == true
@@ -1550,9 +1552,9 @@ class _DaftarState extends State<Daftar> {
                                                                           },
                                                                           buttonText: "Selesai",
                                                                         )),*/
-                        //SizedBox(height: 24),
-                      ],
-                    )),
+              //SizedBox(height: 24),
+            ],
+          )),
     );
   }
 
@@ -1651,27 +1653,27 @@ class _DaftarState extends State<Daftar> {
 
     var etmendatapkaninformasi1 = etmendatapkaninformasi.text.toString();
     var etkodepromo1 = etkodepromo.text.toString();
-      
 
-      if(widget.status_agent=='1'){
-        setState(() {
-          valSumber = "eduAgent";
-          
-        });
-      }
+
+    if(widget.status_agent=='1'){
+      setState(() {
+        valSumber = "eduAgent";
+
+      });
+    }
 
 
     if (etnamalengkap1.isNotEmpty &&
-            etnamapanggilan1.isNotEmpty &&
-            etnoktp1.isNotEmpty &&
-            etnohp1.isNotEmpty &&
-            etnowa1.isNotEmpty &&
-            etttl1.isNotEmpty &&
-            //valpendidikan1.isNotEmpty &&
-            valSumber.toString() != null &&
-            dateText.toString() != ''
-        //|| valpendidikan1.toString != null
-        ) {
+        etnamapanggilan1.isNotEmpty &&
+        etnoktp1.isNotEmpty &&
+        etnohp1.isNotEmpty &&
+        etnowa1.isNotEmpty &&
+        etttl1.isNotEmpty &&
+        //valpendidikan1.isNotEmpty &&
+        valSumber.toString() != null &&
+        dateText.toString() != ''
+    //|| valpendidikan1.toString != null
+    ) {
       print("succ=1");
 
       double frmlir = key_redeem == "1"
@@ -1724,102 +1726,103 @@ class _DaftarState extends State<Daftar> {
     Kampusview_model()
         .pendaftaran(
       //keycode
-      globalkey.toString(),
-      //kodecampus,
-      widget.campus.kode.toString(),
-      //prodi,
-      widget.kodejurusan.toString(),
-      //kelas,
-      widget.kodeprogram.toString(),
-      //pendidikan,
-      valpendidikan1.toString(),
-      //kelompok,
-      widget.namakelompok.toString(),
-      //item,
-      "formulir#1#${namaformulir2},jaket#1#${widget.namajaket},spb#${widget.waktuspb}#${widget.angsuranspb},spp#${widget.waktuspp}#${widget.angsuranspp},konversi#1#${widget.namakonversi},kmhs#1#${widget.kmhsmaba},perpus#1#${widget.perpus},krs#1#${widget.krs},dpm#1#${widget.dpm}", //5
-      //total,
-      widget.totalbiaya.toString(),
-      //tahun,
-      widget.tahunangkatan.toString(),
-      //angkatan,
-      widget.angkatan,
-      //waktu,
-      widget.namakelassingkatan.toString(),
-      //smb,
-      valSumber.toString(), //10
-      //label_kampus,
-      widget.campus.nama,
-      //label_kelas,
-      widget.programperkuliahan,
-      //label_waktu,
-      widget.namakelaswaktu.toString(),
-      //label_prodi,
-      widget.namaJurusan.toString(),
-      //label_wilayah,
-      widget.wilayah,
-      //15
-      //nama,
-      etnamalengkap1,
-      //tem_lahir,
-      etttl1,
-      //tgl_lahir,
-      dateText.toString(),
-      //gender,
-      "L",
-      //email,
-      globalEmail.toString(), //20
-      //no_hp,
-      "0" + _etnohp1,
-      //no_wa,
-      "0" + _etnowa1,
-      //nikktp,
-      etnoktp1,
-      //ayahkandung,
-      "",
-      //ibukandung,
-      "", //25
-      //alamat1,
-      "",
-      //kodepos,
-      "",
-      //kota,
-      "",
-      //kecamatan,
-      "",
-      //kelurahan,
-      "", //30
-      //kodejrs,
-      widget.kodejurusan.toString(),
-      //wkt_kul,
-      widget.namakelassingkatan.toString(),
-      //smb_informasi,
-      valSumber.toString(),
-      //kode_gsf,
-      "",
-      //konversi,
-      "1:${widget.namakonversi}", //35
-      //formulir,
-      "1:${namaformulir2.toString()}",
-      //jaket,
-      "1:${widget.namajaket.toString()}",
-      //spb,
-      "${widget.waktuspb.toString()}:${widget.angsuranspb.toString()}",
-      //spp
-      "${widget.waktuspp.toString()}:${widget.angsuranspp.toString()}",
-      valpengalaman.toString(),
-      dateTextdari.toString(),
-      dateTexthingga.toString(),
-      etnamaperusahaan.toString(),
-      etposisi.toString(),
-      etjurusan.toString(),
-      ettahunkelulusan.toString(),
-      etnilaiakhir.toString(),
-      etdari.toString(),
-      poin_redeem.toString(),
-      diskon_redeem.toString(),
-      key_redeem.toString(),
-      widget.status_agent.toString(),
-      keycode_agent.toString() == null ? "" : keycode_agent.toString(),
+        globalkey.toString(),
+        //kodecampus,
+        widget.campus.kode.toString(),
+        //prodi,
+        widget.kodejurusan.toString(),
+        //kelas,
+        widget.kodeprogram.toString(),
+        //pendidikan,
+        valpendidikan1.toString(),
+        //kelompok,
+        widget.namakelompok.toString(),
+        //item,
+        "formulir#1#${namaformulir2},jaket#1#${widget.namajaket},spb#${widget.waktuspb}#${widget.angsuranspb},spp#${widget.waktuspp}#${widget.angsuranspp},konversi#1#${widget.namakonversi},kmhs#1#${widget.kmhsmaba},perpus#1#${widget.perpus},krs#1#${widget.krs},dpm#1#${widget.dpm}", //5
+        //total,
+        widget.totalbiaya.toString(),
+        //tahun,
+        widget.tahunangkatan.toString(),
+        //angkatan,
+        widget.angkatan,
+        //waktu,
+        widget.namakelassingkatan.toString(),
+        //smb,
+        valSumber.toString(), //10
+        //label_kampus,
+        widget.campus.nama,
+        //label_kelas,
+        widget.programperkuliahan,
+        //label_waktu,
+        widget.namakelaswaktu.toString(),
+        //label_prodi,
+        widget.namaJurusan.toString(),
+        //label_wilayah,
+        widget.wilayah,
+        //15
+        //nama,
+        etnamalengkap1,
+        //tem_lahir,
+        etttl1,
+        //tgl_lahir,
+        dateText.toString(),
+        //gender,
+        "L",
+        //email,
+        globalEmail.toString(), //20
+        //no_hp,
+        "0" + _etnohp1,
+        //no_wa,
+        "0" + _etnowa1,
+        //nikktp,
+        etnoktp1,
+        //ayahkandung,
+        "",
+        //ibukandung,
+        "", //25
+        //alamat1,
+        "",
+        //kodepos,
+        "",
+        //kota,
+        "",
+        //kecamatan,
+        "",
+        //kelurahan,
+        "", //30
+        //kodejrs,
+        widget.kodejurusan.toString(),
+        //wkt_kul,
+        widget.namakelassingkatan.toString(),
+        //smb_informasi,
+        valSumber.toString(),
+        //kode_gsf,
+        "",
+        //konversi,
+        "1:${widget.namakonversi}", //35
+        //formulir,
+        "1:${namaformulir2.toString()}",
+        //jaket,
+        "1:${widget.namajaket.toString()}",
+        //spb,
+        "${widget.waktuspb.toString()}:${widget.angsuranspb.toString()}",
+        //spp
+        "${widget.waktuspp.toString()}:${widget.angsuranspp.toString()}",
+        valpengalaman.toString(),
+        dateTextdari.toString(),
+        dateTexthingga.toString(),
+        etnamaperusahaan.toString(),
+        etposisi.toString(),
+        etjurusan.toString(),
+        ettahunkelulusan.toString(),
+        etnilaiakhir.toString(),
+        etdari.toString(),
+        poin_redeem.toString(),
+        diskon_redeem.toString(),
+        key_redeem.toString(),
+        widget.status_agent.toString(),
+        keycode_agent.toString() == null ? "" : keycode_agent.toString(),
+        widget.bayar_tiap_tgl
     )
         .then((value) {//handled
       StatusModel data = value;
@@ -1853,22 +1856,23 @@ class _DaftarState extends State<Daftar> {
             context,
             MaterialPageRoute(
                 builder: (context) => (Invoice(
-                      logo:
-                          widget.campus.logo == null ? "" : widget.campus.logo,
-                      nama:
-                          widget.campus.nama == null ? "" : widget.campus.nama,
-                      singktan: widget.campus.singkatan == null
-                          ? ""
-                          : widget.campus.singkatan,
-                      formulir: namaformulir2 == null ? "" : namaformulir2,
-                      keycode: globalkey == null ? "" : globalkey,
-                      namaJurusan:
-                          widget.namaJurusan == null ? "" : widget.namaJurusan,
-                      kodekampus:
-                          widget.campus.kode == null ? "" : widget.campus.kode,
-                      id_invoice: no_virtual == null ? "" : no_virtual,
+                  logo:
+                  widget.campus.logo == null ? "" : widget.campus.logo,
+                  nama:
+                  widget.campus.nama == null ? "" : widget.campus.nama,
+                  singktan: widget.campus.singkatan == null
+                      ? ""
+                      : widget.campus.singkatan,
+                  formulir: namaformulir2 == null ? "" : namaformulir2,
+                  keycode: globalkey == null ? "" : globalkey,
+                  namaJurusan:
+                  widget.namaJurusan == null ? "" : widget.namaJurusan,
+                  kodekampus:
+                  widget.campus.kode == null ? "" : widget.campus.kode,
+                  id_invoice: no_virtual == null ? "" : no_virtual,
                   status_agent: widget.status_agent,
-                    ))));
+                  bayar_tiap_tanggal: widget.bayar_tiap_tgl,
+                ))));
       } else if (data.status == 400) {
         Flushbar(
           title: "Mohon Maaf",
@@ -1894,40 +1898,40 @@ class _DaftarState extends State<Daftar> {
     });
   }
 
-  // void _navigateAndDisplaySelection(BuildContext context) async {
-  //   // Navigator.push returns a Future that completes after calling
-  //   // Navigator.pop on the Selection Screen.
-  //   final result = await Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) => ListPromo(
-  //               kodekampus:
-  //                   widget.campus.kode == null ? "" : widget.campus.kode,
-  //             )),
-  //   );
+// void _navigateAndDisplaySelection(BuildContext context) async {
+//   // Navigator.push returns a Future that completes after calling
+//   // Navigator.pop on the Selection Screen.
+//   final result = await Navigator.push(
+//     context,
+//     MaterialPageRoute(
+//         builder: (context) => ListPromo(
+//               kodekampus:
+//                   widget.campus.kode == null ? "" : widget.campus.kode,
+//             )),
+//   );
 
-  //   // After the Selection Screen returns a result, hide any previous snackbars
-  //   // and show the new result.
+//   // After the Selection Screen returns a result, hide any previous snackbars
+//   // and show the new result.
 
-  //   var promo_redeem2 = result.split('#');
+//   var promo_redeem2 = result.split('#');
 
-  //   // ScaffoldMessenger.of(context)
-  //   //   ..removeCurrentSnackBar()
-  //   //   // ..showSnackBar(SnackBar(content: Text('$result')));
-  //   //    ..showSnackBar(SnackBar(content: Text('Berhasil Digunakan')));
+//   // ScaffoldMessenger.of(context)
+//   //   ..removeCurrentSnackBar()
+//   //   // ..showSnackBar(SnackBar(content: Text('$result')));
+//   //    ..showSnackBar(SnackBar(content: Text('Berhasil Digunakan')));
 
-  //   print("result${result}");
-  //   setState(() {
-  //     if (promo_redeem2[2] == "1" || promo_redeem2[2] == 1) {
-  //       etkodepromo = TextEditingController(
-  //           text: promo_redeem2[0] == "null" ? "" : promo_redeem2[0]);
-  //     } else {
-  //       etkodepromo = TextEditingController(text: "");
-  //     }
+//   print("result${result}");
+//   setState(() {
+//     if (promo_redeem2[2] == "1" || promo_redeem2[2] == 1) {
+//       etkodepromo = TextEditingController(
+//           text: promo_redeem2[0] == "null" ? "" : promo_redeem2[0]);
+//     } else {
+//       etkodepromo = TextEditingController(text: "");
+//     }
 
-  //     poin_redeem = promo_redeem2[0] == "null" ? "" : promo_redeem2[0];
-  //     diskon_redeem = promo_redeem2[1] == "null" ? "" : promo_redeem2[1];
-  //     key_redeem = promo_redeem2[2] == "null" ? "" : promo_redeem2[2];
-  //   });
-  // }
+//     poin_redeem = promo_redeem2[0] == "null" ? "" : promo_redeem2[0];
+//     diskon_redeem = promo_redeem2[1] == "null" ? "" : promo_redeem2[1];
+//     key_redeem = promo_redeem2[2] == "null" ? "" : promo_redeem2[2];
+//   });
+// }
 }

@@ -27,11 +27,12 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
   List<MasterDaerahModel> dataprovinsi = new List();
   void getProvinsi() async {
-    Masterview_model().provinsi().then((value2) {//handled
+    Masterview_model().provinsi().then((value2) {
+      //handled
       setState(() {
         dataprovinsi = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -39,33 +40,36 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   List<MasterDaerahModel> datakabkota = new List();
   void getKabKota(id_parent) async {
     print("idParent${id_parent}");
-    Masterview_model().kab__kota(id_parent.toString()).then((value2) {//handled
+    Masterview_model().kab__kota(id_parent.toString()).then((value2) {
+      //handled
       setState(() {
         datakabkota = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   List<MasterDaerahModel> datakecamatan = new List();
   void getkecamatan(idparent) async {
-    Masterview_model().kecamatan(idparent.toString()).then((value2) {//handled
+    Masterview_model().kecamatan(idparent.toString()).then((value2) {
+      //handled
       setState(() {
         datakecamatan = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   List<MasterDaerahModel> datadesa = new List();
   void getdesa(idparent) async {
-    Masterview_model().desa(idparent.toString()).then((value2) {//handled
+    Masterview_model().desa(idparent.toString()).then((value2) {
+      //handled
       setState(() {
         datadesa = value2;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -73,23 +77,25 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   List<SpesialisasiModel> dataSpesialisasi = new List();
   List<SpesialisasiModel> forfilterdataSpesialisasi = [];
   void getSpesialisasi() async {
-    KarirViewModel().karir_spesialisasi().then((value1) {//handled
+    KarirViewModel().karir_spesialisasi().then((value1) {
+      //handled
       setState(() {
         dataSpesialisasi = value1 == null ? [] : value1;
         forfilterdataSpesialisasi = dataSpesialisasi;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   List<SpesialisasiModel> datajabatan = new List();
   void getjabatan() async {
-    KarirViewModel().karir_jabatan().then((value1) {//handled
+    KarirViewModel().karir_jabatan().then((value1) {
+      //handled
       setState(() {
         datajabatan = value1 == null ? [] : value1;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -97,12 +103,13 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   List<SpesialisasiModel> dataindustri = new List();
   List<SpesialisasiModel> forfilterdataindustri = [];
   void getindustri() async {
-    KarirViewModel().karir_industri().then((value1) {//handled
+    KarirViewModel().karir_industri().then((value1) {
+      //handled
       setState(() {
         dataindustri = value1 == null ? [] : value1;
         forfilterdataindustri = dataindustri;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -110,12 +117,13 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   List<SpesialisasiModel> databidang = new List();
   List<SpesialisasiModel> forfilterdatabidang = [];
   void getbidang() async {
-    KarirViewModel().karir_bidang().then((value1) {//handled
+    KarirViewModel().karir_bidang().then((value1) {
+      //handled
       setState(() {
         databidang = value1 == null ? [] : value1;
         forfilterdatabidang = databidang;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
@@ -123,19 +131,20 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   List<SpesialisasiModel> dataposisi = new List();
   List<SpesialisasiModel> forfilterdataposisi = [];
   void getposisi() async {
-    KarirViewModel().karir_posisi().then((value1) {//handled
+    KarirViewModel().karir_posisi().then((value1) {
+      //handled
       setState(() {
         dataposisi = value1 == null ? [] : value1;
         forfilterdataposisi = dataposisi;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -295,8 +304,8 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             .simpan_pengalaman(
           etperusahaan.text.toString(),
           _dari.toString(),
-          masihkerja==true ? "00-00-0000" :_sampai.toString(),
-          masihkerja==true ? "1" : "",
+          masihkerja == true ? "00-00-0000" : _sampai.toString(),
+          masihkerja == true ? "1" : "",
           valbidang.toString(),
           valspesialisasi.toString(),
           "",
@@ -311,7 +320,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
           etgajibulanan.text.toString(),
           etdeskripsi.text.toString(),
           valposisi.toString(),
-          widget.keycode.toString(),).then((value) {//handled
+          widget.keycode.toString(),
+        )
+            .then((value) {
+          //handled
           StatusModel data = value;
 
           if (data.status == 200) {
@@ -350,7 +362,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             Flushbar(
               title: "Maaf  !!",
               message:
-                  "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
+              "Password harus lebih dari 6 karakter, mengandung huruf besar kecil dan angka",
               duration: Duration(seconds: 3),
               flushbarPosition: FlushbarPosition.TOP,
               flushbarStyle: FlushbarStyle.FLOATING,
@@ -393,7 +405,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
               InSignIn = false;
             });
           }
-        }).catchError((erro){
+        }).catchError((erro) {
           InSignIn = false;
           onErrHandling(erro);
         });
@@ -401,7 +413,8 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
       // update_profile();
 
-    };
+    }
+    ;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -501,92 +514,92 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
                   child: Expanded(
                     child: datajabatan.length == 0
                         ? Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                      height: 48,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.grey[350])),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                      height: 48,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.grey[350])),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Shimmer.fromColors(
-                                  baseColor: Colors.grey[350],
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                      height: 48,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.grey[350])),
-                                ),
-                              ),
-                            ],
-                          )
-                        : ListView.builder(
-                            itemCount: datajabatan.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final lastDataSipema = datajabatan[index];
-                              return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    valjabatan = lastDataSipema.id;
-                                    hintjabatan = lastDataSipema.nama;
-
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 24, top: 15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(lastDataSipema.nama,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.clip,
-                                          style: whiteFontStyle.copyWith(
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Divider(
-                                        color: Colors.white38,
-                                        thickness: 1,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[350],
+                            highlightColor: Colors.white,
+                            child: Container(
+                                height: 48,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    color: Colors.grey[350])),
                           ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[350],
+                            highlightColor: Colors.white,
+                            child: Container(
+                                height: 48,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    color: Colors.grey[350])),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[350],
+                            highlightColor: Colors.white,
+                            child: Container(
+                                height: 48,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    color: Colors.grey[350])),
+                          ),
+                        ),
+                      ],
+                    )
+                        : ListView.builder(
+                      itemCount: datajabatan.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final lastDataSipema = datajabatan[index];
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              valjabatan = lastDataSipema.id;
+                              hintjabatan = lastDataSipema.nama;
+
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 20, right: 24, top: 15),
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text(lastDataSipema.nama,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    style: whiteFontStyle.copyWith(
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Divider(
+                                  color: Colors.white38,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(height: 24),
@@ -606,7 +619,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: dataSpesialisasi, cat: "spesialisasi",);
+          return ContentModal(
+            datalist: dataSpesialisasi,
+            cat: "spesialisasi",
+          );
         });
     setState(() {
       valspesialisasi = result[0].toString();
@@ -624,7 +640,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: dataindustri, cat: "industri",);
+          return ContentModal(
+            datalist: dataindustri,
+            cat: "industri",
+          );
         });
     setState(() {
       valindustri = result[0].toString();
@@ -642,7 +661,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: databidang, cat: "bidang",);
+          return ContentModal(
+            datalist: databidang,
+            cat: "bidang",
+          );
         });
     setState(() {
       valbidang = result[0].toString();
@@ -652,7 +674,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
   var valposisi;
   var hintposisi;
-  void modalBottomposisi(context) async{
+  void modalBottomposisi(context) async {
     final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
@@ -660,7 +682,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: dataposisi, cat: "posisi",);
+          return ContentModal(
+            datalist: dataposisi,
+            cat: "posisi",
+          );
         });
     setState(() {
       valposisi = result[0].toString();
@@ -670,7 +695,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
   var valprov;
   var hintprov;
-  void modalBottomProv(context) async{
+  void modalBottomProv(context) async {
     final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
@@ -678,7 +703,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: dataprovinsi, cat: "provinsi",);
+          return ContentModal(
+            datalist: dataprovinsi,
+            cat: "provinsi",
+          );
         });
     setState(() {
       valprov = result[0].toString();
@@ -697,7 +725,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: datakabkota, cat: "kabupaten",);
+          return ContentModal(
+            datalist: datakabkota,
+            cat: "kabupaten",
+          );
         });
     setState(() {
       valkabkota = result[0].toString();
@@ -708,7 +739,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
   var valkec;
   var hintkec;
-  void modalBottomKec(context) async{
+  void modalBottomKec(context) async {
     final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
@@ -716,7 +747,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: datakecamatan, cat: "kecamatan",);
+          return ContentModal(
+            datalist: datakecamatan,
+            cat: "kecamatan",
+          );
         });
     setState(() {
       valkec = result[0].toString();
@@ -727,7 +761,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
 
   var valdesa;
   var hintdesa;
-  void modalBottomDesa(context) async{
+  void modalBottomDesa(context) async {
     final result = await showModalBottomSheet(
         backgroundColor: mainColor1,
         isScrollControlled: true,
@@ -735,7 +769,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (context) {
-          return ContentModal(datalist: datadesa, cat: "desa",);
+          return ContentModal(
+            datalist: datadesa,
+            cat: "desa",
+          );
         });
     setState(() {
       valdesa = result[0].toString();
@@ -781,16 +818,21 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
   Future<bool> _backPressed() {
     return Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ShowPengalaman(keycode: widget.keycode == null ? "" : widget.keycode)),
+      MaterialPageRoute(
+          builder: (context) => ShowPengalaman(
+              keycode: widget.keycode == null ? "" : widget.keycode)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     print("_selectedIndex${_selectedIndex}");
-    return WillPopScope(
-      //onWillPop: _backPressed,
-      child: Scaffold(
+    return
+      // WillPopScope(
+      //   //onWillPop: _backPressed,
+      //   child:
+      // );
+      Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backwardsCompatibility: false,
@@ -994,18 +1036,21 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
                             height: 10,
                           ),
                           Container(
-                            child: masihkerja==true ? IgnorePointer() : Container(
+                            child: masihkerja == true
+                                ? IgnorePointer()
+                                : Container(
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
-                                border: Border.all(color: mainColor1, width: 2),
+                                border:
+                                Border.all(color: mainColor1, width: 2),
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 title: Text(
                                   _sampai == "" ? "YYYY/MM/DD" : _sampai,
-                                  style:
-                                  TextStyle(fontSize: 16, color: Colors.blue),
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.blue),
                                 ),
                                 onTap: () {
                                   selectDueDate_sampai(context);
@@ -1024,7 +1069,10 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
                             //   borderRadius: BorderRadius.circular(10),
                             // ),
                             child: CheckboxListTile(
-                              title: Text('Masih bekerja', style: blueFontStyle,),
+                              title: Text(
+                                'Masih bekerja',
+                                style: blueFontStyle,
+                              ),
                               value: masihkerja,
                               onChanged: (bool value) {
                                 setState(() {
@@ -1503,8 +1551,7 @@ class _PenglamanDatadiriState extends State<PenglamanDatadiri> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -1523,18 +1570,16 @@ class Debouncer {
   }
 }
 
-class ContentModal extends StatefulWidget{
+class ContentModal extends StatefulWidget {
   var datalist;
   String cat;
-  ContentModal({Key key, @required this.datalist, this.cat}): super(key : key);
+  ContentModal({Key key, @required this.datalist, this.cat}) : super(key: key);
 
   @override
   ContentModalState createState() => new ContentModalState();
-
 }
 
-class ContentModalState extends State<ContentModal>{
-
+class ContentModalState extends State<ContentModal> {
   TextEditingController etsearchposisi = new TextEditingController();
   TextEditingController etsearchspesialisasi = new TextEditingController();
   TextEditingController etsearchbidang = new TextEditingController();
@@ -1556,17 +1601,20 @@ class ContentModalState extends State<ContentModal>{
   int lenght = 0;
 
   @override
-  initState(){
+  initState() {
     super.initState();
-    if(widget.cat=="provinsi"||widget.cat=="kabupaten"||widget.cat=="kecamatan"||widget.cat=="desa"){
+    if (widget.cat == "provinsi" ||
+        widget.cat == "kabupaten" ||
+        widget.cat == "kecamatan" ||
+        widget.cat == "desa") {
       fdataListwilayah = widget.datalist;
       dataListwilayah = widget.datalist;
       lenght = fdataListwilayah.length;
-    }else if(widget.cat=="jurusan"){
+    } else if (widget.cat == "jurusan") {
       fdataListJurusan = widget.datalist;
       dataListJurusan = widget.datalist;
       lenght = fdataListJurusan.length;
-    }else{
+    } else {
       fdataList = widget.datalist;
       dataList = widget.datalist;
       lenght = fdataList.length;
@@ -1602,22 +1650,21 @@ class ContentModalState extends State<ContentModal>{
               ),
               child: TextFormField(
                 cursorColor: mainColor1,
-                controller:
-                widget.cat=="posisi"
+                controller: widget.cat == "posisi"
                     ? etsearchposisi
-                    : widget.cat=="spesialisasi"
+                    : widget.cat == "spesialisasi"
                     ? etsearchspesialisasi
-                    : widget.cat=="bidang"
+                    : widget.cat == "bidang"
                     ? etsearchbidang
-                    : widget.cat=="industri"
+                    : widget.cat == "industri"
                     ? etsearchindustri
-                    : widget.cat=="provinsi"
+                    : widget.cat == "provinsi"
                     ? etsearchprovinsi
-                    : widget.cat=="kabupaten"
+                    : widget.cat == "kabupaten"
                     ? etsearchkabupaten
-                    : widget.cat=="kecamatan"
+                    : widget.cat == "kecamatan"
                     ? etsearchkecamatan
-                    : widget.cat=="desa"
+                    : widget.cat == "desa"
                     ? etsearchdesa
                     : etsearchjurusan,
                 keyboardType: TextInputType.text,
@@ -1628,26 +1675,29 @@ class ContentModalState extends State<ContentModal>{
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
-                        left: 10, bottom: 5, top: 5, right: 10),
-                    hintText: "Cari "+widget.cat),
+                    contentPadding:
+                    EdgeInsets.only(left: 10, bottom: 5, top: 5, right: 10),
+                    hintText: "Cari " + widget.cat),
                 onChanged: (string) {
                   setState(() {
-                    if(widget.cat=="provinsi"||widget.cat=="kabupaten"||widget.cat=="kecamatan"||widget.cat=="desa"){
+                    if (widget.cat == "provinsi" ||
+                        widget.cat == "kabupaten" ||
+                        widget.cat == "kecamatan" ||
+                        widget.cat == "desa") {
                       fdataListwilayah = dataListwilayah
                           .where((u) => (u.nama
                           .toLowerCase()
                           .contains(string.toLowerCase())))
                           .toList();
                       lenght = fdataListwilayah.length;
-                    }else if(widget.cat=="jurusan"){
+                    } else if (widget.cat == "jurusan") {
                       fdataListJurusan = dataListJurusan
                           .where((u) => (u.nama
                           .toLowerCase()
                           .contains(string.toLowerCase())))
                           .toList();
                       lenght = fdataListJurusan.length;
-                    }else{
+                    } else {
                       fdataList = dataList
                           .where((u) => (u.nama
                           .toLowerCase()
@@ -1662,8 +1712,7 @@ class ContentModalState extends State<ContentModal>{
             Container(
               child: Expanded(
                 child: lenght == 0
-                    ?
-                Column(
+                    ? Column(
                   children: [
                     Text("Tidak ditemukan",
                         maxLines: 1,
@@ -1679,7 +1728,10 @@ class ContentModalState extends State<ContentModal>{
                     ),
                   ],
                 )
-                    : widget.cat=="provinsi"||widget.cat=="kabupaten"||widget.cat=="kecamatan"||widget.cat=="desa"
+                    : widget.cat == "provinsi" ||
+                    widget.cat == "kabupaten" ||
+                    widget.cat == "kecamatan" ||
+                    widget.cat == "desa"
                     ? ListView.builder(
                   itemCount: lenght,
                   itemBuilder: (BuildContext context, int index) {
@@ -1690,8 +1742,8 @@ class ContentModalState extends State<ContentModal>{
                           //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
                           //valposisi = lastDataSipema.id;
                           //hintposisi = lastDataSipema.nama;
-                          result[0]=fdata.kode.toString();
-                          result[1]=fdata.nama.toString();
+                          result[0] = fdata.kode.toString();
+                          result[1] = fdata.nama.toString();
                           Navigator.pop(context, result);
                         });
                       },
@@ -1720,7 +1772,7 @@ class ContentModalState extends State<ContentModal>{
                     );
                   },
                 )
-                    : widget.cat=="jurusan"
+                    : widget.cat == "jurusan"
                     ? ListView.builder(
                   itemCount: lenght,
                   itemBuilder: (BuildContext context, int index) {
@@ -1731,8 +1783,8 @@ class ContentModalState extends State<ContentModal>{
                           //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
                           //valposisi = lastDataSipema.id;
                           //hintposisi = lastDataSipema.nama;
-                          result[0]=fdata.id.toString();
-                          result[1]=fdata.nama.toString();
+                          result[0] = fdata.id.toString();
+                          result[1] = fdata.nama.toString();
                           Navigator.pop(context, result);
                         });
                       },
@@ -1771,8 +1823,8 @@ class ContentModalState extends State<ContentModal>{
                           //print("valpos: "+lastDataSipema.id.toString()+"&&"+lastDataSipema.nama);
                           //valposisi = lastDataSipema.id;
                           //hintposisi = lastDataSipema.nama;
-                          result[0]=fdata.id.toString();
-                          result[1]=fdata.nama.toString();
+                          result[0] = fdata.id.toString();
+                          result[1] = fdata.nama.toString();
                           Navigator.pop(context, result);
                         });
                       },
@@ -1809,5 +1861,4 @@ class ContentModalState extends State<ContentModal>{
       ),
     );
   }
-
 }
