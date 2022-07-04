@@ -28,12 +28,13 @@ class _MainWishlistState extends State<MainWishlist> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-    ScrollController _controller;
-   SessionManager sessionManager = SessionManager();
+  ScrollController _controller;
+  SessionManager sessionManager = SessionManager();
 
   var gabs = CryptoData.getData;
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
+    await sessionManager.getPreference().then((value) {
+      //handled
       setState(() {
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
@@ -63,18 +64,20 @@ class _MainWishlistState extends State<MainWishlist> {
   var datawhitlistget = [];
   void dataw(globalkey2) {
     //print("globalkey2${globalkey2}");
-    Whitlistview_model().getwhitlist(globalkey2).then((value1) {//handled
+    Whitlistview_model().getwhitlist(globalkey2).then((value1) {
+      //handled
       print(value1);
       setState(() {
         datawhitlistget = value1;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   void hapusw(id_hapus) {
-    Whitlistview_model().hapuswhitlist(id_hapus.toString()).then((value1) {//handled
+    Whitlistview_model().hapuswhitlist(id_hapus.toString()).then((value1) {
+      //handled
       StatusModel data = value1;
       if (data.status == 200) {
         Fluttertoast.showToast(
@@ -95,14 +98,14 @@ class _MainWishlistState extends State<MainWishlist> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -307,155 +310,150 @@ class _MainWishlistState extends State<MainWishlist> {
                               : Container(
                                   child: datawhitlistget[0].nama == "tes123"
                                       ? NoWishlist()
-                                      : Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Center(
-                                            child: ListView.builder(
-                                                itemCount:
-                                                    datawhitlistget.length,
-                                                itemBuilder: (context, index) {
-                                                  final Photo xkampus =
-                                                      datawhitlistget[index];
-                                                  return Container(
+                                      : ListView.separated(
+                                          padding: EdgeInsets.all(8.0),
+                                          separatorBuilder: (context, index) {
+                                            return SizedBox(
+                                              height: 16,
+                                            );
+                                          },
+                                          itemCount: datawhitlistget.length,
+                                          itemBuilder: (context, index) {
+                                            final Photo xkampus =
+                                                datawhitlistget[index];
+                                            return Container(
+                                              height: 140,
+                                              padding: EdgeInsets.all(8.0),
+                                              decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black12,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 4,
+                                                      offset: Offset(0,
+                                                          1), // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0)),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 128,
+                                                    height: 128,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.network(
+                                                        datawhitlistget[index]
+                                                            .cover,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 16,
+                                                  ),
+                                                  Expanded(
+                                                      child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
                                                     child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        Card(
-                                                          borderOnForeground:
-                                                              true,
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              14.0),
-                                                                  child:
-                                                                      Container(
-                                                                    height: 100,
-                                                                    width: 100,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    child: Image
-                                                                        .network(
-                                                                      datawhitlistget[
-                                                                              index]
-                                                                          .cover,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 20,
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                          datawhitlistget[index]
-                                                                              .singkatan,
-                                                                          style: TextStyle(
-                                                                              color: mainColor1,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16)),
-                                                                      Text(
-                                                                        datawhitlistget[index]
-                                                                            .nama,
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                mainColor1),
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                        maxLines:
-                                                                            2,
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        height:
-                                                                            10,
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            width:
-                                                                                60,
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                30,
-                                                                            height:
-                                                                                30,
-                                                                            child:
-                                                                                ClipOval(
-                                                                              child: Material(
-                                                                                color: Colors.grey,
-                                                                                child: InkWell(
-                                                                                    splashColor: Colors.red,
-                                                                                    onTap: () {
-                                                                                      hapusw(datawhitlistget[index].id);
-                                                                                    },
-                                                                                    child: Icon(
-                                                                                      Icons.delete,
-                                                                                      color: Colors.white,
-                                                                                    )),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Container(
-                                                                              margin: EdgeInsets.only(left: 15),
-                                                                              child: TextButton(
-                                                                                onPressed: () {
-                                                                                  Navigator.push(
-                                                                                      context,
-                                                                                      MaterialPageRoute(
-                                                                                          builder: (context) => (HomeDetailPage(
-                                                                                                campus: xkampus,
-                                                                                                routef: 'Wishlist',
-                                                                                              ))));
-                                                                                },
-                                                                                child: ClipRRect(
-                                                                                    borderRadius: BorderRadius.circular(14.0),
-                                                                                    child: Container(
-                                                                                      alignment: Alignment.center,
-                                                                                      height: 30,
-                                                                                      padding: EdgeInsets.symmetric(horizontal: 15),
-                                                                                      color: Colors.yellow,
-                                                                                      child: Text(
-                                                                                        "Daftar",
-                                                                                        style: TextStyle(color: mainColor1, fontWeight: FontWeight.bold),
-                                                                                      ),
-                                                                                    )),
-                                                                              )),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ))
-                                                              ],
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              datawhitlistget[
+                                                                      index]
+                                                                  .singkatan,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black87,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
                                                             ),
-                                                          ),
-                                                        )
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              datawhitlistget[
+                                                                      index]
+                                                                  .nama,
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      mainColor1),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              maxLines: 2,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 32,
+                                                              child:
+                                                                  EduButtonSecond(
+                                                                      buttonText:
+                                                                          "Daftar Sekarang",
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.push(
+                                                                            context,
+                                                                            MaterialPageRoute(
+                                                                                builder: (context) => (HomeDetailPage(
+                                                                                      campus: xkampus,
+                                                                                      routef: 'Wishlist',
+                                                                                    ))));
+                                                                      }),
+                                                            ),
+                                                            IconButton(
+                                                                icon: Icon(
+                                                                  Icons.delete,
+                                                                  color: Colors
+                                                                      .red,
+                                                                ),
+                                                                onPressed: () {
+                                                                  hapusw(datawhitlistget[
+                                                                          index]
+                                                                      .id);
+                                                                })
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
-                                                  );
-                                                }),
-                                          ),
-                                        ),
+                                                  ))
+                                                ],
+                                              ),
+                                            );
+                                          }),
                                 )),
                 )),
     );
