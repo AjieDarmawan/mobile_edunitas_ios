@@ -311,9 +311,9 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
           ? first_kodeprogram.toString()
           : kodeprogram.toString(),
       // kodeprogram.length == 0 ? "P2K" : "P2K",
-      // namaKelompok.length == 0
-      //     ? first_kelompok.toString()
-      //     : namaKelompok.toString(),
+      namaKelompok.length == 0
+          ? first_kelompok.toString()
+          : namaKelompok.toString(),
     )
         .then((value) {
       //handled

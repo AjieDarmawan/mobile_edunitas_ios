@@ -182,8 +182,11 @@ class _CekbiayaWebJurusanState extends State<CekbiayaWebJurusan> {
     sipemaview_model().getBiayaSipema_web(widget.campus.kode,widget.campus.webacid).then((value) {
       setState(() {
         dataWebJurusan = value;
-        labelnamaweb = dataWebJurusan[0].label;
-        kodeweb = dataWebJurusan[0].kode;
+       
+         labelnamaweb = widget.namaJurusan;
+       // labelnamaweb = dataWebJurusan[0].label;
+        // kodeweb = dataWebJurusan[0].kode;
+        kodeweb = widget.kodejurusan;
         jenjangweb = dataWebJurusan[0].jenjang;
       });
     }).catchError((erro){

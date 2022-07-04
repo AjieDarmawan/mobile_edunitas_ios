@@ -131,13 +131,14 @@ class sipemaview_model {
   }
 
   Future<List<AngsuranModel>> daftarangsuranspp(
-      String kodekampus, String kodejrs, String kodeprg) async {
+      String kodekampus, String kodejrs, String kodeprg,String kelompok) async {
     try {
       final response = await http
           .post(ConstanUrl().baseUrl + "angsuranspp", body: {
         'kode_kampus': kodekampus.toString(),
         'kodejrs': kodejrs.toString(),
         'kodeprg': kodeprg.toString(),
+        'kelompok': kelompok.toString(),
         // 'waktu': waktu.toString(),
       });
 
