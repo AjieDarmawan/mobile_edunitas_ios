@@ -90,7 +90,7 @@ class _Daftar_kuliahState extends State<Daftar_kuliah> {
   void getBiayaSipemaAngsurSPP() {
     sipemaview_model()
         .daftarangsuranspp(widget.campus.kode.toString(),
-        widget.kodejurusan.toString(), widget.kodeprogram.toString())
+        widget.kodejurusan.toString(), widget.kodeprogram.toString(),"")
         .then((value) {//handled
       setState(() {
         dataAngsurSpp = value;

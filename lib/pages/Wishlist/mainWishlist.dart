@@ -28,12 +28,12 @@ class _MainWishlistState extends State<MainWishlist> {
   var globalkey = "", globalEmail = "";
   var status = false;
   var mystatus = false;
-    ScrollController _controller;
-   SessionManager sessionManager = SessionManager();
-
+  SessionManager sessionManager = SessionManager();
+  ScrollController _controller;
   var gabs = CryptoData.getData;
   void getPreferences() async {
-    await sessionManager.getPreference().then((value) {//handled
+    await sessionManager.getPreference().then((value) {
+      //handled
       setState(() {
         mystatus = sessionManager.status;
         globalkey = sessionManager.key;
@@ -63,18 +63,20 @@ class _MainWishlistState extends State<MainWishlist> {
   var datawhitlistget = [];
   void dataw(globalkey2) {
     //print("globalkey2${globalkey2}");
-    Whitlistview_model().getwhitlist(globalkey2).then((value1) {//handled
+    Whitlistview_model().getwhitlist(globalkey2).then((value1) {
+      //handled
       print(value1);
       setState(() {
         datawhitlistget = value1;
       });
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
   void hapusw(id_hapus) {
-    Whitlistview_model().hapuswhitlist(id_hapus.toString()).then((value1) {//handled
+    Whitlistview_model().hapuswhitlist(id_hapus.toString()).then((value1) {
+      //handled
       StatusModel data = value1;
       if (data.status == 200) {
         Fluttertoast.showToast(
@@ -95,14 +97,14 @@ class _MainWishlistState extends State<MainWishlist> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-    }).catchError((erro){
+    }).catchError((erro) {
       onErrHandling(erro);
     });
   }
 
-  void onErrHandling(erro){
-    print("do_login_err: "+erro.toString());
-    if(erro.toString().contains("SocketException")){
+  void onErrHandling(erro) {
+    print("do_login_err: " + erro.toString());
+    if (erro.toString().contains("SocketException")) {
       Flushbar(
           title: "Tidak ada koneksi",
           message: "Mohon cek koneksi internet",
@@ -134,46 +136,46 @@ class _MainWishlistState extends State<MainWishlist> {
 
   String _homeScreenText = "Waiting for token...";
   String _messageText = "Waiting for message...";
-  //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   void fcm() {
-    // _firebaseMessaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     setState(() {
-    //       _messageText = "Push Messaging message: $message";
-    //     });
-    //     FlutterRingtonePlayer.playNotification();
-    //     print("onMessage: $message");
-    //   },
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     setState(() {
-    //       _messageText = "Push Messaging message: $message";
-    //     });
-    //     print("onLaunch: $message");
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     setState(() {
-    //       _messageText = "Push Messaging message: $message";
-    //     });
-    //     print("onResume: $message");
-    //   },
-    // );
-    // //ios only
-    // _firebaseMessaging.requestNotificationPermissions(
-    //   const IosNotificationSettings(sound: true, badge: true, alert: true),
-    // );
-    // _firebaseMessaging.onIosSettingsRegistered
-    //     .listen((IosNotificationSettings settings) {
-    //   print("Settings registered: $settings");
-    // });
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        FlutterRingtonePlayer.playNotification();
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        setState(() {
+          _messageText = "Push Messaging message: $message";
+        });
+        print("onResume: $message");
+      },
+    );
+    //ios only
+    _firebaseMessaging.requestNotificationPermissions(
+      const IosNotificationSettings(sound: true, badge: true, alert: true),
+    );
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
 
-    // _firebaseMessaging.getToken().then((String token) {
-    //   assert(token != null);
-    //   setState(() {
-    //     _homeScreenText = "Push Messaging token: $token";
-    //   });
-    //   print(_homeScreenText);
-    // });
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      setState(() {
+        _homeScreenText = "Push Messaging token: $token";
+      });
+      print(_homeScreenText);
+    });
   }
 
   //conn has been updated 22 August 2021
@@ -284,180 +286,175 @@ class _MainWishlistState extends State<MainWishlist> {
           child: globalkey == null
               ? NonLogin()
               : Scaffold(
-                  appBar: AppBar(
-                    backwardsCompatibility: false,
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarIconBrightness: Brightness.light,
-                      statusBarColor: Colors.transparent,
-                    ),
-                    automaticallyImplyLeading: false,
-                    backgroundColor: mainColor1,
-                    title: Text(
-                      "Wishlist",
-                      style: whiteFontStyle,
-                    ),
-                  ),
-                  backgroundColor: CupertinoColors.systemGrey6,
-                  body: Container(
-                      //Center(datawhitlistget[0].nama=="tes123") ? Text("Belum Ada Whitlist") :
-                      child: datawhitlistget == null
-                          ? shimmerLoading()
-                          : datawhitlistget.length == 0
-                              ? shimmerLoading()
-                              : Container(
-                                  child: datawhitlistget[0].nama == "tes123"
-                                      ? NoWishlist()
-                                      : Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Center(
-                                            child: ListView.builder(
-                                                itemCount:
-                                                    datawhitlistget.length,
-                                                itemBuilder: (context, index) {
-                                                  final Photo xkampus =
-                                                      datawhitlistget[index];
-                                                  return Container(
-                                                    child: Column(
-                                                      children: [
-                                                        Card(
-                                                          borderOnForeground:
-                                                              true,
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              14.0),
-                                                                  child:
-                                                                      Container(
-                                                                    height: 100,
-                                                                    width: 100,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    child: Image
-                                                                        .network(
-                                                                      datawhitlistget[
-                                                                              index]
-                                                                          .cover,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 20,
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                          datawhitlistget[index]
-                                                                              .singkatan,
-                                                                          style: TextStyle(
-                                                                              color: mainColor1,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16)),
-                                                                      Text(
-                                                                        datawhitlistget[index]
-                                                                            .nama,
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                mainColor1),
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                        maxLines:
-                                                                            2,
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                      ),
-                                                                      SizedBox(
-                                                                        height:
-                                                                            10,
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            width:
-                                                                                60,
-                                                                          ),
-                                                                          Container(
-                                                                            width:
-                                                                                30,
-                                                                            height:
-                                                                                30,
-                                                                            child:
-                                                                                ClipOval(
-                                                                              child: Material(
-                                                                                color: Colors.grey,
-                                                                                child: InkWell(
-                                                                                    splashColor: Colors.red,
-                                                                                    onTap: () {
-                                                                                      hapusw(datawhitlistget[index].id);
-                                                                                    },
-                                                                                    child: Icon(
-                                                                                      Icons.delete,
-                                                                                      color: Colors.white,
-                                                                                    )),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Container(
-                                                                              margin: EdgeInsets.only(left: 15),
-                                                                              child: TextButton(
-                                                                                onPressed: () {
-                                                                                  Navigator.push(
-                                                                                      context,
-                                                                                      MaterialPageRoute(
-                                                                                          builder: (context) => (HomeDetailPage(
-                                                                                                campus: xkampus,
-                                                                                                routef: 'Wishlist',
-                                                                                              ))));
-                                                                                },
-                                                                                child: ClipRRect(
-                                                                                    borderRadius: BorderRadius.circular(14.0),
-                                                                                    child: Container(
-                                                                                      alignment: Alignment.center,
-                                                                                      height: 30,
-                                                                                      padding: EdgeInsets.symmetric(horizontal: 15),
-                                                                                      color: Colors.yellow,
-                                                                                      child: Text(
-                                                                                        "Daftar",
-                                                                                        style: TextStyle(color: mainColor1, fontWeight: FontWeight.bold),
-                                                                                      ),
-                                                                                    )),
-                                                                              )),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ))
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  );
-                                                }),
-                                          ),
+            appBar: AppBar(
+              backwardsCompatibility: false,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.light,
+                statusBarColor: Colors.transparent,
+              ),
+              automaticallyImplyLeading: false,
+              backgroundColor: mainColor1,
+              title: Text(
+                "Wishlist",
+                style: whiteFontStyle,
+              ),
+            ),
+            backgroundColor: CupertinoColors.systemGrey6,
+            body: Container(
+              //Center(datawhitlistget[0].nama=="tes123") ? Text("Belum Ada Whitlist") :
+                child: datawhitlistget == null
+                    ? shimmerLoading()
+                    : datawhitlistget.length == 0
+                    ? shimmerLoading()
+                    : Container(
+                  child: datawhitlistget[0].nama == "tes123"
+                      ? NoWishlist()
+                      : ListView.separated(
+                      padding: EdgeInsets.all(8.0),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          height: 16,
+                        );
+                      },
+                      itemCount: datawhitlistget.length,
+                      itemBuilder: (context, index) {
+                        final Photo xkampus =
+                        datawhitlistget[index];
+                        return Container(
+                          height: 140,
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0,
+                                      1), // changes position of shadow
+                                ),
+                              ],
+                              color: Colors.white,
+                              borderRadius:
+                              BorderRadius.circular(
+                                  8.0)),
+                          child: Row(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 128,
+                                height: 128,
+                                child: ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      8.0),
+                                  child: Image.network(
+                                    datawhitlistget[index]
+                                        .cover,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets
+                                        .symmetric(
+                                        vertical: 8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              datawhitlistget[
+                                              index]
+                                                  .singkatan,
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .black87,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                  fontSize: 14),
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              datawhitlistget[
+                                              index]
+                                                  .nama,
+                                              style: TextStyle(
+                                                  color:
+                                                  mainColor1),
+                                              overflow:
+                                              TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 2,
+                                              textAlign:
+                                              TextAlign
+                                                  .start,
+                                            ),
+                                          ],
                                         ),
-                                )),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .center,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              height: 32,
+                                              child:
+                                              EduButtonSecond(
+                                                  buttonText:
+                                                  "Daftar Sekarang",
+                                                  onPressed:
+                                                      () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => (HomeDetailPage(
+                                                              campus: xkampus,
+                                                              routef: 'Wishlist',
+                                                            ))));
+                                                  }),
+                                            ),
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.delete,
+                                                  color: Colors
+                                                      .red,
+                                                ),
+                                                onPressed: () {
+                                                  hapusw(datawhitlistget[
+                                                  index]
+                                                      .id);
+                                                })
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        );
+                      }),
                 )),
+          )),
     );
   }
 }

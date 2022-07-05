@@ -110,7 +110,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   String bayartiaptanggal_terpilih = '1';
 
   //kelompok where
-  List<ListDetailJurusanPengelompok> datasipemaKelompok = new List();
+  List<ListDetailJurusanPengelompok> datasipemaKelompok = [];
   void getSipemaWhereKelompok(kode_kampus, kode_jurusan, kodeprogram) {
     KarirViewModel()
         .biayasipema_baru_kelompok(kode_kampus.toString(),
@@ -149,25 +149,6 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
         first_kelompok = datasipemaKelompok[0].kelompok;
         first_lulusan = datasipemaKelompok[0].lulusan;
 
-        // this.namaspp,
-        // this.namaspb,
-        // this.namaformulir,
-        // this.angkatan,
-        // this.wilayah,
-        // // this.namakonversi,
-        // this.tahunangkatan,
-
-        // this.kmhsmaba,
-        // this.perpus,
-        // this.krs,
-        // this.dpm,
-
-        //   biayajaket = first_namajaket.toString();
-        // programstudilulusan = first_lulusan.toString();
-        // namaspp = first_namaspp;
-        // namaspb = first_namaspb;
-        // namaformulir = first_formulir.toString();
-
         getBiayaSipemaAngsur();
         getBiayaSipemaAngsurSPP();
         datacampuskelas();
@@ -179,25 +160,38 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
   }
 
   // kelompok program
-  List<MasterJurusanModel> datasipemaprogram = new List();
+  List<MasterJurusanModel> datasipemaprogram = [];
 
-  var sipema_program_nama, sipema_program_kode;
+  var sipema_program_nama = '', sipema_program_kode = '', def_program_kuliah_terpilih = '';
   void getSipemaWhereprogram(kode_kampus, kode_jurusan) {
     KarirViewModel()
         .biayasipema_baru_program(
-        kode_kampus.toString(), kode_jurusan.toString())
+        kode_kampus.toString(),
+        kode_jurusan.toString())
         .then((value) {
       //handled
       setState(() {
-        datasipemaprogram = value == null ? [] : value;
+        if(datasipemaprogram.length == 0){
+          datasipemaprogram = value == null ? [] : value;
 
-        // datasipemaprogram = value;
+          // datasipemaprogram = value;
 
-        sipema_program_nama = datasipemaprogram[0].nama;
-        sipema_program_kode = datasipemaprogram[0].kode;
+          sipema_program_nama = sipema_program_nama==''?datasipemaprogram[0].nama:sipema_program_nama;
+          sipema_program_kode = sipema_program_kode==''?datasipemaprogram[0].kode:sipema_program_kode;
 
-        getSipemaWhereKelompok(widget.campus.kode.toString(),
-            widget.kodejurusan.toString(), sipema_program_kode.toString());
+          print("TES1${widget.campus.kode}");
+          print("TES2${widget.kodejurusan}");
+          print("TES3${sipema_program_kode}");
+
+          // sipema_program_nama = widget.namaJurusan;
+          // sipema_program_kode = widget.kodejurusan;
+
+          getSipemaWhereKelompok(
+              widget.campus.kode.toString(),
+              widget.kodejurusan.toString(),
+              sipema_program_kode.toString()
+          );
+        }
       });
     }).catchError((erro) {
       onErrHandling(erro);
@@ -311,9 +305,9 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
           ? first_kodeprogram.toString()
           : kodeprogram.toString(),
       // kodeprogram.length == 0 ? "P2K" : "P2K",
-      // namaKelompok.length == 0
-      //     ? first_kelompok.toString()
-      //     : namaKelompok.toString(),
+      namaKelompok.length == 0
+          ? first_kelompok.toString()
+          : namaKelompok.toString(),
     )
         .then((value) {
       //handled
@@ -459,6 +453,7 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
 
   @override
   void initState() {
+    print("CEK${widget.kodejurusan}");
     super.initState();
     getPreferences();
     conn();
@@ -730,11 +725,13 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                         item.kode.toString();
                                   }).toList(),
                                   defaultSelected:
-                                  datasipemaprogram[0].nama +
+                                  def_program_kuliah_terpilih == ''
+                                      ? datasipemaprogram[0].nama +
                                       "X" +
                                       datasipemaprogram[0]
                                           .kode
-                                          .toString(),
+                                          .toString()
+                                      : def_program_kuliah_terpilih.toString(),
                                   buttonTextStyle: ButtonTextStyle(
                                     selectedColor: Colors.white,
                                     unSelectedColor: mainColor1,
@@ -750,11 +747,17 @@ class _Daftar_kuliahWebJurusanState extends State<Daftar_kuliahWebJurusan> {
                                       sipema_program_nama = arr[0];
                                       sipema_program_kode = arr[1];
 
+                                      def_program_kuliah_terpilih = value.toString();
+
+                                      print("TES4${widget.campus.kode}");
+                                      print("TES5${kodeweb.toString()}");
+                                      print("TES6${sipema_program_kode}");
+
                                       // sipema_program_nama = value;
                                       getSipemaWhereKelompok(
                                           widget.campus.kode
                                               .toString(),
-                                          kodeweb.toString(),
+                                          widget.kodejurusan.toString(),
                                           sipema_program_kode
                                               .toString());
 
