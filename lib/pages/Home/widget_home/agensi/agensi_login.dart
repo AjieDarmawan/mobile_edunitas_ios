@@ -50,13 +50,14 @@ class _AgensiLoginState extends State<AgensiLogin> {
       singkatan_me,
       kode_campus_me,
       foto_me;
-  void datausers() {
-    UserViewModel().users_detail(widget.email.toString()).then((value) {//handled
+  void datausers() async{
+    await UserViewModel().get_agent_name(widget.email.toString()).then((value) => setState(() => varnama = value));
+    await UserViewModel().users_detail(widget.email.toString()).then((value) {//handled
       UsersDetailModel data = value;
 
       if (data.status == 200) {
         setState(() {
-          varnama = data.nama;
+          //varnama = data.nama;
           varemail = data.email;
           varalamat = data.alamat;
           varpendidikan = data.pendidikan;
@@ -222,6 +223,7 @@ class _AgensiLoginState extends State<AgensiLogin> {
         print("email${globalEmail}");
         print("globalkey${globalkey}");
         print("mystatus${mystatus}");
+        check_agent(globalkey);
       });
     });
   }
@@ -233,6 +235,7 @@ class _AgensiLoginState extends State<AgensiLogin> {
       nama_agent = data.message;
       keycode_agent = data.etc;
       gambar_selfi = data.etc2;
+      dapatkan_data();
     }).catchError((erro){
       onErrHandling(erro);
     });
@@ -271,12 +274,15 @@ class _AgensiLoginState extends State<AgensiLogin> {
     }
   }
 
+  void dapatkan_data(){
+    getWebJurusan();
+    datausers();
+  }
+
   @override
   void initState() {
     super.initState();
-    getWebJurusan();
     getPreferences();
-    datausers();
   }
 
   bool _value_no = false;

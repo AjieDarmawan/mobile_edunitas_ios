@@ -264,6 +264,17 @@ class UserViewModel {
     }
   }
 
+  Future<String> get_agent_name(String email) async{
+    final response =
+    await http.post(ConstanUrl().baseUrl + "namaAgent", body: {
+      'email': email,
+    });
+
+    final jsondata = jsonDecode(response.body);
+    var namaagent = jsondata["nama_agent"]==''||null?'agen belum bernama':jsondata["nama_agent"];
+    return namaagent;
+  }
+
   Future form_forgetpassword(
       String email, String password, String codereff) async {
     final response = await http.post(

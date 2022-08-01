@@ -582,7 +582,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
                                 ),
                               ),
                               Opacity(
-                                opacity: 0.5,
+                                opacity: 0.0,
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 16.0),
                                   child: TextButton(
@@ -1100,7 +1100,7 @@ class _MainHomeState extends State<MainHome> with TickerProviderStateMixin {
                                 ),
                               ),
                               Opacity(
-                                opacity: 0.5,
+                                opacity: 0.0,
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 16.0),
                                   child: TextButton(
